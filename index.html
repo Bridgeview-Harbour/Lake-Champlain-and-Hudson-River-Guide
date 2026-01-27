@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Lake Champlain & Hudson River Boater's Guide | Bridgeview Harbour Marina</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin="anonymous" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://tile.openstreetmap.org">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <h1>Lake Champlain & Hudson River Guide</h1>
+            <p class="tagline">Presented by Bridgeview Harbour Marina</p>
+        </div>
+        <button id="menuToggle" class="menu-toggle" aria-label="Toggle Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Main Container -->
+    <main class="app-container">
+        <!-- Map Container -->
+        <div id="map" class="map-container"></div>
+
+        <!-- Side Panel -->
+        <aside id="sidePanel" class="side-panel">
+            <!-- Trip Calculator -->
+            <section class="panel-section trip-calculator">
+                <h2>Trip Calculator</h2>
+
+                <!-- Start Point -->
+                <div class="form-group">
+                    <label for="startPoint">From:</label>
+                    <select id="startPoint" class="touch-select">
+                        <option value="">Select starting point...</option>
+                    </select>
+                </div>
+
+                <!-- End Point -->
+                <div class="form-group">
+                    <label for="endPoint">To:</label>
+                    <select id="endPoint" class="touch-select">
+                        <option value="">Select destination...</option>
+                    </select>
+                </div>
+
+                <!-- Swap Button -->
+                <button id="swapPoints" class="btn btn-secondary swap-btn" aria-label="Swap start and end points">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 16V4M7 4L3 8M7 4L11 8M17 8V20M17 20L21 16M17 20L13 16"/>
+                    </svg>
+                    Swap
+                </button>
+
+                <!-- Settings Row -->
+                <div class="settings-row">
+                    <!-- Unit Selection -->
+                    <div class="form-group">
+                        <label for="unitSelect">Units:</label>
+                        <select id="unitSelect" class="touch-select">
+                            <option value="nm">Nautical Miles</option>
+                            <option value="mi">Miles</option>
+                            <option value="km">Kilometers</option>
+                        </select>
+                    </div>
+
+                    <!-- Vessel Speed -->
+                    <div class="form-group">
+                        <label for="vesselSpeed">Avg Speed:</label>
+                        <div class="speed-input-group">
+                            <input type="number" id="vesselSpeed" class="touch-input"
+                                   min="1" max="100" value="15" step="0.5">
+                            <span id="speedUnit" class="unit-label">kts</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Display -->
+                <div id="tripResults" class="trip-results hidden">
+                    <div class="result-item distance">
+                        <span class="result-label">Distance:</span>
+                        <span id="distanceValue" class="result-value">--</span>
+                    </div>
+                    <div class="result-item time">
+                        <span class="result-label">Est. Travel Time:</span>
+                        <span id="timeValue" class="result-value">--</span>
+                    </div>
+                </div>
+
+                <!-- Calculate Button -->
+                <button id="calculateBtn" class="btn btn-primary calculate-btn">
+                    Calculate Route
+                </button>
+
+                <!-- Clear Button -->
+                <button id="clearBtn" class="btn btn-outline clear-btn">
+                    Clear Selection
+                </button>
+            </section>
+
+            <!-- Filter Section -->
+            <section class="panel-section filter-section">
+                <h2>Points of Interest</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">
+                        <span class="filter-icon">&#128506;</span>
+                        All
+                    </button>
+                    <button class="filter-btn" data-filter="marina">
+                        <span class="filter-icon">&#9875;</span>
+                        Marinas
+                    </button>
+                    <button class="filter-btn" data-filter="restaurant">
+                        <span class="filter-icon">&#127860;</span>
+                        Restaurants
+                    </button>
+                    <button class="filter-btn" data-filter="historic">
+                        <span class="filter-icon">&#127984;</span>
+                        Historic Sites
+                    </button>
+                    <button class="filter-btn" data-filter="bay">
+                        <span class="filter-icon">&#127754;</span>
+                        Bays & Harbors
+                    </button>
+                    <button class="filter-btn" data-filter="fuel">
+                        <span class="filter-icon">&#9981;</span>
+                        Fuel
+                    </button>
+                    <button class="filter-btn" data-filter="anchorage">
+                        <span class="filter-icon">&#9875;</span>
+                        Anchorages
+                    </button>
+                </div>
+            </section>
+
+            <!-- Location List -->
+            <section class="panel-section location-list-section">
+                <h2>Locations <span id="locationCount" class="count-badge">0</span></h2>
+                <div class="search-box">
+                    <input type="text" id="locationSearch" class="touch-input"
+                           placeholder="Search locations...">
+                </div>
+                <ul id="locationList" class="location-list">
+                    <!-- Populated by JavaScript -->
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Quick Info Panel (shows on marker click) -->
+        <div id="quickInfo" class="quick-info hidden">
+            <button id="closeQuickInfo" class="close-btn" aria-label="Close">&times;</button>
+            <h3 id="quickInfoTitle">Location Name</h3>
+            <p id="quickInfoType" class="poi-type">Type</p>
+            <p id="quickInfoDesc" class="poi-desc">Description</p>
+            <div class="quick-info-actions">
+                <button id="setAsStart" class="btn btn-small btn-primary">Set as Start</button>
+                <button id="setAsEnd" class="btn btn-small btn-secondary">Set as Destination</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Legend -->
+    <div id="mapLegend" class="map-legend">
+        <button id="legendToggle" class="legend-toggle">Legend</button>
+        <div id="legendContent" class="legend-content hidden">
+            <div class="legend-item"><span class="legend-marker marina"></span> Marina</div>
+            <div class="legend-item"><span class="legend-marker restaurant"></span> Restaurant</div>
+            <div class="legend-item"><span class="legend-marker historic"></span> Historic Site</div>
+            <div class="legend-item"><span class="legend-marker bay"></span> Bay/Harbor</div>
+            <div class="legend-item"><span class="legend-marker fuel"></span> Fuel</div>
+            <div class="legend-item"><span class="legend-marker anchorage"></span> Anchorage</div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Loading map...</p>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin="anonymous"></script>
+
+    <!-- Application Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
