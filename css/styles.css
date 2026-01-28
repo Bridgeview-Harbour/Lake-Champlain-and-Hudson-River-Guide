@@ -30,6 +30,9 @@
     --bay-color: #16a085;
     --fuel-color: #f39c12;
     --anchorage-color: #27ae60;
+    --lock-color: #9b59b6;
+    --bridge-color: #7f8c8d;
+    --bridge-movable-color: #e67e22;
 }
 
 /* Reset & Base */
@@ -698,6 +701,22 @@ body {
 .poi-marker.bay { background: var(--bay-color); color: white; }
 .poi-marker.fuel { background: var(--fuel-color); color: white; }
 .poi-marker.anchorage { background: var(--anchorage-color); color: white; }
+/* ATON (Aids to Navigation) Types */
+.poi-marker.aton { background: var(--restaurant-color); color: white; }
+.poi-marker.aton-lighthouse { background: #f1c40f; color: #333; }
+.poi-marker.aton-buoy { background: var(--restaurant-color); color: white; }
+.poi-marker.aton-daymark { background: var(--anchorage-color); color: white; }
+.poi-marker.aton-light { background: #f1c40f; color: #333; }
+.poi-marker.aton-beacon { background: var(--primary-light); color: white; }
+/* Lock Type */
+.poi-marker.lock { background: var(--lock-color); color: white; }
+/* Bridge Types */
+.poi-marker.bridge { background: var(--bridge-color); color: white; }
+.poi-marker.bridge-fixed { background: var(--bridge-color); color: white; }
+.poi-marker.bridge-draw { background: var(--bridge-movable-color); color: white; }
+.poi-marker.bridge-swing { background: var(--bridge-movable-color); color: white; }
+.poi-marker.bridge-bascule { background: var(--bridge-movable-color); color: white; }
+.poi-marker.bridge-lift { background: var(--bridge-movable-color); color: white; }
 
 /* ============================================
    Quick Info Panel
@@ -828,6 +847,9 @@ body {
 .legend-marker.bay { background: var(--bay-color); }
 .legend-marker.fuel { background: var(--fuel-color); }
 .legend-marker.anchorage { background: var(--anchorage-color); }
+.legend-marker.lock { background: var(--lock-color); }
+.legend-marker.bridge { background: var(--bridge-color); }
+.legend-marker.bridge-movable { background: var(--bridge-movable-color); }
 
 /* ============================================
    Loading Overlay
@@ -897,6 +919,22 @@ body {
 .custom-marker.bay { background: var(--bay-color); }
 .custom-marker.fuel { background: var(--fuel-color); }
 .custom-marker.anchorage { background: var(--anchorage-color); }
+/* ATON (Aids to Navigation) Types */
+.custom-marker.aton { background: var(--restaurant-color); }
+.custom-marker.aton-lighthouse { background: #f1c40f; }
+.custom-marker.aton-buoy { background: var(--restaurant-color); }
+.custom-marker.aton-daymark { background: var(--anchorage-color); }
+.custom-marker.aton-light { background: #f1c40f; }
+.custom-marker.aton-beacon { background: var(--primary-light); }
+/* Lock Type */
+.custom-marker.lock { background: var(--lock-color); }
+/* Bridge Types */
+.custom-marker.bridge { background: var(--bridge-color); }
+.custom-marker.bridge-fixed { background: var(--bridge-color); }
+.custom-marker.bridge-draw { background: var(--bridge-movable-color); }
+.custom-marker.bridge-swing { background: var(--bridge-movable-color); }
+.custom-marker.bridge-bascule { background: var(--bridge-movable-color); }
+.custom-marker.bridge-lift { background: var(--bridge-movable-color); }
 
 .custom-marker.selected {
     transform: scale(1.3);

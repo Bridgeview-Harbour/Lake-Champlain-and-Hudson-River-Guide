@@ -26,14 +26,17 @@ const MAP_BOUNDS = {
 
 /**
  * Category mapping from JSON to app types
- * JSON uses: marina, bay, dining, poi
- * App uses: marina, bay, restaurant, historic, fuel, anchorage
+ * JSON uses: marina, bay, dining, poi, aton, lock, bridge
+ * App uses: marina, bay, restaurant, historic, fuel, anchorage, aton-*, lock, bridge-*
  */
 const CATEGORY_MAP = {
     'marina': 'marina',
     'bay': 'bay',
     'dining': 'restaurant',
-    'poi': 'historic'
+    'poi': 'historic',
+    'aton': 'aton',
+    'lock': 'lock',
+    'bridge': 'bridge'
 };
 
 /**
@@ -45,10 +48,25 @@ const SUBCATEGORY_MAP = {
     'outlet': 'bay',
     'fuel-dock': 'fuel',
     'museum': 'historic',
-    'lighthouse': 'historic',
     'waterfront-restaurant': 'restaurant',
     'full-service': 'marina',
-    'private': 'marina'
+    'private': 'marina',
+    // Aids to Navigation subtypes
+    'lighthouse': 'aton-lighthouse',
+    'buoy': 'aton-buoy',
+    'daymark': 'aton-daymark',
+    'light': 'aton-light',
+    'beacon': 'aton-beacon',
+    // Lock subtypes
+    'lock': 'lock',
+    'canal-lock': 'lock',
+    // Bridge subtypes
+    'bridge': 'bridge',
+    'fixed-bridge': 'bridge-fixed',
+    'drawbridge': 'bridge-draw',
+    'swing-bridge': 'bridge-swing',
+    'bascule-bridge': 'bridge-bascule',
+    'lift-bridge': 'bridge-lift'
 };
 
 /**
@@ -84,6 +102,74 @@ const TYPE_CONFIG = {
         name: 'Anchorage',
         icon: '⚓',
         color: '#27ae60'
+    },
+    // Aids to Navigation types
+    'aton': {
+        name: 'Nav Aid',
+        icon: '◆',
+        color: '#e74c3c'
+    },
+    'aton-lighthouse': {
+        name: 'Lighthouse',
+        icon: '🏠',
+        color: '#f1c40f'
+    },
+    'aton-buoy': {
+        name: 'Buoy',
+        icon: '●',
+        color: '#e74c3c'
+    },
+    'aton-daymark': {
+        name: 'Daymark',
+        icon: '▲',
+        color: '#27ae60'
+    },
+    'aton-light': {
+        name: 'Light',
+        icon: '✦',
+        color: '#f1c40f'
+    },
+    'aton-beacon': {
+        name: 'Beacon',
+        icon: '◈',
+        color: '#3498db'
+    },
+    // Lock type
+    'lock': {
+        name: 'Lock',
+        icon: '🔒',
+        color: '#9b59b6'
+    },
+    // Bridge types
+    'bridge': {
+        name: 'Bridge',
+        icon: '🌉',
+        color: '#7f8c8d'
+    },
+    'bridge-fixed': {
+        name: 'Fixed Bridge',
+        icon: '🌉',
+        color: '#7f8c8d'
+    },
+    'bridge-draw': {
+        name: 'Drawbridge',
+        icon: '🌉',
+        color: '#e67e22'
+    },
+    'bridge-swing': {
+        name: 'Swing Bridge',
+        icon: '🌉',
+        color: '#e67e22'
+    },
+    'bridge-bascule': {
+        name: 'Bascule Bridge',
+        icon: '🌉',
+        color: '#e67e22'
+    },
+    'bridge-lift': {
+        name: 'Lift Bridge',
+        icon: '🌉',
+        color: '#e67e22'
     }
 };
 
@@ -140,16 +226,47 @@ function transformPoi(jsonPoi) {
         }
     }
 
+    // Build tags array (for multi-category filtering)
+    let tags = jsonPoi.tags ? [...jsonPoi.tags] : [];
+
+    // Auto-add fuel tag if fuel is in amenities or fuel object exists
+    if (amenities.includes('fuel') || jsonPoi.details?.fuel?.available) {
+        if (!tags.includes('fuel')) {
+            tags.push('fuel');
+        }
+    }
+
     // Build the transformed POI
     const poi = {
         id: jsonPoi.id,
         name: jsonPoi.name,
         type: type,
+        tags: tags,
         lat: jsonPoi.location.coordinates.latitude,
         lng: jsonPoi.location.coordinates.longitude,
         description: jsonPoi.details?.description || '',
         amenities: amenities
     };
+
+    // Add fuel details if present
+    if (jsonPoi.details?.fuel) {
+        poi.fuel = {
+            available: jsonPoi.details.fuel.available || false,
+            types: jsonPoi.details.fuel.types || [],
+            ethanolFree: jsonPoi.details.fuel['ethanol-free'] || false,
+            highSpeed: jsonPoi.details.fuel['high-speed'] || false,
+            hours: jsonPoi.details.fuel.hours || null
+        };
+    } else if (amenities.includes('fuel')) {
+        // Legacy support: if fuel is in amenities but no fuel object, assume both types
+        poi.fuel = {
+            available: true,
+            types: ['gasoline', 'diesel'],
+            ethanolFree: amenities.includes('non-ethanol-fuel'),
+            highSpeed: false,
+            hours: null
+        };
+    }
 
     // Add optional fields if present
     if (jsonPoi.contact?.website) {
@@ -193,6 +310,76 @@ function transformPoi(jsonPoi) {
     }
     if (jsonPoi.details?.minDepth) {
         poi.minDepth = jsonPoi.details.minDepth;
+    }
+
+    // Add ATON (Aids to Navigation) specific details
+    if (jsonPoi.details?.aton) {
+        poi.aton = {
+            uscgId: jsonPoi.details.aton.uscgId || null,
+            llnr: jsonPoi.details.aton.llnr || null,  // Light List Number
+            characteristic: jsonPoi.details.aton.characteristic || null,  // e.g., "Fl R 4s"
+            color: jsonPoi.details.aton.color || null,  // e.g., "red", "green", "red-white"
+            shape: jsonPoi.details.aton.shape || null,  // e.g., "nun", "can", "sphere"
+            height: jsonPoi.details.aton.height || null,  // height in feet
+            range: jsonPoi.details.aton.range || null,  // visible range in nm
+            structure: jsonPoi.details.aton.structure || null,  // e.g., "white tower", "skeleton tower"
+            radarReflector: jsonPoi.details.aton.radarReflector || false,
+            sound: jsonPoi.details.aton.sound || null,  // e.g., "horn", "bell", "whistle"
+            racon: jsonPoi.details.aton.racon || null,  // radar beacon code
+            ais: jsonPoi.details.aton.ais || false,  // has AIS transponder
+            remarks: jsonPoi.details.aton.remarks || null
+        };
+    }
+
+    // Add Lock specific details
+    if (jsonPoi.details?.lock) {
+        poi.lock = {
+            lockNumber: jsonPoi.details.lock.lockNumber || null,  // e.g., "C-1" for Champlain Lock 1
+            canalName: jsonPoi.details.lock.canalName || null,  // e.g., "Champlain Canal", "Erie Canal", "Chambly Canal"
+            canalSystem: jsonPoi.details.lock.canalSystem || null,  // e.g., "NYS Canal System", "Parks Canada"
+            lift: jsonPoi.details.lock.lift || null,  // lift height in feet
+            chamberLength: jsonPoi.details.lock.chamberLength || null,  // chamber length in feet
+            chamberWidth: jsonPoi.details.lock.chamberWidth || null,  // chamber width in feet
+            minDepth: jsonPoi.details.lock.minDepth || null,  // minimum depth in feet
+            maxVesselLength: jsonPoi.details.lock.maxVesselLength || null,  // max vessel length in feet
+            maxVesselBeam: jsonPoi.details.lock.maxVesselBeam || null,  // max vessel beam in feet
+            maxVesselHeight: jsonPoi.details.lock.maxVesselHeight || null,  // max air draft in feet (clearance)
+            operatingHours: jsonPoi.details.lock.operatingHours || null,  // e.g., "7am-5pm"
+            operatingSeason: jsonPoi.details.lock.operatingSeason || null,  // e.g., "May 1 - Nov 15"
+            lockageTime: jsonPoi.details.lock.lockageTime || null,  // typical lockage time in minutes
+            fee: jsonPoi.details.lock.fee || null,  // lockage fee info
+            tieUpWalls: jsonPoi.details.lock.tieUpWalls || false,  // has tie-up walls above/below lock
+            restrooms: jsonPoi.details.lock.restrooms || false,
+            water: jsonPoi.details.lock.water || false,
+            electric: jsonPoi.details.lock.electric || false,
+            pumpOut: jsonPoi.details.lock.pumpOut || false,
+            remarks: jsonPoi.details.lock.remarks || null
+        };
+    }
+
+    // Add Bridge specific details
+    if (jsonPoi.details?.bridge) {
+        poi.bridge = {
+            bridgeType: jsonPoi.details.bridge.bridgeType || null,  // "fixed", "draw", "swing", "bascule", "lift"
+            clearanceHeight: jsonPoi.details.bridge.clearanceHeight || null,  // vertical clearance in feet (closed position)
+            clearanceHeightOpen: jsonPoi.details.bridge.clearanceHeightOpen || null,  // vertical clearance when open (for movable bridges)
+            horizontalClearance: jsonPoi.details.bridge.horizontalClearance || null,  // horizontal clearance in feet
+            channelWidth: jsonPoi.details.bridge.channelWidth || null,  // navigable channel width in feet
+            mileMarker: jsonPoi.details.bridge.mileMarker || null,  // mile marker on waterway
+            chartNumber: jsonPoi.details.bridge.chartNumber || null,  // NOAA chart number
+            owner: jsonPoi.details.bridge.owner || null,  // e.g., "NYS DOT", "Vermont AOT"
+            roadway: jsonPoi.details.bridge.roadway || null,  // e.g., "US Route 2", "NY Route 22"
+            // Opening schedule for movable bridges
+            openingSchedule: jsonPoi.details.bridge.openingSchedule || null,  // e.g., "On signal" or "On the hour and half-hour"
+            restrictedHours: jsonPoi.details.bridge.restrictedHours || null,  // e.g., "No openings 7-9am, 4-6pm weekdays"
+            vhfChannel: jsonPoi.details.bridge.vhfChannel || null,  // VHF channel for bridge tender
+            phone: jsonPoi.details.bridge.phone || null,  // phone for bridge tender
+            signalRequired: jsonPoi.details.bridge.signalRequired || false,  // requires signal to open
+            signalType: jsonPoi.details.bridge.signalType || null,  // e.g., "1 prolonged blast + 1 short blast"
+            advanceNotice: jsonPoi.details.bridge.advanceNotice || null,  // e.g., "24 hours" for some bridges
+            operatingSeason: jsonPoi.details.bridge.operatingSeason || null,  // seasonal operation dates
+            remarks: jsonPoi.details.bridge.remarks || null
+        };
     }
 
     return poi;

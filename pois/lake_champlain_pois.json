@@ -35,6 +35,7 @@
       "slug": "bridgeview-harbour-marina",
       "category": "marina",
       "subcategory": "full-service",
+      "tags": ["fuel"],
       "location": {
         "coordinates": {
           "latitude": 44.041570641131415,
@@ -55,8 +56,15 @@
       },
       "details": {
         "description": "Family-owned and operated full-service marina providing slips, moorings, storage and service. Serving recreational boaters and commercial captains on southern Lake Champlain since 2020.",
-        "amenities": ["fuel", "transient-slips", "moorings", "pump-out", "wifi", "storage", "hauling", "farmers-market"],
+        "amenities": ["transient-slips", "moorings", "pump-out", "wifi", "storage", "hauling", "farmers-market"],
         "services": ["boat-hauling", "winter-storage", "marine-travel-lift"],
+        "fuel": {
+          "available": true,
+          "types": ["gasoline", "diesel"],
+          "ethanol-free": false,
+          "high-speed": false,
+          "hours": "8am-5pm daily (in season)"
+        },
         "seasonalHours": {
           "open": "May",
           "close": "October"
@@ -73,6 +81,7 @@
       "slug": "champlain-bridge-marina",
       "category": "marina",
       "subcategory": "full-service",
+      "tags": ["fuel"],
       "location": {
         "coordinates": {
           "latitude": 44.04105477120546,
@@ -93,8 +102,15 @@
       },
       "details": {
         "description": "Family-owned, full-service marina located near the Lake Champlain Bridge. Offers dockage, seasonal boat storage, and comprehensive mechanical services.",
-        "amenities": ["fuel", "transient-slips", "pump-out", "showers", "non-ethanol-fuel"],
+        "amenities": ["transient-slips", "pump-out", "showers"],
         "services": ["boat-sales", "winterization", "shrink-wrapping", "insurance-repairs"],
+        "fuel": {
+          "available": true,
+          "types": ["gasoline"],
+          "ethanol-free": true,
+          "high-speed": false,
+          "hours": "9am-4:30pm weekdays, 9am-4pm Sat"
+        },
         "totalSlips": 130,
         "transientSlips": 20,
         "maxVesselLength": 60,

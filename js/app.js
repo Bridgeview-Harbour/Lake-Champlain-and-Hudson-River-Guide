@@ -288,16 +288,18 @@
 
         // Build options HTML
         let html = `<option value="">${placeholder}</option>`;
-        const typeOrder = ['marina', 'restaurant', 'bay', 'historic', 'fuel', 'anchorage'];
+        const typeOrder = ['marina', 'restaurant', 'bay', 'historic', 'fuel', 'anchorage', 'lock', 'bridge', 'bridge-fixed', 'bridge-draw', 'bridge-swing', 'bridge-bascule', 'bridge-lift', 'aton-lighthouse', 'aton-buoy', 'aton-daymark', 'aton-light', 'aton-beacon', 'aton'];
 
         typeOrder.forEach(type => {
             if (grouped[type] && grouped[type].length > 0) {
                 const config = TYPE_CONFIG[type];
-                html += `<optgroup label="${config.icon} ${config.name}s">`;
-                grouped[type].forEach(poi => {
-                    html += `<option value="${poi.id}">${poi.name}</option>`;
-                });
-                html += '</optgroup>';
+                if (config) {
+                    html += `<optgroup label="${config.icon} ${config.name}s">`;
+                    grouped[type].forEach(poi => {
+                        html += `<option value="${poi.id}">${poi.name}</option>`;
+                    });
+                    html += '</optgroup>';
+                }
             }
         });
 
@@ -529,6 +531,49 @@
     }
 
     // ============================================
+    // POI Filter Matching
+    // ============================================
+    function poiMatchesFilter(poi, filter) {
+        if (filter === 'all') return true;
+
+        // Handle fuel type filters
+        if (filter === 'fuel-gasoline') {
+            return poi.fuel && poi.fuel.available && poi.fuel.types.includes('gasoline');
+        }
+        if (filter === 'fuel-diesel') {
+            return poi.fuel && poi.fuel.available && poi.fuel.types.includes('diesel');
+        }
+
+        // Check primary type
+        if (poi.type === filter) return true;
+
+        // Check tags for secondary categories (e.g., marina with fuel tag)
+        if (poi.tags && poi.tags.includes(filter)) return true;
+
+        // Special case: 'fuel' filter should match any POI with fuel available
+        if (filter === 'fuel' && poi.fuel && poi.fuel.available) return true;
+
+        // Special case: 'aton' filter should match all ATON subtypes
+        if (filter === 'aton' && poi.type && poi.type.startsWith('aton')) return true;
+
+        // Special case: 'aton-lighthouse' filter
+        if (filter === 'aton-lighthouse' && poi.type === 'aton-lighthouse') return true;
+
+        // Special case: 'aton-buoy' filter
+        if (filter === 'aton-buoy' && poi.type === 'aton-buoy') return true;
+
+        // Special case: 'bridge' filter should match all bridge subtypes
+        if (filter === 'bridge' && poi.type && poi.type.startsWith('bridge')) return true;
+
+        // Special case: 'bridge-draw' filter should match all movable bridge types
+        if (filter === 'bridge-draw' && poi.type &&
+            (poi.type === 'bridge-draw' || poi.type === 'bridge-swing' ||
+             poi.type === 'bridge-bascule' || poi.type === 'bridge-lift')) return true;
+
+        return false;
+    }
+
+    // ============================================
     // Populate Location List
     // ============================================
     function populateLocationList() {
@@ -545,9 +590,9 @@
         // Filter POIs based on current filter and search
         let filteredPOIs = [...POINTS_OF_INTEREST];
 
-        // Apply type filter
+        // Apply type/tag filter
         if (state.currentFilter !== 'all') {
-            filteredPOIs = filteredPOIs.filter(poi => poi.type === state.currentFilter);
+            filteredPOIs = filteredPOIs.filter(poi => poiMatchesFilter(poi, state.currentFilter));
         }
 
         // Apply search filter
@@ -847,9 +892,9 @@
     // ============================================
     // Filter Markers on Map
     // ============================================
-    function filterMarkers(type) {
+    function filterMarkers(filter) {
         Object.values(state.markers).forEach(({ marker, poi }) => {
-            if (type === 'all' || poi.type === type) {
+            if (poiMatchesFilter(poi, filter)) {
                 marker.addTo(state.map);
             } else {
                 state.map.removeLayer(marker);
