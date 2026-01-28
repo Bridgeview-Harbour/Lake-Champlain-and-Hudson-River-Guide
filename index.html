@@ -44,28 +44,14 @@
             <section class="panel-section trip-calculator">
                 <h2>Trip Calculator</h2>
 
-                <!-- Start Point -->
-                <div class="form-group">
-                    <label for="startPoint">From:</label>
-                    <select id="startPoint" class="touch-select">
-                        <option value="">Select starting point...</option>
-                    </select>
+                <!-- Stops Container (dynamically populated) -->
+                <div id="stopsContainer" class="stops-container">
+                    <!-- Dynamically generated stop rows -->
                 </div>
 
-                <!-- End Point -->
-                <div class="form-group">
-                    <label for="endPoint">To:</label>
-                    <select id="endPoint" class="touch-select">
-                        <option value="">Select destination...</option>
-                    </select>
-                </div>
-
-                <!-- Swap Button -->
-                <button id="swapPoints" class="btn btn-secondary swap-btn" aria-label="Swap start and end points">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M7 16V4M7 4L3 8M7 4L11 8M17 8V20M17 20L21 16M17 20L13 16"/>
-                    </svg>
-                    Swap
+                <!-- Add Stop Button -->
+                <button id="addStopBtn" class="btn btn-secondary add-stop-btn">
+                    + Add Stop
                 </button>
 
                 <!-- Settings Row -->
@@ -93,13 +79,20 @@
 
                 <!-- Results Display -->
                 <div id="tripResults" class="trip-results hidden">
-                    <div class="result-item distance">
-                        <span class="result-label">Distance:</span>
-                        <span id="distanceValue" class="result-value">--</span>
+                    <!-- Itinerary (leg-by-leg breakdown) -->
+                    <div id="itinerary" class="itinerary">
+                        <!-- Dynamically populated -->
                     </div>
-                    <div class="result-item time">
-                        <span class="result-label">Est. Travel Time:</span>
-                        <span id="timeValue" class="result-value">--</span>
+                    <!-- Totals -->
+                    <div class="trip-totals">
+                        <div class="result-item distance">
+                            <span class="result-label">Total Distance:</span>
+                            <span id="distanceValue" class="result-value">--</span>
+                        </div>
+                        <div class="result-item time">
+                            <span class="result-label">Total Time:</span>
+                            <span id="timeValue" class="result-value">--</span>
+                        </div>
                     </div>
                 </div>
 
@@ -201,6 +194,7 @@
 
     <!-- Application Scripts -->
     <script src="js/data.js"></script>
+    <script src="js/navigation.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

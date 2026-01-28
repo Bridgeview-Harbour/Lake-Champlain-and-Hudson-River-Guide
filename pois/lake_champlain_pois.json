@@ -1,0 +1,1088 @@
+{
+  "metadata": {
+    "name": "Lake Champlain & Hudson River Points of Interest",
+    "version": "1.0.0",
+    "lastUpdated": "2025-01-27",
+    "description": "Comprehensive database of marinas, bays, dining, and points of interest for marine navigation",
+    "author": "Bridgeview Harbour Marina",
+    "contact": {
+      "website": "https://www.bridgeviewharbour.com",
+      "email": "crew@bridgeviewharbour.com",
+      "phone": "+1 (518) 546-7400"
+    }
+  },
+  "schema": {
+    "version": "1.0",
+    "categories": ["marina", "bay", "dining", "poi"],
+    "waterBodies": ["lake-champlain", "hudson-river", "richelieu-river"],
+    "regions": {
+      "lake-champlain": {
+        "south-lake": "Whitehall to Crown Point (below 44.1°N)",
+        "central-lake": "Crown Point to Burlington (44.1°N - 44.5°N)",
+        "broad-lake": "Burlington to Plattsburgh (44.5°N - 44.7°N)",
+        "north-lake": "Plattsburgh to Canadian border (above 44.7°N)",
+        "quebec": "Canadian portion to Sorel"
+      },
+      "hudson-river": {
+        "upper-hudson": "Whitehall south"
+      }
+    }
+  },
+  "pois": [
+    {
+      "id": "marina-bridgeview-harbour",
+      "name": "Bridgeview Harbour Marina",
+      "slug": "bridgeview-harbour-marina",
+      "category": "marina",
+      "subcategory": "full-service",
+      "location": {
+        "coordinates": {
+          "latitude": 44.041570641131415,
+          "longitude": -73.45802273181317
+        },
+        "town": "Port Henry",
+        "county": "Essex",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "south-lake"
+      },
+      "contact": {
+        "phone": "+1 (518) 546-7400",
+        "email": "crew@bridgeviewharbour.com",
+        "website": "https://www.bridgeviewharbour.com",
+        "vhfChannel": "16"
+      },
+      "details": {
+        "description": "Family-owned and operated full-service marina providing slips, moorings, storage and service. Serving recreational boaters and commercial captains on southern Lake Champlain since 2020.",
+        "amenities": ["fuel", "transient-slips", "moorings", "pump-out", "wifi", "storage", "hauling", "farmers-market"],
+        "services": ["boat-hauling", "winter-storage", "marine-travel-lift"],
+        "seasonalHours": {
+          "open": "May",
+          "close": "October"
+        }
+      },
+      "metadata": {
+        "verified": true,
+        "source": "owner-provided"
+      }
+    },
+    {
+      "id": "marina-champlain-bridge",
+      "name": "Champlain Bridge Marina",
+      "slug": "champlain-bridge-marina",
+      "category": "marina",
+      "subcategory": "full-service",
+      "location": {
+        "coordinates": {
+          "latitude": 44.04105477120546,
+          "longitude": -73.4170179729963
+        },
+        "address": "7724 Route 17 West",
+        "town": "West Addison",
+        "county": "Addison",
+        "state": "VT",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "south-lake"
+      },
+      "contact": {
+        "phone": "+1 (802) 759-2049",
+        "website": "https://www.sayahoy.com",
+        "vhfChannel": "9, 16"
+      },
+      "details": {
+        "description": "Family-owned, full-service marina located near the Lake Champlain Bridge. Offers dockage, seasonal boat storage, and comprehensive mechanical services.",
+        "amenities": ["fuel", "transient-slips", "pump-out", "showers", "non-ethanol-fuel"],
+        "services": ["boat-sales", "winterization", "shrink-wrapping", "insurance-repairs"],
+        "totalSlips": 130,
+        "transientSlips": 20,
+        "maxVesselLength": 60,
+        "approachDepth": 7,
+        "docksideDepth": 7,
+        "dockType": "floating",
+        "seasonalHours": {
+          "weekdays": "9am-4:30pm",
+          "saturday": "9am-4pm",
+          "sunday": "closed"
+        }
+      },
+      "metadata": {
+        "verified": true,
+        "source": "web-research"
+      }
+    },
+    {
+      "id": "marina-port-henry",
+      "name": "Port Henry Marina",
+      "slug": "port-henry-marina",
+      "category": "marina",
+      "subcategory": "private",
+      "location": {
+        "coordinates": {
+          "latitude": 44.054369295727064,
+          "longitude": -73.45263964762107
+        },
+        "address": "40 Velez Road",
+        "town": "Port Henry",
+        "county": "Essex",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "south-lake"
+      },
+      "contact": {
+        "website": "https://www.porthenrymarina.com"
+      },
+      "details": {
+        "description": "Private marina on Lake Champlain. No transient slips available.",
+        "amenities": ["wifi", "pump-out", "showers", "laundry", "ice"],
+        "services": ["winter-storage"],
+        "totalSlips": 105,
+        "transientSlips": 0,
+        "moorings": 12,
+        "maxVesselLength": 70,
+        "approachDepth": 20,
+        "docksideDepth": 15,
+        "electricService": ["15A", "20A", "30A", "50A"]
+      },
+      "metadata": {
+        "verified": true,
+        "source": "web-research",
+        "note": "Private marina - no transients"
+      }
+    },
+    {
+      "id": "marina-westport",
+      "name": "Westport Marina",
+      "slug": "westport-marina",
+      "category": "marina",
+      "subcategory": "full-service",
+      "location": {
+        "coordinates": {
+          "latitude": 44.18254984372554,
+          "longitude": -73.43100477844585
+        },
+        "address": "20 Washington Street",
+        "town": "Westport",
+        "county": "Essex",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "contact": {
+        "phone": "+1 (518) 962-4356",
+        "tollFree": "+1 (800) 626-0342",
+        "fax": "+1 (518) 412-2525",
+        "email": "TheCrew@WestportMarina.com",
+        "website": "https://www.westportmarina.com",
+        "vhfChannel": "9, 16"
+      },
+      "details": {
+        "description": "Friendly, full service, 100-slip marina located in Northwest Bay on Lake Champlain. Owned by the Carroll Family since 1982. Features The Galley/Portside Restaurant on-site.",
+        "amenities": ["fuel-gas", "fuel-diesel", "propane", "transient-slips", "moorings", "pump-out", "wifi", "showers", "laundry", "ice", "ship-store"],
+        "services": ["engine-repair", "mast-stepping", "hull-repair", "bow-thruster-repair", "generator-service", "inflatable-repair", "powerboat-rental", "kayak-rental"],
+        "totalSlips": 100,
+        "transientSlips": 40,
+        "moorings": 25,
+        "maxVesselLength": 100,
+        "minDepth": 15,
+        "electricService": ["30A", "50A"],
+        "dockType": "floating",
+        "seasonalHours": {
+          "june": "8am-5pm daily",
+          "julyAugust": "8am-6pm daily",
+          "septOct": "8am-5pm daily",
+          "winter": "8am-3pm M-F"
+        },
+        "restaurantOnSite": "Portside Restaurant"
+      },
+      "metadata": {
+        "verified": true,
+        "source": "web-research"
+      }
+    },
+    {
+      "id": "marina-point-bay",
+      "name": "Point Bay Marina",
+      "slug": "point-bay-marina",
+      "category": "marina",
+      "subcategory": "full-service",
+      "location": {
+        "coordinates": {
+          "latitude": 44.27328764081657,
+          "longitude": -73.28554345565504
+        },
+        "address": "1401 Thompson Point Road",
+        "town": "Charlotte",
+        "county": "Chittenden",
+        "state": "VT",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "contact": {
+        "phone": "+1 (802) 425-2431",
+        "website": "https://www.pointbaymarina.com"
+      },
+      "details": {
+        "description": "Full-service marina nestled between the Green Mountains of Vermont and the Adirondack Mountains of New York. Features 200 seasonal slips and 105 moorings with certified full-service team.",
+        "amenities": ["fuel-gas", "fuel-diesel", "transient-slips", "moorings", "showers", "ice", "bbq-area", "grocery-nearby"],
+        "services": ["boat-service", "winter-storage"],
+        "totalSlips": 200,
+        "transientSlips": 20,
+        "moorings": 105,
+        "maxVesselLength": 60,
+        "minDepth": 12,
+        "electricService": ["30A", "50A"],
+        "launchRamp": true,
+        "seasonalHours": {
+          "weekdays": "8am-4pm",
+          "weekends": "9am-3pm"
+        }
+      },
+      "metadata": {
+        "verified": true,
+        "source": "web-research"
+      }
+    },
+    {
+      "id": "marina-safe-harbor-willsboro",
+      "name": "Safe Harbor Willsboro Bay",
+      "slug": "safe-harbor-willsboro-bay",
+      "category": "marina",
+      "subcategory": "full-service",
+      "location": {
+        "coordinates": {
+          "latitude": 44.404910233109526,
+          "longitude": -73.39422861295624
+        },
+        "address": "25 Klein Way",
+        "town": "Willsboro",
+        "county": "Essex",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "contact": {
+        "phone": "+1 (518) 963-7276",
+        "website": "https://shmarinas.com/locations/safe-harbor-willsboro-bay/",
+        "vhfChannel": "9"
+      },
+      "details": {
+        "description": "Nestled at the southern end of tranquil Willsboro Bay, Safe Harbor Willsboro Bay's deep-water harbor is surrounded by the natural beauty and rich historic sites of Lake Champlain. Features elevated waterfront dining at The Upper Deck restaurant.",
+        "amenities": ["fuel", "transient-slips", "pump-out", "wifi", "showers", "laundry", "pool", "playground", "bbq-area", "ship-store"],
+        "services": ["boat-service", "brokerage", "winter-storage"],
+        "totalSlips": 201,
+        "transientSlips": 15,
+        "maxVesselLength": 60,
+        "approachDepth": 40,
+        "docksideDepth": 25,
+        "dockType": "floating",
+        "restaurantOnSite": "The Upper Deck"
+      },
+      "metadata": {
+        "verified": true,
+        "source": "web-research"
+      }
+    },
+    {
+      "id": "marina-indian-bay",
+      "name": "Indian Bay Marina and Restaurant",
+      "slug": "indian-bay-marina-restaurant",
+      "category": "marina",
+      "subcategory": "full-service",
+      "location": {
+        "coordinates": {
+          "latitude": 44.427781823897284,
+          "longitude": -73.39254931292123
+        },
+        "address": "237 Corlear Drive",
+        "town": "Willsboro",
+        "county": "Essex",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "contact": {
+        "phone": "+1 (518) 963-7858",
+        "website": "https://www.indianbaymarinany.com"
+      },
+      "details": {
+        "description": "Family-owned marina and restaurant celebrating 40+ years of service on Lake Champlain since 1983. Owned by siblings Joe and Patty Walsh. Full-service restaurant with lakeside dining, air conditioning, and full bar.",
+        "amenities": ["fuel", "transient-slips", "showers", "ice"],
+        "services": ["mechanical-repairs", "marine-parts"],
+        "totalSlips": 10,
+        "transientSlips": 6,
+        "minDepth": 10,
+        "electricService": ["30A"],
+        "restaurantOnSite": "Indian Bay Restaurant",
+        "seasonalHours": {
+          "restaurant": "11:30am-9pm daily"
+        }
+      },
+      "metadata": {
+        "verified": true,
+        "source": "web-research"
+      }
+    },
+    {
+      "id": "bay-cole-bay",
+      "name": "Cole Bay",
+      "slug": "cole-bay-westport",
+      "category": "bay",
+      "subcategory": "anchorage",
+      "location": {
+        "coordinates": {
+          "latitude": 44.14215846044703,
+          "longitude": -73.42141320213032
+        },
+        "town": "Westport",
+        "county": "Essex",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "bayDetails": {
+        "windExposure": {
+          "north": null,
+          "south": null,
+          "east": null,
+          "west": null
+        },
+        "protectionFactor": null,
+        "anchorageType": "natural",
+        "bottomType": null,
+        "holdingQuality": null
+      },
+      "details": {
+        "description": "Natural bay on the western shore of Lake Champlain near Westport"
+      },
+      "metadata": {
+        "verified": false,
+        "source": "user-provided",
+        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+      }
+    },
+    {
+      "id": "bay-young-bay",
+      "name": "Young Bay",
+      "slug": "young-bay-westport",
+      "category": "bay",
+      "subcategory": "anchorage",
+      "location": {
+        "coordinates": {
+          "latitude": 44.15934049230751,
+          "longitude": -73.40545942287605
+        },
+        "town": "Westport",
+        "county": "Essex",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "bayDetails": {
+        "windExposure": {
+          "north": null,
+          "south": null,
+          "east": null,
+          "west": null
+        },
+        "protectionFactor": null,
+        "anchorageType": "natural",
+        "bottomType": null,
+        "holdingQuality": null
+      },
+      "details": {
+        "description": "Natural bay on the western shore of Lake Champlain near Westport"
+      },
+      "metadata": {
+        "verified": false,
+        "source": "user-provided",
+        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+      }
+    },
+    {
+      "id": "bay-hunter-bay",
+      "name": "Hunter Bay",
+      "slug": "hunter-bay-westport",
+      "category": "bay",
+      "subcategory": "anchorage",
+      "location": {
+        "coordinates": {
+          "latitude": 44.19953571348856,
+          "longitude": -73.39831175941988
+        },
+        "town": "Westport",
+        "county": "Essex",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "bayDetails": {
+        "windExposure": {
+          "north": null,
+          "south": null,
+          "east": null,
+          "west": null
+        },
+        "protectionFactor": null,
+        "anchorageType": "natural",
+        "bottomType": null,
+        "holdingQuality": null
+      },
+      "details": {
+        "description": "Natural bay on the western shore of Lake Champlain near Westport"
+      },
+      "metadata": {
+        "verified": false,
+        "source": "user-provided",
+        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+      }
+    },
+    {
+      "id": "harbor-partridge",
+      "name": "Partridge Harbor",
+      "slug": "partridge-harbor-westport",
+      "category": "bay",
+      "subcategory": "harbor",
+      "location": {
+        "coordinates": {
+          "latitude": 44.2007356028773,
+          "longitude": -73.39179935605064
+        },
+        "town": "Westport",
+        "county": "Essex",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "bayDetails": {
+        "windExposure": {
+          "north": null,
+          "south": null,
+          "east": null,
+          "west": null
+        },
+        "protectionFactor": null,
+        "anchorageType": "natural",
+        "bottomType": null,
+        "holdingQuality": null
+      },
+      "details": {
+        "description": "Natural harbor on the western shore of Lake Champlain near Westport"
+      },
+      "metadata": {
+        "verified": false,
+        "source": "user-provided",
+        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+      }
+    },
+    {
+      "id": "harbor-rock",
+      "name": "Rock Harbor",
+      "slug": "rock-harbor-westport",
+      "category": "bay",
+      "subcategory": "harbor",
+      "location": {
+        "coordinates": {
+          "latitude": 44.20462358648426,
+          "longitude": -73.3843929966333
+        },
+        "town": "Westport",
+        "county": "Essex",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "bayDetails": {
+        "windExposure": {
+          "north": null,
+          "south": null,
+          "east": null,
+          "west": null
+        },
+        "protectionFactor": null,
+        "anchorageType": "natural",
+        "bottomType": null,
+        "holdingQuality": null
+      },
+      "details": {
+        "description": "Natural harbor on the western shore of Lake Champlain near Westport"
+      },
+      "metadata": {
+        "verified": false,
+        "source": "user-provided",
+        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+      }
+    },
+    {
+      "id": "harbor-barn-rock",
+      "name": "Barn Rock Harbor",
+      "slug": "barn-rock-harbor-westport",
+      "category": "bay",
+      "subcategory": "harbor",
+      "location": {
+        "coordinates": {
+          "latitude": 44.21127470881053,
+          "longitude": -73.3734618449441
+        },
+        "town": "Westport",
+        "county": "Essex",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "bayDetails": {
+        "windExposure": {
+          "north": null,
+          "south": null,
+          "east": null,
+          "west": null
+        },
+        "protectionFactor": null,
+        "anchorageType": "natural",
+        "bottomType": null,
+        "holdingQuality": null
+      },
+      "details": {
+        "description": "Natural harbor on the western shore of Lake Champlain near Westport"
+      },
+      "metadata": {
+        "verified": false,
+        "source": "user-provided",
+        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+      }
+    },
+    {
+      "id": "harbor-snake-den",
+      "name": "Snake Den Harbor",
+      "slug": "snake-den-harbor-westport",
+      "category": "bay",
+      "subcategory": "harbor",
+      "location": {
+        "coordinates": {
+          "latitude": 44.2277356717606,
+          "longitude": -73.36234019223323
+        },
+        "town": "Westport",
+        "county": "Essex",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "bayDetails": {
+        "windExposure": {
+          "north": null,
+          "south": null,
+          "east": null,
+          "west": null
+        },
+        "protectionFactor": null,
+        "anchorageType": "natural",
+        "bottomType": null,
+        "holdingQuality": null
+      },
+      "details": {
+        "description": "Natural harbor on the western shore of Lake Champlain near Westport"
+      },
+      "metadata": {
+        "verified": false,
+        "source": "user-provided",
+        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+      }
+    },
+    {
+      "id": "bay-porter",
+      "name": "Porter Bay",
+      "slug": "porter-bay-ferrisburgh",
+      "category": "bay",
+      "subcategory": "anchorage",
+      "location": {
+        "coordinates": {
+          "latitude": 44.22824474440216,
+          "longitude": -73.3168571893722
+        },
+        "town": "Ferrisburgh",
+        "county": "Addison",
+        "state": "VT",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "bayDetails": {
+        "windExposure": {
+          "north": null,
+          "south": null,
+          "east": null,
+          "west": null
+        },
+        "protectionFactor": null,
+        "anchorageType": "natural",
+        "bottomType": null,
+        "holdingQuality": null
+      },
+      "details": {
+        "description": "Natural bay on the eastern shore of Lake Champlain in Vermont"
+      },
+      "metadata": {
+        "verified": false,
+        "source": "user-provided",
+        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+      }
+    },
+    {
+      "id": "outlet-otter-creek",
+      "name": "Otter Creek Outlet",
+      "slug": "otter-creek-outlet-ferrisburgh",
+      "category": "bay",
+      "subcategory": "outlet",
+      "location": {
+        "coordinates": {
+          "latitude": 44.22580497376523,
+          "longitude": -73.32407606982247
+        },
+        "town": "Ferrisburgh",
+        "county": "Addison",
+        "state": "VT",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "bayDetails": {
+        "windExposure": {
+          "north": null,
+          "south": null,
+          "east": null,
+          "west": null
+        },
+        "protectionFactor": null,
+        "anchorageType": "river-outlet",
+        "bottomType": null,
+        "holdingQuality": null
+      },
+      "details": {
+        "description": "Outlet where Otter Creek enters Lake Champlain. Provides access to Vergennes via navigable creek."
+      },
+      "metadata": {
+        "verified": false,
+        "source": "user-provided",
+        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+      }
+    },
+    {
+      "id": "bay-fields",
+      "name": "Fields Bay",
+      "slug": "fields-bay-ferrisburgh",
+      "category": "bay",
+      "subcategory": "anchorage",
+      "location": {
+        "coordinates": {
+          "latitude": 44.218393037378675,
+          "longitude": -73.3306743035764
+        },
+        "town": "Ferrisburgh",
+        "county": "Addison",
+        "state": "VT",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "bayDetails": {
+        "windExposure": {
+          "north": null,
+          "south": null,
+          "east": null,
+          "west": null
+        },
+        "protectionFactor": null,
+        "anchorageType": "natural",
+        "bottomType": null,
+        "holdingQuality": null
+      },
+      "details": {
+        "description": "Natural bay on the eastern shore of Lake Champlain in Vermont"
+      },
+      "metadata": {
+        "verified": false,
+        "source": "user-provided",
+        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+      }
+    },
+    {
+      "id": "bay-kingsland",
+      "name": "Kingsland Bay",
+      "slug": "kingsland-bay-ferrisburgh",
+      "category": "bay",
+      "subcategory": "anchorage",
+      "location": {
+        "coordinates": {
+          "latitude": 44.237659056952054,
+          "longitude": -73.29992546093972
+        },
+        "town": "Ferrisburgh",
+        "county": "Addison",
+        "state": "VT",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "bayDetails": {
+        "windExposure": {
+          "north": null,
+          "south": null,
+          "east": null,
+          "west": null
+        },
+        "protectionFactor": null,
+        "anchorageType": "natural",
+        "bottomType": null,
+        "holdingQuality": null
+      },
+      "details": {
+        "description": "Natural bay on the eastern shore of Lake Champlain in Vermont. Kingsland Bay State Park nearby."
+      },
+      "metadata": {
+        "verified": false,
+        "source": "user-provided",
+        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+      }
+    },
+    {
+      "id": "harbor-smuggler",
+      "name": "Smuggler Harbor",
+      "slug": "smuggler-harbor-valcour",
+      "category": "bay",
+      "subcategory": "harbor",
+      "location": {
+        "coordinates": {
+          "latitude": 44.618013836007606,
+          "longitude": -73.40892960633522
+        },
+        "nearestTown": "Plattsburgh",
+        "island": "Valcour Island",
+        "county": "Clinton",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "broad-lake"
+      },
+      "bayDetails": {
+        "windExposure": {
+          "north": null,
+          "south": null,
+          "east": null,
+          "west": null
+        },
+        "protectionFactor": null,
+        "anchorageType": "natural",
+        "bottomType": null,
+        "holdingQuality": null
+      },
+      "details": {
+        "description": "Protected harbor on Valcour Island. Historic site near Battle of Valcour Island location."
+      },
+      "metadata": {
+        "verified": false,
+        "source": "user-provided",
+        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+      }
+    },
+    {
+      "id": "bay-sloop",
+      "name": "Sloop Bay",
+      "slug": "sloop-bay-valcour",
+      "category": "bay",
+      "subcategory": "anchorage",
+      "location": {
+        "coordinates": {
+          "latitude": 44.622198674519176,
+          "longitude": -73.40894033498782
+        },
+        "nearestTown": "Plattsburgh",
+        "island": "Valcour Island",
+        "county": "Clinton",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "broad-lake"
+      },
+      "bayDetails": {
+        "windExposure": {
+          "north": null,
+          "south": null,
+          "east": null,
+          "west": null
+        },
+        "protectionFactor": null,
+        "anchorageType": "natural",
+        "bottomType": null,
+        "holdingQuality": null
+      },
+      "details": {
+        "description": "Natural bay on Valcour Island. Popular anchorage with campsites nearby."
+      },
+      "metadata": {
+        "verified": false,
+        "source": "user-provided",
+        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+      }
+    },
+    {
+      "id": "dining-westport-yacht-club",
+      "name": "Westport Yacht Club",
+      "slug": "westport-yacht-club",
+      "category": "dining",
+      "subcategory": "waterfront-restaurant",
+      "location": {
+        "coordinates": {
+          "latitude": 44.181057209416196,
+          "longitude": -73.42896629958769
+        },
+        "address": "44 Old Arsenal Road",
+        "town": "Westport",
+        "county": "Essex",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "contact": {
+        "phone": "+1 (518) 962-8777",
+        "email": "wyclakechamplain@gmail.com",
+        "website": "https://www.westportyachtclubny.com"
+      },
+      "details": {
+        "description": "Waterfront dining venue overlooking Lake Champlain. Chef/owners Scott Brankman and Emily Farnsworth-Brankman. Features concrete pier for boat mooring and sand beach for seaplanes. American cuisine with seasonal menus.",
+        "cuisine": "American",
+        "diningOptions": ["outdoor-waterfront", "indoor"],
+        "boatAccess": true,
+        "seaplaneAccess": true,
+        "reservationsRecommended": true,
+        "seasonalHours": {
+          "season": "Memorial Day - Labor Day",
+          "days": "Thu-Sat",
+          "hours": "Dinner at 5pm"
+        }
+      },
+      "metadata": {
+        "verified": true,
+        "source": "web-research"
+      }
+    },
+    {
+      "id": "dining-portside-westport",
+      "name": "Portside Restaurant at Westport Marina",
+      "slug": "portside-restaurant-westport",
+      "category": "dining",
+      "subcategory": "waterfront-restaurant",
+      "location": {
+        "coordinates": {
+          "latitude": 44.18254984372554,
+          "longitude": -73.43100477844585
+        },
+        "address": "20 Washington Street",
+        "town": "Westport",
+        "county": "Essex",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "contact": {
+        "phone": "+1 (518) 962-4899",
+        "website": "https://www.westportmarina.com"
+      },
+      "details": {
+        "description": "Lakeside dining at Westport Marina. Memorable waterfront dining experience with sheltered deck and air-conditioned dining room.",
+        "cuisine": "American",
+        "diningOptions": ["outdoor-deck", "indoor-ac"],
+        "boatAccess": true,
+        "atMarina": "marina-westport"
+      },
+      "metadata": {
+        "verified": true,
+        "source": "web-research"
+      }
+    },
+    {
+      "id": "dining-upper-deck-willsboro",
+      "name": "The Upper Deck at Safe Harbor Willsboro Bay",
+      "slug": "upper-deck-willsboro",
+      "category": "dining",
+      "subcategory": "waterfront-restaurant",
+      "location": {
+        "coordinates": {
+          "latitude": 44.40487957380857,
+          "longitude": -73.39482942762298
+        },
+        "address": "25 Klein Way",
+        "town": "Willsboro",
+        "county": "Essex",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "contact": {
+        "phone": "+1 (518) 963-7276",
+        "website": "https://shmarinas.com/locations/safe-harbor-willsboro-bay/"
+      },
+      "details": {
+        "description": "Elevated waterfront dining at Safe Harbor Willsboro Bay marina. Gorgeous twilight views of the bay.",
+        "cuisine": "American - Upscale",
+        "diningOptions": ["waterfront"],
+        "boatAccess": true,
+        "atMarina": "marina-safe-harbor-willsboro",
+        "seasonalHours": {
+          "monTue": "Closed",
+          "wedThu": "5pm-9pm",
+          "friday": "5pm-10pm",
+          "saturday": "12pm-3pm, 5pm-10pm",
+          "sunday": "12pm-3pm, 5pm-9pm"
+        }
+      },
+      "metadata": {
+        "verified": true,
+        "source": "web-research"
+      }
+    },
+    {
+      "id": "dining-indian-bay",
+      "name": "Indian Bay Marina and Restaurant",
+      "slug": "indian-bay-restaurant",
+      "category": "dining",
+      "subcategory": "waterfront-restaurant",
+      "location": {
+        "coordinates": {
+          "latitude": 44.427781823897284,
+          "longitude": -73.39254931292123
+        },
+        "address": "237 Corlear Drive",
+        "town": "Willsboro",
+        "county": "Essex",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "contact": {
+        "phone": "+1 (518) 963-7858",
+        "website": "https://www.indianbaymarinany.com"
+      },
+      "details": {
+        "description": "Family-owned restaurant celebrating 40+ years. Lakeside dining, air conditioned, with full bar. Short ride by boat from Vermont or by car via Essex Ferry. Famous for fantastic sunsets.",
+        "cuisine": "American - Burgers, Seafood",
+        "diningOptions": ["lakeside", "indoor-ac"],
+        "boatAccess": true,
+        "atMarina": "marina-indian-bay",
+        "seasonalHours": {
+          "daily": "11:30am-9pm"
+        }
+      },
+      "metadata": {
+        "verified": true,
+        "source": "web-research"
+      }
+    },
+    {
+      "id": "poi-lcmm",
+      "name": "Lake Champlain Maritime Museum",
+      "slug": "lake-champlain-maritime-museum",
+      "category": "poi",
+      "subcategory": "museum",
+      "location": {
+        "coordinates": {
+          "latitude": 44.19919225292736,
+          "longitude": -73.35843074495011
+        },
+        "address": "4472 Basin Harbor Road",
+        "town": "Vergennes",
+        "county": "Addison",
+        "state": "VT",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "central-lake"
+      },
+      "contact": {
+        "phone": "+1 (802) 475-2022",
+        "email": "info@lcmm.org",
+        "website": "https://www.lcmm.org"
+      },
+      "details": {
+        "description": "Free-to-visit maritime museum on the shores of Lake Champlain. Features over a dozen exhibit buildings chronicling maritime history and nautical archaeology. Home to full-scale replica of Revolutionary War gunboat Philadelphia II and the canal schooner Lois McClure.",
+        "highlights": [
+          "Full-scale 1776 gunboat replica Philadelphia II",
+          "Hazelett Watercraft Center",
+          "Largest collection of wooden shipwrecks in North America",
+          "Boat building workshops",
+          "On-water ecology programs"
+        ],
+        "amenities": ["museum-store", "playground", "picnic-area", "dog-friendly"],
+        "admission": "Free",
+        "seasonalHours": {
+          "season": "Mid-May to Mid-October",
+          "hours": "Daily 10am-4pm"
+        },
+        "accessibility": "ADA accessible"
+      },
+      "metadata": {
+        "verified": true,
+        "source": "web-research"
+      }
+    },
+    {
+      "id": "poi-bluff-point-lighthouse",
+      "name": "Bluff Point Lighthouse",
+      "slug": "bluff-point-lighthouse",
+      "category": "poi",
+      "subcategory": "lighthouse",
+      "location": {
+        "coordinates": {
+          "latitude": 44.62297757101441,
+          "longitude": -73.43100955037255
+        },
+        "island": "Valcour Island",
+        "nearestTown": "Plattsburgh",
+        "county": "Clinton",
+        "state": "NY",
+        "country": "US",
+        "waterBody": "lake-champlain",
+        "waterBodyRegion": "broad-lake"
+      },
+      "contact": {
+        "phone": "+1 (518) 561-0340",
+        "email": "director@clintoncountyhistorical.org",
+        "website": "https://www.clintoncountyhistorical.org/bluff-point-lighthouse"
+      },
+      "details": {
+        "description": "Built in 1874, the only lighthouse on Lake Champlain listed on the National Register of Historic Places. Overlooks site of the Battle of Valcour Island (1776), the first naval battle of the Revolutionary War. Blue limestone base with red-shingled Mansard roof, standing over 90 feet above shore.",
+        "highlights": [
+          "National Register of Historic Places",
+          "Fifth order Fresnel lens",
+          "Battle of Valcour Island historic site",
+          "Valcour Island Heritage Trail access"
+        ],
+        "accessBy": "Boat only - no ferry service",
+        "managedBy": "Clinton County Historical Association",
+        "seasonalHours": {
+          "tours": "Sunday afternoons 1pm-3pm in July and August"
+        }
+      },
+      "metadata": {
+        "verified": true,
+        "source": "web-research"
+      }
+    }
+  ]
+}

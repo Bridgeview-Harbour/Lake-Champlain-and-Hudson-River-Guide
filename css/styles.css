@@ -137,6 +137,7 @@ body {
     display: flex;
     flex-direction: column;
     transition: var(--transition);
+    order: -1;  /* Move to left side */
 }
 
 .panel-section {
@@ -308,6 +309,223 @@ body {
 }
 
 /* ============================================
+   Multi-Stop Routing Styles
+   ============================================ */
+.stops-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.stop-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    transition: background 0.2s, box-shadow 0.2s;
+    min-width: 0;  /* Prevent flex children from overflowing */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.drag-handle {
+    cursor: grab;
+    padding: 4px;
+    color: #6c757d;
+    font-size: 16px;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    flex-shrink: 0;
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+}
+
+.stop-row.dragging {
+    opacity: 0.5;
+    background: #e9ecef;
+}
+
+.stop-row.drag-over {
+    border-top: 2px solid #007bff;
+    padding-top: 6px;
+}
+
+.stop-label {
+    min-width: 50px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    flex-shrink: 0;
+}
+
+.stop-select {
+    flex: 1;
+    min-width: 0;  /* Allow flex item to shrink below content size */
+    min-height: 40px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius);
+    background: white;
+    color: var(--text-color);
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%232c3e50' stroke-width='2'%3E%3Cpolyline points='6,9 12,15 18,9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+    padding-right: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stop-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(26, 95, 122, 0.2);
+}
+
+.remove-stop-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: #dc3545;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+
+.remove-stop-btn:hover {
+    background: #c82333;
+}
+
+.remove-stop-btn.hidden {
+    visibility: hidden;
+}
+
+.add-stop-btn {
+    width: 100%;
+    margin-bottom: 15px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 2px dashed var(--border-color);
+    min-height: 40px;
+}
+
+.add-stop-btn:hover {
+    background: var(--border-color);
+    border-style: solid;
+}
+
+/* Intermediate stop marker style */
+.custom-marker.intermediate {
+    box-shadow: 0 0 0 4px rgba(230, 126, 34, 0.6), 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* ============================================
+   Itinerary Styles
+   ============================================ */
+.itinerary {
+    margin-bottom: 15px;
+}
+
+.itinerary-leg {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.itinerary-leg:last-child {
+    border-bottom: none;
+}
+
+.leg-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--primary-color);
+}
+
+.leg-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.leg-route {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.leg-route .from-to {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.leg-route .arrow {
+    color: var(--text-light);
+    flex-shrink: 0;
+}
+
+.leg-stats {
+    display: flex;
+    gap: 12px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.leg-stats span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.trip-totals {
+    border-top: 2px solid var(--primary-color);
+    padding-top: 12px;
+    margin-top: 5px;
+}
+
+.trip-totals .result-item {
+    padding: 6px 0;
+}
+
+.trip-totals .result-label {
+    font-weight: 600;
+}
+
+.trip-totals .result-value {
+    font-size: 1.2rem;
+}
+
+/* ============================================
    Trip Results
    ============================================ */
 .trip-results {
@@ -385,10 +603,8 @@ body {
    Location List
    ============================================ */
 .location-list-section {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    min-height: 200px;
 }
 
 .search-box {
@@ -418,8 +634,6 @@ body {
 
 .location-list {
     list-style: none;
-    flex: 1;
-    overflow-y: auto;
     margin: 0 -20px;
     padding: 0 20px;
 }
@@ -491,9 +705,8 @@ body {
 .quick-info {
     position: fixed;
     bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 420px);
+    left: 400px;
+    right: 20px;
     max-width: 500px;
     background: white;
     border-radius: var(--radius-lg);
@@ -560,7 +773,7 @@ body {
 .map-legend {
     position: fixed;
     bottom: 20px;
-    left: 20px;
+    left: 400px;
     z-index: 500;
 }
 
@@ -665,12 +878,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    border: 3px solid white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    font-size: 1rem;
+    border: 2px solid white;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    font-size: 0.7rem;
     transition: transform 0.2s ease;
 }
 
@@ -728,10 +941,10 @@ body {
     .side-panel {
         position: fixed;
         top: 60px;
-        right: 0;
+        left: 0;
         width: 100%;
         max-width: 400px;
-        transform: translateX(100%);
+        transform: translateX(-100%);
         box-shadow: var(--shadow-lg);
     }
 
@@ -747,6 +960,7 @@ body {
     }
 
     .map-legend {
+        left: 20px;
         bottom: 80px;
     }
 }
@@ -847,9 +1061,9 @@ body {
     }
 
     .custom-marker {
-        width: 44px;
-        height: 44px;
-        font-size: 1.2rem;
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
     }
 }
 

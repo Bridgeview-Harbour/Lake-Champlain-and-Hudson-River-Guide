@@ -21,14 +21,16 @@
         map: null,
         markers: {},
         routeLine: null,
-        startPoint: null,
-        endPoint: null,
+        stops: [null, null],  // Array of POI IDs: [startId, stop1Id, stop2Id, ..., endId]
         currentUnit: 'nm',
         vesselSpeed: 15,
         currentFilter: 'all',
         searchQuery: '',
         isMobile: window.innerWidth <= 900
     };
+
+    // Drag-and-drop state
+    let draggedIndex = null;
 
     // ============================================
     // DOM Elements
@@ -37,13 +39,13 @@
         map: document.getElementById('map'),
         sidePanel: document.getElementById('sidePanel'),
         menuToggle: document.getElementById('menuToggle'),
-        startPoint: document.getElementById('startPoint'),
-        endPoint: document.getElementById('endPoint'),
-        swapPoints: document.getElementById('swapPoints'),
+        stopsContainer: document.getElementById('stopsContainer'),
+        addStopBtn: document.getElementById('addStopBtn'),
         unitSelect: document.getElementById('unitSelect'),
         vesselSpeed: document.getElementById('vesselSpeed'),
         speedUnit: document.getElementById('speedUnit'),
         tripResults: document.getElementById('tripResults'),
+        itinerary: document.getElementById('itinerary'),
         distanceValue: document.getElementById('distanceValue'),
         timeValue: document.getElementById('timeValue'),
         calculateBtn: document.getElementById('calculateBtn'),
@@ -174,12 +176,7 @@
             doubleClickZoom: true,
             touchZoom: true,
             dragging: true,
-            tap: true,
-            maxBounds: [
-                [MAP_BOUNDS.south, MAP_BOUNDS.west],
-                [MAP_BOUNDS.north, MAP_BOUNDS.east]
-            ],
-            maxBoundsViscosity: 0.8
+            tap: true
         });
 
         // Add tile layer (OpenStreetMap)
@@ -201,20 +198,21 @@
     // ============================================
     // Custom Marker Creation
     // ============================================
-    function createCustomIcon(type, isSelected = false, isStart = false, isEnd = false) {
+    function createCustomIcon(type, isSelected = false, isStart = false, isEnd = false, isIntermediate = false) {
         const config = TYPE_CONFIG[type];
         let className = `custom-marker ${type}`;
 
         if (isSelected) className += ' selected';
         if (isStart) className += ' start';
         if (isEnd) className += ' end';
+        if (isIntermediate) className += ' intermediate';
 
         return L.divIcon({
             className: 'custom-marker-wrapper',
             html: `<div class="${className}">${config.icon}</div>`,
-            iconSize: [36, 36],
-            iconAnchor: [18, 18],
-            popupAnchor: [0, -20]
+            iconSize: [24, 24],
+            iconAnchor: [12, 12],
+            popupAnchor: [0, -12]
         });
     }
 
@@ -265,17 +263,19 @@
     }
 
     // ============================================
-    // Populate Dropdowns
+    // Generate Select Options HTML
     // ============================================
-    function populateDropdowns() {
+    function generateSelectOptionsHTML(placeholder) {
+        // Guard against missing data
+        if (!POINTS_OF_INTEREST || !Array.isArray(POINTS_OF_INTEREST)) {
+            console.error('POINTS_OF_INTEREST not available in generateSelectOptionsHTML');
+            return `<option value="">${placeholder}</option>`;
+        }
+
         // Sort POIs alphabetically
         const sortedPOIs = [...POINTS_OF_INTEREST].sort((a, b) =>
             a.name.localeCompare(b.name)
         );
-
-        // Clear existing options (keep placeholder)
-        elements.startPoint.innerHTML = '<option value="">Select starting point...</option>';
-        elements.endPoint.innerHTML = '<option value="">Select destination...</option>';
 
         // Group by type for better organization
         const grouped = {};
@@ -286,41 +286,262 @@
             grouped[poi.type].push(poi);
         });
 
-        // Add options grouped by type
+        // Build options HTML
+        let html = `<option value="">${placeholder}</option>`;
         const typeOrder = ['marina', 'restaurant', 'bay', 'historic', 'fuel', 'anchorage'];
 
         typeOrder.forEach(type => {
             if (grouped[type] && grouped[type].length > 0) {
                 const config = TYPE_CONFIG[type];
-                const optgroup1 = document.createElement('optgroup');
-                optgroup1.label = config.icon + ' ' + config.name + 's';
-                const optgroup2 = optgroup1.cloneNode(true);
-
+                html += `<optgroup label="${config.icon} ${config.name}s">`;
                 grouped[type].forEach(poi => {
-                    const option1 = document.createElement('option');
-                    option1.value = poi.id;
-                    option1.textContent = poi.name;
-                    optgroup1.appendChild(option1);
-
-                    const option2 = option1.cloneNode(true);
-                    optgroup2.appendChild(option2);
+                    html += `<option value="${poi.id}">${poi.name}</option>`;
                 });
-
-                elements.startPoint.appendChild(optgroup1);
-                elements.endPoint.appendChild(optgroup2);
+                html += '</optgroup>';
             }
         });
 
-        // Set default start location
-        elements.startPoint.value = DEFAULT_START_LOCATION;
-        state.startPoint = DEFAULT_START_LOCATION;
-        updateMarkerAppearance(DEFAULT_START_LOCATION, true, false);
+        return html;
+    }
+
+    // ============================================
+    // Render Stops UI
+    // ============================================
+    function renderStopsUI() {
+        const container = elements.stopsContainer;
+        if (!container) {
+            console.error('stopsContainer element not found');
+            return;
+        }
+        container.innerHTML = '';
+
+        state.stops.forEach((stopId, index) => {
+            const isFirst = index === 0;
+            const isLast = index === state.stops.length - 1;
+            const isMiddle = !isFirst && !isLast;
+
+            // Determine label
+            let label;
+            if (isFirst) {
+                label = 'Start';
+            } else if (isLast) {
+                label = 'End';
+            } else {
+                label = `Stop ${index}`;
+            }
+
+            // Determine placeholder
+            let placeholder;
+            if (isFirst) {
+                placeholder = 'Select starting point...';
+            } else if (isLast) {
+                placeholder = 'Select destination...';
+            } else {
+                placeholder = 'Select stop...';
+            }
+
+            // Create stop row
+            const row = document.createElement('div');
+            row.className = 'stop-row';
+            row.draggable = true;
+            row.dataset.index = index;
+
+            row.innerHTML = `
+                <span class="drag-handle" title="Drag to reorder">&#x2630;</span>
+                <span class="stop-label">${label}</span>
+                <select class="stop-select" data-index="${index}">
+                    ${generateSelectOptionsHTML(placeholder)}
+                </select>
+                <button class="remove-stop-btn ${isMiddle ? '' : 'hidden'}" data-index="${index}" title="Remove stop">&times;</button>
+            `;
+
+            // Set the selected value
+            const select = row.querySelector('.stop-select');
+            if (stopId) {
+                select.value = stopId;
+            }
+
+            // Add change listener
+            select.addEventListener('change', (e) => {
+                updateStop(parseInt(e.target.dataset.index), e.target.value);
+            });
+
+            // Add remove button listener
+            const removeBtn = row.querySelector('.remove-stop-btn');
+            removeBtn.addEventListener('click', () => {
+                removeStop(parseInt(removeBtn.dataset.index));
+            });
+
+            // Drag-and-drop event listeners
+            row.addEventListener('dragstart', (e) => handleDragStart(e, index));
+            row.addEventListener('dragover', handleDragOver);
+            row.addEventListener('dragenter', (e) => handleDragEnter(e, index));
+            row.addEventListener('dragleave', handleDragLeave);
+            row.addEventListener('drop', (e) => handleDrop(e, index));
+            row.addEventListener('dragend', handleDragEnd);
+
+            container.appendChild(row);
+        });
+    }
+
+    // ============================================
+    // Stop Management Functions
+    // ============================================
+    function addStop() {
+        // Insert null before the last position (before End)
+        state.stops.splice(state.stops.length - 1, 0, null);
+        renderStopsUI();
+    }
+
+    function removeStop(index) {
+        // Only allow removing middle stops (not Start or End)
+        if (index > 0 && index < state.stops.length - 1) {
+            // Reset marker appearance for removed stop
+            const poiId = state.stops[index];
+            if (poiId) {
+                resetMarkerAppearance(poiId);
+            }
+            state.stops.splice(index, 1);
+            renderStopsUI();
+            updateAllMarkerAppearances();
+            calculateRoute();
+        }
+    }
+
+    function updateStop(index, poiId) {
+        // Reset old marker if it exists
+        const oldPoiId = state.stops[index];
+        if (oldPoiId) {
+            resetMarkerAppearance(oldPoiId);
+        }
+
+        // Update state
+        state.stops[index] = poiId || null;
+
+        // Update marker appearances
+        updateAllMarkerAppearances();
+
+        // Recalculate route
+        calculateRoute();
+
+        // Update location list to show selection state
+        populateLocationList();
+    }
+
+    // ============================================
+    // Drag-and-Drop Handlers
+    // ============================================
+    function handleDragStart(e, index) {
+        draggedIndex = index;
+        e.target.closest('.stop-row').classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', index.toString());
+    }
+
+    function handleDragOver(e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+    }
+
+    function handleDragEnter(e, index) {
+        if (draggedIndex !== null && draggedIndex !== index) {
+            const row = e.target.closest('.stop-row');
+            if (row) {
+                row.classList.add('drag-over');
+            }
+        }
+    }
+
+    function handleDragLeave(e) {
+        const row = e.target.closest('.stop-row');
+        if (row && !row.contains(e.relatedTarget)) {
+            row.classList.remove('drag-over');
+        }
+    }
+
+    function handleDrop(e, targetIndex) {
+        e.preventDefault();
+        if (draggedIndex !== null && draggedIndex !== targetIndex) {
+            // Reorder state.stops array
+            const [removed] = state.stops.splice(draggedIndex, 1);
+            state.stops.splice(targetIndex, 0, removed);
+            renderStopsUI();
+            updateAllMarkerAppearances();
+            calculateRoute();
+        }
+        cleanupDragState();
+    }
+
+    function handleDragEnd() {
+        cleanupDragState();
+    }
+
+    function cleanupDragState() {
+        draggedIndex = null;
+        document.querySelectorAll('.stop-row').forEach(row => {
+            row.classList.remove('dragging', 'drag-over');
+        });
+    }
+
+    // ============================================
+    // Update All Marker Appearances
+    // ============================================
+    function updateAllMarkerAppearances() {
+        // First reset all markers
+        Object.keys(state.markers).forEach(poiId => {
+            resetMarkerAppearance(poiId);
+        });
+
+        // Then update based on current stops
+        state.stops.forEach((poiId, index) => {
+            if (poiId) {
+                const isStart = index === 0;
+                const isEnd = index === state.stops.length - 1;
+                const isIntermediate = !isStart && !isEnd;
+
+                const markerData = state.markers[poiId];
+                if (markerData) {
+                    const icon = createCustomIcon(markerData.poi.type, true, isStart, isEnd, isIntermediate);
+                    markerData.marker.setIcon(icon);
+                }
+            }
+        });
+    }
+
+    // ============================================
+    // Initialize Stops with Default
+    // ============================================
+    function initializeStops() {
+        // Guard against missing data
+        if (!POINTS_OF_INTEREST || !Array.isArray(POINTS_OF_INTEREST)) {
+            console.error('POINTS_OF_INTEREST not available in initializeStops');
+            renderStopsUI();  // Still render empty stops
+            return;
+        }
+
+        // Set default start location if it exists
+        const defaultExists = POINTS_OF_INTEREST.some(p => p.id === DEFAULT_START_LOCATION);
+        if (defaultExists) {
+            state.stops[0] = DEFAULT_START_LOCATION;
+        }
+        renderStopsUI();
+        updateAllMarkerAppearances();
     }
 
     // ============================================
     // Populate Location List
     // ============================================
     function populateLocationList() {
+        // Guard against missing elements or data
+        if (!elements.locationList || !elements.locationCount) {
+            console.error('Location list elements not found');
+            return;
+        }
+        if (!POINTS_OF_INTEREST || !Array.isArray(POINTS_OF_INTEREST)) {
+            console.error('POINTS_OF_INTEREST not available:', POINTS_OF_INTEREST);
+            return;
+        }
+
         // Filter POIs based on current filter and search
         let filteredPOIs = [...POINTS_OF_INTEREST];
 
@@ -358,7 +579,7 @@
             li.className = 'location-item';
             li.dataset.poiId = poi.id;
 
-            if (poi.id === state.startPoint || poi.id === state.endPoint) {
+            if (state.stops.includes(poi.id)) {
                 li.classList.add('selected');
             }
 
@@ -420,114 +641,169 @@
     // Set Start/End Points
     // ============================================
     function setStartPoint(poiId) {
-        // Reset previous start marker
-        if (state.startPoint) {
-            resetMarkerAppearance(state.startPoint);
-        }
-
-        state.startPoint = poiId;
-        elements.startPoint.value = poiId;
-
-        // Update marker
-        updateMarkerAppearance(poiId, true, false);
-
-        // Update location list
-        populateLocationList();
-
-        // Calculate if both points are set
-        if (state.startPoint && state.endPoint) {
-            calculateRoute();
-        }
-
+        updateStop(0, poiId);
+        renderStopsUI();
         hideQuickInfo();
     }
 
     function setEndPoint(poiId) {
-        // Reset previous end marker
-        if (state.endPoint && state.endPoint !== state.startPoint) {
-            resetMarkerAppearance(state.endPoint);
-        }
-
-        state.endPoint = poiId;
-        elements.endPoint.value = poiId;
-
-        // Update marker
-        updateMarkerAppearance(poiId, false, true);
-
-        // Update location list
-        populateLocationList();
-
-        // Calculate if both points are set
-        if (state.startPoint && state.endPoint) {
-            calculateRoute();
-        }
-
+        updateStop(state.stops.length - 1, poiId);
+        renderStopsUI();
         hideQuickInfo();
     }
 
     // ============================================
-    // Calculate Route
+    // Calculate Route (Multi-Stop Water-Based Routing)
     // ============================================
     function calculateRoute() {
-        if (!state.startPoint || !state.endPoint) {
-            elements.tripResults.classList.add('hidden');
+        // Filter to only valid (selected) stops
+        const validStops = state.stops.filter(id => id);
+
+        if (validStops.length < 2) {
+            clearRoute();
             return;
         }
 
-        const startPoi = POINTS_OF_INTEREST.find(p => p.id === state.startPoint);
-        const endPoi = POINTS_OF_INTEREST.find(p => p.id === state.endPoint);
+        let totalDistanceKm = 0;
+        let allCoordinates = [];
+        const legs = [];  // Store leg information for itinerary
 
-        if (!startPoi || !endPoi) return;
+        // Calculate each segment
+        for (let i = 0; i < validStops.length - 1; i++) {
+            const startPoi = POINTS_OF_INTEREST.find(p => p.id === validStops[i]);
+            const endPoi = POINTS_OF_INTEREST.find(p => p.id === validStops[i + 1]);
 
-        // Calculate distance in km
-        const distanceKm = calculateDistance(
-            startPoi.lat, startPoi.lng,
-            endPoi.lat, endPoi.lng
-        );
+            if (!startPoi || !endPoi) continue;
+
+            // Calculate water-based route for this segment
+            const routeResult = calculateWaterRoute(validStops[i], validStops[i + 1]);
+
+            let segmentDistanceKm;
+            if (routeResult && !routeResult.isFallback) {
+                // Use water route distance
+                segmentDistanceKm = routeResult.distance;
+
+                // Concatenate coordinates (avoid duplicating junction points)
+                if (i === 0) {
+                    allCoordinates = [...routeResult.coordinates];
+                } else {
+                    // Skip the first coordinate if it's the same as the last one
+                    allCoordinates.push(...routeResult.coordinates.slice(1));
+                }
+            } else {
+                // Fallback to straight-line distance
+                segmentDistanceKm = calculateDistance(
+                    startPoi.lat, startPoi.lng,
+                    endPoi.lat, endPoi.lng
+                );
+
+                // Add direct line coordinates
+                if (i === 0) {
+                    allCoordinates.push([startPoi.lat, startPoi.lng]);
+                }
+                allCoordinates.push([endPoi.lat, endPoi.lng]);
+            }
+
+            // Store leg information
+            legs.push({
+                from: startPoi.name,
+                to: endPoi.name,
+                distanceKm: segmentDistanceKm
+            });
+
+            totalDistanceKm += segmentDistanceKm;
+        }
 
         // Convert to current unit
         const unit = state.currentUnit;
-        const distance = convertDistance(distanceKm, unit);
         const unitAbbr = UNIT_CONVERSIONS[unit].abbr;
+        const totalDistance = convertDistance(totalDistanceKm, unit);
+        const totalTime = calculateTravelTime(totalDistanceKm, state.vesselSpeed, unit);
 
-        // Calculate travel time
-        const travelTime = calculateTravelTime(distanceKm, state.vesselSpeed, unit);
+        // Build itinerary HTML
+        let itineraryHTML = '';
+        legs.forEach((leg, index) => {
+            const legDistance = convertDistance(leg.distanceKm, unit);
+            const legTime = calculateTravelTime(leg.distanceKm, state.vesselSpeed, unit);
 
-        // Update display
-        elements.distanceValue.textContent = formatDistance(distance, unitAbbr);
-        elements.timeValue.textContent = formatTime(travelTime);
+            itineraryHTML += `
+                <div class="itinerary-leg">
+                    <div class="leg-icon">${index + 1}</div>
+                    <div class="leg-details">
+                        <div class="leg-route">
+                            <span class="from-to">${leg.from}</span>
+                            <span class="arrow">→</span>
+                            <span class="from-to">${leg.to}</span>
+                        </div>
+                        <div class="leg-stats">
+                            <span>📏 ${formatDistance(legDistance, unitAbbr)}</span>
+                            <span>⏱️ ${formatTime(legTime)}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Update itinerary display
+        if (elements.itinerary) {
+            elements.itinerary.innerHTML = itineraryHTML;
+        }
+
+        // Update totals
+        elements.distanceValue.textContent = formatDistance(totalDistance, unitAbbr);
+        elements.timeValue.textContent = formatTime(totalTime);
         elements.tripResults.classList.remove('hidden');
 
-        // Draw route line
-        drawRouteLine(startPoi, endPoi);
+        // Draw route line through all coordinates
+        drawRouteLine(null, null, { coordinates: allCoordinates });
 
-        // Fit map to show both points
-        const bounds = L.latLngBounds(
-            [startPoi.lat, startPoi.lng],
-            [endPoi.lat, endPoi.lng]
-        );
-        state.map.fitBounds(bounds, { padding: [50, 50] });
+        // Fit map to show entire route
+        if (allCoordinates.length > 0) {
+            const bounds = L.latLngBounds(allCoordinates);
+            state.map.fitBounds(bounds, { padding: [50, 50] });
+        }
     }
 
     // ============================================
-    // Draw Route Line
+    // Clear Route
     // ============================================
-    function drawRouteLine(startPoi, endPoi) {
+    function clearRoute() {
+        elements.tripResults.classList.add('hidden');
+        if (elements.itinerary) {
+            elements.itinerary.innerHTML = '';
+        }
+        clearRouteLine();
+    }
+
+    // ============================================
+    // Draw Route Line (Multi-Point Water Route)
+    // ============================================
+    function drawRouteLine(startPoi, endPoi, routeResult) {
         // Remove existing line
         if (state.routeLine) {
             state.map.removeLayer(state.routeLine);
         }
 
-        // Create new line
-        state.routeLine = L.polyline([
-            [startPoi.lat, startPoi.lng],
-            [endPoi.lat, endPoi.lng]
-        ], {
+        // Determine coordinates to draw
+        let coordinates;
+        if (routeResult && routeResult.coordinates && routeResult.coordinates.length > 0) {
+            // Use water route through waypoints
+            coordinates = routeResult.coordinates;
+        } else {
+            // Fallback to direct line
+            coordinates = [
+                [startPoi.lat, startPoi.lng],
+                [endPoi.lat, endPoi.lng]
+            ];
+        }
+
+        // Create multi-point polyline following the water route
+        state.routeLine = L.polyline(coordinates, {
             color: '#1a5f7a',
             weight: 4,
             opacity: 0.8,
-            dashArray: '10, 10',
-            lineCap: 'round'
+            lineCap: 'round',
+            lineJoin: 'round'
         }).addTo(state.map);
     }
 
@@ -542,21 +818,18 @@
     // Clear Selection
     // ============================================
     function clearSelection() {
-        // Reset markers
-        if (state.startPoint) {
-            resetMarkerAppearance(state.startPoint);
-        }
-        if (state.endPoint) {
-            resetMarkerAppearance(state.endPoint);
-        }
+        // Reset all markers
+        state.stops.forEach(poiId => {
+            if (poiId) {
+                resetMarkerAppearance(poiId);
+            }
+        });
 
-        // Clear state
-        state.startPoint = null;
-        state.endPoint = null;
+        // Reset stops to just Start and End (both empty)
+        state.stops = [null, null];
 
-        // Reset dropdowns
-        elements.startPoint.value = '';
-        elements.endPoint.value = '';
+        // Re-render stops UI
+        renderStopsUI();
 
         // Hide results
         elements.tripResults.classList.add('hidden');
@@ -594,65 +867,21 @@
             elements.menuToggle.classList.toggle('active');
         });
 
-        // Start point change
-        elements.startPoint.addEventListener('change', (e) => {
-            if (state.startPoint) {
-                resetMarkerAppearance(state.startPoint);
-            }
-            if (e.target.value) {
-                setStartPoint(e.target.value);
-                // Pan to start point
-                const poi = POINTS_OF_INTEREST.find(p => p.id === e.target.value);
-                if (poi) {
-                    state.map.setView([poi.lat, poi.lng], 11);
-                }
-            } else {
-                state.startPoint = null;
-                elements.tripResults.classList.add('hidden');
-                clearRouteLine();
-            }
-        });
-
-        // End point change
-        elements.endPoint.addEventListener('change', (e) => {
-            if (state.endPoint) {
-                resetMarkerAppearance(state.endPoint);
-            }
-            if (e.target.value) {
-                setEndPoint(e.target.value);
-            } else {
-                state.endPoint = null;
-                elements.tripResults.classList.add('hidden');
-                clearRouteLine();
-            }
-        });
-
-        // Swap points
-        elements.swapPoints.addEventListener('click', () => {
-            const tempStart = state.startPoint;
-            const tempEnd = state.endPoint;
-
-            // Reset both markers
-            if (tempStart) resetMarkerAppearance(tempStart);
-            if (tempEnd) resetMarkerAppearance(tempEnd);
-
-            // Swap
-            if (tempEnd) setStartPoint(tempEnd);
-            if (tempStart) setEndPoint(tempStart);
-
-            // Recalculate
-            if (state.startPoint && state.endPoint) {
-                calculateRoute();
-            }
-        });
+        // Add stop button
+        if (elements.addStopBtn) {
+            elements.addStopBtn.addEventListener('click', addStop);
+        } else {
+            console.error('addStopBtn element not found');
+        }
 
         // Unit change
         elements.unitSelect.addEventListener('change', (e) => {
             state.currentUnit = e.target.value;
             elements.speedUnit.textContent = UNIT_CONVERSIONS[e.target.value].speedUnit;
 
-            // Recalculate if route exists
-            if (state.startPoint && state.endPoint) {
+            // Recalculate if route exists (need at least 2 valid stops)
+            const validStops = state.stops.filter(id => id);
+            if (validStops.length >= 2) {
                 calculateRoute();
             }
         });
@@ -662,7 +891,8 @@
             state.vesselSpeed = parseFloat(e.target.value) || 15;
 
             // Recalculate if route exists
-            if (state.startPoint && state.endPoint) {
+            const validStops = state.stops.filter(id => id);
+            if (validStops.length >= 2) {
                 calculateRoute();
             }
         });
@@ -671,7 +901,8 @@
         elements.vesselSpeed.addEventListener('input', (e) => {
             state.vesselSpeed = parseFloat(e.target.value) || 15;
 
-            if (state.startPoint && state.endPoint) {
+            const validStops = state.stops.filter(id => id);
+            if (validStops.length >= 2) {
                 calculateRoute();
             }
         });
@@ -810,32 +1041,55 @@
     // ============================================
     // Initialize Application
     // ============================================
-    function init() {
-        // Load saved preferences
-        loadPreferences();
+    async function init() {
+        console.log('Starting initialization...');
+        try {
+            // Load POI data from JSON file
+            await initializeData();
+            console.log('POI data loaded successfully, count:', POINTS_OF_INTEREST.length);
 
-        // Initialize map
-        initMap();
+            // Load saved preferences
+            loadPreferences();
+            console.log('Preferences loaded');
 
-        // Populate UI elements
-        populateDropdowns();
-        populateLocationList();
+            // Initialize map
+            initMap();
+            console.log('Map initialized');
 
-        // Set up event listeners
-        initEventListeners();
+            // Populate UI elements
+            console.log('Initializing stops...');
+            initializeStops();
+            console.log('Stops initialized');
 
-        // Set up preference saving
-        initPreferenceSaving();
+            console.log('Populating location list...');
+            populateLocationList();
+            console.log('Location list populated');
 
-        // Set initial speed unit display
-        elements.speedUnit.textContent = UNIT_CONVERSIONS[state.currentUnit].speedUnit;
+            // Set up event listeners
+            console.log('Setting up event listeners...');
+            initEventListeners();
+            console.log('Event listeners set up');
 
-        console.log('Lake Champlain & Hudson River Boater\'s Guide initialized');
+            // Set up preference saving
+            initPreferenceSaving();
+
+            // Set initial speed unit display
+            elements.speedUnit.textContent = UNIT_CONVERSIONS[state.currentUnit].speedUnit;
+
+            console.log('Lake Champlain & Hudson River Boater\'s Guide initialized');
+        } catch (error) {
+            console.error('Failed to initialize application:', error);
+            console.error('Error stack:', error.stack);
+            // Hide loading overlay even on error
+            if (elements.loadingOverlay) {
+                elements.loadingOverlay.classList.add('hidden');
+            }
+        }
     }
 
     // Start the application when DOM is ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', () => init());
     } else {
         init();
     }
