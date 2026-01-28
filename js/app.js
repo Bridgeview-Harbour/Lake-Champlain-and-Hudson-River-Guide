@@ -553,22 +553,14 @@
         // Special case: 'fuel' filter should match any POI with fuel available
         if (filter === 'fuel' && poi.fuel && poi.fuel.available) return true;
 
-        // Special case: 'aton' filter should match all ATON subtypes
+        // Special case: 'poi' filter should match 'historic' type (generic points of interest)
+        if (filter === 'poi' && poi.type === 'historic') return true;
+
+        // Special case: 'aton' filter should match all ATON subtypes (lighthouses, buoys, etc.)
         if (filter === 'aton' && poi.type && poi.type.startsWith('aton')) return true;
 
-        // Special case: 'aton-lighthouse' filter
-        if (filter === 'aton-lighthouse' && poi.type === 'aton-lighthouse') return true;
-
-        // Special case: 'aton-buoy' filter
-        if (filter === 'aton-buoy' && poi.type === 'aton-buoy') return true;
-
-        // Special case: 'bridge' filter should match all bridge subtypes
+        // Special case: 'bridge' filter should match all bridge subtypes (fixed and movable)
         if (filter === 'bridge' && poi.type && poi.type.startsWith('bridge')) return true;
-
-        // Special case: 'bridge-draw' filter should match all movable bridge types
-        if (filter === 'bridge-draw' && poi.type &&
-            (poi.type === 'bridge-draw' || poi.type === 'bridge-swing' ||
-             poi.type === 'bridge-bascule' || poi.type === 'bridge-lift')) return true;
 
         return false;
     }

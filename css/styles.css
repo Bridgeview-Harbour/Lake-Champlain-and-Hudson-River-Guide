@@ -849,7 +849,7 @@ body {
 .legend-marker.anchorage { background: var(--anchorage-color); }
 .legend-marker.lock { background: var(--lock-color); }
 .legend-marker.bridge { background: var(--bridge-color); }
-.legend-marker.bridge-movable { background: var(--bridge-movable-color); }
+.legend-marker.aton { background: var(--restaurant-color); }
 
 /* ============================================
    Loading Overlay
