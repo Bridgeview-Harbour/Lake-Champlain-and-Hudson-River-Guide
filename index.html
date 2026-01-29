@@ -30,7 +30,7 @@
             <h1>Lake Champlain & Hudson River Guide</h1>
             <p class="tagline">Presented by Bridgeview Harbour Marina</p>
         </div>
-        <button id="menuToggle" class="menu-toggle" aria-label="Toggle Menu">
+        <button id="menuToggle" class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidePanel">
             <span></span>
             <span></span>
             <span></span>
@@ -43,7 +43,7 @@
         <div id="map" class="map-container"></div>
 
         <!-- Side Panel -->
-        <aside id="sidePanel" class="side-panel">
+        <aside id="sidePanel" class="side-panel" role="complementary" aria-label="Trip planning and filters">
             <!-- Trip Calculator -->
             <section class="panel-section trip-calculator">
                 <h2>Trip Calculator</h2>
@@ -114,61 +114,61 @@
             <!-- Filter Section -->
             <section class="panel-section filter-section">
                 <h2>Points of Interest</h2>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">
-                        <span class="filter-icon">&#128506;</span>
+                <div class="filter-buttons" role="group" aria-label="Filter points of interest by type">
+                    <button class="filter-btn active" data-filter="all" aria-pressed="true">
+                        <span class="filter-icon" aria-hidden="true">&#128506;</span>
                         All
                     </button>
-                    <button class="filter-btn" data-filter="marina">
-                        <span class="filter-icon">&#9875;</span>
+                    <button class="filter-btn" data-filter="marina" aria-pressed="false">
+                        <span class="filter-icon" aria-hidden="true">&#9875;</span>
                         Marinas
                     </button>
-                    <button class="filter-btn" data-filter="restaurant">
-                        <span class="filter-icon">&#127860;</span>
+                    <button class="filter-btn" data-filter="restaurant" aria-pressed="false">
+                        <span class="filter-icon" aria-hidden="true">&#127860;</span>
                         Restaurants
                     </button>
-                    <button class="filter-btn" data-filter="poi">
-                        <span class="filter-icon">&#128205;</span>
+                    <button class="filter-btn" data-filter="poi" aria-pressed="false">
+                        <span class="filter-icon" aria-hidden="true">&#128205;</span>
                         Points of Interest
                     </button>
-                    <button class="filter-btn" data-filter="bay">
-                        <span class="filter-icon">&#127754;</span>
+                    <button class="filter-btn" data-filter="bay" aria-pressed="false">
+                        <span class="filter-icon" aria-hidden="true">&#127754;</span>
                         Bays & Harbors
                     </button>
-                    <button class="filter-btn" data-filter="fuel">
-                        <span class="filter-icon">&#9981;</span>
+                    <button class="filter-btn" data-filter="fuel" aria-pressed="false">
+                        <span class="filter-icon" aria-hidden="true">&#9981;</span>
                         Fuel
                     </button>
-                    <button class="filter-btn" data-filter="anchorage">
-                        <span class="filter-icon">&#9875;</span>
+                    <button class="filter-btn" data-filter="anchorage" aria-pressed="false">
+                        <span class="filter-icon" aria-hidden="true">&#9875;</span>
                         Anchorages
                     </button>
-                    <button class="filter-btn" data-filter="lock">
-                        <span class="filter-icon">&#128274;</span>
+                    <button class="filter-btn" data-filter="lock" aria-pressed="false">
+                        <span class="filter-icon" aria-hidden="true">&#128274;</span>
                         Locks
                     </button>
-                    <button class="filter-btn" data-filter="bridge">
-                        <span class="filter-icon">&#127753;</span>
+                    <button class="filter-btn" data-filter="bridge" aria-pressed="false">
+                        <span class="filter-icon" aria-hidden="true">&#127753;</span>
                         Bridges
                     </button>
-                    <button class="filter-btn" data-filter="aton">
-                        <span class="filter-icon">&#9830;</span>
+                    <button class="filter-btn" data-filter="aton" aria-pressed="false">
+                        <span class="filter-icon" aria-hidden="true">&#9830;</span>
                         Nav Aids
                     </button>
-                    <button class="filter-btn" data-filter="boat-launch">
-                        <span class="filter-icon">&#128676;</span>
+                    <button class="filter-btn" data-filter="boat-launch" aria-pressed="false">
+                        <span class="filter-icon" aria-hidden="true">&#128676;</span>
                         Launches
                     </button>
-                    <button class="filter-btn" data-filter="campground">
-                        <span class="filter-icon">&#9978;</span>
+                    <button class="filter-btn" data-filter="campground" aria-pressed="false">
+                        <span class="filter-icon" aria-hidden="true">&#9978;</span>
                         Campgrounds
                     </button>
-                    <button class="filter-btn" data-filter="hotel">
-                        <span class="filter-icon">&#127976;</span>
+                    <button class="filter-btn" data-filter="hotel" aria-pressed="false">
+                        <span class="filter-icon" aria-hidden="true">&#127976;</span>
                         Hotels
                     </button>
-                    <button class="filter-btn" data-filter="beach">
-                        <span class="filter-icon">&#127958;</span>
+                    <button class="filter-btn" data-filter="beach" aria-pressed="false">
+                        <span class="filter-icon" aria-hidden="true">&#127958;</span>
                         Beaches
                     </button>
                 </div>
@@ -188,8 +188,8 @@
         </aside>
 
         <!-- Quick Info Panel (shows on marker click) -->
-        <div id="quickInfo" class="quick-info hidden">
-            <button id="closeQuickInfo" class="close-btn" aria-label="Close">&times;</button>
+        <div id="quickInfo" class="quick-info hidden" role="dialog" aria-labelledby="quickInfoTitle" aria-modal="false">
+            <button id="closeQuickInfo" class="close-btn" aria-label="Close location details">&times;</button>
             <h3 id="quickInfoTitle">Location Name</h3>
             <p id="quickInfoType" class="poi-type">Type</p>
             <p id="quickInfoDesc" class="poi-desc">Description</p>
@@ -202,8 +202,8 @@
 
     <!-- Legend -->
     <div id="mapLegend" class="map-legend">
-        <button id="legendToggle" class="legend-toggle">Legend</button>
-        <div id="legendContent" class="legend-content hidden">
+        <button id="legendToggle" class="legend-toggle" aria-expanded="false" aria-controls="legendContent">Legend</button>
+        <div id="legendContent" class="legend-content hidden" role="region" aria-label="Map legend">
             <div class="legend-item"><span class="legend-marker marina"></span> Marina</div>
             <div class="legend-item"><span class="legend-marker restaurant"></span> Restaurant</div>
             <div class="legend-item"><span class="legend-marker historic"></span> Point of Interest</div>
@@ -223,8 +223,8 @@
     </div>
 
     <!-- Loading Overlay -->
-    <div id="loadingOverlay" class="loading-overlay">
-        <div class="loading-spinner"></div>
+    <div id="loadingOverlay" class="loading-overlay" role="status" aria-live="polite" aria-label="Loading application">
+        <div class="loading-spinner" aria-hidden="true"></div>
         <p>Loading map...</p>
     </div>
 

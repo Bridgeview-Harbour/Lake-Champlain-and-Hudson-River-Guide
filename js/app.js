@@ -32,6 +32,52 @@
     // Drag-and-drop state
     let draggedIndex = null;
 
+    // Focus management state
+    let lastFocusedElement = null;
+
+    // ============================================
+    // Toast Notification System
+    // ============================================
+    /**
+     * Show a toast notification
+     * @param {string} message - The message to display
+     * @param {string} type - Type of toast: 'info', 'success', 'error', 'warning'
+     * @param {number} duration - How long to show the toast in ms (default 3000)
+     */
+    function showToast(message, type = 'info', duration = 3000) {
+        // Remove any existing toast
+        const existingToast = document.querySelector('.toast');
+        if (existingToast) {
+            existingToast.remove();
+        }
+
+        // Create toast element
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.setAttribute('role', 'alert');
+        toast.setAttribute('aria-live', 'assertive');
+        toast.textContent = message;
+
+        // Add to document
+        document.body.appendChild(toast);
+
+        // Trigger reflow for animation
+        toast.offsetHeight;
+
+        // Show toast
+        toast.classList.add('visible');
+
+        // Auto-hide after duration
+        setTimeout(() => {
+            toast.classList.remove('visible');
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.remove();
+                }
+            }, 300);
+        }, duration);
+    }
+
     // ============================================
     // DOM Elements
     // ============================================
@@ -713,6 +759,7 @@
         if (state.isMobile) {
             elements.sidePanel.classList.remove('open');
             elements.menuToggle.classList.remove('active');
+            elements.menuToggle.setAttribute('aria-expanded', 'false');
         }
     }
 
@@ -722,6 +769,9 @@
     let currentQuickInfoPoi = null;
 
     function showQuickInfo(poi) {
+        // Save the currently focused element for restoring later
+        lastFocusedElement = document.activeElement;
+
         currentQuickInfoPoi = poi;
         const config = TYPE_CONFIG[poi.type];
 
@@ -730,11 +780,22 @@
         elements.quickInfoDesc.textContent = poi.description;
 
         elements.quickInfo.classList.remove('hidden');
+
+        // Set focus to close button for keyboard users
+        setTimeout(() => {
+            elements.closeQuickInfo.focus();
+        }, 100);
     }
 
     function hideQuickInfo() {
         elements.quickInfo.classList.add('hidden');
         currentQuickInfoPoi = null;
+
+        // Restore focus to the element that triggered the dialog
+        if (lastFocusedElement && lastFocusedElement.focus) {
+            lastFocusedElement.focus();
+            lastFocusedElement = null;
+        }
     }
 
     // ============================================
@@ -760,6 +821,7 @@
         const validStops = state.stops.filter(id => id);
 
         if (validStops.length < 2) {
+            showToast('Please select at least a start and destination', 'error');
             clearRoute();
             return;
         }
@@ -965,6 +1027,9 @@
         elements.menuToggle.addEventListener('click', () => {
             elements.sidePanel.classList.toggle('open');
             elements.menuToggle.classList.toggle('active');
+            // Update ARIA expanded state
+            const isOpen = elements.sidePanel.classList.contains('open');
+            elements.menuToggle.setAttribute('aria-expanded', isOpen.toString());
         });
 
         // Add stop button
@@ -1016,9 +1081,13 @@
         // Filter buttons
         elements.filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Update active state
-                elements.filterButtons.forEach(b => b.classList.remove('active'));
+                // Update active state and ARIA pressed
+                elements.filterButtons.forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-pressed', 'false');
+                });
                 btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
 
                 // Apply filter
                 state.currentFilter = btn.dataset.filter;
@@ -1053,6 +1122,9 @@
         // Legend toggle
         elements.legendToggle.addEventListener('click', () => {
             elements.legendContent.classList.toggle('hidden');
+            // Update ARIA expanded state
+            const isExpanded = !elements.legendContent.classList.contains('hidden');
+            elements.legendToggle.setAttribute('aria-expanded', isExpanded.toString());
         });
 
         // Close quick info on map click
@@ -1081,21 +1153,68 @@
                 !elements.menuToggle.contains(e.target)) {
                 elements.sidePanel.classList.remove('open');
                 elements.menuToggle.classList.remove('active');
+                elements.menuToggle.setAttribute('aria-expanded', 'false');
             }
         });
 
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
-            // Escape closes panels
+            // Escape closes panels in order of priority
             if (e.key === 'Escape') {
-                hideQuickInfo();
-                if (state.isMobile) {
+                // First close quick info if open
+                if (!elements.quickInfo.classList.contains('hidden')) {
+                    hideQuickInfo();
+                    return;
+                }
+
+                // Then close legend if open
+                if (!elements.legendContent.classList.contains('hidden')) {
+                    elements.legendContent.classList.add('hidden');
+                    elements.legendToggle.setAttribute('aria-expanded', 'false');
+                    elements.legendToggle.focus();
+                    return;
+                }
+
+                // Then close side panel on mobile if open
+                if (state.isMobile && elements.sidePanel.classList.contains('open')) {
                     elements.sidePanel.classList.remove('open');
                     elements.menuToggle.classList.remove('active');
+                    elements.menuToggle.setAttribute('aria-expanded', 'false');
+                    elements.menuToggle.focus();
+                    return;
                 }
-                elements.legendContent.classList.add('hidden');
+            }
+
+            // Focus trap for quick info panel when Tab is pressed
+            if (e.key === 'Tab' && !elements.quickInfo.classList.contains('hidden')) {
+                trapFocusInQuickInfo(e);
             }
         });
+    }
+
+    // ============================================
+    // Focus Trap for Quick Info Panel
+    // ============================================
+    function trapFocusInQuickInfo(e) {
+        const focusableElements = elements.quickInfo.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+            // Shift + Tab: if on first element, go to last
+            if (document.activeElement === firstElement) {
+                e.preventDefault();
+                lastElement.focus();
+            }
+        } else {
+            // Tab: if on last element, go to first
+            if (document.activeElement === lastElement) {
+                e.preventDefault();
+                firstElement.focus();
+            }
+        }
     }
 
     // ============================================
