@@ -244,7 +244,17 @@
             minZoom: 7
         });
 
-        const nautical = L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
+        // NOAA Raster Nautical Charts (RNC)
+        const noaaCharts = L.tileLayer('https://tileservice.charts.noaa.gov/tiles/50000_1/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.charts.noaa.gov">NOAA</a> Nautical Charts',
+            maxZoom: 18,
+            minZoom: 7,
+            tileSize: 256,
+            opacity: 1
+        });
+
+        // OpenSeaMap overlay (navigation aids symbols)
+        const seaMarks = L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openseamap.org">OpenSeaMap</a>',
             maxZoom: 18,
             minZoom: 7
@@ -257,12 +267,13 @@
         const baseMaps = {
             "Street Map": streetMap,
             "Satellite": satellite,
-            "Topographic": topoMap
+            "Topographic": topoMap,
+            "NOAA Charts": noaaCharts
         };
 
-        // Create overlay maps (nautical chart overlay)
+        // Create overlay maps (navigation aids overlay)
         const overlayMaps = {
-            "Nautical Charts": nautical
+            "Nav Aids (OpenSeaMap)": seaMarks
         };
 
         // Add layer control to map (top-right corner)
