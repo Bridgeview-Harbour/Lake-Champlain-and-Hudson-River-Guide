@@ -128,7 +128,7 @@ def map_category(categories_str):
     categories = [c.strip().lower() for c in categories_str.split(';')]
     tags = []
 
-    # Category mapping
+    # Category mapping - (category, subcategory)
     category_map = {
         'marina': ('marina', 'full-service'),
         'mairna': ('marina', 'full-service'),  # Handle typo
@@ -141,26 +141,28 @@ def map_category(categories_str):
         'restaurant': ('dining', 'waterfront-restaurant'),
         'dining': ('dining', 'waterfront-restaurant'),
         'bar': ('dining', 'bar-grill'),
+        'winery': ('dining', 'winery'),
         'points of interest': ('poi', None),
         'poi': ('poi', None),
         'historic landmark': ('poi', 'historic'),
         'landmark': ('poi', 'landmark'),
         'museum': ('poi', 'museum'),
-        'bay': ('bay', None),
-        'anchorage': ('bay', 'anchorage'),
-        'harbor': ('bay', 'harbor'),
-        'boat launch': ('bay', 'boat-launch'),
-        'boat': ('bay', 'boat-launch'),
-        'public dock': ('bay', 'harbor'),
-        'campground': ('poi', 'campground'),
-        'hotel': ('poi', 'hotel'),
-        'ferry': ('poi', 'ferry'),
-        'beach': ('bay', 'beach'),
-        'island': ('bay', 'island'),
         'confluence': ('poi', 'confluence'),
         'border': ('poi', 'landmark'),
         'obstructions': ('poi', 'hazard'),
-        'winery': ('dining', 'winery'),
+        # Bay and water features
+        'bay': ('bay', None),
+        'anchorage': ('bay', 'anchorage'),
+        'harbor': ('bay', 'harbor'),
+        # New dedicated categories
+        'hotel': ('hotel', None),
+        'campground': ('campground', None),
+        'boat launch': ('boat-launch', None),
+        'boat': ('boat-launch', None),
+        'beach': ('beach', None),
+        'ferry': ('ferry', None),
+        'island': ('island', None),
+        'public dock': ('public-dock', None),
     }
 
     # Find primary category

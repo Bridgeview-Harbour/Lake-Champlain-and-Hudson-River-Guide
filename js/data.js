@@ -36,7 +36,17 @@ const CATEGORY_MAP = {
     'poi': 'historic',
     'aton': 'aton',
     'lock': 'lock',
-    'bridge': 'bridge'
+    'bridge': 'bridge',
+    // Additional categories
+    'hotel': 'hotel',
+    'campground': 'campground',
+    'boat-launch': 'boat-launch',
+    'beach': 'beach',
+    'ferry': 'ferry',
+    'island': 'island',
+    'public-dock': 'public-dock',
+    'confluence': 'historic',
+    'landmark': 'historic'
 };
 
 /**
@@ -76,7 +86,15 @@ const SUBCATEGORY_MAP = {
     'drawbridge': 'bridge-draw',
     'swing-bridge': 'bridge-swing',
     'bascule-bridge': 'bridge-bascule',
-    'lift-bridge': 'bridge-lift'
+    'lift-bridge': 'bridge-lift',
+    // Additional subtypes
+    'hotel': 'hotel',
+    'campground': 'campground',
+    'boat-launch': 'boat-launch',
+    'beach': 'beach',
+    'ferry': 'ferry',
+    'island': 'island',
+    'public-dock': 'public-dock'
 };
 
 /**
@@ -220,6 +238,42 @@ const TYPE_CONFIG = {
         name: 'Lift Bridge',
         icon: '🌉',
         color: '#e67e22'
+    },
+    // Additional POI types
+    'hotel': {
+        name: 'Hotel',
+        icon: '🏨',
+        color: '#9b59b6'
+    },
+    'campground': {
+        name: 'Campground',
+        icon: '⛺',
+        color: '#27ae60'
+    },
+    'boat-launch': {
+        name: 'Boat Launch',
+        icon: '🚤',
+        color: '#3498db'
+    },
+    'beach': {
+        name: 'Beach',
+        icon: '🏖',
+        color: '#f1c40f'
+    },
+    'ferry': {
+        name: 'Ferry',
+        icon: '⛴',
+        color: '#1abc9c'
+    },
+    'island': {
+        name: 'Island',
+        icon: '🏝',
+        color: '#2ecc71'
+    },
+    'public-dock': {
+        name: 'Public Dock',
+        icon: '🛥',
+        color: '#34495e'
     }
 };
 

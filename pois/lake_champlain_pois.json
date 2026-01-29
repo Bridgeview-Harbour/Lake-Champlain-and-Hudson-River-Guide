@@ -341,7 +341,7 @@
     {
       "id": "dock-wilcox-dock",
       "name": "Wilcox Dock",
-      "category": "bay",
+      "category": "public-dock",
       "location": {
         "coordinates": {
           "latitude": 44.70847168491057,
@@ -352,7 +352,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Northern"
       },
-      "subcategory": "harbor",
       "details": {
         "description": "Public dock in Plattsburgh"
       }
@@ -436,7 +435,7 @@
     {
       "id": "island-crab-island",
       "name": "Crab Island",
-      "category": "bay",
+      "category": "island",
       "location": {
         "coordinates": {
           "latitude": 44.66205497214494,
@@ -447,7 +446,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Northern"
       },
-      "subcategory": "island",
       "details": {
         "description": "Historic island - site of Battle of Plattsburgh"
       }
@@ -892,7 +890,7 @@
     {
       "id": "launch-waterford-boat-launch",
       "name": "Waterford Boat Launch",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 42.785576064516526,
@@ -903,7 +901,6 @@
         "country": "United States",
         "waterBodyRegion": "Hudson River Capital Region"
       },
-      "subcategory": "boat-launch",
       "details": {
         "description": "State boat launch"
       }
@@ -1026,7 +1023,7 @@
     {
       "id": "dock-mechanicville-city-docks",
       "name": "Mechanicville City Docks",
-      "category": "bay",
+      "category": "public-dock",
       "location": {
         "coordinates": {
           "latitude": 42.90405988907791,
@@ -1037,7 +1034,6 @@
         "country": "United States",
         "waterBodyRegion": "Hudson River Capital Region"
       },
-      "subcategory": "harbor",
       "details": {
         "description": "Free municipal docks with limited amenities"
       }
@@ -1212,7 +1208,7 @@
     {
       "id": "launch-town-of-saratoga-boat-launch",
       "name": "Town of Saratoga Boat Launch",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 43.03610955094749,
@@ -1223,7 +1219,6 @@
         "country": "United States",
         "waterBodyRegion": "Hudson River"
       },
-      "subcategory": "boat-launch",
       "details": {
         "description": "State boat launch"
       }
@@ -1577,7 +1572,7 @@
     {
       "id": "launch-hudson-river-boat-launch-at-fort-edward",
       "name": "Hudson River Boat Launch at Fort Edward",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 43.25429788131806,
@@ -1588,7 +1583,6 @@
         "country": "United States",
         "waterBodyRegion": "Hudson River"
       },
-      "subcategory": "boat-launch",
       "details": {
         "description": "State boat launch"
       }
@@ -1649,7 +1643,7 @@
     {
       "id": "dock-fort-edward-yacht-basin",
       "name": "Fort Edward Yacht Basin",
-      "category": "bay",
+      "category": "public-dock",
       "location": {
         "coordinates": {
           "latitude": 43.26829224225778,
@@ -1660,7 +1654,6 @@
         "country": "United States",
         "waterBodyRegion": "Champlain Canal"
       },
-      "subcategory": "harbor",
       "details": {
         "description": "Free public dock with electric and water"
       }
@@ -2079,7 +2072,7 @@
     {
       "id": "launch-whitehall-public-boat-launch",
       "name": "Whitehall Public Boat Launch",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 43.5508006304283,
@@ -2090,7 +2083,6 @@
         "country": "United States",
         "waterBodyRegion": "Champlain Canal"
       },
-      "subcategory": "boat-launch",
       "details": {
         "description": "State boat launch"
       }
@@ -2319,7 +2311,7 @@
     {
       "id": "launch-benson-landing-boat-launch",
       "name": "Benson Landing Boat Launch",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 43.728642768241,
@@ -2330,7 +2322,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "boat-launch",
       "details": {
         "description": "Vermont state boat launch"
       }
@@ -2338,7 +2329,7 @@
     {
       "id": "launch-george-davis-boat-launch",
       "name": "George Davis Boat Launch",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 43.76421009170354,
@@ -2349,7 +2340,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "boat-launch",
       "contact": {
         "website": "https://anrweb.vt.gov/FWD/FW/FishingAccessAreas.aspx"
       },
@@ -2598,7 +2588,7 @@
     {
       "id": "launch-larrabees-point-access-area",
       "name": "Larrabees Point Access Area",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 43.84922971666925,
@@ -2609,7 +2599,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "boat-launch",
       "contact": {
         "website": "https://anrweb.vt.gov/FWD/FW/FishingAccessAreas.aspx?aa=Larrabees%20Point"
       },
@@ -2620,7 +2609,7 @@
     {
       "id": "launch-ticonderoga-boat-launch",
       "name": "Ticonderoga Boat Launch",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 43.85364753068864,
@@ -2631,7 +2620,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "boat-launch",
       "details": {
         "description": "State boat launch and dock"
       }
@@ -2639,7 +2627,7 @@
     {
       "id": "ferry-fort-ticonderoga-ferry",
       "name": "Fort Ticonderoga Ferry",
-      "category": "poi",
+      "category": "ferry",
       "location": {
         "coordinates": {
           "latitude": 43.85364753068864,
@@ -2650,7 +2638,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "ferry",
       "details": {
         "description": "Historic cable ferry crossing"
       }
@@ -2679,7 +2666,7 @@
     {
       "id": "launch-lapham-bay-access-area",
       "name": "Lapham Bay Access Area",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 43.926094603107124,
@@ -2690,7 +2677,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "boat-launch",
       "details": {
         "description": "Vermont boat launch"
       }
@@ -2698,7 +2684,7 @@
     {
       "id": "island-sheepshead-island",
       "name": "Sheepshead Island",
-      "category": "bay",
+      "category": "island",
       "location": {
         "coordinates": {
           "latitude": 43.93790686479738,
@@ -2709,7 +2695,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "island",
       "details": {
         "description": "Small island in southern lake"
       }
@@ -2717,7 +2702,7 @@
     {
       "id": "launch-monitor-bay-campsite-and-boat-launch",
       "name": "Monitor Bay Campsite and Boat Launch",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 43.947924789848436,
@@ -2728,7 +2713,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "boat-launch",
       "tags": [
         "campground"
       ],
@@ -2783,7 +2767,7 @@
     {
       "id": "camp-sportsman-campground-and-cottages",
       "name": "Sportsman Campground and Cottages",
-      "category": "poi",
+      "category": "campground",
       "location": {
         "coordinates": {
           "latitude": 44.03264214812174,
@@ -2794,7 +2778,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "campground",
       "tags": [
         "campground"
       ],
@@ -2808,7 +2791,7 @@
     {
       "id": "camp-10-acres-campground",
       "name": "10 Acres Campground",
-      "category": "poi",
+      "category": "campground",
       "location": {
         "coordinates": {
           "latitude": 44.03008190791238,
@@ -2819,7 +2802,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "campground",
       "tags": [
         "campground"
       ],
@@ -2857,7 +2839,7 @@
     {
       "id": "launch-chimney-point-boat-ramp",
       "name": "Chimney Point Boat Ramp",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 44.034504792115065,
@@ -2868,7 +2850,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "boat-launch",
       "details": {
         "description": "Vermont boat launch at bridge"
       }
@@ -2926,7 +2907,7 @@
     {
       "id": "launch-crown-point-boat-launch",
       "name": "Crown Point Boat Launch",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 44.02955512600389,
@@ -2937,7 +2918,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "boat-launch",
       "details": {
         "description": "State boat launch"
       }
@@ -3068,7 +3048,7 @@
     {
       "id": "beach-bulwagga-bay-beach",
       "name": "Bulwagga Bay Beach",
-      "category": "bay",
+      "category": "beach",
       "location": {
         "coordinates": {
           "latitude": 44.03604511916276,
@@ -3079,7 +3059,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "beach",
       "details": {
         "description": "Public beach"
       }
@@ -3087,7 +3066,7 @@
     {
       "id": "camp-bulwagga-bay-campground-beach",
       "name": "Bulwagga Bay Campground & Beach",
-      "category": "poi",
+      "category": "campground",
       "location": {
         "coordinates": {
           "latitude": 44.03491611972144,
@@ -3098,7 +3077,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "campground",
       "tags": [
         "campground"
       ],
@@ -3167,7 +3145,7 @@
     {
       "id": "beach-port-henry-beach",
       "name": "Port Henry Beach",
-      "category": "bay",
+      "category": "beach",
       "location": {
         "coordinates": {
           "latitude": 44.05000961243302,
@@ -3178,7 +3156,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "beach",
       "details": {
         "description": "Public beach"
       }
@@ -3186,7 +3163,7 @@
     {
       "id": "camp-port-henry-campgrounds-champ-beach-park",
       "name": "Port Henry Campgrounds & Champ Beach Park",
-      "category": "poi",
+      "category": "campground",
       "location": {
         "coordinates": {
           "latitude": 44.050663932140566,
@@ -3197,7 +3174,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "campground",
       "tags": [
         "campground"
       ],
@@ -3208,7 +3184,7 @@
     {
       "id": "launch-port-henry-boat-launch",
       "name": "Port Henry Boat Launch",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 44.05252049414113,
@@ -3219,7 +3195,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "boat-launch",
       "details": {
         "description": "State boat launch"
       }
@@ -3266,7 +3241,7 @@
     {
       "id": "dock-port-henry-pier",
       "name": "Port Henry Pier",
-      "category": "bay",
+      "category": "public-dock",
       "location": {
         "coordinates": {
           "latitude": 44.05058682123638,
@@ -3277,7 +3252,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "harbor",
       "details": {
         "description": "Historic pier and public dock"
       }
@@ -3369,7 +3343,7 @@
     {
       "id": "island-cole-island",
       "name": "Cole Island",
-      "category": "bay",
+      "category": "island",
       "location": {
         "coordinates": {
           "latitude": 44.14090329490463,
@@ -3380,7 +3354,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "island",
       "details": {
         "description": "Island near Cole Bay"
       }
@@ -3424,7 +3397,7 @@
     {
       "id": "camp-barber-homestead-park",
       "name": "Barber Homestead Park",
-      "category": "poi",
+      "category": "campground",
       "location": {
         "coordinates": {
           "latitude": 44.153719538243614,
@@ -3435,7 +3408,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "campground",
       "tags": [
         "campground"
       ],
@@ -3573,7 +3545,7 @@
     {
       "id": "launch-westport-boat-launch",
       "name": "Westport Boat Launch",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 44.18882319496973,
@@ -3584,7 +3556,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "boat-launch",
       "details": {
         "description": "State boat launch"
       }
@@ -3592,7 +3563,7 @@
     {
       "id": "hotel-westport-lakeside-motel",
       "name": "Westport Lakeside Motel",
-      "category": "poi",
+      "category": "hotel",
       "location": {
         "coordinates": {
           "latitude": 44.18942012551756,
@@ -3603,7 +3574,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "hotel",
       "details": {
         "description": "Lakeside lodging"
       }
@@ -3851,7 +3821,7 @@
     {
       "id": "hotel-essex-inn-on-the-adirondack-coast",
       "name": "Essex Inn on the Adirondack Coast",
-      "category": "poi",
+      "category": "hotel",
       "location": {
         "coordinates": {
           "latitude": 44.30871909976386,
@@ -3862,7 +3832,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Broad Lake"
       },
-      "subcategory": "hotel",
       "details": {
         "description": "Historic inn with dining"
       }
@@ -3908,7 +3877,7 @@
     {
       "id": "ferry-essex-ferry-dock",
       "name": "Essex Ferry Dock",
-      "category": "poi",
+      "category": "ferry",
       "location": {
         "coordinates": {
           "latitude": 44.31081883371589,
@@ -3919,7 +3888,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Broad Lake"
       },
-      "subcategory": "ferry",
       "details": {
         "description": "Lake Champlain Transportation Co ferry"
       }
@@ -3946,7 +3914,7 @@
     {
       "id": "beach-boquet-beach",
       "name": "Boquet Beach",
-      "category": "bay",
+      "category": "beach",
       "location": {
         "coordinates": {
           "latitude": 44.35473711263557,
@@ -3957,7 +3925,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Broad Lake"
       },
-      "subcategory": "beach",
       "details": {
         "description": "Public beach"
       }
@@ -4005,7 +3972,7 @@
     {
       "id": "hotel-willsboro-point-nightly-accommodations",
       "name": "Willsboro Point Nightly Accommodations",
-      "category": "poi",
+      "category": "hotel",
       "location": {
         "coordinates": {
           "latitude": 44.43232521042483,
@@ -4016,7 +3983,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Broad Lake"
       },
-      "subcategory": "hotel",
       "contact": {
         "website": "https://www.willsboropoint.com/#rentals"
       },
@@ -4124,7 +4090,7 @@
     {
       "id": "launch-willsboro-bay-boat-launch",
       "name": "Willsboro Bay Boat Launch",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 44.40009403347969,
@@ -4135,7 +4101,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Broad Lake"
       },
-      "subcategory": "boat-launch",
       "details": {
         "description": "State boat launch"
       }
@@ -4165,7 +4130,7 @@
     {
       "id": "launch-port-douglass-boat-launch",
       "name": "Port Douglass Boat Launch",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 44.48447137465917,
@@ -4176,7 +4141,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Broad Lake"
       },
-      "subcategory": "boat-launch",
       "contact": {
         "website": "http://www.dec.ny.gov/outdoor/23897.html"
       },
@@ -4187,7 +4151,7 @@
     {
       "id": "beach-port-kent-beach",
       "name": "Port Kent Beach",
-      "category": "bay",
+      "category": "beach",
       "location": {
         "coordinates": {
           "latitude": 44.52720125586525,
@@ -4198,7 +4162,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Broad Lake"
       },
-      "subcategory": "beach",
       "details": {
         "description": "Public beach"
       }
@@ -4206,7 +4169,7 @@
     {
       "id": "launch-port-kent-boat-launch",
       "name": "Port Kent Boat Launch",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 44.52650330087202,
@@ -4217,7 +4180,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Broad Lake"
       },
-      "subcategory": "boat-launch",
       "details": {
         "description": "State boat launch"
       }
@@ -4244,7 +4206,7 @@
     {
       "id": "camp-ausable-point-campground",
       "name": "Ausable Point Campground",
-      "category": "poi",
+      "category": "campground",
       "location": {
         "coordinates": {
           "latitude": 44.57237306835322,
@@ -4255,7 +4217,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Northern"
       },
-      "subcategory": "campground",
       "tags": [
         "campground"
       ],
@@ -4270,7 +4231,7 @@
     {
       "id": "hotel-valcour-inn-and-boathouse",
       "name": "Valcour Inn and Boathouse",
-      "category": "poi",
+      "category": "hotel",
       "location": {
         "coordinates": {
           "latitude": 44.604588634397274,
@@ -4281,7 +4242,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Northern"
       },
-      "subcategory": "hotel",
       "contact": {
         "website": "http://www.valcourinn.com/",
         "phone": "15185664077"
@@ -4293,7 +4253,7 @@
     {
       "id": "launch-peru-boat-launch",
       "name": "Peru Boat Launch",
-      "category": "bay",
+      "category": "boat-launch",
       "location": {
         "coordinates": {
           "latitude": 44.61908180202903,
@@ -4304,7 +4264,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Northern"
       },
-      "subcategory": "boat-launch",
       "details": {
         "description": "State boat launch near Valcour Island"
       }
@@ -4312,7 +4271,7 @@
     {
       "id": "hotel-heron-ledge-cottages",
       "name": "Heron Ledge Cottages",
-      "category": "poi",
+      "category": "hotel",
       "location": {
         "coordinates": {
           "latitude": 44.62140028619301,
@@ -4323,7 +4282,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Northern"
       },
-      "subcategory": "hotel",
       "contact": {
         "website": "http://www.heronledge.com/",
         "phone": "15188347608"
@@ -4414,7 +4372,7 @@
     {
       "id": "beach-sailors-beach",
       "name": "Sailor's Beach",
-      "category": "bay",
+      "category": "beach",
       "location": {
         "coordinates": {
           "latitude": 44.681589125716556,
@@ -4425,7 +4383,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Northern"
       },
-      "subcategory": "beach",
       "details": {
         "description": "Public beach"
       }
@@ -4684,7 +4641,7 @@
     {
       "id": "dock-vergennes-municipal-docks",
       "name": "Vergennes Municipal Docks",
-      "category": "bay",
+      "category": "public-dock",
       "location": {
         "coordinates": {
           "latitude": 44.1678,
@@ -4695,7 +4652,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Broad Lake"
       },
-      "subcategory": "harbor",
       "contact": {
         "website": "https://www.vergennes.org/departments/municipal_docks.php"
       },
@@ -5055,7 +5011,7 @@
     {
       "id": "beach-charlotte-town-beach",
       "name": "Charlotte Town Beach",
-      "category": "bay",
+      "category": "beach",
       "location": {
         "coordinates": {
           "latitude": 44.3153,
@@ -5066,7 +5022,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Broad Lake"
       },
-      "subcategory": "beach",
       "details": {
         "description": "Public beach"
       }
@@ -5136,7 +5091,7 @@
     {
       "id": "island-valcour-island",
       "name": "Valcour Island",
-      "category": "bay",
+      "category": "island",
       "location": {
         "coordinates": {
           "latitude": 44.6217,
@@ -5147,7 +5102,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Northern"
       },
-      "subcategory": "island",
       "tags": [
         "anchorage"
       ],
@@ -5158,7 +5112,7 @@
     {
       "id": "island-juniper-island",
       "name": "Juniper Island",
-      "category": "bay",
+      "category": "island",
       "location": {
         "coordinates": {
           "latitude": 44.4556,
@@ -5169,7 +5123,6 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Broad Lake"
       },
-      "subcategory": "island",
       "details": {
         "description": "Small island in Burlington Bay"
       }

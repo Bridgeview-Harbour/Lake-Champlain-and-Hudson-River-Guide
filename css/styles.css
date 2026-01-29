@@ -819,6 +819,14 @@ body {
 .poi-marker.bridge-swing { background: var(--bridge-movable-color); color: white; }
 .poi-marker.bridge-bascule { background: var(--bridge-movable-color); color: white; }
 .poi-marker.bridge-lift { background: var(--bridge-movable-color); color: white; }
+/* Additional POI Types */
+.poi-marker.hotel { background: #9b59b6; color: white; }
+.poi-marker.campground { background: #27ae60; color: white; }
+.poi-marker.boat-launch { background: #3498db; color: white; }
+.poi-marker.beach { background: #f1c40f; color: #333; }
+.poi-marker.ferry { background: #1abc9c; color: white; }
+.poi-marker.island { background: #2ecc71; color: white; }
+.poi-marker.public-dock { background: #34495e; color: white; }
 
 /* ============================================
    Quick Info Panel
@@ -967,6 +975,14 @@ body {
     clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
     border-radius: 0;
 }
+/* Additional POI Legend Markers */
+.legend-marker.boat-launch { background: #3498db; }
+.legend-marker.campground { background: #27ae60; }
+.legend-marker.hotel { background: #9b59b6; }
+.legend-marker.beach { background: #f1c40f; }
+.legend-marker.ferry { background: #1abc9c; }
+.legend-marker.island { background: #2ecc71; }
+.legend-marker.public-dock { background: #34495e; }
 
 /* ============================================
    Loading Overlay
@@ -1132,6 +1148,14 @@ body {
 .custom-marker.bridge-swing { background: var(--bridge-movable-color); }
 .custom-marker.bridge-bascule { background: var(--bridge-movable-color); }
 .custom-marker.bridge-lift { background: var(--bridge-movable-color); }
+/* Additional POI Types */
+.custom-marker.hotel { background: #9b59b6; }
+.custom-marker.campground { background: #27ae60; }
+.custom-marker.boat-launch { background: #3498db; }
+.custom-marker.beach { background: #f1c40f; }
+.custom-marker.ferry { background: #1abc9c; }
+.custom-marker.island { background: #2ecc71; }
+.custom-marker.public-dock { background: #34495e; }
 
 .custom-marker.selected {
     transform: scale(1.3);
