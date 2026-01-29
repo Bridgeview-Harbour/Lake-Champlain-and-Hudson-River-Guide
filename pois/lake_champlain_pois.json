@@ -1,1103 +1,5196 @@
 {
-  "metadata": {
-    "name": "Lake Champlain & Hudson River Points of Interest",
-    "version": "1.0.0",
-    "lastUpdated": "2025-01-27",
-    "description": "Comprehensive database of marinas, bays, dining, and points of interest for marine navigation",
-    "author": "Bridgeview Harbour Marina",
-    "contact": {
-      "website": "https://www.bridgeviewharbour.com",
-      "email": "crew@bridgeviewharbour.com",
-      "phone": "+1 (518) 546-7400"
-    }
-  },
-  "schema": {
-    "version": "1.0",
-    "categories": ["marina", "bay", "dining", "poi"],
-    "waterBodies": ["lake-champlain", "hudson-river", "richelieu-river"],
-    "regions": {
-      "lake-champlain": {
-        "south-lake": "Whitehall to Crown Point (below 44.1°N)",
-        "central-lake": "Crown Point to Burlington (44.1°N - 44.5°N)",
-        "broad-lake": "Burlington to Plattsburgh (44.5°N - 44.7°N)",
-        "north-lake": "Plattsburgh to Canadian border (above 44.7°N)",
-        "quebec": "Canadian portion to Sorel"
-      },
-      "hudson-river": {
-        "upper-hudson": "Whitehall south"
-      }
-    }
-  },
+  "version": "1.0",
+  "lastUpdated": "2026-01-28",
+  "source": "Lake Champlain & Hudson River Boater's Guide",
   "pois": [
     {
-      "id": "marina-bridgeview-harbour",
-      "name": "Bridgeview Harbour Marina",
-      "slug": "bridgeview-harbour-marina",
+      "id": "marina-marina-les-berges",
+      "name": "Marina Les Berges",
       "category": "marina",
-      "subcategory": "full-service",
-      "tags": ["fuel"],
       "location": {
         "coordinates": {
-          "latitude": 44.041570641131415,
-          "longitude": -73.45802273181317
+          "latitude": 45.141008961102564,
+          "longitude": -73.26348548191558
         },
-        "town": "Port Henry",
-        "county": "Essex",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "south-lake"
+        "town": "212 1re Rue, Île-aux-Noix, QC J0J 1G0, Canada",
+        "state": "Quebec",
+        "country": "Canada",
+        "waterBodyRegion": "Richelieu River Southern"
       },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
       "contact": {
-        "phone": "+1 (518) 546-7400",
-        "email": "crew@bridgeviewharbour.com",
-        "website": "https://www.bridgeviewharbour.com",
-        "vhfChannel": "16"
+        "website": "https://marinalesberges.ca/",
+        "phone": "14502913312"
       },
       "details": {
-        "description": "Family-owned and operated full-service marina providing slips, moorings, storage and service. Serving recreational boaters and commercial captains on southern Lake Champlain since 2020.",
-        "amenities": ["transient-slips", "moorings", "pump-out", "wifi", "storage", "hauling", "farmers-market"],
-        "services": ["boat-hauling", "winter-storage", "marine-travel-lift"],
+        "description": "Full-service marina on Richelieu River",
         "fuel": {
           "available": true,
-          "types": ["gasoline", "diesel"],
-          "ethanol-free": false,
-          "high-speed": false,
-          "hours": "8am-5pm daily (in season)"
-        },
-        "seasonalHours": {
-          "open": "May",
-          "close": "October"
+          "types": [
+            "gasoline"
+          ],
+          "ethanol-free": false
         }
-      },
-      "metadata": {
-        "verified": true,
-        "source": "owner-provided"
       }
     },
     {
-      "id": "marina-champlain-bridge",
-      "name": "Champlain Bridge Marina",
-      "slug": "champlain-bridge-marina",
+      "id": "marina-marina-gosselin",
+      "name": "Marina Gosselin",
       "category": "marina",
-      "subcategory": "full-service",
-      "tags": ["fuel"],
       "location": {
         "coordinates": {
-          "latitude": 44.04105477120546,
-          "longitude": -73.4170179729963
+          "latitude": 45.13368088697435,
+          "longitude": -73.2667655102612
         },
-        "address": "7724 Route 17 West",
-        "town": "West Addison",
-        "county": "Addison",
-        "state": "VT",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "south-lake"
+        "town": "116 1re Rue, Île-aux-Noix, QC J0J 1G0, Canada",
+        "state": "Quebec",
+        "country": "Canada",
+        "waterBodyRegion": "Richelieu River Southern"
       },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
       "contact": {
-        "phone": "+1 (802) 759-2049",
-        "website": "https://www.sayahoy.com",
-        "vhfChannel": "9, 16"
+        "website": "https://www.marinagosselin.com/",
+        "phone": "14502913170"
       },
       "details": {
-        "description": "Family-owned, full-service marina located near the Lake Champlain Bridge. Offers dockage, seasonal boat storage, and comprehensive mechanical services.",
-        "amenities": ["transient-slips", "pump-out", "showers"],
-        "services": ["boat-sales", "winterization", "shrink-wrapping", "insurance-repairs"],
+        "description": "Marina on Richelieu River",
         "fuel": {
           "available": true,
-          "types": ["gasoline"],
-          "ethanol-free": true,
-          "high-speed": false,
-          "hours": "9am-4:30pm weekdays, 9am-4pm Sat"
-        },
-        "totalSlips": 130,
-        "transientSlips": 20,
-        "maxVesselLength": 60,
-        "approachDepth": 7,
-        "docksideDepth": 7,
-        "dockType": "floating",
-        "seasonalHours": {
-          "weekdays": "9am-4:30pm",
-          "saturday": "9am-4pm",
-          "sunday": "closed"
+          "types": [
+            "gasoline"
+          ],
+          "ethanol-free": false
         }
-      },
-      "metadata": {
-        "verified": true,
-        "source": "web-research"
       }
     },
     {
-      "id": "marina-port-henry",
-      "name": "Port Henry Marina",
-      "slug": "port-henry-marina",
+      "id": "marina-daniel-masson-marine",
+      "name": "Daniel Masson Marine",
       "category": "marina",
-      "subcategory": "private",
       "location": {
         "coordinates": {
-          "latitude": 44.054369295727064,
-          "longitude": -73.45263964762107
+          "latitude": 45.13032028002238,
+          "longitude": -73.27708665050241
         },
-        "address": "40 Velez Road",
-        "town": "Port Henry",
-        "county": "Essex",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "south-lake"
+        "town": "950 Rue Principale, Île-aux-Noix, QC J0J 1G0, Canada",
+        "state": "Quebec",
+        "country": "Canada",
+        "waterBodyRegion": "Richelieu River Southern"
       },
-      "contact": {
-        "website": "https://www.porthenrymarina.com"
-      },
-      "details": {
-        "description": "Private marina on Lake Champlain. No transient slips available.",
-        "amenities": ["wifi", "pump-out", "showers", "laundry", "ice"],
-        "services": ["winter-storage"],
-        "totalSlips": 105,
-        "transientSlips": 0,
-        "moorings": 12,
-        "maxVesselLength": 70,
-        "approachDepth": 20,
-        "docksideDepth": 15,
-        "electricService": ["15A", "20A", "30A", "50A"]
-      },
-      "metadata": {
-        "verified": true,
-        "source": "web-research",
-        "note": "Private marina - no transients"
-      }
-    },
-    {
-      "id": "marina-westport",
-      "name": "Westport Marina",
-      "slug": "westport-marina",
-      "category": "marina",
       "subcategory": "full-service",
-      "location": {
-        "coordinates": {
-          "latitude": 44.18254984372554,
-          "longitude": -73.43100477844585
-        },
-        "address": "20 Washington Street",
-        "town": "Westport",
-        "county": "Essex",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
-      },
+      "tags": [
+        "fuel"
+      ],
       "contact": {
-        "phone": "+1 (518) 962-4356",
-        "tollFree": "+1 (800) 626-0342",
-        "fax": "+1 (518) 412-2525",
-        "email": "TheCrew@WestportMarina.com",
-        "website": "https://www.westportmarina.com",
-        "vhfChannel": "9, 16"
+        "website": "http://www.marinedanielmasson.com/",
+        "phone": "14502915000"
       },
       "details": {
-        "description": "Friendly, full service, 100-slip marina located in Northwest Bay on Lake Champlain. Owned by the Carroll Family since 1982. Features The Galley/Portside Restaurant on-site.",
-        "amenities": ["fuel-gas", "fuel-diesel", "propane", "transient-slips", "moorings", "pump-out", "wifi", "showers", "laundry", "ice", "ship-store"],
-        "services": ["engine-repair", "mast-stepping", "hull-repair", "bow-thruster-repair", "generator-service", "inflatable-repair", "powerboat-rental", "kayak-rental"],
+        "description": "Full-service marina and boat dealer",
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "marina-marine-360",
+      "name": "Marine 360",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 45.12807976539797,
+          "longitude": -73.2703489416411
+        },
+        "town": "50 62e Avenue, Île-aux-Noix, QC J0J 1G0, Canada",
+        "state": "Quebec",
+        "country": "Canada",
+        "waterBodyRegion": "Richelieu River Southern"
+      },
+      "subcategory": "full-service",
+      "contact": {
+        "website": "http://www.marine360.ca/",
+        "phone": "15142828484"
+      },
+      "details": {
+        "description": "Marina on Richelieu River"
+      }
+    },
+    {
+      "id": "marina-marina-st-paul-lile-aux-noix",
+      "name": "Marina St-Paul-L'Ile-Aux-Noix",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 45.12645334830994,
+          "longitude": -73.28118785849317
+        },
+        "town": "910 Rue Principale, Île-aux-Noix, QC J0J 1G0, Canada",
+        "state": "Quebec",
+        "country": "Canada",
+        "waterBodyRegion": "Richelieu River Southern"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "http://www.marina-ile-aux-noix.com/",
+        "phone": "14502913010"
+      },
+      "details": {
+        "description": "Marina near Fort Lennox",
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "marina-marina-fortin-inc",
+      "name": "Marina Fortin Inc.",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 45.12385689216749,
+          "longitude": -73.2837413214569
+        },
+        "town": "878 Rue Principale, Île-aux-Noix, QC J0J 1G0, Canada",
+        "state": "Quebec",
+        "country": "Canada",
+        "waterBodyRegion": "Richelieu River Southern"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "https://marinafortin.com/",
+        "phone": "14502913333"
+      },
+      "details": {
+        "description": "Full-service marina",
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "marina-marina-rose-des-vents",
+      "name": "Marina Rose des Vents",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 45.06140419243307,
+          "longitude": -73.33415061247196
+        },
+        "town": "Le Haut-Richelieu",
+        "state": "Quebec",
+        "country": "Canada",
+        "waterBodyRegion": "Richelieu River Southern"
+      },
+      "subcategory": "full-service",
+      "contact": {
+        "website": "http://www.marinarosedesvents.com/"
+      },
+      "details": {
+        "description": "Marina on Richelieu River"
+      }
+    },
+    {
+      "id": "marina-marina-sieur-de-champlain",
+      "name": "Marina Sieur de Champlain",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 45.02326885466941,
+          "longitude": -73.35398018716312
+        },
+        "town": "Lacolle",
+        "state": "Quebec",
+        "country": "Canada",
+        "waterBodyRegion": "Richelieu River Southern"
+      },
+      "subcategory": "full-service",
+      "details": {
+        "description": "Marina near US border"
+      }
+    },
+    {
+      "id": "poi-canadian-border",
+      "name": "Canadian Border",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 45.01077012779936,
+          "longitude": -73.3432084361967
+        },
+        "town": "Rouses Point",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "landmark",
+      "details": {
+        "description": "US-Canada border crossing on Lake Champlain"
+      }
+    },
+    {
+      "id": "poi-fort-montgomery",
+      "name": "Fort Montgomery",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 45.00868800569846,
+          "longitude": -73.34880352404889
+        },
+        "town": "Rouses Point",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "landmark",
+      "tags": [
+        "landmark"
+      ],
+      "details": {
+        "description": "Historic fort at Rouses Point"
+      }
+    },
+    {
+      "id": "marina-safe-harbor-gaines",
+      "name": "Safe Harbor Gaines",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.99073806062195,
+          "longitude": -73.36167477074986
+        },
+        "town": "Rouses Point",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "https://shmarinas.com/locations/safe-harbor-gaines/",
+        "phone": "15182977000",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "Full-service marina at northernmost point of US Lake Champlain",
         "totalSlips": 100,
-        "transientSlips": 40,
-        "moorings": 25,
-        "maxVesselLength": 100,
-        "minDepth": 15,
-        "electricService": ["30A", "50A"],
-        "dockType": "floating",
-        "seasonalHours": {
-          "june": "8am-5pm daily",
-          "julyAugust": "8am-6pm daily",
-          "septOct": "8am-5pm daily",
-          "winter": "8am-3pm M-F"
-        },
-        "restaurantOnSite": "Portside Restaurant"
-      },
-      "metadata": {
-        "verified": true,
-        "source": "web-research"
-      }
-    },
-    {
-      "id": "marina-point-bay",
-      "name": "Point Bay Marina",
-      "slug": "point-bay-marina",
-      "category": "marina",
-      "subcategory": "full-service",
-      "location": {
-        "coordinates": {
-          "latitude": 44.27328764081657,
-          "longitude": -73.28554345565504
-        },
-        "address": "1401 Thompson Point Road",
-        "town": "Charlotte",
-        "county": "Chittenden",
-        "state": "VT",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
-      },
-      "contact": {
-        "phone": "+1 (802) 425-2431",
-        "website": "https://www.pointbaymarina.com"
-      },
-      "details": {
-        "description": "Full-service marina nestled between the Green Mountains of Vermont and the Adirondack Mountains of New York. Features 200 seasonal slips and 105 moorings with certified full-service team.",
-        "amenities": ["fuel-gas", "fuel-diesel", "transient-slips", "moorings", "showers", "ice", "bbq-area", "grocery-nearby"],
-        "services": ["boat-service", "winter-storage"],
-        "totalSlips": 200,
         "transientSlips": 20,
-        "moorings": 105,
         "maxVesselLength": 60,
-        "minDepth": 12,
-        "electricService": ["30A", "50A"],
-        "launchRamp": true,
-        "seasonalHours": {
-          "weekdays": "8am-4pm",
-          "weekends": "9am-3pm"
+        "minDepth": 8.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": true
         }
-      },
-      "metadata": {
-        "verified": true,
-        "source": "web-research"
       }
     },
     {
-      "id": "marina-safe-harbor-willsboro",
-      "name": "Safe Harbor Willsboro Bay",
-      "slug": "safe-harbor-willsboro-bay",
-      "category": "marina",
-      "subcategory": "full-service",
+      "id": "bridge-rouses-point-bridge",
+      "name": "Rouses Point Bridge",
+      "category": "bridge",
       "location": {
         "coordinates": {
-          "latitude": 44.404910233109526,
-          "longitude": -73.39422861295624
+          "latitude": 44.9892,
+          "longitude": -73.3622
         },
-        "address": "25 Klein Way",
-        "town": "Willsboro",
-        "county": "Essex",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
+        "town": "Rouses Point",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
       },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Korean War Veterans Memorial Bridge connecting NY to VT",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 56.0,
+          "roadway": "US Route 2"
+        }
+      }
+    },
+    {
+      "id": "dock-wilcox-dock",
+      "name": "Wilcox Dock",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.70847168491057,
+          "longitude": -73.44332713226694
+        },
+        "town": "Plattsburgh",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "harbor",
+      "details": {
+        "description": "Public dock in Plattsburgh"
+      }
+    },
+    {
+      "id": "marina-city-of-plattsburgh-marina",
+      "name": "City of Plattsburgh Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.69684969183512,
+          "longitude": -73.4405045217145
+        },
+        "town": "Plattsburgh",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
       "contact": {
-        "phone": "+1 (518) 963-7276",
-        "website": "https://shmarinas.com/locations/safe-harbor-willsboro-bay/",
-        "vhfChannel": "9"
+        "website": "http://www.plattsburghrecreation.com/marina",
+        "phone": "15183247245"
       },
       "details": {
-        "description": "Nestled at the southern end of tranquil Willsboro Bay, Safe Harbor Willsboro Bay's deep-water harbor is surrounded by the natural beauty and rich historic sites of Lake Champlain. Features elevated waterfront dining at The Upper Deck restaurant.",
-        "amenities": ["fuel", "transient-slips", "pump-out", "wifi", "showers", "laundry", "pool", "playground", "bbq-area", "ship-store"],
-        "services": ["boat-service", "brokerage", "winter-storage"],
-        "totalSlips": 201,
+        "description": "Municipal marina in downtown Plattsburgh",
+        "totalSlips": 75,
+        "transientSlips": 15,
+        "maxVesselLength": 50,
+        "minDepth": 6.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "marina-plattsburgh-boat-basin",
+      "name": "Plattsburgh Boat Basin",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.69673529473506,
+          "longitude": -73.44057425914698
+        },
+        "town": "Plattsburgh",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "http://www.plattsburghboatbasin.com/",
+        "phone": "15185612800",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "Full-service marina with fuel dock",
+        "totalSlips": 120,
+        "transientSlips": 25,
+        "maxVesselLength": 65,
+        "minDepth": 8.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": true
+        }
+      }
+    },
+    {
+      "id": "island-crab-island",
+      "name": "Crab Island",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.66205497214494,
+          "longitude": -73.41656248040859
+        },
+        "town": "Plattsburgh",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "island",
+      "details": {
+        "description": "Historic island - site of Battle of Plattsburgh"
+      }
+    },
+    {
+      "id": "lock-usacoe-troy-federal-lock",
+      "name": "USACOE Troy Federal Lock",
+      "category": "lock",
+      "location": {
+        "coordinates": {
+          "latitude": 42.75143385094,
+          "longitude": -73.6854453811803
+        },
+        "town": "Troy",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
+      },
+      "subcategory": "canal-lock",
+      "details": {
+        "description": "Federal lock at head of tidewater Hudson River",
+        "lock": {
+          "lockNumber": "Troy",
+          "canalName": "Hudson River",
+          "lift": 14.0,
+          "chamberLength": 600.0,
+          "chamberWidth": 44.5,
+          "operatingHours": "24 hours",
+          "operatingSeason": "Year-round"
+        }
+      }
+    },
+    {
+      "id": "bridge-collar-city-bridge",
+      "name": "Collar City Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 42.74029199112693,
+          "longitude": -73.68862053434404
+        },
+        "town": "Green Island",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge over Hudson River",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 24.0,
+          "roadway": "NY 378"
+        }
+      }
+    },
+    {
+      "id": "marina-troy-downtown-marina",
+      "name": "Troy Downtown Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 42.73533161505528,
+          "longitude": -73.68861027050298
+        },
+        "town": "Troy",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "details": {
+        "description": "Marina in downtown Troy",
+        "totalSlips": 40,
+        "transientSlips": 10,
+        "maxVesselLength": 45,
+        "minDepth": 8.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "bridge-green-island-bridge",
+      "name": "Green Island Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 42.73551755427481,
+          "longitude": -73.68974939955453
+        },
+        "town": "Troy",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge connecting Troy to Green Island",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 22.0,
+          "roadway": "NY 2"
+        }
+      }
+    },
+    {
+      "id": "bridge-troy-menands-bridge",
+      "name": "Troy-Menands Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 42.70100460748762,
+          "longitude": -73.70300899934794
+        },
+        "town": "Troy",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed highway bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 135.0,
+          "roadway": "I-787"
+        }
+      }
+    },
+    {
+      "id": "bridge-congress-street-bridge",
+      "name": "Congress Street Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 42.728914387195815,
+          "longitude": -73.69723695740751
+        },
+        "town": "Watervliet",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 24.0,
+          "roadway": "Congress St"
+        }
+      }
+    },
+    {
+      "id": "marina-chelsea-piers-marina",
+      "name": "Chelsea Piers Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 40.74607978425462,
+          "longitude": -74.00962283904776
+        },
+        "town": "New York City",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River NYC"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "https://www.chelseapiers.com/marina",
+        "phone": "12123366600",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "Premier Manhattan marina",
+        "totalSlips": 200,
+        "transientSlips": 50,
+        "maxVesselLength": 200,
+        "minDepth": 15.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "poi-statue-of-liberty",
+      "name": "Statue of Liberty",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 40.68920869521197,
+          "longitude": -74.04460769103578
+        },
+        "town": "New York City",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River NYC"
+      },
+      "subcategory": "landmark",
+      "tags": [
+        "landmark"
+      ],
+      "details": {
+        "description": "Iconic landmark at entrance to Hudson River"
+      }
+    },
+    {
+      "id": "bridge-verrazzano-narrows-bridge",
+      "name": "Verrazzano-Narrows Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 40.606974563134344,
+          "longitude": -74.04343711540345
+        },
+        "town": "New York City",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River NYC"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Suspension bridge - entrance to NY Harbor",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 228.0,
+          "roadway": "I-278"
+        }
+      }
+    },
+    {
+      "id": "aton-romer-shoal-light",
+      "name": "Romer Shoal Light",
+      "category": "aton",
+      "location": {
+        "coordinates": {
+          "latitude": 40.50957918512855,
+          "longitude": -73.99857781617676
+        },
+        "town": "Middletown Township",
+        "state": "New Jersey",
+        "country": "United States",
+        "waterBodyRegion": "Atlantic Ocean Ocean"
+      },
+      "subcategory": "buoy",
+      "details": {
+        "description": "Lighthouse marking entrance to Ambrose Channel",
+        "aton": {
+          "color": "Fl W 15s",
+          "shape": "white"
+        }
+      }
+    },
+    {
+      "id": "marina-waterford-marina",
+      "name": "Waterford Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 42.78783189939874,
+          "longitude": -73.67992966314684
+        },
+        "town": "Waterford",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "details": {
+        "description": "Marina at confluence of Erie and Champlain Canals",
+        "totalSlips": 30,
+        "transientSlips": 5,
+        "maxVesselLength": 40,
+        "minDepth": 6.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "poi-waterford-harbor-visitor-center",
+      "name": "Waterford Harbor Visitor Center",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 42.78737522803156,
+          "longitude": -73.67958634040231
+        },
+        "town": "Waterford",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
+      },
+      "contact": {
+        "phone": "15182339123"
+      },
+      "details": {
+        "description": "NYS Canal visitor center"
+      }
+    },
+    {
+      "id": "lock-erie-canal-lock-e2",
+      "name": "Erie Canal Lock E2",
+      "category": "lock",
+      "location": {
+        "coordinates": {
+          "latitude": 42.78927275423102,
+          "longitude": -73.68175356524912
+        },
+        "town": "Waterford",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
+      },
+      "subcategory": "canal-lock",
+      "contact": {
+        "phone": "18004226254",
+        "vhfChannel": 13
+      },
+      "details": {
+        "description": "Second lock on Erie Canal Flight of Five",
+        "lock": {
+          "lockNumber": "E-2",
+          "canalName": "Erie Canal",
+          "lift": 34.0,
+          "chamberLength": 300.0,
+          "chamberWidth": 43.5,
+          "operatingHours": "7am-5pm",
+          "operatingSeason": "May 1 - Nov 15"
+        }
+      }
+    },
+    {
+      "id": "bridge-112th-street-bridge",
+      "name": "112th Street Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 42.77169376826124,
+          "longitude": -73.68166081053707
+        },
+        "town": "Cohoes",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 21.0,
+          "roadway": "112th St"
+        }
+      }
+    },
+    {
+      "id": "marina-troy-motor-boat-canoe-club",
+      "name": "Troy Motor Boat & Canoe Club",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 42.78251903756698,
+          "longitude": -73.67571101112426
+        },
+        "town": "Troy",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "http://troyboatclub.com/",
+        "phone": "15182359697"
+      },
+      "details": {
+        "description": "Private boat club with transient welcome",
+        "totalSlips": 50,
+        "transientSlips": 5,
+        "maxVesselLength": 35,
+        "minDepth": 6.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "bridge-troy-waterford-bridge",
+      "name": "Troy-Waterford Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 42.788770466078724,
+          "longitude": -73.67409785290502
+        },
+        "town": "Troy",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "NY 4"
+        }
+      }
+    },
+    {
+      "id": "launch-waterford-boat-launch",
+      "name": "Waterford Boat Launch",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 42.785576064516526,
+          "longitude": -73.67744261914862
+        },
+        "town": "Waterford",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
+      },
+      "subcategory": "boat-launch",
+      "details": {
+        "description": "State boat launch"
+      }
+    },
+    {
+      "id": "lock-lock-c1-waterford-champlain-canal",
+      "name": "Lock C1 Waterford, Champlain Canal",
+      "category": "lock",
+      "location": {
+        "coordinates": {
+          "latitude": 42.82405537326736,
+          "longitude": -73.6643180672735
+        },
+        "town": "Waterford",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal Capital Region"
+      },
+      "subcategory": "canal-lock",
+      "contact": {
+        "phone": "15182378566",
+        "vhfChannel": 13
+      },
+      "details": {
+        "description": "First lock northbound on Champlain Canal",
+        "lock": {
+          "lockNumber": "C-1",
+          "canalName": "Champlain Canal",
+          "canalSystem": "NYS Canal System",
+          "lift": 14.0,
+          "chamberLength": 300.0,
+          "chamberWidth": 43.5,
+          "operatingHours": "7am-5pm",
+          "operatingSeason": "May 1 - Nov 15"
+        }
+      }
+    },
+    {
+      "id": "marina-lock-one-marina",
+      "name": "Lock One Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 42.82924448018401,
+          "longitude": -73.66629735293856
+        },
+        "town": "Waterford",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal Capital Region"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "http://www.lockonemarinaandshipyard.com/",
+        "phone": "15182381321",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "Full-service marina with shipyard",
+        "totalSlips": 80,
         "transientSlips": 15,
         "maxVesselLength": 60,
-        "approachDepth": 40,
-        "docksideDepth": 25,
-        "dockType": "floating",
-        "restaurantOnSite": "The Upper Deck"
-      },
-      "metadata": {
-        "verified": true,
-        "source": "web-research"
+        "minDepth": 8.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": true
+        }
       }
     },
     {
-      "id": "marina-indian-bay",
-      "name": "Indian Bay Marina and Restaurant",
-      "slug": "indian-bay-marina-restaurant",
-      "category": "marina",
-      "subcategory": "full-service",
+      "id": "poi-halfmoon-lighthouse-park",
+      "name": "Halfmoon Lighthouse Park",
+      "category": "poi",
       "location": {
         "coordinates": {
-          "latitude": 44.427781823897284,
-          "longitude": -73.39254931292123
+          "latitude": 42.838574327684704,
+          "longitude": -73.67266047546154
         },
-        "address": "237 Corlear Drive",
-        "town": "Willsboro",
-        "county": "Essex",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
+        "town": "Halfmoon",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
       },
       "contact": {
-        "phone": "+1 (518) 963-7858",
-        "website": "https://www.indianbaymarinany.com"
+        "website": "http://www.townofhalfmoon-ny.gov/parks-department/pages/lighthouse-park",
+        "phone": "15183717410"
       },
       "details": {
-        "description": "Family-owned marina and restaurant celebrating 40+ years of service on Lake Champlain since 1983. Owned by siblings Joe and Patty Walsh. Full-service restaurant with lakeside dining, air conditioning, and full bar.",
-        "amenities": ["fuel", "transient-slips", "showers", "ice"],
-        "services": ["mechanical-repairs", "marine-parts"],
-        "totalSlips": 10,
-        "transientSlips": 6,
-        "minDepth": 10,
-        "electricService": ["30A"],
-        "restaurantOnSite": "Indian Bay Restaurant",
-        "seasonalHours": {
-          "restaurant": "11:30am-9pm daily"
-        }
+        "description": "Park with historic lighthouse replica"
+      }
+    },
+    {
+      "id": "poi-mechanicville-hydroelectric-plant",
+      "name": "Mechanicville Hydroelectric Plant",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 42.877964741674965,
+          "longitude": -73.67753173730165
+        },
+        "town": "Mechanicville",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
       },
-      "metadata": {
-        "verified": true,
-        "source": "web-research"
+      "contact": {
+        "website": "https://en.wikipedia.org/wiki/Mechanicville_Hydroelectric_Plant"
+      },
+      "details": {
+        "description": "Historic hydroelectric facility"
+      }
+    },
+    {
+      "id": "dock-mechanicville-city-docks",
+      "name": "Mechanicville City Docks",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 42.90405988907791,
+          "longitude": -73.68396404905175
+        },
+        "town": "Mechanicville",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
+      },
+      "subcategory": "harbor",
+      "details": {
+        "description": "Free municipal docks with limited amenities"
+      }
+    },
+    {
+      "id": "bridge-howland-ave-bridge",
+      "name": "Howland Ave Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 42.905364438563446,
+          "longitude": -73.68230376171691
+        },
+        "town": "Mechanicville",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "Howland Ave"
+        }
+      }
+    },
+    {
+      "id": "lock-lock-c3-mechanicville-north-champlain-canal",
+      "name": "Lock C3 Mechanicville North, Champlain Canal",
+      "category": "lock",
+      "location": {
+        "coordinates": {
+          "latitude": 42.91169032628117,
+          "longitude": -73.67777351072817
+        },
+        "town": "Mechanicville",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal Capital Region"
+      },
+      "subcategory": "canal-lock",
+      "details": {
+        "description": "Champlain Canal lock",
+        "lock": {
+          "lockNumber": "C-3",
+          "canalName": "Champlain Canal",
+          "canalSystem": "NYS Canal System",
+          "lift": 12.0,
+          "chamberLength": 300.0,
+          "chamberWidth": 43.5,
+          "operatingHours": "7am-5pm",
+          "operatingSeason": "May 1 - Nov 15"
+        }
+      }
+    },
+    {
+      "id": "lock-lock-c2-mechanicville-south-champlain-canal",
+      "name": "Lock C2 Mechanicville South, Champlain Canal",
+      "category": "lock",
+      "location": {
+        "coordinates": {
+          "latitude": 42.87787500659451,
+          "longitude": -73.67635448085775
+        },
+        "town": "Mechanicville",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal Capital Region"
+      },
+      "subcategory": "canal-lock",
+      "details": {
+        "description": "Champlain Canal lock",
+        "lock": {
+          "lockNumber": "C-2",
+          "canalName": "Champlain Canal",
+          "canalSystem": "NYS Canal System",
+          "lift": 10.0,
+          "chamberLength": 300.0,
+          "chamberWidth": 43.5,
+          "operatingHours": "7am-5pm",
+          "operatingSeason": "May 1 - Nov 15"
+        }
+      }
+    },
+    {
+      "id": "bridge-mechanicville-rail-bridge",
+      "name": "Mechanicville Rail Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 42.919280603574634,
+          "longitude": -73.67183300288767
+        },
+        "town": "Mechanicville",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River Capital Region"
+      },
+      "subcategory": "bridge-lift",
+      "details": {
+        "description": "Railroad lift bridge",
+        "lock": {
+          "lockNumber": "On signal"
+        },
+        "bridge": {
+          "bridgeType": "lift",
+          "clearanceHeight": 8.0,
+          "clearanceHeightOpen": 45.0,
+          "roadway": "CSX Railroad"
+        }
+      }
+    },
+    {
+      "id": "lock-lock-c4-schaghticoke-champlain-canal",
+      "name": "Lock C4 Schaghticoke, Champlain Canal",
+      "category": "lock",
+      "location": {
+        "coordinates": {
+          "latitude": 42.93239887540657,
+          "longitude": -73.6545905709741
+        },
+        "town": "Schaghticoke",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal Capital Region"
+      },
+      "subcategory": "canal-lock",
+      "contact": {
+        "phone": "15186645261",
+        "vhfChannel": 13
+      },
+      "details": {
+        "description": "Champlain Canal lock",
+        "lock": {
+          "lockNumber": "C-4",
+          "canalName": "Champlain Canal",
+          "canalSystem": "NYS Canal System",
+          "lift": 11.0,
+          "chamberLength": 300.0,
+          "chamberWidth": 43.5,
+          "operatingHours": "7am-5pm",
+          "operatingSeason": "May 1 - Nov 15"
+        }
+      }
+    },
+    {
+      "id": "bridge-stillwater-bridge",
+      "name": "Stillwater Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 42.93698354773763,
+          "longitude": -73.64952846871257
+        },
+        "town": "Stillwater",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "NY 4"
+        }
+      }
+    },
+    {
+      "id": "launch-town-of-saratoga-boat-launch",
+      "name": "Town of Saratoga Boat Launch",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 43.03610955094749,
+          "longitude": -73.59227658929832
+        },
+        "town": "Quaker Springs",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "boat-launch",
+      "details": {
+        "description": "State boat launch"
+      }
+    },
+    {
+      "id": "restaurant-the-alley-bar-and-grill",
+      "name": "The Alley Bar and Grill",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 43.05910513621496,
+          "longitude": -73.59314904006052
+        },
+        "town": "Schuylerville",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "waterfront-restaurant",
+      "contact": {
+        "phone": "15185076151"
+      },
+      "details": {
+        "description": "Casual dining near canal"
+      }
+    },
+    {
+      "id": "poi-schuylerville-beach",
+      "name": "Schuylerville Beach",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.098828805181604,
+          "longitude": -73.57586555230571
+        },
+        "town": "Schuylerville",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "details": {
+        "description": "Public beach on Hudson River"
+      }
+    },
+    {
+      "id": "restaurant-the-basin-grill",
+      "name": "The Basin Grill",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 43.09832351388868,
+          "longitude": -73.57597552289732
+        },
+        "town": "Schuylerville",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "waterfront-restaurant",
+      "contact": {
+        "website": "http://www.thebasingrill.com/",
+        "phone": "15186952073"
+      },
+      "details": {
+        "description": "Waterfront dining"
+      }
+    },
+    {
+      "id": "bridge-schuylerville-bridge",
+      "name": "Schuylerville Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.0985644090987,
+          "longitude": -73.57538275469828
+        },
+        "town": "Schuylerville",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "NY 29"
+        }
+      }
+    },
+    {
+      "id": "confluence-batten-kill-river",
+      "name": "Batten Kill River",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.10950266172438,
+          "longitude": -73.57461521930261
+        },
+        "town": "Clark Mills",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "confluence",
+      "details": {
+        "description": "Confluence of Batten Kill with Hudson"
+      }
+    },
+    {
+      "id": "poi-the-marshall-house",
+      "name": "The Marshall House",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.11125713342057,
+          "longitude": -73.57997963733123
+        },
+        "town": "Schuylerville",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "historic",
+      "tags": [
+        "landmark",
+        "historic"
+      ],
+      "contact": {
+        "website": "https://themarshallhouse.org/",
+        "phone": "15185075444"
+      },
+      "details": {
+        "description": "Historic house from Revolutionary War"
+      }
+    },
+    {
+      "id": "lock-lock-c5-northumberland-champlain-canal",
+      "name": "Lock C5 Northumberland, Champlain Canal",
+      "category": "lock",
+      "location": {
+        "coordinates": {
+          "latitude": 43.112537709372766,
+          "longitude": -73.57797334504292
+        },
+        "town": "Schuylerville",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "canal-lock",
+      "contact": {
+        "phone": "15186953919",
+        "vhfChannel": 13
+      },
+      "details": {
+        "description": "Champlain Canal lock near Saratoga battlefield",
+        "lock": {
+          "lockNumber": "C-5",
+          "canalName": "Champlain Canal",
+          "canalSystem": "NYS Canal System",
+          "lift": 19.0,
+          "chamberLength": 300.0,
+          "chamberWidth": 43.5,
+          "operatingHours": "7am-5pm",
+          "operatingSeason": "May 1 - Nov 15"
+        }
+      }
+    },
+    {
+      "id": "bridge-northumberland-bridge",
+      "name": "Northumberland Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.128801717438975,
+          "longitude": -73.58706998018788
+        },
+        "town": "Greenwich",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "County Road"
+        }
+      }
+    },
+    {
+      "id": "lock-lock-c6-fort-miller-champlain-canal",
+      "name": "Lock C6 Fort Miller, Champlain Canal",
+      "category": "lock",
+      "location": {
+        "coordinates": {
+          "latitude": 43.16153275491472,
+          "longitude": -73.5798174017929
+        },
+        "town": "Fort Edward",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "canal-lock",
+      "details": {
+        "description": "Champlain Canal lock",
+        "lock": {
+          "lockNumber": "C-6",
+          "canalName": "Champlain Canal",
+          "canalSystem": "NYS Canal System",
+          "lift": 16.0,
+          "chamberLength": 300.0,
+          "chamberWidth": 43.5,
+          "operatingHours": "7am-5pm",
+          "operatingSeason": "May 1 - Nov 15"
+        }
+      }
+    },
+    {
+      "id": "bridge-fort-miller-road-bridge",
+      "name": "Fort Miller Road Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.16671799248884,
+          "longitude": -73.57980207961684
+        },
+        "town": "Fort Edward",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "Fort Miller Rd"
+        }
+      }
+    },
+    {
+      "id": "bridge-fort-edward-empire-state-trail-bridge",
+      "name": "Fort Edward, Empire State Trail Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.17766562040275,
+          "longitude": -73.57924867584393
+        },
+        "town": "Fort Edward",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Pedestrian/bike bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "Empire State Trail"
+        }
+      }
+    },
+    {
+      "id": "poi-fort-edward-champlain-canal-historic-lock",
+      "name": "Fort Edward, Champlain Canal Historic Lock",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.18954480038459,
+          "longitude": -73.5810223882048
+        },
+        "town": "Fort Edward",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "historic",
+      "tags": [
+        "landmark",
+        "historic"
+      ],
+      "details": {
+        "description": "Remains of original 1823 canal lock"
+      }
+    },
+    {
+      "id": "confluence-moses-kill-river",
+      "name": "Moses Kill River",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.19921475661272,
+          "longitude": -73.58200973033641
+        },
+        "town": "Fort Edward",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "confluence",
+      "details": {
+        "description": "Stream confluence with Hudson"
+      }
+    },
+    {
+      "id": "poi-august-field-airport-on-griffin-island",
+      "name": "August Field Airport on Griffin Island",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.20954928554044,
+          "longitude": -73.58258037818688
+        },
+        "town": "Gansevoort",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "details": {
+        "description": "Small private airport on island"
+      }
+    },
+    {
+      "id": "confluence-snook-kill",
+      "name": "Snook Kill",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.231026889898914,
+          "longitude": -73.5928388438784
+        },
+        "town": "Gansevoort",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "confluence",
+      "details": {
+        "description": "Stream confluence with Hudson"
+      }
+    },
+    {
+      "id": "launch-hudson-river-boat-launch-at-fort-edward",
+      "name": "Hudson River Boat Launch at Fort Edward",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 43.25429788131806,
+          "longitude": -73.58800408573741
+        },
+        "town": "Fort Edward",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "boat-launch",
+      "details": {
+        "description": "State boat launch"
+      }
+    },
+    {
+      "id": "lock-lock-c7-fort-edward-champlain-canal",
+      "name": "Lock C7 Fort Edward, Champlain Canal",
+      "category": "lock",
+      "location": {
+        "coordinates": {
+          "latitude": 43.25650122457995,
+          "longitude": -73.58443740807523
+        },
+        "town": "Fort Edward",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "canal-lock",
+      "details": {
+        "description": "Champlain Canal lock",
+        "lock": {
+          "lockNumber": "C-7",
+          "canalName": "Champlain Canal",
+          "canalSystem": "NYS Canal System",
+          "lift": 11.0,
+          "chamberLength": 300.0,
+          "chamberWidth": 43.5,
+          "operatingHours": "7am-5pm",
+          "operatingSeason": "May 1 - Nov 15"
+        }
+      }
+    },
+    {
+      "id": "bridge-route-4-bridge-fort-edward",
+      "name": "Route 4 Bridge Fort Edward",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.259512586076546,
+          "longitude": -73.5807581634144
+        },
+        "town": "Fort Edward",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed highway bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "US Route 4"
+        }
+      }
+    },
+    {
+      "id": "dock-fort-edward-yacht-basin",
+      "name": "Fort Edward Yacht Basin",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 43.26829224225778,
+          "longitude": -73.5880136602602
+        },
+        "town": "Fort Edward",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "harbor",
+      "details": {
+        "description": "Free public dock with electric and water"
+      }
+    },
+    {
+      "id": "confluence-champlain-canal-hudson-confluence",
+      "name": "Champlain Canal Hudson Confluence",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.255991169870356,
+          "longitude": -73.5853093690123
+        },
+        "town": "Fort Edward",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "confluence",
+      "details": {
+        "description": "Point where canal diverges from Hudson River"
+      }
+    },
+    {
+      "id": "bridge-argyle-street-bridge-fort-edward",
+      "name": "Argyle Street Bridge - Fort Edward",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.26408966500471,
+          "longitude": -73.57604790904888
+        },
+        "town": "Fort Edward",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "Argyle St"
+        }
+      }
+    },
+    {
+      "id": "bridge-east-street-bridge-fort-edward",
+      "name": "East Street Bridge - Fort Edward",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.27218364095962,
+          "longitude": -73.56880300041637
+        },
+        "town": "Fort Edward",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Hudson River"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "East St"
+        }
+      }
+    },
+    {
+      "id": "lock-lock-c8-hudson-falls-champlain-canal",
+      "name": "Lock C8 Hudson Falls, Champlain Canal",
+      "category": "lock",
+      "location": {
+        "coordinates": {
+          "latitude": 43.28198241299902,
+          "longitude": -73.55919334259485
+        },
+        "town": "Hudson Falls",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "canal-lock",
+      "details": {
+        "description": "Champlain Canal lock",
+        "lock": {
+          "lockNumber": "C-8",
+          "canalName": "Champlain Canal",
+          "canalSystem": "NYS Canal System",
+          "lift": 14.0,
+          "chamberLength": 300.0,
+          "chamberWidth": 43.5,
+          "operatingHours": "7am-5pm",
+          "operatingSeason": "May 1 - Nov 15"
+        }
+      }
+    },
+    {
+      "id": "bridge-ny-196-bridge-hudson-falls",
+      "name": "NY 196 Bridge - Hudson Falls",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.304084082181916,
+          "longitude": -73.53929830549492
+        },
+        "town": "Hudson Falls",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "NY 196"
+        }
+      }
+    },
+    {
+      "id": "bridge-new-swamp-road-bridge",
+      "name": "New Swamp Road Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.33190235212719,
+          "longitude": -73.5108438837928
+        },
+        "town": "Hudson Falls",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "New Swamp Rd"
+        }
+      }
+    },
+    {
+      "id": "lock-lock-c9-smiths-basin-champlain-canal",
+      "name": "Lock C9 Smith's Basin, Champlain Canal",
+      "category": "lock",
+      "location": {
+        "coordinates": {
+          "latitude": 43.35180057713157,
+          "longitude": -73.49573674869272
+        },
+        "town": "Fort Ann",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "canal-lock",
+      "details": {
+        "description": "Champlain Canal lock",
+        "lock": {
+          "lockNumber": "C-9",
+          "canalName": "Champlain Canal",
+          "canalSystem": "NYS Canal System",
+          "lift": 11.0,
+          "chamberLength": 300.0,
+          "chamberWidth": 43.5,
+          "operatingHours": "7am-5pm",
+          "operatingSeason": "May 1 - Nov 15"
+        }
+      }
+    },
+    {
+      "id": "bridge-ny-149-bridge-fort-ann",
+      "name": "NY 149 Bridge - Fort Ann",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.35781476910574,
+          "longitude": -73.49359879934632
+        },
+        "town": "Fort Ann",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "NY 149"
+        }
+      }
+    },
+    {
+      "id": "bridge-baldwin-corners-road-bridge-fort-ann",
+      "name": "Baldwin Corners Road Bridge - Fort Ann",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.39003920729446,
+          "longitude": -73.48610344231157
+        },
+        "town": "Fort Ann",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "Baldwin Corners Rd"
+        }
+      }
+    },
+    {
+      "id": "bridge-ann-street-bridge-fort-ann",
+      "name": "Ann Street Bridge - Fort Ann",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.413659464138505,
+          "longitude": -73.48497093968366
+        },
+        "town": "Fort Ann",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "Ann St"
+        }
+      }
+    },
+    {
+      "id": "poi-fort-ann-canal-park",
+      "name": "Fort Ann Canal Park",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.414324653853924,
+          "longitude": -73.48529235691245
+        },
+        "town": "Fort Ann",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "details": {
+        "description": "Canal-side park with docks and picnic area"
+      }
+    },
+    {
+      "id": "bridge-ny-22-bridge-comstock",
+      "name": "NY 22 Bridge - Comstock",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.456953658555406,
+          "longitude": -73.44100936231177
+        },
+        "town": "Comstock",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "NY 22"
+        }
+      }
+    },
+    {
+      "id": "lock-lock-c11-comstock-champlain-canal",
+      "name": "Lock C11 Comstock, Champlain Canal",
+      "category": "lock",
+      "location": {
+        "coordinates": {
+          "latitude": 43.46815206507674,
+          "longitude": -73.43505663732472
+        },
+        "town": "Comstock",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "canal-lock",
+      "details": {
+        "description": "Champlain Canal lock",
+        "lock": {
+          "lockNumber": "C-11",
+          "canalName": "Champlain Canal",
+          "canalSystem": "NYS Canal System",
+          "lift": 11.0,
+          "chamberLength": 300.0,
+          "chamberWidth": 43.5,
+          "operatingHours": "7am-5pm",
+          "operatingSeason": "May 1 - Nov 15"
+        }
+      }
+    },
+    {
+      "id": "bridge-ryder-road-bridge",
+      "name": "Ryder Road Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.48421360972283,
+          "longitude": -73.42475084601978
+        },
+        "town": "Whitehall",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "Ryder Rd"
+        }
+      }
+    },
+    {
+      "id": "confluence-mettawee-river",
+      "name": "Mettawee River",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.533803058573945,
+          "longitude": -73.40243579841255
+        },
+        "town": "Whitehall",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "confluence",
+      "details": {
+        "description": "River confluence"
+      }
+    },
+    {
+      "id": "bridge-whitehall-train-bridge",
+      "name": "Whitehall Train Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.54788424169869,
+          "longitude": -73.40215656572875
+        },
+        "town": "Whitehall",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "bridge-swing",
+      "details": {
+        "description": "Railroad swing bridge",
+        "lock": {
+          "lockNumber": "On signal"
+        },
+        "bridge": {
+          "bridgeType": "swing",
+          "clearanceHeight": 8.0,
+          "clearanceHeightOpen": 135.0,
+          "roadway": "Amtrak/CSX"
+        }
+      }
+    },
+    {
+      "id": "bridge-poultney-street-bridge-whitehall",
+      "name": "Poultney Street Bridge - Whitehall",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.549596812267,
+          "longitude": -73.40208682829274
+        },
+        "town": "Whitehall",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "Poultney St"
+        }
+      }
+    },
+    {
+      "id": "launch-whitehall-public-boat-launch",
+      "name": "Whitehall Public Boat Launch",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 43.5508006304283,
+          "longitude": -73.40229306825833
+        },
+        "town": "Whitehall",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "boat-launch",
+      "details": {
+        "description": "State boat launch"
+      }
+    },
+    {
+      "id": "poi-1812-uss-ticonderoga-hull",
+      "name": "1812 U.S.S. Ticonderoga Hull",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.55279746178915,
+          "longitude": -73.40249063536521
+        },
+        "town": "Whitehall",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "historic",
+      "tags": [
+        "landmark",
+        "historic"
+      ],
+      "details": {
+        "description": "Hull remains of War of 1812 schooner"
+      }
+    },
+    {
+      "id": "poi-skenesborough-museum",
+      "name": "Skenesborough Museum",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.5532639968131,
+          "longitude": -73.4026059703497
+        },
+        "town": "Whitehall",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "contact": {
+        "website": "http://www.skenesborough.com/skenesborough-museum/",
+        "phone": "15184990716"
+      },
+      "details": {
+        "description": "Local history museum - Birthplace of US Navy"
+      }
+    },
+    {
+      "id": "bridge-saunders-street-bridge",
+      "name": "Saunders Street Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 43.555177573975115,
+          "longitude": -73.40158863706999
+        },
+        "town": "Whitehall",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 17.0,
+          "roadway": "Saunders St"
+        }
+      }
+    },
+    {
+      "id": "lock-lock-c12-whitehall-champlain-canal",
+      "name": "Lock C12 Whitehall, Champlain Canal",
+      "category": "lock",
+      "location": {
+        "coordinates": {
+          "latitude": 43.557674481072944,
+          "longitude": -73.40087603264287
+        },
+        "town": "Whitehall",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Champlain Canal"
+      },
+      "subcategory": "canal-lock",
+      "contact": {
+        "phone": "15184991700",
+        "vhfChannel": 13
+      },
+      "details": {
+        "description": "Last lock northbound - entrance to Lake Champlain",
+        "lock": {
+          "lockNumber": "C-12",
+          "canalName": "Champlain Canal",
+          "canalSystem": "NYS Canal System",
+          "lift": 11.0,
+          "chamberLength": 300.0,
+          "chamberWidth": 43.5,
+          "operatingHours": "7am-5pm",
+          "operatingSeason": "May 1 - Nov 15"
+        }
+      }
+    },
+    {
+      "id": "marina-whitehall-marina",
+      "name": "Whitehall Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 43.55927170670533,
+          "longitude": -73.40085725716911
+        },
+        "town": "Whitehall",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "phone": "15184999700",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "Full-service marina at head of Lake Champlain",
+        "totalSlips": 50,
+        "transientSlips": 10,
+        "maxVesselLength": 50,
+        "minDepth": 6.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "restaurant-champs-corner-pub-and-grill",
+      "name": "Champs Corner Pub and Grill",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 43.56136247258776,
+          "longitude": -73.40087483373414
+        },
+        "town": "Whitehall",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "waterfront-restaurant",
+      "contact": {
+        "website": "https://www.facebook.com/profile.php?id=100063549885004",
+        "phone": "15184995172"
+      },
+      "details": {
+        "description": "Casual dining near marina"
+      }
+    },
+    {
+      "id": "confluence-poultney-river",
+      "name": "Poultney River",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.56895090518341,
+          "longitude": -73.40054988694115
+        },
+        "town": "West Haven",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "confluence",
+      "details": {
+        "description": "River confluence with lake"
+      }
+    },
+    {
+      "id": "bay-south-bay",
+      "name": "South Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 43.5822719999323,
+          "longitude": -73.4277590047984
+        },
+        "town": "Whitehall",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "tags": [
+        "anchorage"
+      ],
+      "details": {
+        "description": "Protected anchorage south of main lake"
+      }
+    },
+    {
+      "id": "poi-western-most-point-of-vermont",
+      "name": "Western Most Point of Vermont",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.58860301723655,
+          "longitude": -73.43055817968121
+        },
+        "town": "West Haven",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "details": {
+        "description": "Geographic point of interest"
+      }
+    },
+    {
+      "id": "launch-benson-landing-boat-launch",
+      "name": "Benson Landing Boat Launch",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 43.728642768241,
+          "longitude": -73.36732903673419
+        },
+        "town": "Benson",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "boat-launch",
+      "details": {
+        "description": "Vermont state boat launch"
+      }
+    },
+    {
+      "id": "launch-george-davis-boat-launch",
+      "name": "George Davis Boat Launch",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 43.76421009170354,
+          "longitude": -73.34309365185183
+        },
+        "town": "Orwell",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "boat-launch",
+      "contact": {
+        "website": "https://anrweb.vt.gov/FWD/FW/FishingAccessAreas.aspx"
+      },
+      "details": {
+        "description": "Vermont Fish & Wildlife access"
+      }
+    },
+    {
+      "id": "marina-plunder-bay-marina",
+      "name": "Plunder Bay Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 43.79439150486487,
+          "longitude": -73.3578369982008
+        },
+        "town": "Orwell",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "http://plunderbayvt.com/",
+        "phone": "18023451460"
+      },
+      "details": {
+        "description": "Marina on southern Lake Champlain",
+        "totalSlips": 30,
+        "transientSlips": 5,
+        "maxVesselLength": 40,
+        "minDepth": 6.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "marina-chipman-point-marina",
+      "name": "Chipman Point Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 43.7997932892087,
+          "longitude": -73.37568428914632
+        },
+        "town": "Orwell",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "https://chipmanpoint.com/",
+        "phone": "18029482288",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "Full-service marina near historic sites",
+        "totalSlips": 60,
+        "transientSlips": 10,
+        "maxVesselLength": 50,
+        "minDepth": 8.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": true
+        }
+      }
+    },
+    {
+      "id": "poi-mt-independence-visitor-center",
+      "name": "Mt. Independence Visitor Center",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.818613005107494,
+          "longitude": -73.38485124956458
+        },
+        "town": "Orwell",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "contact": {
+        "website": "https://historicsites.vermont.gov/mount-independence",
+        "phone": "18025058592"
+      },
+      "details": {
+        "description": "Vermont historic site visitor center"
+      }
+    },
+    {
+      "id": "poi-mount-independence",
+      "name": "Mount Independence",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.826395393512264,
+          "longitude": -73.38160495210535
+        },
+        "town": "Orwell",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "historic",
+      "tags": [
+        "landmark",
+        "historic"
+      ],
+      "contact": {
+        "website": "https://historicsites.vermont.gov/mount-independence",
+        "phone": "18025058592"
+      },
+      "details": {
+        "description": "Revolutionary War fortification site"
+      }
+    },
+    {
+      "id": "restaurant-fort-view-inn",
+      "name": "Fort View Inn",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 43.828361378431,
+          "longitude": -73.40025166880278
+        },
+        "town": "Ticonderoga",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "waterfront-restaurant",
+      "details": {
+        "description": "Waterfront dining with fort views"
+      }
+    },
+    {
+      "id": "confluence-la-chute-river",
+      "name": "La Chute River",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.83493398033025,
+          "longitude": -73.39372692295336
+        },
+        "town": "Ticonderoga",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "confluence",
+      "details": {
+        "description": "Historic river outlet from Lake George"
+      }
+    },
+    {
+      "id": "poi-fort-ticonderoga",
+      "name": "Fort Ticonderoga",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.84186856267097,
+          "longitude": -73.38749607538244
+        },
+        "town": "Ticonderoga",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "historic",
+      "tags": [
+        "landmark",
+        "historic"
+      ],
+      "contact": {
+        "website": "https://www.fortticonderoga.org/"
+      },
+      "details": {
+        "description": "Revolutionary War fort and museum"
+      }
+    },
+    {
+      "id": "poi-general-henry-knox-cannon-trail-marker-1",
+      "name": "General Henry Knox Cannon Trail Marker #1",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.84080067895851,
+          "longitude": -73.38408430560871
+        },
+        "town": "Ticonderoga",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "historic",
+      "tags": [
+        "landmark",
+        "historic"
+      ],
+      "details": {
+        "description": "Historic marker on Knox Trail"
+      }
+    },
+    {
+      "id": "poi-mount-defiance",
+      "name": "Mount Defiance",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.83160369709217,
+          "longitude": -73.40653977741042
+        },
+        "town": "Ticonderoga",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "historic",
+      "tags": [
+        "landmark",
+        "historic"
+      ],
+      "contact": {
+        "website": "http://www.fortticonderoga.org/visit/mount-defiance"
+      },
+      "details": {
+        "description": "Strategic hilltop with panoramic views"
+      }
+    },
+    {
+      "id": "launch-larrabees-point-access-area",
+      "name": "Larrabees Point Access Area",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 43.84922971666925,
+          "longitude": -73.36942565357774
+        },
+        "town": "Shoreham",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "boat-launch",
+      "contact": {
+        "website": "https://anrweb.vt.gov/FWD/FW/FishingAccessAreas.aspx?aa=Larrabees%20Point"
+      },
+      "details": {
+        "description": "Vermont boat launch at ferry crossing"
+      }
+    },
+    {
+      "id": "launch-ticonderoga-boat-launch",
+      "name": "Ticonderoga Boat Launch",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 43.85364753068864,
+          "longitude": -73.38511121153566
+        },
+        "town": "Ticonderoga",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "boat-launch",
+      "details": {
+        "description": "State boat launch and dock"
+      }
+    },
+    {
+      "id": "ferry-fort-ticonderoga-ferry",
+      "name": "Fort Ticonderoga Ferry",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.85364753068864,
+          "longitude": -73.38511121153566
+        },
+        "town": "Shoreham",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "ferry",
+      "details": {
+        "description": "Historic cable ferry crossing"
+      }
+    },
+    {
+      "id": "poi-sylvamo-ticonderoga-mill",
+      "name": "Sylvamo - Ticonderoga Mill",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.89227093936317,
+          "longitude": -73.40236555218047
+        },
+        "town": "Ticonderoga",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "contact": {
+        "website": "http://sylvamo.com/"
+      },
+      "details": {
+        "description": "Paper mill - local landmark"
+      }
+    },
+    {
+      "id": "launch-lapham-bay-access-area",
+      "name": "Lapham Bay Access Area",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 43.926094603107124,
+          "longitude": -73.39227570627233
+        },
+        "town": "Bridport",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "boat-launch",
+      "details": {
+        "description": "Vermont boat launch"
+      }
+    },
+    {
+      "id": "island-sheepshead-island",
+      "name": "Sheepshead Island",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 43.93790686479738,
+          "longitude": -73.41355648775505
+        },
+        "town": "Crown Point",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "island",
+      "details": {
+        "description": "Small island in southern lake"
+      }
+    },
+    {
+      "id": "launch-monitor-bay-campsite-and-boat-launch",
+      "name": "Monitor Bay Campsite and Boat Launch",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 43.947924789848436,
+          "longitude": -73.41332612038939
+        },
+        "town": "Crown Point",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "boat-launch",
+      "tags": [
+        "campground"
+      ],
+      "contact": {
+        "website": "https://townofcrownpointny.gov/monitor-bay/"
+      },
+      "details": {
+        "description": "Municipal campground with boat launch"
+      }
+    },
+    {
+      "id": "bay-gilligans-bay",
+      "name": "Gilligans Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 43.95557841255965,
+          "longitude": -73.41081844619963
+        },
+        "town": "Crown Point",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "anchorage",
+      "tags": [
+        "anchorage"
+      ],
+      "details": {
+        "description": "Protected anchorage"
+      }
+    },
+    {
+      "id": "hazard-putts-point-spires",
+      "name": "Putts Point Spires",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 43.957598061654956,
+          "longitude": -73.4067736750532
+        },
+        "town": "Crown Point",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "hazard",
+      "details": {
+        "description": "Underwater hazard - marked"
+      }
+    },
+    {
+      "id": "camp-sportsman-campground-and-cottages",
+      "name": "Sportsman Campground and Cottages",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.03264214812174,
+          "longitude": -73.40990981755553
+        },
+        "town": "Addison",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "campground",
+      "tags": [
+        "campground"
+      ],
+      "contact": {
+        "website": "http://www.sportsmanccs.com/"
+      },
+      "details": {
+        "description": "Lakeside camping"
+      }
+    },
+    {
+      "id": "camp-10-acres-campground",
+      "name": "10 Acres Campground",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.03008190791238,
+          "longitude": -73.40400251392309
+        },
+        "town": "Addison",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "campground",
+      "tags": [
+        "campground"
+      ],
+      "contact": {
+        "website": "https://www.10acrescampground.com/"
+      },
+      "details": {
+        "description": "Campground near bridge"
+      }
+    },
+    {
+      "id": "aton-red-conical-58-lighted-rfl4s",
+      "name": "Red Conical 58 Lighted - RFL4S",
+      "category": "aton",
+      "location": {
+        "coordinates": {
+          "latitude": 44.02632246954932,
+          "longitude": -73.41340624438519
+        },
+        "town": "Crown Point",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "buoy",
+      "details": {
+        "description": "Lighted channel buoy",
+        "aton": {
+          "color": "Fl R 4s",
+          "shape": "red"
+        }
+      }
+    },
+    {
+      "id": "launch-chimney-point-boat-ramp",
+      "name": "Chimney Point Boat Ramp",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.034504792115065,
+          "longitude": -73.42188745923237
+        },
+        "town": "Addison",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "boat-launch",
+      "details": {
+        "description": "Vermont boat launch at bridge"
+      }
+    },
+    {
+      "id": "poi-chimney-point-historic-museum",
+      "name": "Chimney Point Historic Museum",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.034884357875434,
+          "longitude": -73.42095217714127
+        },
+        "town": "Addison",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "historic",
+      "tags": [
+        "landmark",
+        "historic"
+      ],
+      "contact": {
+        "website": "http://historicsites.vermont.gov/"
+      },
+      "details": {
+        "description": "Vermont historic site"
+      }
+    },
+    {
+      "id": "bridge-lake-champlain-bridge",
+      "name": "Lake Champlain Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 44.03278594283646,
+          "longitude": -73.4232035957054
+        },
+        "town": "Crown Point",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Fixed bridge - only crossing between Whitehall and Rouses Point",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 75.0,
+          "roadway": "NY 185 / VT 17"
+        }
+      }
+    },
+    {
+      "id": "launch-crown-point-boat-launch",
+      "name": "Crown Point Boat Launch",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.02955512600389,
+          "longitude": -73.42450011890374
+        },
+        "town": "Crown Point",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "boat-launch",
+      "details": {
+        "description": "State boat launch"
+      }
+    },
+    {
+      "id": "poi-crown-point-state-historic-site",
+      "name": "Crown Point State Historic Site",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.02878284720524,
+          "longitude": -73.42945360211246
+        },
+        "town": "Crown Point",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "historic",
+      "tags": [
+        "landmark",
+        "historic"
+      ],
+      "contact": {
+        "website": "https://parks.ny.gov/historic-sites/34/details.aspx"
+      },
+      "details": {
+        "description": "Fort ruins and visitor center"
+      }
+    },
+    {
+      "id": "poi-lake-champlain-visitors-center",
+      "name": "Lake Champlain Visitors Center",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.02949341530646,
+          "longitude": -73.42566956200227
+        },
+        "town": "Crown Point",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "contact": {
+        "website": "http://www.lakechamplainregion.com/professional-services/lake-champlain-visitors-center"
+      },
+      "details": {
+        "description": "Regional tourism center"
+      }
+    },
+    {
+      "id": "poi-champlain-memorial-lighthouse",
+      "name": "Champlain Memorial Lighthouse",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.02988017684379,
+          "longitude": -73.4215148446729
+        },
+        "town": "Crown Point",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "lighthouse",
+      "tags": [
+        "landmark",
+        "historic"
+      ],
+      "details": {
+        "description": "Historic lighthouse at Crown Point",
+        "aton": {
+          "color": "Fl W 10s",
+          "shape": "white"
+        }
+      }
+    },
+    {
+      "id": "poi-fort-st-frederic",
+      "name": "Fort St. Frederic",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.030471040240215,
+          "longitude": -73.42611069246796
+        },
+        "town": "Crown Point",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "historic",
+      "tags": [
+        "landmark",
+        "historic"
+      ],
+      "contact": {
+        "website": "https://www.nps.gov/parkhistory/online_books/explorers/sitec45.htm"
+      },
+      "details": {
+        "description": "French colonial fort ruins"
+      }
+    },
+    {
+      "id": "bay-bulwagga-bay",
+      "name": "Bulwagga Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.01811087466645,
+          "longitude": -73.44519028053095
+        },
+        "town": "Crown Point",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "anchorage",
+      "tags": [
+        "anchorage"
+      ],
+      "details": {
+        "description": "Protected anchorage with good holding"
+      }
+    },
+    {
+      "id": "beach-bulwagga-bay-beach",
+      "name": "Bulwagga Bay Beach",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.03604511916276,
+          "longitude": -73.45612837845567
+        },
+        "town": "Port Henry",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "beach",
+      "details": {
+        "description": "Public beach"
+      }
+    },
+    {
+      "id": "camp-bulwagga-bay-campground-beach",
+      "name": "Bulwagga Bay Campground & Beach",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.03491611972144,
+          "longitude": -73.45548330725624
+        },
+        "town": "Port Henry",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "campground",
+      "tags": [
+        "campground"
+      ],
+      "details": {
+        "description": "Lakeside camping and beach"
+      }
+    },
+    {
+      "id": "poi-port-henry-waterfront-farmers-market",
+      "name": "Port Henry Waterfront Farmers' Market",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.03995178609477,
+          "longitude": -73.45855548408409
+        },
+        "town": "Port Henry",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "details": {
+        "description": "Seasonal farmers market"
+      }
+    },
+    {
+      "id": "marina-bridgeview-harbour-marina",
+      "name": "Bridgeview Harbour Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.04137086541007,
+          "longitude": -73.45767035513336
+        },
+        "town": "Port Henry",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "campground",
+        "fuel"
+      ],
+      "contact": {
+        "website": "https://www.bridgeviewharbour.com",
+        "phone": "15185467400",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "Full-service marina with fuel dock and camping",
+        "totalSlips": 50,
+        "transientSlips": 10,
+        "maxVesselLength": 50,
+        "minDepth": 8.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": true
+        }
+      }
+    },
+    {
+      "id": "beach-port-henry-beach",
+      "name": "Port Henry Beach",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.05000961243302,
+          "longitude": -73.4542372458281
+        },
+        "town": "Port Henry",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "beach",
+      "details": {
+        "description": "Public beach"
+      }
+    },
+    {
+      "id": "camp-port-henry-campgrounds-champ-beach-park",
+      "name": "Port Henry Campgrounds & Champ Beach Park",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.050663932140566,
+          "longitude": -73.45421379883025
+        },
+        "town": "Port Henry",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "campground",
+      "tags": [
+        "campground"
+      ],
+      "details": {
+        "description": "Municipal camping and beach"
+      }
+    },
+    {
+      "id": "launch-port-henry-boat-launch",
+      "name": "Port Henry Boat Launch",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.05252049414113,
+          "longitude": -73.45305720452397
+        },
+        "town": "Port Henry",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "boat-launch",
+      "details": {
+        "description": "State boat launch"
+      }
+    },
+    {
+      "id": "marina-port-henry-marina",
+      "name": "Port Henry Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.054155795092484,
+          "longitude": -73.45218531725945
+        },
+        "town": "Port Henry",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "http://porthenrymarina.com/",
+        "phone": "15185464075",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "Full-service marina",
+        "totalSlips": 60,
+        "transientSlips": 10,
+        "maxVesselLength": 45,
+        "minDepth": 6.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "dock-port-henry-pier",
+      "name": "Port Henry Pier",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.05058682123638,
+          "longitude": -73.45118826714413
+        },
+        "town": "Port Henry",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "harbor",
+      "details": {
+        "description": "Historic pier and public dock"
+      }
+    },
+    {
+      "id": "restaurant-dockside-caf",
+      "name": "Dockside Café",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 44.04086540618795,
+          "longitude": -73.45871117038496
+        },
+        "town": "Port Henry",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "waterfront-restaurant",
+      "contact": {
+        "website": "https://www.facebook.com/DocksideCafeAtBridgeviewHarbour/"
+      },
+      "details": {
+        "description": "Waterfront dining at Bridgeview Harbour"
+      }
+    },
+    {
+      "id": "bay-mullen-bay",
+      "name": "Mullen Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.09863385598507,
+          "longitude": -73.44560174348865
+        },
+        "town": "Moriah",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "details": {
+        "description": "Bay on western shore"
+      }
+    },
+    {
+      "id": "bay-stevenson-bay",
+      "name": "Stevenson Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.11154907362342,
+          "longitude": -73.43202435208524
+        },
+        "town": "Westport",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "anchorage",
+      "tags": [
+        "anchorage"
+      ],
+      "details": {
+        "description": "Protected anchorage"
       }
     },
     {
       "id": "bay-cole-bay",
       "name": "Cole Bay",
-      "slug": "cole-bay-westport",
       "category": "bay",
-      "subcategory": "anchorage",
       "location": {
         "coordinates": {
-          "latitude": 44.14215846044703,
-          "longitude": -73.42141320213032
+          "latitude": 44.14284349343071,
+          "longitude": -73.42120587952374
         },
         "town": "Westport",
-        "county": "Essex",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
       },
-      "bayDetails": {
-        "windExposure": {
-          "north": null,
-          "south": null,
-          "east": null,
-          "west": null
-        },
-        "protectionFactor": null,
-        "anchorageType": "natural",
-        "bottomType": null,
-        "holdingQuality": null
-      },
+      "subcategory": "anchorage",
+      "tags": [
+        "anchorage"
+      ],
       "details": {
-        "description": "Natural bay on the western shore of Lake Champlain near Westport"
+        "description": "Protected anchorage"
+      }
+    },
+    {
+      "id": "island-cole-island",
+      "name": "Cole Island",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.14090329490463,
+          "longitude": -73.42142045623908
+        },
+        "town": "Westport",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
       },
-      "metadata": {
-        "verified": false,
-        "source": "user-provided",
-        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+      "subcategory": "island",
+      "details": {
+        "description": "Island near Cole Bay"
       }
     },
     {
       "id": "bay-young-bay",
       "name": "Young Bay",
-      "slug": "young-bay-westport",
       "category": "bay",
-      "subcategory": "anchorage",
       "location": {
         "coordinates": {
-          "latitude": 44.15934049230751,
-          "longitude": -73.40545942287605
+          "latitude": 44.15934320101876,
+          "longitude": -73.4051475159417
         },
         "town": "Westport",
-        "county": "Essex",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
-      },
-      "bayDetails": {
-        "windExposure": {
-          "north": null,
-          "south": null,
-          "east": null,
-          "west": null
-        },
-        "protectionFactor": null,
-        "anchorageType": "natural",
-        "bottomType": null,
-        "holdingQuality": null
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
       },
       "details": {
-        "description": "Natural bay on the western shore of Lake Champlain near Westport"
+        "description": "Bay on western shore"
+      }
+    },
+    {
+      "id": "bay-south-bay",
+      "name": "South Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.15204606787638,
+          "longitude": -73.40727182542345
+        },
+        "town": "Westport",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
       },
-      "metadata": {
-        "verified": false,
-        "source": "user-provided",
-        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+      "details": {
+        "description": "Bay south of Westport"
+      }
+    },
+    {
+      "id": "camp-barber-homestead-park",
+      "name": "Barber Homestead Park",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.153719538243614,
+          "longitude": -73.4077298245857
+        },
+        "town": "Westport",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "campground",
+      "tags": [
+        "campground"
+      ],
+      "details": {
+        "description": "Municipal park"
+      }
+    },
+    {
+      "id": "bay-cold-spring-bay",
+      "name": "Cold Spring Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.16787001592942,
+          "longitude": -73.41324861062421
+        },
+        "town": "Westport",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "details": {
+        "description": "Bay on western shore"
+      }
+    },
+    {
+      "id": "restaurant-rolling-hills-estate-winery",
+      "name": "Rolling Hills Estate Winery",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 44.16997295489235,
+          "longitude": -73.4221798517701
+        },
+        "town": "Westport",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "waterfront-restaurant",
+      "details": {
+        "description": "Winery with lake views"
+      }
+    },
+    {
+      "id": "restaurant-westport-yacht-club",
+      "name": "Westport Yacht Club",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 44.18076614228613,
+          "longitude": -73.42875608532442
+        },
+        "town": "Westport",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "waterfront-restaurant",
+      "details": {
+        "description": "Yacht club with dining"
+      }
+    },
+    {
+      "id": "marina-westport-marina",
+      "name": "Westport Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.18280997860689,
+          "longitude": -73.43074811190628
+        },
+        "town": "Westport",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "details": {
+        "description": "Marina in Westport harbor",
+        "totalSlips": 40,
+        "transientSlips": 8,
+        "maxVesselLength": 45,
+        "minDepth": 6.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "restaurant-portside-restaurant",
+      "name": "Portside Restaurant",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 44.18227621464789,
+          "longitude": -73.43072128981935
+        },
+        "town": "Westport",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "waterfront-restaurant",
+      "details": {
+        "description": "Waterfront dining"
+      }
+    },
+    {
+      "id": "poi-lee-park-and-beach",
+      "name": "Lee Park and Beach",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.184583621939254,
+          "longitude": -73.4328574380724
+        },
+        "town": "Westport",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "details": {
+        "description": "Public park and beach"
+      }
+    },
+    {
+      "id": "launch-westport-boat-launch",
+      "name": "Westport Boat Launch",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.18882319496973,
+          "longitude": -73.43398649064298
+        },
+        "town": "Westport",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "boat-launch",
+      "details": {
+        "description": "State boat launch"
+      }
+    },
+    {
+      "id": "hotel-westport-lakeside-motel",
+      "name": "Westport Lakeside Motel",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.18942012551756,
+          "longitude": -73.43402649056281
+        },
+        "town": "Westport",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "hotel",
+      "details": {
+        "description": "Lakeside lodging"
+      }
+    },
+    {
+      "id": "poi-furnace-point",
+      "name": "Furnace Point",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.191912670481436,
+          "longitude": -73.42695051772458
+        },
+        "town": "Westport",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "details": {
+        "description": "Historic iron furnace site"
       }
     },
     {
       "id": "bay-hunter-bay",
       "name": "Hunter Bay",
-      "slug": "hunter-bay-westport",
       "category": "bay",
-      "subcategory": "anchorage",
       "location": {
         "coordinates": {
-          "latitude": 44.19953571348856,
-          "longitude": -73.39831175941988
+          "latitude": 44.19977071072829,
+          "longitude": -73.40015288828687
         },
         "town": "Westport",
-        "county": "Essex",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
       },
-      "bayDetails": {
-        "windExposure": {
-          "north": null,
-          "south": null,
-          "east": null,
-          "west": null
-        },
-        "protectionFactor": null,
-        "anchorageType": "natural",
-        "bottomType": null,
-        "holdingQuality": null
-      },
+      "subcategory": "anchorage",
+      "tags": [
+        "anchorage"
+      ],
       "details": {
-        "description": "Natural bay on the western shore of Lake Champlain near Westport"
-      },
-      "metadata": {
-        "verified": false,
-        "source": "user-provided",
-        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+        "description": "Protected anchorage"
       }
     },
     {
-      "id": "harbor-partridge",
+      "id": "bay-partridge-harbor",
       "name": "Partridge Harbor",
-      "slug": "partridge-harbor-westport",
       "category": "bay",
-      "subcategory": "harbor",
       "location": {
         "coordinates": {
-          "latitude": 44.2007356028773,
-          "longitude": -73.39179935605064
+          "latitude": 44.20044423615178,
+          "longitude": -73.39233763940597
         },
         "town": "Westport",
-        "county": "Essex",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
       },
-      "bayDetails": {
-        "windExposure": {
-          "north": null,
-          "south": null,
-          "east": null,
-          "west": null
-        },
-        "protectionFactor": null,
-        "anchorageType": "natural",
-        "bottomType": null,
-        "holdingQuality": null
-      },
+      "subcategory": "anchorage",
+      "tags": [
+        "anchorage"
+      ],
       "details": {
-        "description": "Natural harbor on the western shore of Lake Champlain near Westport"
-      },
-      "metadata": {
-        "verified": false,
-        "source": "user-provided",
-        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+        "description": "Protected harbor"
       }
     },
     {
-      "id": "harbor-rock",
+      "id": "bay-rock-harbor",
       "name": "Rock Harbor",
-      "slug": "rock-harbor-westport",
       "category": "bay",
-      "subcategory": "harbor",
       "location": {
         "coordinates": {
-          "latitude": 44.20462358648426,
-          "longitude": -73.3843929966333
+          "latitude": 44.20459048938679,
+          "longitude": -73.38465973331995
         },
         "town": "Westport",
-        "county": "Essex",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
       },
-      "bayDetails": {
-        "windExposure": {
-          "north": null,
-          "south": null,
-          "east": null,
-          "west": null
-        },
-        "protectionFactor": null,
-        "anchorageType": "natural",
-        "bottomType": null,
-        "holdingQuality": null
-      },
+      "subcategory": "anchorage",
+      "tags": [
+        "anchorage"
+      ],
       "details": {
-        "description": "Natural harbor on the western shore of Lake Champlain near Westport"
-      },
-      "metadata": {
-        "verified": false,
-        "source": "user-provided",
-        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+        "description": "Protected anchorage"
       }
     },
     {
-      "id": "harbor-barn-rock",
+      "id": "bay-barn-rock-harbor",
       "name": "Barn Rock Harbor",
-      "slug": "barn-rock-harbor-westport",
       "category": "bay",
-      "subcategory": "harbor",
       "location": {
         "coordinates": {
-          "latitude": 44.21127470881053,
-          "longitude": -73.3734618449441
+          "latitude": 44.211388066629326,
+          "longitude": -73.37358340467945
         },
         "town": "Westport",
-        "county": "Essex",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
       },
-      "bayDetails": {
-        "windExposure": {
-          "north": null,
-          "south": null,
-          "east": null,
-          "west": null
-        },
-        "protectionFactor": null,
-        "anchorageType": "natural",
-        "bottomType": null,
-        "holdingQuality": null
-      },
+      "subcategory": "anchorage",
+      "tags": [
+        "anchorage"
+      ],
       "details": {
-        "description": "Natural harbor on the western shore of Lake Champlain near Westport"
-      },
-      "metadata": {
-        "verified": false,
-        "source": "user-provided",
-        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+        "description": "Protected anchorage in the Narrows"
       }
     },
     {
-      "id": "harbor-snake-den",
+      "id": "bay-snake-den-harbor",
       "name": "Snake Den Harbor",
-      "slug": "snake-den-harbor-westport",
       "category": "bay",
-      "subcategory": "harbor",
       "location": {
         "coordinates": {
-          "latitude": 44.2277356717606,
-          "longitude": -73.36234019223323
+          "latitude": 44.22776596761818,
+          "longitude": -73.3632820992096
         },
         "town": "Westport",
-        "county": "Essex",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
-      },
-      "bayDetails": {
-        "windExposure": {
-          "north": null,
-          "south": null,
-          "east": null,
-          "west": null
-        },
-        "protectionFactor": null,
-        "anchorageType": "natural",
-        "bottomType": null,
-        "holdingQuality": null
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Narrows"
       },
       "details": {
-        "description": "Natural harbor on the western shore of Lake Champlain near Westport"
-      },
-      "metadata": {
-        "verified": false,
-        "source": "user-provided",
-        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+        "description": "Harbor in the Narrows"
       }
     },
     {
-      "id": "bay-porter",
-      "name": "Porter Bay",
-      "slug": "porter-bay-ferrisburgh",
+      "id": "bay-grog-harbor",
+      "name": "Grog Harbor",
       "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.25936871645782,
+          "longitude": -73.32694879509239
+        },
+        "town": "Essex",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Narrows"
+      },
       "subcategory": "anchorage",
-      "location": {
-        "coordinates": {
-          "latitude": 44.22824474440216,
-          "longitude": -73.3168571893722
-        },
-        "town": "Ferrisburgh",
-        "county": "Addison",
-        "state": "VT",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
-      },
-      "bayDetails": {
-        "windExposure": {
-          "north": null,
-          "south": null,
-          "east": null,
-          "west": null
-        },
-        "protectionFactor": null,
-        "anchorageType": "natural",
-        "bottomType": null,
-        "holdingQuality": null
-      },
+      "tags": [
+        "anchorage"
+      ],
       "details": {
-        "description": "Natural bay on the eastern shore of Lake Champlain in Vermont"
-      },
-      "metadata": {
-        "verified": false,
-        "source": "user-provided",
-        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+        "description": "Protected anchorage near Split Rock"
       }
     },
     {
-      "id": "outlet-otter-creek",
-      "name": "Otter Creek Outlet",
-      "slug": "otter-creek-outlet-ferrisburgh",
+      "id": "poi-split-rock-point",
+      "name": "Split Rock Point",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.27079187931224,
+          "longitude": -73.32224912583587
+        },
+        "town": "Essex",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Narrows"
+      },
+      "details": {
+        "description": "Historic landmark and lighthouse site"
+      }
+    },
+    {
+      "id": "bay-whallon-bay",
+      "name": "Whallon Bay",
       "category": "bay",
-      "subcategory": "outlet",
       "location": {
         "coordinates": {
-          "latitude": 44.22580497376523,
-          "longitude": -73.32407606982247
+          "latitude": 44.27530910002894,
+          "longitude": -73.34316135506087
         },
-        "town": "Ferrisburgh",
-        "county": "Addison",
-        "state": "VT",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
-      },
-      "bayDetails": {
-        "windExposure": {
-          "north": null,
-          "south": null,
-          "east": null,
-          "west": null
-        },
-        "protectionFactor": null,
-        "anchorageType": "river-outlet",
-        "bottomType": null,
-        "holdingQuality": null
+        "town": "Essex",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
       },
       "details": {
-        "description": "Outlet where Otter Creek enters Lake Champlain. Provides access to Vergennes via navigable creek."
-      },
-      "metadata": {
-        "verified": false,
-        "source": "user-provided",
-        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
+        "description": "Bay on western shore"
       }
     },
     {
-      "id": "bay-fields",
-      "name": "Fields Bay",
-      "slug": "fields-bay-ferrisburgh",
-      "category": "bay",
-      "subcategory": "anchorage",
+      "id": "marina-essex-marina",
+      "name": "Essex Marina",
+      "category": "marina",
       "location": {
         "coordinates": {
-          "latitude": 44.218393037378675,
-          "longitude": -73.3306743035764
+          "latitude": 44.30745615228226,
+          "longitude": -73.34936375099063
         },
-        "town": "Ferrisburgh",
-        "county": "Addison",
-        "state": "VT",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
+        "town": "Essex",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
       },
-      "bayDetails": {
-        "windExposure": {
-          "north": null,
-          "south": null,
-          "east": null,
-          "west": null
-        },
-        "protectionFactor": null,
-        "anchorageType": "natural",
-        "bottomType": null,
-        "holdingQuality": null
-      },
-      "details": {
-        "description": "Natural bay on the eastern shore of Lake Champlain in Vermont"
-      },
-      "metadata": {
-        "verified": false,
-        "source": "user-provided",
-        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
-      }
-    },
-    {
-      "id": "bay-kingsland",
-      "name": "Kingsland Bay",
-      "slug": "kingsland-bay-ferrisburgh",
-      "category": "bay",
-      "subcategory": "anchorage",
-      "location": {
-        "coordinates": {
-          "latitude": 44.237659056952054,
-          "longitude": -73.29992546093972
-        },
-        "town": "Ferrisburgh",
-        "county": "Addison",
-        "state": "VT",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
-      },
-      "bayDetails": {
-        "windExposure": {
-          "north": null,
-          "south": null,
-          "east": null,
-          "west": null
-        },
-        "protectionFactor": null,
-        "anchorageType": "natural",
-        "bottomType": null,
-        "holdingQuality": null
-      },
-      "details": {
-        "description": "Natural bay on the eastern shore of Lake Champlain in Vermont. Kingsland Bay State Park nearby."
-      },
-      "metadata": {
-        "verified": false,
-        "source": "user-provided",
-        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
-      }
-    },
-    {
-      "id": "harbor-smuggler",
-      "name": "Smuggler Harbor",
-      "slug": "smuggler-harbor-valcour",
-      "category": "bay",
-      "subcategory": "harbor",
-      "location": {
-        "coordinates": {
-          "latitude": 44.618013836007606,
-          "longitude": -73.40892960633522
-        },
-        "nearestTown": "Plattsburgh",
-        "island": "Valcour Island",
-        "county": "Clinton",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "broad-lake"
-      },
-      "bayDetails": {
-        "windExposure": {
-          "north": null,
-          "south": null,
-          "east": null,
-          "west": null
-        },
-        "protectionFactor": null,
-        "anchorageType": "natural",
-        "bottomType": null,
-        "holdingQuality": null
-      },
-      "details": {
-        "description": "Protected harbor on Valcour Island. Historic site near Battle of Valcour Island location."
-      },
-      "metadata": {
-        "verified": false,
-        "source": "user-provided",
-        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
-      }
-    },
-    {
-      "id": "bay-sloop",
-      "name": "Sloop Bay",
-      "slug": "sloop-bay-valcour",
-      "category": "bay",
-      "subcategory": "anchorage",
-      "location": {
-        "coordinates": {
-          "latitude": 44.622198674519176,
-          "longitude": -73.40894033498782
-        },
-        "nearestTown": "Plattsburgh",
-        "island": "Valcour Island",
-        "county": "Clinton",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "broad-lake"
-      },
-      "bayDetails": {
-        "windExposure": {
-          "north": null,
-          "south": null,
-          "east": null,
-          "west": null
-        },
-        "protectionFactor": null,
-        "anchorageType": "natural",
-        "bottomType": null,
-        "holdingQuality": null
-      },
-      "details": {
-        "description": "Natural bay on Valcour Island. Popular anchorage with campsites nearby."
-      },
-      "metadata": {
-        "verified": false,
-        "source": "user-provided",
-        "needsReview": ["windExposure", "protectionFactor", "bottomType"]
-      }
-    },
-    {
-      "id": "dining-westport-yacht-club",
-      "name": "Westport Yacht Club",
-      "slug": "westport-yacht-club",
-      "category": "dining",
-      "subcategory": "waterfront-restaurant",
-      "location": {
-        "coordinates": {
-          "latitude": 44.181057209416196,
-          "longitude": -73.42896629958769
-        },
-        "address": "44 Old Arsenal Road",
-        "town": "Westport",
-        "county": "Essex",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
-      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
       "contact": {
-        "phone": "+1 (518) 962-8777",
-        "email": "wyclakechamplain@gmail.com",
-        "website": "https://www.westportyachtclubny.com"
+        "website": "http://www.essexmarinany.com/",
+        "phone": "15189637222",
+        "vhfChannel": 9
       },
       "details": {
-        "description": "Waterfront dining venue overlooking Lake Champlain. Chef/owners Scott Brankman and Emily Farnsworth-Brankman. Features concrete pier for boat mooring and sand beach for seaplanes. American cuisine with seasonal menus.",
-        "cuisine": "American",
-        "diningOptions": ["outdoor-waterfront", "indoor"],
-        "boatAccess": true,
-        "seaplaneAccess": true,
-        "reservationsRecommended": true,
-        "seasonalHours": {
-          "season": "Memorial Day - Labor Day",
-          "days": "Thu-Sat",
-          "hours": "Dinner at 5pm"
+        "description": "Marina in historic Essex village",
+        "totalSlips": 30,
+        "transientSlips": 8,
+        "maxVesselLength": 40,
+        "minDepth": 6.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": false
         }
-      },
-      "metadata": {
-        "verified": true,
-        "source": "web-research"
       }
     },
     {
-      "id": "dining-portside-westport",
-      "name": "Portside Restaurant at Westport Marina",
-      "slug": "portside-restaurant-westport",
+      "id": "restaurant-the-essex-ice-cream-caf",
+      "name": "The Essex Ice Cream Café",
       "category": "dining",
-      "subcategory": "waterfront-restaurant",
       "location": {
         "coordinates": {
-          "latitude": 44.18254984372554,
-          "longitude": -73.43100477844585
+          "latitude": 44.30970179995404,
+          "longitude": -73.35137540777691
         },
-        "address": "20 Washington Street",
-        "town": "Westport",
-        "county": "Essex",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
+        "town": "Essex",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
       },
+      "subcategory": "waterfront-restaurant",
+      "details": {
+        "description": "Ice cream and cafe"
+      }
+    },
+    {
+      "id": "hotel-essex-inn-on-the-adirondack-coast",
+      "name": "Essex Inn on the Adirondack Coast",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.30871909976386,
+          "longitude": -73.35141832313641
+        },
+        "town": "Essex",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "hotel",
+      "details": {
+        "description": "Historic inn with dining"
+      }
+    },
+    {
+      "id": "marina-old-dock-house-marina",
+      "name": "Old Dock House & Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.31018930526602,
+          "longitude": -73.35017377818751
+        },
+        "town": "Essex",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
       "contact": {
-        "phone": "+1 (518) 962-4899",
-        "website": "https://www.westportmarina.com"
+        "website": "http://theolddock.com/",
+        "phone": "15189634232",
+        "vhfChannel": 9
       },
       "details": {
-        "description": "Lakeside dining at Westport Marina. Memorable waterfront dining experience with sheltered deck and air-conditioned dining room.",
-        "cuisine": "American",
-        "diningOptions": ["outdoor-deck", "indoor-ac"],
-        "boatAccess": true,
-        "atMarina": "marina-westport"
-      },
-      "metadata": {
-        "verified": true,
-        "source": "web-research"
+        "description": "Marina with waterfront restaurant",
+        "totalSlips": 20,
+        "transientSlips": 5,
+        "maxVesselLength": 35,
+        "minDepth": 6.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline"
+          ],
+          "ethanol-free": false
+        }
       }
     },
     {
-      "id": "dining-upper-deck-willsboro",
-      "name": "The Upper Deck at Safe Harbor Willsboro Bay",
-      "slug": "upper-deck-willsboro",
-      "category": "dining",
-      "subcategory": "waterfront-restaurant",
+      "id": "ferry-essex-ferry-dock",
+      "name": "Essex Ferry Dock",
+      "category": "poi",
       "location": {
         "coordinates": {
-          "latitude": 44.40487957380857,
-          "longitude": -73.39482942762298
+          "latitude": 44.31081883371589,
+          "longitude": -73.35074240647344
         },
-        "address": "25 Klein Way",
+        "town": "Essex",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "ferry",
+      "details": {
+        "description": "Lake Champlain Transportation Co ferry"
+      }
+    },
+    {
+      "id": "confluence-boquet-river",
+      "name": "Boquet River",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.35601054917346,
+          "longitude": -73.35530736643877
+        },
         "town": "Willsboro",
-        "county": "Essex",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
       },
-      "contact": {
-        "phone": "+1 (518) 963-7276",
-        "website": "https://shmarinas.com/locations/safe-harbor-willsboro-bay/"
-      },
+      "subcategory": "confluence",
       "details": {
-        "description": "Elevated waterfront dining at Safe Harbor Willsboro Bay marina. Gorgeous twilight views of the bay.",
-        "cuisine": "American - Upscale",
-        "diningOptions": ["waterfront"],
-        "boatAccess": true,
-        "atMarina": "marina-safe-harbor-willsboro",
-        "seasonalHours": {
-          "monTue": "Closed",
-          "wedThu": "5pm-9pm",
-          "friday": "5pm-10pm",
-          "saturday": "12pm-3pm, 5pm-10pm",
-          "sunday": "12pm-3pm, 5pm-9pm"
-        }
-      },
-      "metadata": {
-        "verified": true,
-        "source": "web-research"
+        "description": "River mouth - fishing spot"
       }
     },
     {
-      "id": "dining-indian-bay",
+      "id": "beach-boquet-beach",
+      "name": "Boquet Beach",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.35473711263557,
+          "longitude": -73.35514106948439
+        },
+        "town": "Willsboro",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "beach",
+      "details": {
+        "description": "Public beach"
+      }
+    },
+    {
+      "id": "bay-buena-vista-bay",
+      "name": "Buena Vista Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.40056500738974,
+          "longitude": -73.38015155417494
+        },
+        "town": "Willsboro",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "anchorage",
+      "tags": [
+        "anchorage"
+      ],
+      "details": {
+        "description": "Bay on western shore"
+      }
+    },
+    {
+      "id": "poi-pumpkin-reef",
+      "name": "Pumpkin Reef",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.44561526618685,
+          "longitude": -73.37358681927505
+        },
+        "town": "Willsboro",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "details": {
+        "description": "Underwater hazard - marked"
+      }
+    },
+    {
+      "id": "hotel-willsboro-point-nightly-accommodations",
+      "name": "Willsboro Point Nightly Accommodations",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.43232521042483,
+          "longitude": -73.38738592198585
+        },
+        "town": "Willsboro",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "hotel",
+      "contact": {
+        "website": "https://www.willsboropoint.com/#rentals"
+      },
+      "details": {
+        "description": "Lakeside lodging"
+      }
+    },
+    {
+      "id": "marina-indian-bay-marina-and-restaurant",
       "name": "Indian Bay Marina and Restaurant",
-      "slug": "indian-bay-restaurant",
-      "category": "dining",
-      "subcategory": "waterfront-restaurant",
+      "category": "marina",
       "location": {
         "coordinates": {
-          "latitude": 44.427781823897284,
-          "longitude": -73.39254931292123
+          "latitude": 44.427674662513304,
+          "longitude": -73.39325459516178
         },
-        "address": "237 Corlear Drive",
         "town": "Willsboro",
-        "county": "Essex",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
       },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
       "contact": {
-        "phone": "+1 (518) 963-7858",
-        "website": "https://www.indianbaymarinany.com"
+        "website": "http://www.indianbaymarinany.com/",
+        "phone": "15189637858",
+        "vhfChannel": 9
       },
       "details": {
-        "description": "Family-owned restaurant celebrating 40+ years. Lakeside dining, air conditioned, with full bar. Short ride by boat from Vermont or by car via Essex Ferry. Famous for fantastic sunsets.",
-        "cuisine": "American - Burgers, Seafood",
-        "diningOptions": ["lakeside", "indoor-ac"],
-        "boatAccess": true,
-        "atMarina": "marina-indian-bay",
-        "seasonalHours": {
-          "daily": "11:30am-9pm"
+        "description": "Full-service marina with restaurant",
+        "totalSlips": 45,
+        "transientSlips": 10,
+        "maxVesselLength": 50,
+        "minDepth": 8.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": true
         }
-      },
-      "metadata": {
-        "verified": true,
-        "source": "web-research"
       }
     },
     {
-      "id": "poi-lcmm",
-      "name": "Lake Champlain Maritime Museum",
-      "slug": "lake-champlain-maritime-museum",
-      "category": "poi",
-      "subcategory": "museum",
+      "id": "restaurant-the-upper-deck",
+      "name": "The Upper Deck",
+      "category": "dining",
       "location": {
         "coordinates": {
-          "latitude": 44.19919225292736,
-          "longitude": -73.35843074495011
+          "latitude": 44.40491938761567,
+          "longitude": -73.39477214295349
         },
-        "address": "4472 Basin Harbor Road",
+        "town": "Willsboro",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "waterfront-restaurant",
+      "details": {
+        "description": "Waterfront dining"
+      }
+    },
+    {
+      "id": "marina-safe-harbor-willsboro-bay",
+      "name": "Safe Harbor Willsboro Bay",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.40498453851561,
+          "longitude": -73.39557412343801
+        },
+        "town": "Willsboro",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "https://shmarinas.com/locations/safe-harbor-willsboro/",
+        "phone": "15189637276",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "Full-service Safe Harbor marina",
+        "totalSlips": 150,
+        "transientSlips": 30,
+        "maxVesselLength": 65,
+        "minDepth": 10.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": true
+        }
+      }
+    },
+    {
+      "id": "launch-willsboro-bay-boat-launch",
+      "name": "Willsboro Bay Boat Launch",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.40009403347969,
+          "longitude": -73.39033010148208
+        },
+        "town": "Willsboro",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "boat-launch",
+      "details": {
+        "description": "State boat launch"
+      }
+    },
+    {
+      "id": "bay-willsboro-bay",
+      "name": "Willsboro Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.39933720278754,
+          "longitude": -73.38912840265631
+        },
+        "town": "Willsboro",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "anchorage",
+      "tags": [
+        "anchorage"
+      ],
+      "details": {
+        "description": "Large protected bay - excellent anchorage"
+      }
+    },
+    {
+      "id": "launch-port-douglass-boat-launch",
+      "name": "Port Douglass Boat Launch",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.48447137465917,
+          "longitude": -73.41697353652225
+        },
+        "town": "Keeseville",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "boat-launch",
+      "contact": {
+        "website": "http://www.dec.ny.gov/outdoor/23897.html"
+      },
+      "details": {
+        "description": "State boat launch"
+      }
+    },
+    {
+      "id": "beach-port-kent-beach",
+      "name": "Port Kent Beach",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.52720125586525,
+          "longitude": -73.40435327463666
+        },
+        "town": "Port Kent",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "beach",
+      "details": {
+        "description": "Public beach"
+      }
+    },
+    {
+      "id": "launch-port-kent-boat-launch",
+      "name": "Port Kent Boat Launch",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.52650330087202,
+          "longitude": -73.40334744628451
+        },
+        "town": "Port Kent",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "boat-launch",
+      "details": {
+        "description": "State boat launch"
+      }
+    },
+    {
+      "id": "confluence-ausable-river",
+      "name": "Ausable River",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.55616555392404,
+          "longitude": -73.42414192755848
+        },
+        "town": "Port Kent",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "confluence",
+      "details": {
+        "description": "Major river mouth"
+      }
+    },
+    {
+      "id": "camp-ausable-point-campground",
+      "name": "Ausable Point Campground",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.57237306835322,
+          "longitude": -73.4280849956548
+        },
+        "town": "Peru",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "campground",
+      "tags": [
+        "campground"
+      ],
+      "contact": {
+        "website": "http://www.dec.ny.gov/outdoor/24452.html",
+        "phone": "15185617080"
+      },
+      "details": {
+        "description": "State campground on the lake"
+      }
+    },
+    {
+      "id": "hotel-valcour-inn-and-boathouse",
+      "name": "Valcour Inn and Boathouse",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.604588634397274,
+          "longitude": -73.43857103132333
+        },
+        "town": "Peru",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "hotel",
+      "contact": {
+        "website": "http://www.valcourinn.com/",
+        "phone": "15185664077"
+      },
+      "details": {
+        "description": "Lodging with dock access"
+      }
+    },
+    {
+      "id": "launch-peru-boat-launch",
+      "name": "Peru Boat Launch",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.61908180202903,
+          "longitude": -73.44354077016203
+        },
+        "town": "Peru",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "boat-launch",
+      "details": {
+        "description": "State boat launch near Valcour Island"
+      }
+    },
+    {
+      "id": "hotel-heron-ledge-cottages",
+      "name": "Heron Ledge Cottages",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.62140028619301,
+          "longitude": -73.44611699309085
+        },
+        "town": "Plattsburgh",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "hotel",
+      "contact": {
+        "website": "http://www.heronledge.com/",
+        "phone": "15188347608"
+      },
+      "details": {
+        "description": "Lakeside cottage rentals"
+      }
+    },
+    {
+      "id": "restaurant-the-mariner-bar-grill",
+      "name": "The Mariner Bar & Grill",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 44.624425807332244,
+          "longitude": -73.44720564393849
+        },
+        "town": "Plattsburgh",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "waterfront-restaurant",
+      "contact": {
+        "website": "https://www.themarinergrill.com/",
+        "phone": "15185658511"
+      },
+      "details": {
+        "description": "Waterfront dining"
+      }
+    },
+    {
+      "id": "marina-champlain-fleet-club",
+      "name": "Champlain Fleet Club",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.624641086744646,
+          "longitude": -73.44715864107206
+        },
+        "town": "Plattsburgh",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "http://www.champlainfleetclub.com/",
+        "phone": "18023635090"
+      },
+      "details": {
+        "description": "Private yacht club - reciprocals welcome",
+        "totalSlips": 60,
+        "transientSlips": 5,
+        "maxVesselLength": 50,
+        "minDepth": 8.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "confluence-salmon-river",
+      "name": "Salmon River",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.62730979696812,
+          "longitude": -73.44670802995876
+        },
+        "town": "Plattsburgh",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "confluence",
+      "details": {
+        "description": "River mouth"
+      }
+    },
+    {
+      "id": "beach-sailors-beach",
+      "name": "Sailor's Beach",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.681589125716556,
+          "longitude": -73.44184174227382
+        },
+        "town": "Plattsburgh",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "beach",
+      "details": {
+        "description": "Public beach"
+      }
+    },
+    {
+      "id": "poi-sailors-point-park",
+      "name": "Sailors Point Park",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.69138687998434,
+          "longitude": -73.44396126094192
+        },
+        "town": "Plattsburgh",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "details": {
+        "description": "Waterfront park"
+      }
+    },
+    {
+      "id": "marina-naked-turtle",
+      "name": "Naked Turtle",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.69612428399227,
+          "longitude": -73.44203890834598
+        },
+        "town": "Plattsburgh",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "https://www.nakedturtle.net/",
+        "phone": "15185666200",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "Marina with restaurant and entertainment",
+        "totalSlips": 50,
+        "transientSlips": 15,
+        "maxVesselLength": 55,
+        "minDepth": 8.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "marina-burlington-harbor-marina",
+      "name": "Burlington Harbor Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.4775,
+          "longitude": -73.2261
+        },
+        "town": "Burlington",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "https://www.burlingtonharbormarina.com/",
+        "phone": "8026519402",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "Premier downtown marina with 160 slips and transient dockage",
+        "totalSlips": 160,
+        "transientSlips": 60,
+        "maxVesselLength": 90,
+        "minDepth": 13.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "marina-ferry-dock-marina",
+      "name": "Ferry Dock Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.4753,
+          "longitude": -73.2234
+        },
+        "town": "Burlington",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "https://ferrydockmarina.com/",
+        "phone": "8028623300",
+        "vhfChannel": 16
+      },
+      "details": {
+        "description": "Full-service marina with non-ethanol gas",
+        "totalSlips": 80,
+        "transientSlips": 20,
+        "maxVesselLength": 60,
+        "minDepth": 10.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": true
+        }
+      }
+    },
+    {
+      "id": "marina-safe-harbor-shelburne-shipyard",
+      "name": "Safe Harbor Shelburne Shipyard",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.3825,
+          "longitude": -73.2456
+        },
+        "town": "Shelburne",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "https://shmarinas.com/locations/safe-harbor-shelburne-shipyard/",
+        "phone": "18029853326",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "Historic shipyard since 1820 - full service",
+        "totalSlips": 105,
+        "transientSlips": 5,
+        "maxVesselLength": 55,
+        "minDepth": 9.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": true
+        }
+      }
+    },
+    {
+      "id": "marina-point-bay-marina",
+      "name": "Point Bay Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.3086,
+          "longitude": -73.2628
+        },
+        "town": "Charlotte",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "https://www.pointbaymarina.com/",
+        "phone": "18024252431",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "Full-service marina with 200 slips and moorings",
+        "totalSlips": 200,
+        "transientSlips": 10,
+        "maxVesselLength": 55,
+        "minDepth": 10.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": true
+        }
+      }
+    },
+    {
+      "id": "marina-basin-harbor-boat-club",
+      "name": "Basin Harbor Boat Club",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.1742,
+          "longitude": -73.3564
+        },
         "town": "Vergennes",
-        "county": "Addison",
-        "state": "VT",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "central-lake"
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
       },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
       "contact": {
-        "phone": "+1 (802) 475-2022",
-        "email": "info@lcmm.org",
-        "website": "https://www.lcmm.org"
+        "website": "https://www.basinharbor.com/the-boat-club/",
+        "phone": "18024754311",
+        "vhfChannel": 9
       },
       "details": {
-        "description": "Free-to-visit maritime museum on the shores of Lake Champlain. Features over a dozen exhibit buildings chronicling maritime history and nautical archaeology. Home to full-scale replica of Revolutionary War gunboat Philadelphia II and the canal schooner Lois McClure.",
-        "highlights": [
-          "Full-scale 1776 gunboat replica Philadelphia II",
-          "Hazelett Watercraft Center",
-          "Largest collection of wooden shipwrecks in North America",
-          "Boat building workshops",
-          "On-water ecology programs"
-        ],
-        "amenities": ["museum-store", "playground", "picnic-area", "dog-friendly"],
-        "admission": "Free",
-        "seasonalHours": {
-          "season": "Mid-May to Mid-October",
-          "hours": "Daily 10am-4pm"
-        },
-        "accessibility": "ADA accessible"
-      },
-      "metadata": {
-        "verified": true,
-        "source": "web-research"
+        "description": "Resort marina with 66 slips",
+        "totalSlips": 66,
+        "transientSlips": 10,
+        "maxVesselLength": 70,
+        "minDepth": 8.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline"
+          ],
+          "ethanol-free": false
+        }
       }
     },
     {
-      "id": "poi-bluff-point-lighthouse",
-      "name": "Bluff Point Lighthouse",
-      "slug": "bluff-point-lighthouse",
-      "category": "poi",
-      "subcategory": "lighthouse",
+      "id": "dock-vergennes-municipal-docks",
+      "name": "Vergennes Municipal Docks",
+      "category": "bay",
       "location": {
         "coordinates": {
-          "latitude": 44.62297757101441,
-          "longitude": -73.43100955037255
+          "latitude": 44.1678,
+          "longitude": -73.2539
         },
-        "island": "Valcour Island",
-        "nearestTown": "Plattsburgh",
-        "county": "Clinton",
-        "state": "NY",
-        "country": "US",
-        "waterBody": "lake-champlain",
-        "waterBodyRegion": "broad-lake"
+        "town": "Vergennes",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
       },
+      "subcategory": "harbor",
       "contact": {
-        "phone": "+1 (518) 561-0340",
-        "email": "director@clintoncountyhistorical.org",
-        "website": "https://www.clintoncountyhistorical.org/bluff-point-lighthouse"
+        "website": "https://www.vergennes.org/departments/municipal_docks.php"
       },
       "details": {
-        "description": "Built in 1874, the only lighthouse on Lake Champlain listed on the National Register of Historic Places. Overlooks site of the Battle of Valcour Island (1776), the first naval battle of the Revolutionary War. Blue limestone base with red-shingled Mansard roof, standing over 90 feet above shore.",
-        "highlights": [
-          "National Register of Historic Places",
-          "Fifth order Fresnel lens",
-          "Battle of Valcour Island historic site",
-          "Valcour Island Heritage Trail access"
-        ],
-        "accessBy": "Boat only - no ferry service",
-        "managedBy": "Clinton County Historical Association",
-        "seasonalHours": {
-          "tours": "Sunday afternoons 1pm-3pm in July and August"
-        }
+        "description": "Free municipal docks on Otter Creek - 48hr limit"
+      }
+    },
+    {
+      "id": "marina-champlain-marina",
+      "name": "Champlain Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.5456,
+          "longitude": -73.2042
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
       },
-      "metadata": {
-        "verified": true,
-        "source": "web-research"
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "https://www.champlainmarina.com/",
+        "phone": "18028631800",
+        "vhfChannel": 16
+      },
+      "details": {
+        "description": "118-slip marina in Malletts Bay with ValvTect fuel",
+        "totalSlips": 118,
+        "transientSlips": 10,
+        "maxVesselLength": 70,
+        "minDepth": 10.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": true
+        }
+      }
+    },
+    {
+      "id": "marina-bay-harbor-marina",
+      "name": "Bay Harbor Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.5528,
+          "longitude": -73.2089
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "https://bayharbormarinavt.com/",
+        "phone": "18028638753",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "165 floating slips in Malletts Bay",
+        "totalSlips": 165,
+        "transientSlips": 15,
+        "maxVesselLength": 65,
+        "minDepth": 10.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": true
+        }
+      }
+    },
+    {
+      "id": "marina-the-moorings-marina",
+      "name": "The Moorings Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.5489,
+          "longitude": -73.2064
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "https://mooringsvt.com/",
+        "phone": "18028633388",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "Full-service marina in Malletts Bay",
+        "totalSlips": 100,
+        "transientSlips": 10,
+        "maxVesselLength": 55,
+        "minDepth": 8.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "marina-malletts-bay-boat-club",
+      "name": "Malletts Bay Boat Club",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.5462,
+          "longitude": -73.2098
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "transientSlips": 80,
+        "maxVesselLength": 5,
+        "minDepth": 45.0,
+        "bridge": {
+          "bridgeType": "8"
+        }
+      }
+    },
+    {
+      "id": "marina-ladds-landing-marina",
+      "name": "Ladd's Landing Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.7058,
+          "longitude": -73.2892
+        },
+        "town": "Grand Isle",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "https://www.laddslandingmarina.com/",
+        "phone": "18023723810",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "Marina at Grand Isle drawbridge - fuel and ship store",
+        "totalSlips": 80,
+        "transientSlips": 15,
+        "maxVesselLength": 50,
+        "minDepth": 8.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": true
+        }
+      }
+    },
+    {
+      "id": "marina-north-hero-marina",
+      "name": "North Hero Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.8053,
+          "longitude": -73.2647
+        },
+        "town": "North Hero",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "https://northheromarina.com/",
+        "phone": "18023725953",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "91 deep water slips with pool and tiki bar",
+        "totalSlips": 91,
+        "transientSlips": 15,
+        "maxVesselLength": 60,
+        "minDepth": 10.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline",
+            "diesel"
+          ],
+          "ethanol-free": true
+        }
+      }
+    },
+    {
+      "id": "marina-apple-island-marina",
+      "name": "Apple Island Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.6408,
+          "longitude": -73.2967
+        },
+        "town": "South Hero",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "phone": "18023724051",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "Marina at entrance to Islands",
+        "totalSlips": 60,
+        "transientSlips": 10,
+        "maxVesselLength": 45,
+        "minDepth": 8.0,
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline"
+          ],
+          "ethanol-free": false
+        }
+      }
+    },
+    {
+      "id": "marina-keeler-bay-marina",
+      "name": "Keeler Bay Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.6542,
+          "longitude": -73.3011
+        },
+        "town": "South Hero",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "full-service",
+      "details": {
+        "description": "92 seasonal slips on Lake Champlain",
+        "totalSlips": 92,
+        "transientSlips": 5,
+        "maxVesselLength": 40,
+        "minDepth": 6.0
+      }
+    },
+    {
+      "id": "bridge-us-2-drawbridge-grand-isle",
+      "name": "US 2 Drawbridge - Grand Isle",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 44.7058,
+          "longitude": -73.2889
+        },
+        "town": "Grand Isle",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "bridge-bascule",
+      "details": {
+        "description": "Bascule drawbridge connecting Grand Isle to North Hero",
+        "lock": {
+          "lockNumber": "On signal"
+        },
+        "bridge": {
+          "bridgeType": "bascule",
+          "clearanceHeight": 18.0,
+          "roadway": "US Route 2"
+        }
+      }
+    },
+    {
+      "id": "bridge-us-2-bridge-alburgh",
+      "name": "US 2 Bridge - Alburgh",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 44.9733,
+          "longitude": -73.2528
+        },
+        "town": "Alburgh",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "description": "Causeway bridge to Alburgh",
+        "bridge": {
+          "bridgeType": "fixed",
+          "clearanceHeight": 8.0,
+          "roadway": "US Route 2"
+        }
+      }
+    },
+    {
+      "id": "confluence-otter-creek-entrance",
+      "name": "Otter Creek Entrance",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.2017,
+          "longitude": -73.3347
+        },
+        "town": "Ferrisburgh",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "confluence",
+      "details": {
+        "description": "Entrance to Otter Creek - 7mi to Vergennes"
+      }
+    },
+    {
+      "id": "beach-charlotte-town-beach",
+      "name": "Charlotte Town Beach",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.3153,
+          "longitude": -73.2614
+        },
+        "town": "Charlotte",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "beach",
+      "details": {
+        "description": "Public beach"
+      }
+    },
+    {
+      "id": "bay-shelburne-bay",
+      "name": "Shelburne Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.3847,
+          "longitude": -73.2389
+        },
+        "town": "Shelburne",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "anchorage",
+      "tags": [
+        "anchorage"
+      ],
+      "details": {
+        "description": "Protected bay - good anchorage"
+      }
+    },
+    {
+      "id": "poi-burlington-waterfront",
+      "name": "Burlington Waterfront",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.4778,
+          "longitude": -73.2208
+        },
+        "town": "Burlington",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "details": {
+        "description": "Vibrant waterfront with parks and bike path"
+      }
+    },
+    {
+      "id": "poi-echo-leahy-center",
+      "name": "ECHO Leahy Center",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.4761,
+          "longitude": -73.2256
+        },
+        "town": "Burlington",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "contact": {
+        "website": "https://www.echovermont.org/",
+        "phone": "18028647823"
+      },
+      "details": {
+        "description": "Lake Champlain science center and aquarium"
+      }
+    },
+    {
+      "id": "island-valcour-island",
+      "name": "Valcour Island",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.6217,
+          "longitude": -73.4314
+        },
+        "town": "Peru",
+        "state": "New York",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Northern"
+      },
+      "subcategory": "island",
+      "tags": [
+        "anchorage"
+      ],
+      "details": {
+        "description": "Historic island - Revolutionary War battle site"
+      }
+    },
+    {
+      "id": "island-juniper-island",
+      "name": "Juniper Island",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.4556,
+          "longitude": -73.2583
+        },
+        "town": "Burlington",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "island",
+      "details": {
+        "description": "Small island in Burlington Bay"
+      }
+    },
+    {
+      "id": "poi-lake-champlain-maritime-museum",
+      "name": "Lake Champlain Maritime Museum",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.1978,
+          "longitude": -73.3397
+        },
+        "town": "Vergennes",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "contact": {
+        "website": "https://www.lcmm.org/",
+        "phone": "18024752022"
+      },
+      "details": {
+        "description": "Museum of Lake Champlain maritime history"
       }
     }
   ]
