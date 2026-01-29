@@ -7,7 +7,7 @@
  */
 
 // Default starting location - Bridgeview Harbour Marina
-const DEFAULT_START_LOCATION = 'marina-bridgeview-harbour';
+const DEFAULT_START_LOCATION = 'marina-bridgeview-harbour-marina';
 
 // Map center coordinates (centered on Lake Champlain region)
 const MAP_CENTER = {
@@ -398,7 +398,7 @@ function transformPoi(jsonPoi) {
     }
 
     // Mark featured locations
-    if (jsonPoi.id === 'marina-bridgeview-harbour') {
+    if (jsonPoi.id === 'marina-bridgeview-harbour-marina') {
         poi.featured = true;
     }
 
