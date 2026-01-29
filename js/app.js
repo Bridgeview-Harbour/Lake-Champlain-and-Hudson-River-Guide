@@ -245,15 +245,6 @@
             minZoom: 7
         });
 
-        // NOAA Raster Nautical Charts (RNC) - Seamless service
-        const noaaCharts = L.tileLayer('https://seamlessrnc.nauticalcharts.noaa.gov/arcgis/rest/services/RNC/NOAA_RNC/MapServer/tile/{z}/{y}/{x}', {
-            attribution: '&copy; <a href="https://www.charts.noaa.gov">NOAA</a> Nautical Charts',
-            maxZoom: 16,
-            minZoom: 7,
-            tileSize: 256,
-            opacity: 1
-        });
-
         // OpenSeaMap overlay (navigation aids symbols)
         const seaMarks = L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openseamap.org">OpenSeaMap</a>',
@@ -265,11 +256,11 @@
         streetMap.addTo(state.map);
 
         // Create base maps object for layer control
+        // Note: NOAA Charts temporarily removed - will be added back with self-hosted tiles
         const baseMaps = {
             "Street Map": streetMap,
             "Satellite": satellite,
-            "Topographic": topoMap,
-            "NOAA Charts": noaaCharts
+            "Topographic": topoMap
         };
 
         // Create overlay maps (navigation aids overlay)

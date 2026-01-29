@@ -47,19 +47,26 @@ except ImportError as e:
 # Bounding box for Lake Champlain & Hudson River region
 # Format: (min_lon, min_lat, max_lon, max_lat)
 BOUNDS = {
-    'lake_champlain': (-73.5, 43.5, -73.1, 45.1),
-    'hudson_river': (-74.1, 40.5, -73.5, 43.5),
-    'full_region': (-74.1, 40.5, -73.1, 45.1)  # Combined
+    'lake_champlain': (-73.45, 43.8, -73.2, 45.0),  # Just Lake Champlain
+    'hudson_river': (-74.0, 40.6, -73.7, 42.8),     # Hudson River
+    'full_region': (-74.1, 40.5, -73.1, 45.1),      # Combined (large)
+    'test_area': (-73.4, 44.4, -73.25, 44.6)        # Small test area
 }
 
 # Which region to process
-REGION = 'full_region'
+REGION = 'lake_champlain'
 
-# Zoom levels to process (higher = more detail, more tiles)
-ZOOM_LEVELS = range(10, 16)  # Zoom 10-15
+# Zoom levels to process - Start with lower zooms for overnight batch 1
+# Batch 1: Zoom 10-12 (~108 tiles, ~6 minutes at 2s/tile + 2s delay)
+# Batch 2: Zoom 13 (~280 tiles, ~19 minutes)
+# Batch 3: Zoom 14+ (larger batches for later)
+ZOOM_LEVELS = range(10, 13)  # Zoom 10-12 for first batch
 
-# NOAA tile server URL
-NOAA_TILE_URL = "https://tileservice.charts.noaa.gov/tiles/50000_1/{z}/{x}/{y}.png"
+# NOAA tile server URLs (try seamless RNC service - more reliable)
+# Option 1: Seamless RNC (ArcGIS REST)
+NOAA_TILE_URL = "https://seamlessrnc.nauticalcharts.noaa.gov/arcgis/rest/services/RNC/NOAA_RNC/MapServer/tile/{z}/{y}/{x}"
+# Option 2: Direct tile service (can be slow)
+# NOAA_TILE_URL = "https://tileservice.charts.noaa.gov/tiles/50000_1/{z}/{x}/{y}.png"
 
 # Output directory
 OUTPUT_DIR = Path("./processed_tiles")
@@ -68,10 +75,13 @@ OUTPUT_DIR = Path("./processed_tiles")
 WATER_DATA_URL = "https://naciscdn.org/naturalearth/10m/physical/ne_10m_ocean.zip"
 WATER_DATA_DIR = Path("./water_data")
 
-# Processing settings
-MAX_WORKERS = 8  # Concurrent download threads
+# Processing settings - SLOW MODE for overnight batch processing
+MAX_WORKERS = 1  # Single thread to be gentle on NOAA servers
+RETRY_ATTEMPTS = 5  # More retry attempts
+RETRY_DELAY = 5  # Longer delay between retries (seconds)
+REQUEST_DELAY = 2  # Delay between each tile request (seconds)
 LAND_COLORS_THRESHOLD = 200  # Brightness threshold for land detection
-USE_WATER_MASK = True  # Use water polygon mask (more accurate)
+USE_WATER_MASK = False  # Use color-based detection (works better for inland waters like Lake Champlain)
 
 
 # =============================================================================
@@ -197,18 +207,38 @@ def load_water_geometry(bounds):
 # =============================================================================
 
 def download_tile(z, x, y):
-    """Download a single NOAA tile."""
+    """Download a single NOAA tile with retry logic."""
+    import time
+
     url = NOAA_TILE_URL.format(z=z, x=x, y=y)
 
-    try:
-        response = requests.get(url, timeout=30)
-        if response.status_code == 200:
-            return Image.open(BytesIO(response.content)).convert('RGBA')
-        else:
+    for attempt in range(RETRY_ATTEMPTS):
+        try:
+            response = requests.get(url, timeout=60, headers={
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) NOAA Chart Processor'
+            })
+            if response.status_code == 200:
+                # Check if we got actual image data
+                if len(response.content) > 100:
+                    return Image.open(BytesIO(response.content)).convert('RGBA')
+                else:
+                    return None  # Empty/placeholder tile
+            elif response.status_code == 404:
+                return None  # No chart data for this tile
+            else:
+                if attempt < RETRY_ATTEMPTS - 1:
+                    time.sleep(RETRY_DELAY * (attempt + 1))
+                    continue
+                return None
+        except Exception as e:
+            if attempt < RETRY_ATTEMPTS - 1:
+                time.sleep(RETRY_DELAY * (attempt + 1))
+                continue
+            # Only print error on final attempt
+            print(f"Failed tile {z}/{x}/{y} after {RETRY_ATTEMPTS} attempts: {type(e).__name__}")
             return None
-    except Exception as e:
-        print(f"Error downloading tile {z}/{x}/{y}: {e}")
-        return None
+
+    return None
 
 
 def create_water_mask_for_tile(tile_bounds, water_geom, tile_size=256):
@@ -243,31 +273,42 @@ def create_water_mask_for_tile(tile_bounds, water_geom, tile_size=256):
 
 def detect_land_by_color(img_array):
     """
-    Detect land areas by color analysis.
-    NOAA charts typically show land in tan/beige colors.
-    Water is typically blue/white.
+    Detect land areas by color analysis for NOAA nautical charts.
 
-    This is a fallback when water polygon data isn't available.
+    NOAA chart colors:
+    - Land: Tan/beige (RGB ~220, 200, 170) - sandy/earthy colors
+    - Water: Blue tints, white, light cyan
+    - Urban areas: Yellow/gray tints
+    - Depth contours: Blue lines on lighter background
     """
-    # Convert to HSV for better color detection
-    from PIL import Image
-
-    # Land colors in NOAA charts are typically:
-    # - Tan/beige: high R, medium G, low B
-    # - Yellow tints for urban areas
-
     r, g, b, a = img_array[:,:,0], img_array[:,:,1], img_array[:,:,2], img_array[:,:,3]
 
-    # Detect typical land colors (tan, beige, yellow)
-    # Land has: R > G > B, with R being relatively high
-    is_land = (
-        (r > 180) & (g > 150) & (b < 200) &  # Tan/beige
-        (r > b + 20)  # R significantly higher than B
-    ) | (
-        (r > 200) & (g > 200) & (b < 180)  # Yellow-ish (urban)
+    # Detect land colors in NOAA charts
+    # Land is typically tan/beige: high R, medium-high G, lower B
+    is_land_tan = (
+        (r > 180) & (r < 250) &
+        (g > 160) & (g < 230) &
+        (b > 120) & (b < 200) &
+        (r > b + 15) &  # R higher than B (tan/beige characteristic)
+        (g > b)  # G also higher than B
     )
 
-    # Create mask (255 = keep, 0 = make transparent)
+    # Urban/developed areas often have yellow-gray tint
+    is_land_urban = (
+        (r > 190) & (g > 190) & (b > 150) & (b < 200) &
+        (abs(r.astype(int) - g.astype(int)) < 30)  # R and G similar
+    )
+
+    # Very light beige/cream for some land areas
+    is_land_light = (
+        (r > 230) & (g > 220) & (b > 200) & (b < 230) &
+        (r > b)
+    )
+
+    # Combine land detection
+    is_land = is_land_tan | is_land_urban | is_land_light
+
+    # Create mask (255 = keep/water, 0 = make transparent/land)
     mask = np.where(is_land, 0, 255).astype(np.uint8)
 
     return mask
@@ -275,11 +316,16 @@ def detect_land_by_color(img_array):
 
 def process_tile(z, x, y, water_geom=None):
     """Download and process a single tile."""
+    import time
+
     output_path = OUTPUT_DIR / str(z) / str(x) / f"{y}.png"
 
     # Skip if already processed
     if output_path.exists():
         return True, (z, x, y), "skipped"
+
+    # Add delay between requests to be gentle on NOAA servers
+    time.sleep(REQUEST_DELAY)
 
     # Download tile
     img = download_tile(z, x, y)
