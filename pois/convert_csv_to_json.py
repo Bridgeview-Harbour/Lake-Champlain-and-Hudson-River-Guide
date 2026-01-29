@@ -184,6 +184,72 @@ def map_category(categories_str):
     return primary_cat, subcategory, tags
 
 
+def validate_poi(poi, row_num):
+    """
+    Validate POI data for required fields and valid ranges.
+
+    Args:
+        poi: The POI dictionary to validate
+        row_num: Row number in CSV for error reporting
+
+    Returns:
+        tuple: (is_valid, error_message)
+    """
+    # Check required fields
+    required_fields = ['id', 'name', 'category', 'location']
+    for field in required_fields:
+        if field not in poi:
+            return False, f"Missing required field: {field}"
+
+    # Validate coordinates exist
+    if 'coordinates' not in poi.get('location', {}):
+        return False, "Missing coordinates in location"
+
+    coords = poi['location']['coordinates']
+    if 'latitude' not in coords or 'longitude' not in coords:
+        return False, "Missing latitude or longitude"
+
+    # Validate coordinate ranges
+    lat = coords['latitude']
+    lng = coords['longitude']
+
+    if not isinstance(lat, (int, float)) or not isinstance(lng, (int, float)):
+        return False, f"Coordinates must be numeric: lat={lat}, lng={lng}"
+
+    if not (-90 <= lat <= 90):
+        return False, f"Latitude {lat} out of range (-90 to 90)"
+
+    if not (-180 <= lng <= 180):
+        return False, f"Longitude {lng} out of range (-180 to 180)"
+
+    # Lake Champlain & Hudson River region bounds check
+    # Approximate bounds: 40°N to 46°N, -75°W to -71°W
+    if not (40 <= lat <= 46):
+        print(f"  Warning row {row_num}: Latitude {lat} is outside expected region (40°N-46°N)")
+
+    if not (-75 <= lng <= -71):
+        print(f"  Warning row {row_num}: Longitude {lng} is outside expected region (-75°W to -71°W)")
+
+    # Validate ID format
+    if not poi['id'] or not isinstance(poi['id'], str):
+        return False, "ID must be a non-empty string"
+
+    # Validate name
+    if not poi['name'] or not isinstance(poi['name'], str):
+        return False, "Name must be a non-empty string"
+
+    # Validate category
+    valid_categories = [
+        'marina', 'dining', 'poi', 'bay', 'lock', 'bridge',
+        'aton', 'boat-launch', 'campground', 'hotel', 'beach',
+        'ferry', 'island', 'public-dock'
+    ]
+    if poi['category'] not in valid_categories:
+        print(f"  Warning row {row_num}: Unknown category '{poi['category']}'")
+
+    return True, None
+
+
 def convert_row_to_poi(row, row_num):
     """Convert a CSV row to POI JSON format."""
     name = row.get('Name', '').strip()
@@ -440,6 +506,12 @@ def convert_row_to_poi(row, row_num):
 
     if details:
         poi["details"] = details
+
+    # Validate POI before returning
+    is_valid, error = validate_poi(poi, row_num)
+    if not is_valid:
+        print(f"  Error row {row_num}: '{name}' validation failed: {error}")
+        return None
 
     return poi
 

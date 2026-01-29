@@ -79,6 +79,27 @@
     }
 
     // ============================================
+    // Debounce Utility
+    // ============================================
+    /**
+     * Debounce function to limit the rate at which a function can fire
+     * @param {Function} func - The function to debounce
+     * @param {number} wait - The delay in milliseconds
+     * @returns {Function} Debounced function
+     */
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // ============================================
     // DOM Elements
     // ============================================
     const elements = {
@@ -122,8 +143,27 @@
      * @param {number} lat2 - Latitude of point 2
      * @param {number} lng2 - Longitude of point 2
      * @returns {number} Distance in kilometers
+     * @throws {Error} If coordinates are invalid
      */
     function calculateDistance(lat1, lng1, lat2, lng2) {
+        // Validate inputs
+        if (!Number.isFinite(lat1) || !Number.isFinite(lng1) ||
+            !Number.isFinite(lat2) || !Number.isFinite(lng2)) {
+            console.error('Invalid coordinates:', {lat1, lng1, lat2, lng2});
+            throw new Error('Invalid coordinates provided to calculateDistance');
+        }
+
+        // Validate coordinate ranges
+        if (lat1 < -90 || lat1 > 90 || lat2 < -90 || lat2 > 90) {
+            console.error('Latitude out of range:', {lat1, lat2});
+            throw new Error('Latitude must be between -90 and 90 degrees');
+        }
+
+        if (lng1 < -180 || lng1 > 180 || lng2 < -180 || lng2 > 180) {
+            console.error('Longitude out of range:', {lng1, lng2});
+            throw new Error('Longitude must be between -180 and 180 degrees');
+        }
+
         const R = 6371; // Earth's radius in kilometers
         const dLat = toRadians(lat2 - lat1);
         const dLng = toRadians(lng2 - lng1);
@@ -137,6 +177,9 @@
     }
 
     function toRadians(degrees) {
+        if (!Number.isFinite(degrees)) {
+            throw new Error('toRadians requires a finite number');
+        }
         return degrees * (Math.PI / 180);
     }
 
@@ -148,8 +191,19 @@
      * @param {number} km - Distance in kilometers
      * @param {string} unit - Target unit (nm, mi, km)
      * @returns {number} Converted distance
+     * @throws {Error} If distance is invalid or unit is not supported
      */
     function convertDistance(km, unit) {
+        if (!Number.isFinite(km) || km < 0) {
+            console.error('Invalid distance:', km);
+            throw new Error('Distance must be a positive finite number');
+        }
+
+        if (!UNIT_CONVERSIONS[unit]) {
+            console.error('Unknown unit:', unit);
+            throw new Error(`Unsupported unit: ${unit}`);
+        }
+
         return km * UNIT_CONVERSIONS[unit].factor;
     }
 
@@ -1099,10 +1153,14 @@
             });
         });
 
-        // Location search
-        elements.locationSearch.addEventListener('input', (e) => {
-            state.searchQuery = e.target.value;
+        // Location search with debouncing for better performance
+        const debouncedSearch = debounce((value) => {
+            state.searchQuery = value;
             populateLocationList();
+        }, 300);
+
+        elements.locationSearch.addEventListener('input', (e) => {
+            debouncedSearch(e.target.value);
         });
 
         // Quick info close
