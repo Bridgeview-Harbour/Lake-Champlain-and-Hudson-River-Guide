@@ -708,12 +708,13 @@
         "country": "United States",
         "waterBodyRegion": "Atlantic Ocean Ocean"
       },
-      "subcategory": "buoy",
+      "subcategory": "lighthouse",
       "details": {
         "description": "Lighthouse marking entrance to Ambrose Channel",
         "aton": {
-          "color": "Fl W 15s",
-          "shape": "white"
+          "characteristic": "Fl W 15s",
+          "color": "white",
+          "shape": "tower"
         }
       }
     },
@@ -2843,12 +2844,13 @@
         "country": "United States",
         "waterBodyRegion": "Lake Champlain Southern"
       },
-      "subcategory": "buoy",
+      "subcategory": "red-nun",
       "details": {
         "description": "Lighted channel buoy",
         "aton": {
-          "color": "Fl R 4s",
-          "shape": "red"
+          "characteristic": "Fl R 4s",
+          "color": "red",
+          "shape": "nun"
         }
       }
     },
@@ -3009,8 +3011,9 @@
       "details": {
         "description": "Historic lighthouse at Crown Point",
         "aton": {
-          "color": "Fl W 10s",
-          "shape": "white"
+          "characteristic": "Fl W 10s",
+          "color": "white",
+          "shape": "tower"
         }
       }
     },
@@ -3137,8 +3140,8 @@
       },
       "subcategory": "full-service",
       "tags": [
-        "campground",
-        "fuel"
+        "fuel",
+        "campground"
       ],
       "contact": {
         "website": "https://www.bridgeviewharbour.com",

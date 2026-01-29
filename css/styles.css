@@ -701,13 +701,115 @@ body {
 .poi-marker.bay { background: var(--bay-color); color: white; }
 .poi-marker.fuel { background: var(--fuel-color); color: white; }
 .poi-marker.anchorage { background: var(--anchorage-color); color: white; }
-/* ATON (Aids to Navigation) Types */
-.poi-marker.aton { background: var(--restaurant-color); color: white; }
-.poi-marker.aton-lighthouse { background: #f1c40f; color: #333; }
-.poi-marker.aton-buoy { background: var(--restaurant-color); color: white; }
-.poi-marker.aton-daymark { background: var(--anchorage-color); color: white; }
-.poi-marker.aton-light { background: #f1c40f; color: #333; }
-.poi-marker.aton-beacon { background: var(--primary-light); color: white; }
+/* ATON (Aids to Navigation) Types - USCG IALA Region B Compliant */
+/* Generic ATON fallback */
+.poi-marker.aton { background: #cc0000; color: white; }
+
+/* Lighthouse - White/Yellow octagonal shape */
+.poi-marker.aton-lighthouse {
+    background: linear-gradient(135deg, #ffffff 0%, #f1c40f 100%);
+    color: #333;
+    border: 2px solid #333;
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+}
+
+/* Red Nun (Starboard) - Red conical/triangular pointing UP */
+.poi-marker.aton-red-nun {
+    background: #cc0000;
+    color: white;
+    border: 2px solid #990000;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    width: 24px;
+    height: 28px;
+}
+
+/* Green Can (Port) - Green square/cylindrical */
+.poi-marker.aton-green-can {
+    background: #006633;
+    color: white;
+    border: 2px solid #004422;
+    border-radius: 4px;
+}
+
+/* Red Daybeacon - Red triangle pointing UP */
+.poi-marker.aton-red-daybeacon {
+    background: #cc0000;
+    color: white;
+    border: 2px solid #990000;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+
+/* Green Daybeacon - Green square */
+.poi-marker.aton-green-daybeacon {
+    background: #006633;
+    color: white;
+    border: 2px solid #004422;
+    border-radius: 2px;
+}
+
+/* Safe Water Mark - Red and white vertical stripes, circular */
+.poi-marker.aton-safe-water {
+    background: repeating-linear-gradient(
+        90deg,
+        #cc0000 0px,
+        #cc0000 4px,
+        #ffffff 4px,
+        #ffffff 8px
+    );
+    border: 2px solid #990000;
+    border-radius: 50%;
+}
+
+/* Isolated Danger Mark - Black with red horizontal band */
+.poi-marker.aton-danger {
+    background: linear-gradient(
+        to bottom,
+        #000000 0%,
+        #000000 35%,
+        #cc0000 35%,
+        #cc0000 65%,
+        #000000 65%,
+        #000000 100%
+    );
+    border: 2px solid #333;
+    border-radius: 50%;
+}
+
+/* Special Mark - Yellow X shape (diamond) */
+.poi-marker.aton-special {
+    background: #ffcc00;
+    color: #333;
+    border: 2px solid #cc9900;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+/* Generic buoy - defaults to red nun style */
+.poi-marker.aton-buoy {
+    background: #cc0000;
+    color: white;
+    border: 2px solid #990000;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+
+/* Daymark fallback */
+.poi-marker.aton-daymark {
+    background: #006633;
+    color: white;
+    border: 2px solid #004422;
+}
+
+/* Light - Yellow star-like */
+.poi-marker.aton-light {
+    background: #f1c40f;
+    color: #333;
+    border: 2px solid #d4ac0d;
+}
+
+/* Beacon fallback */
+.poi-marker.aton-beacon {
+    background: var(--primary-light);
+    color: white;
+}
 /* Lock Type */
 .poi-marker.lock { background: var(--lock-color); color: white; }
 /* Bridge Types */
@@ -849,7 +951,22 @@ body {
 .legend-marker.anchorage { background: var(--anchorage-color); }
 .legend-marker.lock { background: var(--lock-color); }
 .legend-marker.bridge { background: var(--bridge-color); }
-.legend-marker.aton { background: var(--restaurant-color); }
+/* ATON Legend Markers - USCG Compliant */
+.legend-marker.aton-red-nun {
+    background: #cc0000;
+    border-radius: 0;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+.legend-marker.aton-green-can {
+    background: #006633;
+    border-radius: 2px;
+}
+.legend-marker.aton-lighthouse {
+    background: linear-gradient(135deg, #ffffff 0%, #f1c40f 100%);
+    border: 1px solid #333;
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    border-radius: 0;
+}
 
 /* ============================================
    Loading Overlay
@@ -919,13 +1036,93 @@ body {
 .custom-marker.bay { background: var(--bay-color); }
 .custom-marker.fuel { background: var(--fuel-color); }
 .custom-marker.anchorage { background: var(--anchorage-color); }
-/* ATON (Aids to Navigation) Types */
-.custom-marker.aton { background: var(--restaurant-color); }
-.custom-marker.aton-lighthouse { background: #f1c40f; }
-.custom-marker.aton-buoy { background: var(--restaurant-color); }
-.custom-marker.aton-daymark { background: var(--anchorage-color); }
-.custom-marker.aton-light { background: #f1c40f; }
-.custom-marker.aton-beacon { background: var(--primary-light); }
+/* ATON (Aids to Navigation) Types - USCG IALA Region B Compliant */
+.custom-marker.aton { background: #cc0000; border-radius: 50%; }
+
+/* Lighthouse - Octagonal white/yellow */
+.custom-marker.aton-lighthouse {
+    background: linear-gradient(135deg, #ffffff 0%, #f1c40f 100%);
+    border: 2px solid #333;
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    border-radius: 0;
+}
+
+/* Red Nun (Starboard) - Red triangle pointing UP */
+.custom-marker.aton-red-nun {
+    background: #cc0000;
+    border: 2px solid #990000;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    border-radius: 0;
+}
+
+/* Green Can (Port) - Green square */
+.custom-marker.aton-green-can {
+    background: #006633;
+    border: 2px solid #004422;
+    border-radius: 4px;
+}
+
+/* Red Daybeacon - Red triangle */
+.custom-marker.aton-red-daybeacon {
+    background: #cc0000;
+    border: 2px solid #990000;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    border-radius: 0;
+}
+
+/* Green Daybeacon - Green square */
+.custom-marker.aton-green-daybeacon {
+    background: #006633;
+    border: 2px solid #004422;
+    border-radius: 2px;
+}
+
+/* Safe Water Mark - Red/white vertical stripes */
+.custom-marker.aton-safe-water {
+    background: repeating-linear-gradient(90deg, #cc0000 0px, #cc0000 3px, #fff 3px, #fff 6px);
+    border: 2px solid #990000;
+    border-radius: 50%;
+}
+
+/* Isolated Danger - Black with red band */
+.custom-marker.aton-danger {
+    background: linear-gradient(to bottom, #000 0%, #000 35%, #cc0000 35%, #cc0000 65%, #000 65%, #000 100%);
+    border: 2px solid #333;
+    border-radius: 50%;
+}
+
+/* Special Mark - Yellow diamond */
+.custom-marker.aton-special {
+    background: #ffcc00;
+    border: 2px solid #cc9900;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    border-radius: 0;
+}
+
+/* Generic buoy fallback - red nun style */
+.custom-marker.aton-buoy {
+    background: #cc0000;
+    border: 2px solid #990000;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    border-radius: 0;
+}
+
+/* Daymark fallback - green */
+.custom-marker.aton-daymark {
+    background: #006633;
+    border: 2px solid #004422;
+}
+
+/* Light - Yellow */
+.custom-marker.aton-light {
+    background: #f1c40f;
+    border: 2px solid #d4ac0d;
+}
+
+/* Beacon fallback */
+.custom-marker.aton-beacon {
+    background: var(--primary-light);
+}
 /* Lock Type */
 .custom-marker.lock { background: var(--lock-color); }
 /* Bridge Types */

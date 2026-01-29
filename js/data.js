@@ -51,12 +51,22 @@ const SUBCATEGORY_MAP = {
     'waterfront-restaurant': 'restaurant',
     'full-service': 'marina',
     'private': 'marina',
-    // Aids to Navigation subtypes
+    // Aids to Navigation subtypes - USCG IALA Region B
     'lighthouse': 'aton-lighthouse',
     'buoy': 'aton-buoy',
     'daymark': 'aton-daymark',
     'light': 'aton-light',
     'beacon': 'aton-beacon',
+    // Lateral marks (Red Right Returning)
+    'red-nun': 'aton-red-nun',           // Starboard (right) - red conical
+    'green-can': 'aton-green-can',       // Port (left) - green cylindrical
+    // Daybeacons
+    'red-daybeacon': 'aton-red-daybeacon',   // Red triangle
+    'green-daybeacon': 'aton-green-daybeacon', // Green square
+    // Other marks
+    'safe-water': 'aton-safe-water',     // Red/white vertical stripes
+    'isolated-danger': 'aton-danger',    // Black with red band
+    'special-mark': 'aton-special',      // Yellow
     // Lock subtypes
     'lock': 'lock',
     'canal-lock': 'lock',
@@ -103,7 +113,7 @@ const TYPE_CONFIG = {
         icon: '⚓',
         color: '#27ae60'
     },
-    // Aids to Navigation types
+    // Aids to Navigation types - USCG IALA Region B compliant
     'aton': {
         name: 'Nav Aid',
         icon: '◆',
@@ -111,17 +121,17 @@ const TYPE_CONFIG = {
     },
     'aton-lighthouse': {
         name: 'Lighthouse',
-        icon: '🏠',
+        icon: '',  // Uses CSS shape
         color: '#f1c40f'
     },
     'aton-buoy': {
         name: 'Buoy',
-        icon: '●',
+        icon: '',  // Uses CSS shape
         color: '#e74c3c'
     },
     'aton-daymark': {
         name: 'Daymark',
-        icon: '▲',
+        icon: '',  // Uses CSS shape
         color: '#27ae60'
     },
     'aton-light': {
@@ -131,8 +141,48 @@ const TYPE_CONFIG = {
     },
     'aton-beacon': {
         name: 'Beacon',
-        icon: '◈',
+        icon: '',  // Uses CSS shape
         color: '#3498db'
+    },
+    // Lateral Marks - USCG Red Right Returning (IALA-B)
+    'aton-red-nun': {
+        name: 'Red Nun (Starboard)',
+        icon: '',  // Uses CSS triangle shape
+        color: '#cc0000'  // USCG Red
+    },
+    'aton-green-can': {
+        name: 'Green Can (Port)',
+        icon: '',  // Uses CSS square shape
+        color: '#006633'  // USCG Green
+    },
+    // Daybeacons
+    'aton-red-daybeacon': {
+        name: 'Red Daybeacon',
+        icon: '',  // Uses CSS triangle
+        color: '#cc0000'
+    },
+    'aton-green-daybeacon': {
+        name: 'Green Daybeacon',
+        icon: '',  // Uses CSS square
+        color: '#006633'
+    },
+    // Safe Water Mark - Red and white vertical stripes
+    'aton-safe-water': {
+        name: 'Safe Water Mark',
+        icon: '',  // Uses CSS striped pattern
+        color: '#cc0000'
+    },
+    // Isolated Danger Mark - Black with red band
+    'aton-danger': {
+        name: 'Isolated Danger',
+        icon: '',  // Uses CSS banded pattern
+        color: '#000000'
+    },
+    // Special Mark - Yellow
+    'aton-special': {
+        name: 'Special Mark',
+        icon: '',  // Uses CSS shape
+        color: '#ffcc00'  // USCG Yellow
     },
     // Lock type
     'lock': {
@@ -329,6 +379,62 @@ function transformPoi(jsonPoi) {
             ais: jsonPoi.details.aton.ais || false,  // has AIS transponder
             remarks: jsonPoi.details.aton.remarks || null
         };
+
+        // Determine specific ATON type based on color and shape (USCG IALA Region B)
+        const atonColor = (poi.aton.color || '').toLowerCase();
+        const atonShape = (poi.aton.shape || '').toLowerCase();
+        const poiName = (jsonPoi.name || '').toLowerCase();
+        const subcategory = (jsonPoi.subcategory || '').toLowerCase();
+
+        // Check for lighthouse first (takes precedence)
+        if (subcategory === 'lighthouse' || poiName.includes('lighthouse') || poiName.includes('light house')) {
+            type = 'aton-lighthouse';
+        }
+        // Red markers - Starboard (right side returning from sea)
+        else if (atonColor.includes('red') && !atonColor.includes('white') && !atonColor.includes('black')) {
+            if (atonShape.includes('nun') || atonShape.includes('conical') || atonShape.includes('cone')) {
+                type = 'aton-red-nun';
+            } else if (atonShape.includes('daybeacon') || atonShape.includes('daymark') || atonShape.includes('triangle')) {
+                type = 'aton-red-daybeacon';
+            } else if (subcategory === 'buoy' || poiName.includes('buoy')) {
+                type = 'aton-red-nun';  // Default red buoys to nun shape
+            } else {
+                type = 'aton-red-daybeacon';  // Default red to daybeacon
+            }
+        }
+        // Green markers - Port (left side returning from sea)
+        else if (atonColor.includes('green')) {
+            if (atonShape.includes('can') || atonShape.includes('cylinder') || atonShape.includes('cylindrical')) {
+                type = 'aton-green-can';
+            } else if (atonShape.includes('daybeacon') || atonShape.includes('daymark') || atonShape.includes('square')) {
+                type = 'aton-green-daybeacon';
+            } else if (subcategory === 'buoy' || poiName.includes('buoy')) {
+                type = 'aton-green-can';  // Default green buoys to can shape
+            } else {
+                type = 'aton-green-daybeacon';  // Default green to daybeacon
+            }
+        }
+        // Safe water marks - Red and white vertical stripes
+        else if ((atonColor.includes('red') && atonColor.includes('white')) || atonColor.includes('safe')) {
+            type = 'aton-safe-water';
+        }
+        // Isolated danger marks - Black with red band
+        else if ((atonColor.includes('black') && atonColor.includes('red')) || atonColor.includes('danger')) {
+            type = 'aton-danger';
+        }
+        // Special marks - Yellow
+        else if (atonColor.includes('yellow')) {
+            type = 'aton-special';
+        }
+        // Detect from name patterns
+        else if (poiName.includes('red nun') || poiName.includes('red conical')) {
+            type = 'aton-red-nun';
+        } else if (poiName.includes('green can') || poiName.includes('green cylinder')) {
+            type = 'aton-green-can';
+        }
+
+        // Update the poi type with the detected ATON type
+        poi.type = type;
     }
 
     // Add Lock specific details

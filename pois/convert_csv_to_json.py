@@ -407,13 +407,34 @@ def convert_row_to_poi(row, row_num):
         if aton_details:
             details["aton"] = aton_details
 
-        # Update subcategory for lighthouses
-        if 'lighthouse' in categories_str.lower() or 'lighthouse' in name.lower():
+        # Update subcategory based on USCG ATON types (IALA Region B)
+        # Check for lighthouses first
+        if ('lighthouse' in categories_str.lower() or 'lighthouse' in name.lower() or
+            (aton_shape and 'tower' in aton_shape.lower()) or
+            (name.lower().endswith(' light') and 'nun' not in name.lower() and 'can' not in name.lower())):
             poi["subcategory"] = "lighthouse"
+        elif aton_color and 'red' in aton_color.lower() and not 'white' in aton_color.lower():
+            # Red markers - Starboard (right side returning from sea)
+            if aton_shape and ('nun' in aton_shape.lower() or 'conical' in aton_shape.lower()):
+                poi["subcategory"] = "red-nun"
+            else:
+                poi["subcategory"] = "red-daybeacon"
+        elif aton_color and 'green' in aton_color.lower():
+            # Green markers - Port (left side returning from sea)
+            if aton_shape and ('can' in aton_shape.lower() or 'cylinder' in aton_shape.lower()):
+                poi["subcategory"] = "green-can"
+            else:
+                poi["subcategory"] = "green-daybeacon"
+        elif aton_color and 'red' in aton_color.lower() and 'white' in aton_color.lower():
+            poi["subcategory"] = "safe-water"
+        elif aton_color and 'yellow' in aton_color.lower():
+            poi["subcategory"] = "special-mark"
         elif aton_shape and 'nun' in aton_shape.lower():
-            poi["subcategory"] = "buoy"
+            poi["subcategory"] = "red-nun"  # Default nuns to red
         elif aton_shape and 'can' in aton_shape.lower():
-            poi["subcategory"] = "buoy"
+            poi["subcategory"] = "green-can"  # Default cans to green
+        else:
+            poi["subcategory"] = "buoy"  # Generic fallback
 
     if details:
         poi["details"] = details
