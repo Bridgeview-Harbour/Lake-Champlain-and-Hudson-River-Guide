@@ -238,16 +238,17 @@
             minZoom: 7
         });
 
-        const topoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)',
-            maxZoom: 17,
+        // Esri World Topo Map (more reliable than OpenTopoMap)
+        const topoMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+            attribution: '&copy; Esri, HERE, Garmin, USGS',
+            maxZoom: 19,
             minZoom: 7
         });
 
-        // NOAA Raster Nautical Charts (RNC)
-        const noaaCharts = L.tileLayer('https://tileservice.charts.noaa.gov/tiles/50000_1/{z}/{x}/{y}.png', {
+        // NOAA Raster Nautical Charts (RNC) - Seamless service
+        const noaaCharts = L.tileLayer('https://seamlessrnc.nauticalcharts.noaa.gov/arcgis/rest/services/RNC/NOAA_RNC/MapServer/tile/{z}/{y}/{x}', {
             attribution: '&copy; <a href="https://www.charts.noaa.gov">NOAA</a> Nautical Charts',
-            maxZoom: 18,
+            maxZoom: 16,
             minZoom: 7,
             tileSize: 256,
             opacity: 1
