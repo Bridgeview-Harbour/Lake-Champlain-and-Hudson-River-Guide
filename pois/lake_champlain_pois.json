@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-01-28",
+  "lastUpdated": "2026-01-29",
   "source": "Lake Champlain & Hudson River Boater's Guide",
   "pois": [
     {
@@ -3118,8 +3118,8 @@
       },
       "subcategory": "full-service",
       "tags": [
-        "fuel",
-        "campground"
+        "campground",
+        "fuel"
       ],
       "contact": {
         "website": "https://www.bridgeviewharbour.com",
@@ -4450,8 +4450,8 @@
       "category": "marina",
       "location": {
         "coordinates": {
-          "latitude": 44.4775,
-          "longitude": -73.2261
+          "latitude": 44.479021991942545,
+          "longitude": -73.22429643353938
         },
         "town": "Burlington",
         "state": "Vermont",
@@ -4489,8 +4489,8 @@
       "category": "marina",
       "location": {
         "coordinates": {
-          "latitude": 44.4753,
-          "longitude": -73.2234
+          "latitude": 44.474128065282024,
+          "longitude": -73.22118405081642
         },
         "town": "Burlington",
         "state": "Vermont",
@@ -4528,8 +4528,8 @@
       "category": "marina",
       "location": {
         "coordinates": {
-          "latitude": 44.3825,
-          "longitude": -73.2456
+          "latitude": 44.43477765201347,
+          "longitude": -73.24716929364168
         },
         "town": "Shelburne",
         "state": "Vermont",
@@ -4567,8 +4567,8 @@
       "category": "marina",
       "location": {
         "coordinates": {
-          "latitude": 44.3086,
-          "longitude": -73.2628
+          "latitude": 44.273062711834385,
+          "longitude": -73.2853771128908
         },
         "town": "Charlotte",
         "state": "Vermont",
@@ -4606,8 +4606,8 @@
       "category": "marina",
       "location": {
         "coordinates": {
-          "latitude": 44.1742,
-          "longitude": -73.3564
+          "latitude": 44.19626914527276,
+          "longitude": -73.363499240307
         },
         "town": "Vergennes",
         "state": "Vermont",
@@ -4644,8 +4644,8 @@
       "category": "public-dock",
       "location": {
         "coordinates": {
-          "latitude": 44.1678,
-          "longitude": -73.2539
+          "latitude": 44.16947630299357,
+          "longitude": -73.25833689538382
         },
         "town": "Vergennes",
         "state": "Vermont",
@@ -4665,8 +4665,8 @@
       "category": "marina",
       "location": {
         "coordinates": {
-          "latitude": 44.5456,
-          "longitude": -73.2042
+          "latitude": 44.553282390465434,
+          "longitude": -73.23216175646846
         },
         "town": "Colchester",
         "state": "Vermont",
@@ -4704,8 +4704,8 @@
       "category": "marina",
       "location": {
         "coordinates": {
-          "latitude": 44.5528,
-          "longitude": -73.2089
+          "latitude": 44.54870014796264,
+          "longitude": -73.2178208789093
         },
         "town": "Colchester",
         "state": "Vermont",
@@ -4743,8 +4743,8 @@
       "category": "marina",
       "location": {
         "coordinates": {
-          "latitude": 44.5489,
-          "longitude": -73.2064
+          "latitude": 44.54936525615878,
+          "longitude": -73.21957141987697
         },
         "town": "Colchester",
         "state": "Vermont",
@@ -4782,8 +4782,8 @@
       "category": "marina",
       "location": {
         "coordinates": {
-          "latitude": 44.5462,
-          "longitude": -73.2098
+          "latitude": 44.551143883285974,
+          "longitude": -73.22551288805226
         },
         "town": "Colchester",
         "state": "Vermont",
@@ -4806,8 +4806,8 @@
       "category": "marina",
       "location": {
         "coordinates": {
-          "latitude": 44.7058,
-          "longitude": -73.2892
+          "latitude": 44.765789555959465,
+          "longitude": -73.28713273550542
         },
         "town": "Grand Isle",
         "state": "Vermont",
@@ -4845,8 +4845,8 @@
       "category": "marina",
       "location": {
         "coordinates": {
-          "latitude": 44.8053,
-          "longitude": -73.2647
+          "latitude": 44.83608395676425,
+          "longitude": -73.30093640401576
         },
         "town": "North Hero",
         "state": "Vermont",
@@ -4884,8 +4884,8 @@
       "category": "marina",
       "location": {
         "coordinates": {
-          "latitude": 44.6408,
-          "longitude": -73.2967
+          "latitude": 44.63686753044386,
+          "longitude": -73.26651940287476
         },
         "town": "South Hero",
         "state": "Vermont",
@@ -4921,8 +4921,8 @@
       "category": "marina",
       "location": {
         "coordinates": {
-          "latitude": 44.6542,
-          "longitude": -73.3011
+          "latitude": 44.657229377933874,
+          "longitude": -73.31830270781165
         },
         "town": "South Hero",
         "state": "Vermont",
@@ -5139,7 +5139,7 @@
         "town": "Vergennes",
         "state": "Vermont",
         "country": "United States",
-        "waterBodyRegion": "Lake Champlain Broad Lake"
+        "waterBodyRegion": "Otter Creek"
       },
       "contact": {
         "website": "https://www.lcmm.org/",
@@ -5147,6 +5147,1356 @@
       },
       "details": {
         "description": "Museum of Lake Champlain maritime history"
+      }
+    },
+    {
+      "id": "launch-vergennes-boat-launch",
+      "name": "Vergennes Boat Launch",
+      "category": "boat-launch",
+      "location": {
+        "coordinates": {
+          "latitude": 44.16785155308722,
+          "longitude": -73.25788795221983
+        },
+        "town": "Vergennes",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Otter Creek"
+      }
+    },
+    {
+      "id": "bridge-north-hero-bridge",
+      "name": "North Hero Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 44.88528189030852,
+          "longitude": -73.27485942475208
+        },
+        "town": "North Hero",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "bridge": {
+          "bridgeType": "fixed"
+        }
+      }
+    },
+    {
+      "id": "marina-bridge-road-marina",
+      "name": "Bridge Road Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.88507827223172,
+          "longitude": -73.27215954614222
+        },
+        "town": "North Hero",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "http://www.newenglandpowerboatservice.com/",
+        "phone": "8023725131"
+      },
+      "details": {
+        "description": "Located on Bridge Road in North Hero, this marina offers seasonal and transient dock slips with power, potable water, wi-fi, and bathroom facilities. Features powerboat rentals including water skis, wake boards, and tubes, with a gas dock and pump-out station.",
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline"
+          ],
+          "ethanol-free": true
+        }
+      }
+    },
+    {
+      "id": "bay-dillenbeck-bay",
+      "name": "Dillenbeck Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.918119577574195,
+          "longitude": -73.27319105707224
+        },
+        "town": "North Hero",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "hotel-dillenbeck-cabins",
+      "name": "Dillenbeck Cabins",
+      "category": "hotel",
+      "location": {
+        "coordinates": {
+          "latitude": 44.91542804368428,
+          "longitude": -73.27802769585072
+        },
+        "town": "Alburgh",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "tags": [
+        "campground"
+      ],
+      "contact": {
+        "website": "https://www.lakechamplaincabins.com/"
+      },
+      "details": {
+        "description": "Rustic cabins located at 5460 Route 2, South Alburgh, directly across from Dillenbeck Bay on Lake Champlain. Year-round availability with various suites. Pet-friendly options available."
+      }
+    },
+    {
+      "id": "marina-goose-point-campground",
+      "name": "Goose Point Campground",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.920878127928745,
+          "longitude": -73.27344863165484
+        },
+        "town": "Alburgh",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "campground"
+      ],
+      "contact": {
+        "website": "https://goosepointcamp.com/",
+        "phone": "8027963711"
+      },
+      "details": {
+        "description": "Fun, friendly, and family-oriented campground on Lake Champlain offering boat launching and boat dock facilities. Features include swimming pool, playground, convenience store, and various camping amenities with amazing lake views."
+      }
+    },
+    {
+      "id": "camp-alburgh-rv-resort-travel-sales",
+      "name": "Alburgh RV Resort & Travel Sales",
+      "category": "campground",
+      "location": {
+        "coordinates": {
+          "latitude": 44.96395947386642,
+          "longitude": -73.24365735066719
+        },
+        "town": "Alburgh",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "tags": [
+        "campground"
+      ],
+      "contact": {
+        "website": "https://alburgrvresort.com/",
+        "phone": "8027963733"
+      },
+      "details": {
+        "description": "Full-service RV resort offering seasonal and overnight camping with RV sales. Located at 1 Alburg RV Resort, Alburgh VT. Features various amenities for RV campers and also offers trailer sales and rentals."
+      }
+    },
+    {
+      "id": "bridge-alburg-swanton-bridge",
+      "name": "Alburg-Swanton Bridge",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 44.97275283206798,
+          "longitude": -73.21962354765242
+        },
+        "town": "Alburgh",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "bridge": {
+          "bridgeType": "fixed"
+        }
+      }
+    },
+    {
+      "id": "camp-camping-miller",
+      "name": "Camping MILLER",
+      "category": "campground",
+      "location": {
+        "coordinates": {
+          "latitude": 45.01818832041576,
+          "longitude": -73.18830179722961
+        },
+        "town": "Saint-Georges-de-Clarenceville",
+        "state": "Quebec",
+        "country": "Canda",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "tags": [
+        "campground"
+      ],
+      "contact": {
+        "phone": "14502942464"
+      },
+      "details": {
+        "description": "Campground located in Saint-Georges-de-Clarenceville, Montérégie, Quebec, near Lake Champlain. Situated 8km from Venise-en-Québec and 675m from Lake Champlain."
+      }
+    },
+    {
+      "id": "bay-goose-bay",
+      "name": "Goose Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.981501533994354,
+          "longitude": -73.1312603736978
+        },
+        "town": "Highgate Springs",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "camp-campbells-bay-campground",
+      "name": "Campbell�s Bay Campground",
+      "category": "campground",
+      "location": {
+        "coordinates": {
+          "latitude": 44.99131568923509,
+          "longitude": -73.17199412463226
+        },
+        "town": "Swanton",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "tags": [
+        "campground"
+      ],
+      "contact": {
+        "website": "https://www.campbellsbayvermont.com/",
+        "phone": "8029997157"
+      },
+      "details": {
+        "description": "Family-owned campground at 205 Campbell Bay Rd on Lake Champlain. 2026 season runs May 1 through October 3. Reservations open April 1 for campsites and boat rentals; cabin rentals open February 20, 2026."
+      }
+    },
+    {
+      "id": "camp-lakewood-campgrounds",
+      "name": "Lakewood Campgrounds",
+      "category": "campground",
+      "location": {
+        "coordinates": {
+          "latitude": 44.928216370016855,
+          "longitude": -73.21652641258197
+        },
+        "town": "Swanton",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "tags": [
+        "campground"
+      ],
+      "contact": {
+        "phone": "8028687270"
+      },
+      "details": {
+        "description": "Large campground with 217 sites at 122 Champlain Street on the shores of Lake Champlain. Open May-October 1. Accepts tents and RVs up to 40 feet maximum length."
+      }
+    },
+    {
+      "id": "beach-swanton-beach",
+      "name": "Swanton Beach",
+      "category": "beach",
+      "location": {
+        "coordinates": {
+          "latitude": 44.92070036486748,
+          "longitude": -73.161042158279
+        },
+        "town": "Swanton",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "camp-champlain-valley-campground",
+      "name": "Champlain Valley Campground",
+      "category": "campground",
+      "location": {
+        "coordinates": {
+          "latitude": 44.8734487201828,
+          "longitude": -73.17962406639177
+        },
+        "town": "Swanton",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "tags": [
+        "campground"
+      ],
+      "contact": {
+        "website": "https://smartus.cyou/champlain-valley-campground-6p7r5e",
+        "phone": "8025245146"
+      },
+      "details": {
+        "description": "Located at 600 Maquam Shore Road on the scenic shores of Lake Champlain. Established in 1994 and managed by Ann Bechard. Mailing address: PO Box 555, Swanton, VT 05488-0555."
+      }
+    },
+    {
+      "id": "island-popasquash-island",
+      "name": "Popasquash Island",
+      "category": "island",
+      "location": {
+        "coordinates": {
+          "latitude": 44.86193853207483,
+          "longitude": -73.18957933258184
+        },
+        "town": "Swanton",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "bay-st-albans-bay",
+      "name": "St. Albans Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.79648495192732,
+          "longitude": -73.1522433734617
+        },
+        "town": "St Albans Bay",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "marina-burton-island-marina",
+      "name": "Burton Island  Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.775521643009625,
+          "longitude": -73.19804477542948
+        },
+        "town": "Georgia",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "full-service",
+      "contact": {
+        "website": "https://www.vtstateparks.com/parks/burton-island-marina",
+        "phone": "8025246353",
+        "vhfChannel": null
+      },
+      "details": {
+        "description": "Vermont State Park marina accessible only by water, offering 100 slips with dockside electricity (30/50A) and 15 first-come, first-serve moorings. Features free pump-outs, boater bathrooms, and Burton Island Bistro for food and supplies.",
+        "totalSlips": 100
+      }
+    },
+    {
+      "id": "restaurant-burton-island-bistro",
+      "name": "Burton Island  Bistro",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 44.77605667134987,
+          "longitude": -73.19880115838612
+        },
+        "town": "Georgia",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "waterfront-restaurant",
+      "contact": {
+        "website": "https://www.facebook.com/burtonisland",
+        "phone": "8025242212"
+      },
+      "details": {
+        "description": "Small café and store on Burton Island State Park, accessible only by water via private boat or Island Runner ferry. Serves breakfast (9am-11am) and lunch (12pm-2pm), offering cold salads, to-go items, camping goods, beer, wine, and ice. Operating hours 8:30am-4:00pm."
+      }
+    },
+    {
+      "id": "poi-burton-island-state-park",
+      "name": "Burton Island State Park",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.777852121683814,
+          "longitude": -73.19821107239156
+        },
+        "town": "Georgia",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "poi-woods-island-state-park",
+      "name": "Woods Island State Park",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.80273991680433,
+          "longitude": -73.20899355304626
+        },
+        "town": "Georgia",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "island-dameas-island",
+      "name": "Dameas Island",
+      "category": "island",
+      "location": {
+        "coordinates": {
+          "latitude": 44.82322914480242,
+          "longitude": -73.25132954030683
+        },
+        "town": "Swanton",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "camp-cottonwood-campsites",
+      "name": "Cottonwood Campsites",
+      "category": "campground",
+      "location": {
+        "coordinates": {
+          "latitude": 44.817186645099056,
+          "longitude": -73.24937689210662
+        },
+        "town": "Swanton",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "tags": [
+        "campground"
+      ]
+    },
+    {
+      "id": "island-knight-island-state-park",
+      "name": "Knight Island State Park",
+      "category": "island",
+      "location": {
+        "coordinates": {
+          "latitude": 44.81088472388641,
+          "longitude": -73.25248825454008
+        },
+        "town": "North Hero",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "island-ball-island",
+      "name": "Ball Island",
+      "category": "island",
+      "location": {
+        "coordinates": {
+          "latitude": 44.761640686608764,
+          "longitude": -73.21609823808205
+        },
+        "town": "St. Albans",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "island-savage-island",
+      "name": "Savage Island",
+      "category": "island",
+      "location": {
+        "coordinates": {
+          "latitude": 44.69714935382915,
+          "longitude": -73.24700194905175
+        },
+        "town": "Grand Isle",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "island-fish-bladder-island",
+      "name": "Fish Bladder Island",
+      "category": "island",
+      "location": {
+        "coordinates": {
+          "latitude": 44.67210537337933,
+          "longitude": -73.2532600742672
+        },
+        "town": "South Hero",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "bay-keeler-bay",
+      "name": "Keeler Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.66239722873097,
+          "longitude": -73.30589125203329
+        },
+        "town": "South Hero",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "island-cedar-island",
+      "name": "Cedar Island",
+      "category": "island",
+      "location": {
+        "coordinates": {
+          "latitude": 44.65919975095889,
+          "longitude": -73.25351307415289
+        },
+        "town": "South Hero",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "restaurant-the-sand-bar-bar-grill",
+      "name": "The Sand Bar, Bar & Grill",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 44.63399404313478,
+          "longitude": -73.26505076427311
+        },
+        "town": "South Hero",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "waterfront-restaurant",
+      "contact": {
+        "website": "https://sandbarvt.com/",
+        "phone": "8023952076"
+      },
+      "details": {
+        "description": "Lakefront restaurant and bar in South Hero offering casual dining with water views. Open Tuesday-Thursday 12pm-8pm, Friday-Saturday 12pm-9pm. Closed Monday and Sunday."
+      }
+    },
+    {
+      "id": "camp-apple-island-resort",
+      "name": "Apple Island Resort",
+      "category": "campground",
+      "location": {
+        "coordinates": {
+          "latitude": 44.63547426477831,
+          "longitude": -73.26741554633921
+        },
+        "town": "South Hero",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "tags": [
+        "campground"
+      ],
+      "contact": {
+        "website": "https://appleislandresort.com/",
+        "phone": "8023723800"
+      },
+      "details": {
+        "description": "RV resort and mobile home community at 71 US-2, South Hero. Features park and stay facilities for RVs. Marina contact available at 802-372-3118. Offers both camping and marina services."
+      }
+    },
+    {
+      "id": "bridge-lake-champlain-causeway",
+      "name": "Lake Champlain Causeway",
+      "category": "bridge",
+      "location": {
+        "coordinates": {
+          "latitude": 44.575276613777184,
+          "longitude": -73.31508317915987
+        },
+        "town": "South Hero",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "fixed-bridge",
+      "details": {
+        "bridge": {
+          "bridgeType": "fixed"
+        }
+      }
+    },
+    {
+      "id": "beach-thayer-beach",
+      "name": "Thayer Beach",
+      "category": "beach",
+      "location": {
+        "coordinates": {
+          "latitude": 44.5529354498302,
+          "longitude": -73.2558552238422
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "restaurant-pioneer-lakeshore-caf",
+      "name": "Pioneer Lakeshore Caf�",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 44.551128889448236,
+          "longitude": -73.22989350592276
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "waterfront-restaurant",
+      "contact": {
+        "website": "https://www.pioneerfoodvt.com/"
+      },
+      "details": {
+        "description": "Counter-service café located in Malletts Bay on West Lakeshore Drive. Offers menu enhancements for 2026 season. Open Tuesday-Saturday 11am-8pm, closed Sunday and Monday."
+      }
+    },
+    {
+      "id": "restaurant-new-york-pizza-oven",
+      "name": "New York Pizza Oven",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 44.5509224569805,
+          "longitude": -73.22947508130844
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "waterfront-restaurant",
+      "contact": {
+        "website": "https://nypovt.com/",
+        "phone": "8026580925"
+      },
+      "details": {
+        "description": "Locally owned New York-style pizza restaurant in the heart of Malletts Bay, established 2011. Offers handcrafted pizzas including Buffalo Chicken specialty, hot and cold subs, calzones, stromboli, and gluten-free cauliflower crust options. Open Monday-Sunday 11am-8pm with delivery, pickup, and dine-in service."
+      }
+    },
+    {
+      "id": "restaurant-rozzis-lakeshore-tavern",
+      "name": "Rozzi's Lakeshore Tavern",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 44.55193167541789,
+          "longitude": -73.23379880232315
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "waterfront-restaurant",
+      "contact": {
+        "website": "https://www.rozzislakeshoretavern.com/",
+        "phone": "8028632342"
+      },
+      "details": {
+        "description": "Waterfront tavern and restaurant on West Lakeshore Drive offering American traditional fare and nightlife. Open Monday-Friday 11am-9pm, Saturday-Sunday 9am-9pm."
+      }
+    },
+    {
+      "id": "restaurant-broadacres-creemee",
+      "name": "Broadacres Creemee",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 44.55019611469845,
+          "longitude": -73.2289386395147
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "waterfront-restaurant",
+      "contact": {
+        "phone": "8026524646"
+      },
+      "details": {
+        "description": "Vermont soft-serve ice cream stand (creemees) with hard ice cream and quick food items. Two locations in Colchester: 749 W Lakeshore Dr and 133 Broad Acres Dr. Seasonal operation typical for Vermont ice cream stands."
+      }
+    },
+    {
+      "id": "restaurant-marina-at-marble-island",
+      "name": "Marina At Marble Island",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 44.570276800188346,
+          "longitude": -73.23175397070965
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "waterfront-restaurant",
+      "contact": {
+        "website": "https://marinamarbleisland.com/",
+        "phone": "8028626804"
+      },
+      "details": {
+        "description": "Marina facility in Malletts Bay with scenic views and boating amenities including seasonal slips, hull wash, shrink wrap, pool, and haul services. Harbor house facilities include private restroom suites and member grilling area."
+      }
+    },
+    {
+      "id": "island-marble-island",
+      "name": "Marble Island",
+      "category": "island",
+      "location": {
+        "coordinates": {
+          "latitude": 44.57256969026037,
+          "longitude": -73.23037531524965
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "camp-malletts-bay-campground",
+      "name": "Malletts Bay Campground",
+      "category": "campground",
+      "location": {
+        "coordinates": {
+          "latitude": 44.54452503892569,
+          "longitude": -73.21799329066025
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "tags": [
+        "campground"
+      ],
+      "contact": {
+        "website": "https://mallettsbaycampground.com/",
+        "phone": "8028636980"
+      },
+      "details": {
+        "description": "Located at 88 Malletts Bay Campground in Colchester near Burlington. Open May 1 - October 15. Offers camping sites with access to Malletts Bay on Lake Champlain."
+      }
+    },
+    {
+      "id": "hotel-lakeshore-vermont-inn-and-suites",
+      "name": "Lakeshore Vermont Inn and Suites",
+      "category": "hotel",
+      "location": {
+        "coordinates": {
+          "latitude": 44.54564141734802,
+          "longitude": -73.21721008561293
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "restaurant-the-pickled-perch",
+      "name": "The Pickled Perch",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 44.54460915037453,
+          "longitude": -73.21476391094455
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "waterfront-restaurant",
+      "contact": {
+        "website": "https://thepickledperch.com/",
+        "phone": "8024971647"
+      },
+      "details": {
+        "description": "American bistro-style restaurant located on Malletts Bay at Blakely Road, offering New American cuisine with lake views. Seasonal hours, typically closed Monday and Tuesday. Known for quality food and waterfront dining experience."
+      }
+    },
+    {
+      "id": "bay-malletts-bay",
+      "name": "Malletts Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.630537001041674,
+          "longitude": -73.25314297577656
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "poi-sand-bar-national-waterfowl-management-area",
+      "name": "Sand Bar National Waterfowl Management Area",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.621948650067054,
+          "longitude": -73.2337909713828
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      }
+    },
+    {
+      "id": "poi-burlington-breakwater-north-lighthouse",
+      "name": "Burlington Breakwater North Lighthouse",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.480550230179,
+          "longitude": -73.22981321659455
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "lighthouse",
+      "tags": [
+        "landmark",
+        "historic"
+      ]
+    },
+    {
+      "id": "poi-burlington-breakwater-south-lighthouse",
+      "name": "Burlington Breakwater South Lighthouse",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.470039650388024,
+          "longitude": -73.22568339251683
+        },
+        "town": "Colchester",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Islands"
+      },
+      "subcategory": "lighthouse",
+      "tags": [
+        "landmark",
+        "historic"
+      ]
+    },
+    {
+      "id": "restaurant-st-johns-club",
+      "name": "St. John's Club",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 44.46078431667068,
+          "longitude": -73.22118045575417
+        },
+        "town": "Burlington",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "waterfront-restaurant",
+      "contact": {
+        "website": "https://saintjohnsclub.com/",
+        "phone": "8028649778"
+      },
+      "details": {
+        "description": "Social club and restaurant on Central Avenue in Burlington's South End offering comfort food and sports bar atmosphere. Contact for private events at saintjohnsclub@gmail.com."
+      }
+    },
+    {
+      "id": "beach-blanchard-beach",
+      "name": "Blanchard Beach",
+      "category": "beach",
+      "location": {
+        "coordinates": {
+          "latitude": 44.45708358986346,
+          "longitude": -73.22447537327871
+        },
+        "town": "Burlington",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      }
+    },
+    {
+      "id": "beach-red-rocks-beach",
+      "name": "Red Rocks Beach",
+      "category": "beach",
+      "location": {
+        "coordinates": {
+          "latitude": 44.44248993496456,
+          "longitude": -73.22253602879748
+        },
+        "town": "Burlington",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      }
+    },
+    {
+      "id": "launch-shelburne-bay-boat-ramp",
+      "name": "Shelburne Bay Boat Ramp",
+      "category": "boat-launch",
+      "location": {
+        "coordinates": {
+          "latitude": 44.399495944939666,
+          "longitude": -73.23415795941423
+        },
+        "town": "Shelburne",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      }
+    },
+    {
+      "id": "marina-lake-champlain-yacht-club",
+      "name": "Lake Champlain Yacht Club",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.413193355923426,
+          "longitude": -73.2449623465554
+        },
+        "town": "Shelburne",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "full-service",
+      "contact": {
+        "website": "https://lcyc.info/",
+        "phone": "8029853372"
+      },
+      "details": {
+        "description": "Established in 1887, this member-run yacht club is located in a sheltered cove on the southwest shore of Shelburne Bay. Promotes boating and sailing on Lake Champlain with focus on racing, cruising, and education. Features Wednesday Night racing series, weekend lake races, and educational programs."
+      }
+    },
+    {
+      "id": "island-queneska-island",
+      "name": "Queneska Island",
+      "category": "island",
+      "location": {
+        "coordinates": {
+          "latitude": 44.42967145296078,
+          "longitude": -73.25933101797209
+        },
+        "town": "Shelburne",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      }
+    },
+    {
+      "id": "hotel-shelburne-farms-inn",
+      "name": "Shelburne Farms Inn",
+      "category": "hotel",
+      "location": {
+        "coordinates": {
+          "latitude": 44.39593947149605,
+          "longitude": -73.27791134765361
+        },
+        "town": "Shelburne",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      }
+    },
+    {
+      "id": "beach-shelburne-town-beach",
+      "name": "Shelburne Town Beach",
+      "category": "beach",
+      "location": {
+        "coordinates": {
+          "latitude": 44.36202922216744,
+          "longitude": -73.26656997282623
+        },
+        "town": "Shelburne",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      }
+    },
+    {
+      "id": "marina-charlotte-sailing-center",
+      "name": "Charlotte Sailing Center",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.30070271868401,
+          "longitude": -73.29523188830859
+        },
+        "town": "Charlotte",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      },
+      "subcategory": "full-service",
+      "contact": {
+        "website": "https://www.charlottesailingcenter.com/",
+        "phone": "8024254106",
+        "vhfChannel": 9
+      },
+      "details": {
+        "description": "CLOSED AS OF 2025. Previously operated for 20 years offering sailing instruction, boat rentals, marina services with docks and moorings. Lake Champlain Transportation (property owner) did not renew the lease, forcing closure."
+      }
+    },
+    {
+      "id": "bay-mcneil-cove",
+      "name": "McNeil Cove",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.29819948798874,
+          "longitude": -73.29610092404255
+        },
+        "town": "Charlotte",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      }
+    },
+    {
+      "id": "island-garden-island",
+      "name": "Garden Island",
+      "category": "island",
+      "location": {
+        "coordinates": {
+          "latitude": 44.28282040164881,
+          "longitude": -73.29566242525527
+        },
+        "town": "Charlotte",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      }
+    },
+    {
+      "id": "island-dean-island",
+      "name": "Dean Island",
+      "category": "island",
+      "location": {
+        "coordinates": {
+          "latitude": 44.26461239305309,
+          "longitude": -73.27581197790006
+        },
+        "town": "Charlotte",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      }
+    },
+    {
+      "id": "island-gardiner-island",
+      "name": "Gardiner Island",
+      "category": "island",
+      "location": {
+        "coordinates": {
+          "latitude": 44.25027585548218,
+          "longitude": -73.28737330984141
+        },
+        "town": "Charlotte",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      }
+    },
+    {
+      "id": "bay-hawkins-bay",
+      "name": "Hawkins Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.244250467618336,
+          "longitude": -73.28597856112205
+        },
+        "town": "Charlotte",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Broad Lake"
+      }
+    },
+    {
+      "id": "bay-kingsland-bay",
+      "name": "Kingsland Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.239900122899236,
+          "longitude": -73.29994750580664
+        },
+        "town": "Ferrisburgh",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Narrows"
+      }
+    },
+    {
+      "id": "poi-grosse-point",
+      "name": "Grosse Point",
+      "category": "poi",
+      "location": {
+        "coordinates": {
+          "latitude": 44.237567595451736,
+          "longitude": -73.31679693644168
+        },
+        "town": "Ferrisburgh",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Narrows"
+      }
+    },
+    {
+      "id": "bay-porter-bay",
+      "name": "Porter Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.227414557685734,
+          "longitude": -73.31666354132359
+        },
+        "town": "Ferrisburgh",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Narrows"
+      }
+    },
+    {
+      "id": "bay-fields-bay",
+      "name": "Fields Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.219048025656036,
+          "longitude": -73.32598385015442
+        },
+        "town": "Ferrisburgh",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Narrows"
+      }
+    },
+    {
+      "id": "bay-north-harbor",
+      "name": "North Harbor",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.199941645937365,
+          "longitude": -73.35943722714238
+        },
+        "town": "Vergennes",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Narrows"
+      }
+    },
+    {
+      "id": "restaurant-red-mill",
+      "name": "Red Mill",
+      "category": "dining",
+      "location": {
+        "coordinates": {
+          "latitude": 44.1953559631332,
+          "longitude": -73.35986752362476
+        },
+        "town": "Vergennes",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Narrows"
+      },
+      "subcategory": "waterfront-restaurant",
+      "contact": {
+        "website": "https://basinharbor.com",
+        "phone": "8024752317"
+      },
+      "details": {
+        "description": "Casual, pub-style restaurant at Basin Harbor Club featuring local, fresh signature food and drink. Seasonal operation from late May to mid-October. Hours when open: Monday-Thursday 11:30am-3pm & 5pm-9pm, Friday-Saturday 11:30am-3pm & 5pm-10pm, Sunday 11:30am-3pm & 5pm-9pm."
+      }
+    },
+    {
+      "id": "island-button-island",
+      "name": "Button Island",
+      "category": "island",
+      "location": {
+        "coordinates": {
+          "latitude": 44.17636074251162,
+          "longitude": -73.37029480936309
+        },
+        "town": "Ferrisburgh",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      }
+    },
+    {
+      "id": "bay-button-bay",
+      "name": "Button Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.17653002570381,
+          "longitude": -73.3605959413797
+        },
+        "town": "Ferrisburgh",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      }
+    },
+    {
+      "id": "bay-arnold-bay",
+      "name": "Arnold Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.14716711266376,
+          "longitude": -73.36747730248653
+        },
+        "town": "Panton",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      }
+    },
+    {
+      "id": "island-mud-island",
+      "name": "Mud Island",
+      "category": "island",
+      "location": {
+        "coordinates": {
+          "latitude": 44.1343659383168,
+          "longitude": -73.37244188639609
+        },
+        "town": "Panton",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      }
+    },
+    {
+      "id": "bay-potash-bay",
+      "name": "Potash Bay",
+      "category": "bay",
+      "location": {
+        "coordinates": {
+          "latitude": 44.09520732007753,
+          "longitude": -73.38825554623888
+        },
+        "town": "Addison",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      }
+    },
+    {
+      "id": "camp-dar-state-park",
+      "name": "D.A.R. State Park",
+      "category": "campground",
+      "location": {
+        "coordinates": {
+          "latitude": 44.05547346954562,
+          "longitude": -73.41652834039152
+        },
+        "town": "Addison",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "tags": [
+        "campground"
+      ],
+      "contact": {
+        "website": "https://fpr.vermont.gov/dar-state-park",
+        "phone": "8027592354"
+      },
+      "details": {
+        "description": "Vermont State Park located at 6750 VT RT 17 W on the shores of Lake Champlain in Addison. Offers 47 tent/RV sites and 24 lean-to sites. Managed by Vermont Department of Forests, Parks and Recreation. Reservations: 888-409-7579."
+      }
+    },
+    {
+      "id": "marina-champlain-bridge-marina",
+      "name": "Champlain Bridge Marina",
+      "category": "marina",
+      "location": {
+        "coordinates": {
+          "latitude": 44.04110172361549,
+          "longitude": -73.41705166560823
+        },
+        "town": "Addison",
+        "state": "Vermont",
+        "country": "United States",
+        "waterBodyRegion": "Lake Champlain Southern"
+      },
+      "subcategory": "full-service",
+      "tags": [
+        "fuel"
+      ],
+      "contact": {
+        "website": "http://sayahoy.com/",
+        "phone": "8027592049"
+      },
+      "details": {
+        "description": "Located on Route 17 West in Addison, this marina offers seasonal and transient boat dockage by day, week, or month. Amenities include fuel dock, bath houses, restrooms, showers, Wi-Fi, pump-out service, masting crane, and indoor storage.",
+        "fuel": {
+          "available": true,
+          "types": [
+            "gasoline"
+          ],
+          "ethanol-free": false
+        }
       }
     }
   ]
