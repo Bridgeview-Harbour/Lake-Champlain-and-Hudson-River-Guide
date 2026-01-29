@@ -1,0 +1,59 @@
+{
+  "name": "lake-champlain-and-hudson-river-guide",
+  "version": "1.0.0",
+  "description": "An interactive web-based guide for boaters exploring Lake Champlain, the Hudson River, and connected waterways. Presented by Bridgeview Harbour Marina.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:verbose": "jest --verbose"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/setup.js"
+    ],
+    "collectCoverageFrom": [
+      "js/**/*.js",
+      "!js/data.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 60,
+        "functions": 70,
+        "lines": 70,
+        "statements": 70
+      }
+    },
+    "verbose": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bridgeview-Harbour/Lake-Champlain-and-Hudson-River-Guide.git"
+  },
+  "keywords": [
+    "boating",
+    "navigation",
+    "lake-champlain",
+    "hudson-river",
+    "marine",
+    "marina"
+  ],
+  "author": "Bridgeview Harbour Marina",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bridgeview-Harbour/Lake-Champlain-and-Hudson-River-Guide/issues"
+  },
+  "homepage": "https://github.com/Bridgeview-Harbour/Lake-Champlain-and-Hudson-River-Guide#readme",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^30.2.0"
+  }
+}

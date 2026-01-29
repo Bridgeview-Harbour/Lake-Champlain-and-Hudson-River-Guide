@@ -5,11 +5,22 @@
  * Run with: npm test (after setting up test runner)
  */
 
+// Import functions from app.js
+const {
+    calculateDistance,
+    convertDistance,
+    formatDistance,
+    calculateTravelTime,
+    formatTime
+} = require('../../js/app.js');
+
+const { UNIT_CONVERSIONS } = require('../../js/data.js');
+
 describe('Distance Calculations', () => {
     describe('calculateDistance', () => {
         it('should calculate correct distance between two points', () => {
             // Test case: Burlington, VT to Plattsburgh, NY
-            // Expected: ~37 km (23 miles)
+            // Expected: ~31 km (19 miles)
             const lat1 = 44.4759;
             const lng1 = -73.2121;
             const lat2 = 44.6995;
@@ -17,8 +28,8 @@ describe('Distance Calculations', () => {
 
             const distance = calculateDistance(lat1, lng1, lat2, lng2);
 
-            // Allow 1% margin of error
-            expect(distance).toBeCloseTo(37, 0.5);
+            // Should be close to 31 km (within 1 decimal place)
+            expect(distance).toBeCloseTo(31.3, 1);
         });
 
         it('should return 0 for identical coordinates', () => {
@@ -138,7 +149,7 @@ describe('Distance Calculations', () => {
 
         it('should format minutes only', () => {
             const formatted = formatTime(0.5);
-            expect(formatted).toBe('30m');
+            expect(formatted).toBe('30 min');
         });
     });
 });

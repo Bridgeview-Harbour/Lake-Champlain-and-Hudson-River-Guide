@@ -11,6 +11,9 @@
  * - Offline-capable calculations (no server needed)
  */
 
+// Check if we're in a Node.js environment (for testing)
+const isNode = typeof module !== 'undefined' && module.exports;
+
 (function() {
     'use strict';
 
@@ -1367,11 +1370,27 @@
         }
     }
 
-    // Start the application when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => init());
-    } else {
-        init();
+    // Start the application when DOM is ready (browser only)
+    if (!isNode) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => init());
+        } else {
+            init();
+        }
+    }
+
+    // Export functions for testing (Node.js environment only)
+    if (isNode) {
+        module.exports = {
+            calculateDistance,
+            toRadians,
+            convertDistance,
+            formatDistance,
+            calculateTravelTime,
+            formatTime,
+            debounce,
+            showToast
+        };
     }
 
 })();

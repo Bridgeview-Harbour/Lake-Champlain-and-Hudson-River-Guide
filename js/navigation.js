@@ -6,6 +6,9 @@
  * to ensure routes stay on navigable water and never cross land.
  */
 
+// Check if we're in a Node.js environment (for testing)
+const isNodeNav = typeof module !== 'undefined' && module.exports;
+
 // ============================================
 // Lake Champlain Water Polygon - FROM KMZ DATA
 // ============================================
@@ -2049,4 +2052,25 @@ if (typeof window !== 'undefined') {
     window.findNearestGridPoint = findNearestGridPoint;
     window.generateWaterGrid = generateWaterGrid;
     window.LAKE_CHAMPLAIN_POLYGON = LAKE_CHAMPLAIN_POLYGON;
+}
+
+// Export for testing (Node.js environment)
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        pointInPolygon,
+        isInWater,
+        haversineDistance,
+        generateWaterGrid,
+        getNeighbors,
+        findNearestGridPoint,
+        findPath,
+        calculateWaterRoute,
+        LAKE_CHAMPLAIN_POLYGON,
+        GRID_CONFIG,
+        EARTH_RADIUS_KM,
+        MAX_GRID_SEARCH_DISTANCE_KM,
+        // Expose internal variables for testing
+        get waterGrid() { return waterGrid; },
+        get gridIndex() { return gridIndex; }
+    };
 }
