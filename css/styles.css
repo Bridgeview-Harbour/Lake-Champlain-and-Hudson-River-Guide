@@ -792,7 +792,7 @@ body {
 .map-legend {
     position: fixed;
     bottom: 20px;
-    left: 400px;
+    right: 20px;
     z-index: 500;
 }
 
@@ -815,7 +815,7 @@ body {
 .legend-content {
     position: absolute;
     bottom: 50px;
-    left: 0;
+    right: 0;
     background: white;
     border-radius: var(--radius);
     box-shadow: var(--shadow-lg);
@@ -960,6 +960,39 @@ body {
     font-size: 0.9rem;
 }
 
+/* Leaflet Layer Control Customization */
+.leaflet-control-layers {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: none;
+}
+
+.leaflet-control-layers-toggle {
+    width: 40px;
+    height: 40px;
+    background-size: 24px 24px;
+}
+
+.leaflet-control-layers-expanded {
+    padding: 10px 15px;
+    background: white;
+}
+
+.leaflet-control-layers-base label,
+.leaflet-control-layers-overlays label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.leaflet-control-layers-separator {
+    margin: 8px 0;
+    border-top: 1px solid var(--border-color);
+}
+
 /* Route Line Style */
 .route-line {
     stroke: var(--primary-color);
@@ -998,7 +1031,7 @@ body {
     }
 
     .map-legend {
-        left: 20px;
+        right: 20px;
         bottom: 80px;
     }
 }

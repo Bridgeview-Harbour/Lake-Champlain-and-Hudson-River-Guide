@@ -179,11 +179,50 @@
             tap: true
         });
 
-        // Add tile layer (OpenStreetMap)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        // Define base map layers
+        const streetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19,
+            minZoom: 7
+        });
+
+        const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: '&copy; Esri, Maxar, Earthstar Geographics',
+            maxZoom: 19,
+            minZoom: 7
+        });
+
+        const topoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)',
+            maxZoom: 17,
+            minZoom: 7
+        });
+
+        const nautical = L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openseamap.org">OpenSeaMap</a>',
             maxZoom: 18,
             minZoom: 7
+        });
+
+        // Add default layer to map
+        streetMap.addTo(state.map);
+
+        // Create base maps object for layer control
+        const baseMaps = {
+            "Street Map": streetMap,
+            "Satellite": satellite,
+            "Topographic": topoMap
+        };
+
+        // Create overlay maps (nautical chart overlay)
+        const overlayMaps = {
+            "Nautical Charts": nautical
+        };
+
+        // Add layer control to map (top-right corner)
+        L.control.layers(baseMaps, overlayMaps, {
+            position: 'topright',
+            collapsed: true
         }).addTo(state.map);
 
         // Add markers for all points of interest
