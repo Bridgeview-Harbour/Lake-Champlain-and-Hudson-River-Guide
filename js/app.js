@@ -255,9 +255,18 @@
         });
     }
 
+    // Custom icon for Bridgeview Harbour Marina
+    const bridgeviewIcon = L.icon({
+        iconUrl: 'images/BridgeviewHarbourMarina_favicon_transparent.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 16],
+        popupAnchor: [0, -16]
+    });
+
     function addMarkers() {
         POINTS_OF_INTEREST.forEach(poi => {
-            const icon = createCustomIcon(poi.type);
+            // Use custom icon for Bridgeview Harbour Marina
+            const icon = poi.featured ? bridgeviewIcon : createCustomIcon(poi.type);
             const marker = L.marker([poi.lat, poi.lng], { icon: icon })
                 .addTo(state.map);
 
@@ -289,16 +298,26 @@
         const markerData = state.markers[poiId];
         if (!markerData) return;
 
-        const icon = createCustomIcon(markerData.poi.type, true, isStart, isEnd);
-        markerData.marker.setIcon(icon);
+        // Keep custom icon for featured POI (Bridgeview Harbour Marina)
+        if (markerData.poi.featured) {
+            markerData.marker.setIcon(bridgeviewIcon);
+        } else {
+            const icon = createCustomIcon(markerData.poi.type, true, isStart, isEnd);
+            markerData.marker.setIcon(icon);
+        }
     }
 
     function resetMarkerAppearance(poiId) {
         const markerData = state.markers[poiId];
         if (!markerData) return;
 
-        const icon = createCustomIcon(markerData.poi.type);
-        markerData.marker.setIcon(icon);
+        // Keep custom icon for featured POI (Bridgeview Harbour Marina)
+        if (markerData.poi.featured) {
+            markerData.marker.setIcon(bridgeviewIcon);
+        } else {
+            const icon = createCustomIcon(markerData.poi.type);
+            markerData.marker.setIcon(icon);
+        }
     }
 
     // ============================================
@@ -542,8 +561,13 @@
 
                 const markerData = state.markers[poiId];
                 if (markerData) {
-                    const icon = createCustomIcon(markerData.poi.type, true, isStart, isEnd, isIntermediate);
-                    markerData.marker.setIcon(icon);
+                    // Keep custom icon for featured POI (Bridgeview Harbour Marina)
+                    if (markerData.poi.featured) {
+                        markerData.marker.setIcon(bridgeviewIcon);
+                    } else {
+                        const icon = createCustomIcon(markerData.poi.type, true, isStart, isEnd, isIntermediate);
+                        markerData.marker.setIcon(icon);
+                    }
                 }
             }
         });
