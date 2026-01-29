@@ -3,36 +3,57 @@
    Touch-Friendly Responsive Styles
    ============================================ */
 
-/* CSS Variables for Theming */
+/* CSS Variables for Theming - Nautical Bold Theme */
 :root {
-    --primary-color: #1a5f7a;
-    --primary-dark: #134b61;
-    --primary-light: #2980b9;
-    --secondary-color: #27ae60;
-    --accent-color: #e67e22;
-    --danger-color: #e74c3c;
-    --text-color: #2c3e50;
-    --text-light: #7f8c8d;
-    --bg-color: #ecf0f1;
-    --panel-bg: #ffffff;
-    --border-color: #bdc3c7;
-    --shadow: 0 2px 10px rgba(0,0,0,0.15);
-    --shadow-lg: 0 4px 20px rgba(0,0,0,0.2);
-    --radius: 8px;
-    --radius-lg: 12px;
+    /* Primary nautical colors */
+    --primary-color: #1a3a5c;
+    --primary-dark: #0f2840;
+    --primary-light: #2c5a8c;
+    --secondary-color: #c9a227;
+    --accent-color: #8b2942;
+    --danger-color: #a82039;
+
+    /* Text colors */
+    --text-color: #2c2416;
+    --text-light: #5c4d3d;
+
+    /* Background colors - parchment theme */
+    --bg-color: #f4e8d1;
+    --panel-bg: #faf6ed;
+    --panel-bg-texture: linear-gradient(135deg, #faf6ed 0%, #f0e6d3 50%, #e8dcc8 100%);
+
+    /* Brass/Gold accents */
+    --brass-color: #c9a227;
+    --brass-light: #d4b84b;
+    --brass-dark: #a6851f;
+
+    /* Wood tones */
+    --wood-dark: #3d2314;
+    --wood-medium: #5c3a21;
+    --wood-light: #8b5a2b;
+
+    /* Borders and shadows */
+    --border-color: #c4a574;
+    --rope-color: #a08060;
+    --shadow: 0 2px 10px rgba(44, 36, 22, 0.2);
+    --shadow-lg: 0 4px 20px rgba(44, 36, 22, 0.3);
+
+    /* Dimensions */
+    --radius: 4px;
+    --radius-lg: 8px;
     --touch-target: 48px;
     --transition: all 0.3s ease;
 
-    /* Marker Colors */
-    --marina-color: #2980b9;
-    --restaurant-color: #e74c3c;
-    --historic-color: #8e44ad;
-    --bay-color: #16a085;
-    --fuel-color: #f39c12;
-    --anchorage-color: #27ae60;
-    --lock-color: #9b59b6;
-    --bridge-color: #7f8c8d;
-    --bridge-movable-color: #e67e22;
+    /* Marker Colors - nautical palette */
+    --marina-color: #1a3a5c;
+    --restaurant-color: #8b2942;
+    --historic-color: #6b4c3a;
+    --bay-color: #2c6e6e;
+    --fuel-color: #c9a227;
+    --anchorage-color: #3d6b4f;
+    --lock-color: #5c4a6b;
+    --bridge-color: #5c5c5c;
+    --bridge-movable-color: #a86532;
 }
 
 /* Reset & Base */
@@ -49,44 +70,81 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
     background-color: var(--bg-color);
     color: var(--text-color);
-    line-height: 1.5;
+    line-height: 1.6;
     overflow: hidden;
     height: 100vh;
     width: 100vw;
 }
 
 /* ============================================
-   Header Styles
+   Header Styles - Wood Plank with Brass
    ============================================ */
 .app-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 60px;
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    color: white;
+    height: 70px;
+    background:
+        linear-gradient(180deg,
+            rgba(93, 64, 40, 0.95) 0%,
+            rgba(61, 35, 20, 0.98) 50%,
+            rgba(45, 25, 15, 1) 100%
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 80px,
+            rgba(0,0,0,0.1) 80px,
+            rgba(0,0,0,0.1) 82px
+        );
+    background-color: var(--wood-dark);
+    color: #f4e8d1;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
     z-index: 1000;
-    box-shadow: var(--shadow);
+    box-shadow:
+        0 4px 8px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    border-bottom: 3px solid var(--brass-color);
+}
+
+.app-header::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+        var(--brass-dark) 0%,
+        var(--brass-light) 50%,
+        var(--brass-dark) 100%
+    );
 }
 
 .header-content h1 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-family: 'Cinzel', 'Times New Roman', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    color: var(--brass-light);
 }
 
 .header-content .tagline {
+    font-family: 'Libre Baskerville', Georgia, serif;
     font-size: 0.75rem;
-    opacity: 0.9;
+    font-style: italic;
+    opacity: 0.85;
     margin-top: 2px;
+    letter-spacing: 1px;
 }
 
 .menu-toggle {
@@ -104,7 +162,7 @@ body {
 .menu-toggle span {
     width: 28px;
     height: 3px;
-    background: white;
+    background: var(--brass-light);
     border-radius: 2px;
     transition: var(--transition);
 }
@@ -116,7 +174,7 @@ body {
     position: relative;
     height: 100vh;
     width: 100vw;
-    padding-top: 60px;
+    padding-top: 70px;
     display: flex;
 }
 
@@ -127,35 +185,77 @@ body {
 }
 
 /* ============================================
-   Side Panel Styles
+   Side Panel Styles - Parchment with Rope Border
    ============================================ */
 .side-panel {
     width: 380px;
-    height: calc(100vh - 60px);
-    background: var(--panel-bg);
-    box-shadow: var(--shadow-lg);
+    height: calc(100vh - 70px);
+    background: var(--panel-bg-texture);
+    background-color: var(--panel-bg);
+    box-shadow:
+        var(--shadow-lg),
+        inset 0 0 50px rgba(139, 90, 43, 0.1);
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 500;
     display: flex;
     flex-direction: column;
     transition: var(--transition);
-    order: -1;  /* Move to left side */
+    order: -1;
+    border-right: 4px solid var(--rope-color);
+    position: relative;
+}
+
+/* Rope texture border effect */
+.side-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 4px;
+    background:
+        repeating-linear-gradient(
+            180deg,
+            var(--rope-color) 0px,
+            #8a6a4a 2px,
+            var(--rope-color) 4px,
+            #6a5040 6px,
+            var(--rope-color) 8px
+        );
+    z-index: 10;
 }
 
 .panel-section {
     padding: 20px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 2px solid rgba(160, 128, 96, 0.3);
+    position: relative;
+}
+
+/* Decorative corner flourish */
+.panel-section::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+    border-left: 2px solid var(--brass-color);
+    border-top: 2px solid var(--brass-color);
+    opacity: 0.5;
 }
 
 .panel-section h2 {
+    font-family: 'Cinzel', 'Times New Roman', serif;
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 15px;
-    color: var(--primary-color);
+    color: var(--wood-dark);
     display: flex;
     align-items: center;
     gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* ============================================
@@ -230,7 +330,7 @@ body {
 }
 
 /* ============================================
-   Buttons (Touch Optimized)
+   Buttons (Nautical Brass Theme)
    ============================================ */
 .btn {
     display: inline-flex;
@@ -239,48 +339,72 @@ body {
     gap: 8px;
     min-height: var(--touch-target);
     padding: 12px 24px;
-    font-size: 1rem;
+    font-family: 'Cinzel', 'Times New Roman', serif;
+    font-size: 0.9rem;
     font-weight: 600;
     border: none;
     border-radius: var(--radius);
     cursor: pointer;
     transition: var(--transition);
-    text-transform: none;
-    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-    color: white;
+    background: linear-gradient(180deg,
+        var(--brass-light) 0%,
+        var(--brass-color) 50%,
+        var(--brass-dark) 100%
+    );
+    color: var(--wood-dark);
+    border: 2px solid var(--brass-dark);
+    box-shadow:
+        0 2px 4px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.3);
 }
 
 .btn-primary:hover,
 .btn-primary:active {
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    background: linear-gradient(180deg,
+        var(--brass-color) 0%,
+        var(--brass-dark) 50%,
+        #8a6a1a 100%
+    );
     transform: translateY(-1px);
     box-shadow: var(--shadow);
 }
 
 .btn-secondary {
-    background: var(--secondary-color);
-    color: white;
+    background: linear-gradient(180deg,
+        var(--primary-light) 0%,
+        var(--primary-color) 50%,
+        var(--primary-dark) 100%
+    );
+    color: #f4e8d1;
+    border: 2px solid var(--primary-dark);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .btn-secondary:hover,
 .btn-secondary:active {
-    background: #219a52;
+    background: linear-gradient(180deg,
+        var(--primary-color) 0%,
+        var(--primary-dark) 50%,
+        #0a1c2e 100%
+    );
 }
 
 .btn-outline {
-    background: transparent;
-    border: 2px solid var(--border-color);
-    color: var(--text-color);
+    background: rgba(250, 246, 237, 0.8);
+    border: 2px solid var(--rope-color);
+    color: var(--wood-dark);
 }
 
 .btn-outline:hover,
 .btn-outline:active {
-    background: var(--bg-color);
-    border-color: var(--text-light);
+    background: rgba(244, 232, 209, 1);
+    border-color: var(--wood-medium);
 }
 
 .btn-small {
@@ -531,14 +655,19 @@ body {
 }
 
 /* ============================================
-   Trip Results
+   Trip Results - Nautical Card
    ============================================ */
 .trip-results {
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    background:
+        linear-gradient(135deg, rgba(250, 246, 237, 0.95), rgba(244, 232, 209, 0.95)),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L35 25 L30 20 L25 25 Z' fill='%23c9a227' opacity='0.1'/%3E%3C/svg%3E");
     border-radius: var(--radius-lg);
     padding: 20px;
     margin-top: 15px;
-    border: 2px solid var(--primary-color);
+    border: 3px solid var(--brass-color);
+    box-shadow:
+        inset 0 0 20px rgba(139, 90, 43, 0.1),
+        0 4px 8px rgba(0,0,0,0.15);
 }
 
 .trip-results.hidden {
@@ -553,22 +682,24 @@ body {
 }
 
 .result-item:first-child {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 2px solid rgba(201, 162, 39, 0.3);
 }
 
 .result-label {
+    font-family: 'Libre Baskerville', Georgia, serif;
     font-size: 0.9rem;
     color: var(--text-light);
 }
 
 .result-value {
+    font-family: 'Cinzel', 'Times New Roman', serif;
     font-size: 1.4rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--wood-dark);
 }
 
 /* ============================================
-   Filter Buttons
+   Filter Buttons - Nautical Toggle Pills
    ============================================ */
 .filter-buttons {
     display: flex;
@@ -582,23 +713,31 @@ body {
     gap: 6px;
     min-height: 44px;
     padding: 10px 14px;
-    font-size: 0.85rem;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 0.8rem;
     font-weight: 500;
-    background: var(--bg-color);
-    border: 2px solid transparent;
-    border-radius: 25px;
+    background: rgba(250, 246, 237, 0.9);
+    border: 2px solid var(--rope-color);
+    border-radius: 20px;
     cursor: pointer;
     transition: var(--transition);
     white-space: nowrap;
+    color: var(--wood-dark);
 }
 
 .filter-btn:hover {
-    background: var(--border-color);
+    background: rgba(201, 162, 39, 0.2);
+    border-color: var(--brass-color);
 }
 
 .filter-btn.active {
-    background: var(--primary-color);
-    color: white;
+    background: linear-gradient(180deg,
+        var(--primary-light) 0%,
+        var(--primary-color) 100%
+    );
+    color: #f4e8d1;
+    border-color: var(--primary-dark);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .filter-btn .filter-icon {
@@ -832,7 +971,7 @@ body {
 .poi-marker.public-dock { background: #34495e; color: white; }
 
 /* ============================================
-   Quick Info Panel
+   Quick Info Panel - Nautical Card
    ============================================ */
 .quick-info {
     position: fixed;
@@ -840,12 +979,31 @@ body {
     left: 400px;
     right: 20px;
     max-width: 500px;
-    background: white;
+    background: var(--panel-bg-texture);
+    background-color: var(--panel-bg);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
+    box-shadow:
+        0 4px 20px rgba(0,0,0,0.25),
+        inset 0 0 30px rgba(139, 90, 43, 0.08);
     padding: 20px;
     z-index: 600;
     transition: var(--transition);
+    border: 3px solid var(--brass-color);
+}
+
+.quick-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+        var(--brass-dark) 0%,
+        var(--brass-light) 50%,
+        var(--brass-dark) 100%
+    );
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .quick-info.hidden {
@@ -858,40 +1016,46 @@ body {
     right: 10px;
     width: 44px;
     height: 44px;
-    border: none;
-    background: var(--bg-color);
+    border: 2px solid var(--rope-color);
+    background: rgba(250, 246, 237, 0.9);
     border-radius: 50%;
     font-size: 1.5rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-light);
+    color: var(--wood-dark);
     transition: var(--transition);
 }
 
 .quick-info .close-btn:hover {
-    background: var(--border-color);
-    color: var(--text-color);
+    background: var(--brass-light);
+    border-color: var(--brass-dark);
+    color: var(--wood-dark);
 }
 
 .quick-info h3 {
+    font-family: 'Cinzel', 'Times New Roman', serif;
     font-size: 1.2rem;
     margin-bottom: 5px;
     padding-right: 40px;
+    color: var(--wood-dark);
 }
 
 .quick-info .poi-type {
+    font-family: 'Libre Baskerville', Georgia, serif;
     font-size: 0.85rem;
-    color: var(--primary-color);
+    color: var(--brass-dark);
     font-weight: 500;
     margin-bottom: 8px;
+    font-style: italic;
 }
 
 .quick-info .poi-desc {
     font-size: 0.9rem;
     color: var(--text-light);
     margin-bottom: 15px;
+    line-height: 1.6;
 }
 
 .quick-info-actions {
@@ -900,7 +1064,7 @@ body {
 }
 
 /* ============================================
-   Map Legend
+   Map Legend - Nautical Compass Style
    ============================================ */
 .map-legend {
     position: fixed;
@@ -912,29 +1076,42 @@ body {
 .legend-toggle {
     min-height: 44px;
     padding: 10px 16px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    background: white;
-    border: none;
+    font-family: 'Cinzel', 'Times New Roman', serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(180deg,
+        var(--brass-light) 0%,
+        var(--brass-color) 50%,
+        var(--brass-dark) 100%
+    );
+    color: var(--wood-dark);
+    border: 2px solid var(--brass-dark);
     border-radius: var(--radius);
-    box-shadow: var(--shadow);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     cursor: pointer;
     transition: var(--transition);
 }
 
 .legend-toggle:hover {
-    background: var(--bg-color);
+    background: linear-gradient(180deg,
+        var(--brass-color) 0%,
+        var(--brass-dark) 100%
+    );
 }
 
 .legend-content {
     position: absolute;
     bottom: 50px;
     right: 0;
-    background: white;
+    background: var(--panel-bg-texture);
+    background-color: var(--panel-bg);
     border-radius: var(--radius);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
     padding: 15px;
-    min-width: 160px;
+    min-width: 180px;
+    border: 2px solid var(--brass-color);
 }
 
 .legend-content.hidden {
@@ -946,7 +1123,9 @@ body {
     align-items: center;
     gap: 10px;
     padding: 6px 0;
-    font-size: 0.85rem;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 0.8rem;
+    color: var(--wood-dark);
 }
 
 .legend-marker {
@@ -989,7 +1168,7 @@ body {
 .legend-marker.public-dock { background: #34495e; }
 
 /* ============================================
-   Loading Overlay
+   Loading Overlay - Nautical Compass Theme
    ============================================ */
 .loading-overlay {
     position: fixed;
@@ -997,7 +1176,9 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.95);
+    background:
+        radial-gradient(ellipse at center, rgba(250, 246, 237, 0.98) 0%, rgba(244, 232, 209, 0.98) 100%),
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L55 45 L50 40 L45 45 Z' fill='%23c9a227' opacity='0.05'/%3E%3C/svg%3E");
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1011,14 +1192,47 @@ body {
     pointer-events: none;
 }
 
+/* Ship Wheel / Compass Spinner */
 .loading-spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid var(--bg-color);
-    border-top-color: var(--primary-color);
+    width: 70px;
+    height: 70px;
+    position: relative;
+    animation: spin 2s linear infinite;
+}
+
+.loading-spinner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 4px solid var(--brass-color);
     border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 15px;
+    box-shadow:
+        inset 0 0 0 8px transparent,
+        inset 0 0 0 10px var(--brass-dark);
+}
+
+.loading-spinner::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    background: var(--brass-color);
+    border-radius: 50%;
+    box-shadow:
+        0 -25px 0 -6px var(--wood-dark),
+        0 25px 0 -6px var(--wood-dark),
+        25px 0 0 -6px var(--wood-dark),
+        -25px 0 0 -6px var(--wood-dark),
+        18px -18px 0 -6px var(--wood-dark),
+        -18px 18px 0 -6px var(--wood-dark),
+        18px 18px 0 -6px var(--wood-dark),
+        -18px -18px 0 -6px var(--wood-dark);
 }
 
 @keyframes spin {
@@ -1026,8 +1240,12 @@ body {
 }
 
 .loading-overlay p {
+    font-family: 'Cinzel', 'Times New Roman', serif;
     font-size: 1rem;
-    color: var(--text-light);
+    color: var(--wood-dark);
+    margin-top: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 /* ============================================
@@ -1236,7 +1454,7 @@ body {
 
     .side-panel {
         position: fixed;
-        top: 60px;
+        top: 70px;
         left: 0;
         width: 100%;
         max-width: 400px;
@@ -1325,20 +1543,20 @@ body {
     }
 
     .app-header {
-        height: 70px;
+        height: 80px;
     }
 
     .app-container {
-        padding-top: 70px;
+        padding-top: 80px;
     }
 
     .side-panel {
         width: 450px;
-        height: calc(100vh - 70px);
+        height: calc(100vh - 80px);
     }
 
     .header-content h1 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 
     .panel-section h2 {
@@ -1352,7 +1570,7 @@ body {
     }
 
     .btn {
-        font-size: 1.1rem;
+        font-size: 1rem;
         padding: 14px 28px;
     }
 
@@ -1400,7 +1618,7 @@ body {
 .remove-stop-btn:focus-visible,
 .add-stop-btn:focus-visible,
 .location-item:focus-visible {
-    outline: 3px solid #4A90D9;
+    outline: 3px solid var(--brass-color);
     outline-offset: 2px;
 }
 
@@ -1414,24 +1632,26 @@ body {
 }
 
 /* ============================================
-   Toast Notification System
+   Toast Notification System - Nautical Style
    ============================================ */
 .toast {
     position: fixed;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 12px 24px;
-    border-radius: 8px;
-    color: white;
+    padding: 14px 28px;
+    border-radius: var(--radius);
+    color: #f4e8d1;
     z-index: 10000;
     opacity: 0;
     transition: opacity 0.3s ease;
+    font-family: 'Libre Baskerville', Georgia, serif;
     font-size: 0.95rem;
     font-weight: 500;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
     max-width: 90%;
     text-align: center;
+    border: 2px solid rgba(255,255,255,0.2);
 }
 
 .toast.visible {
@@ -1439,20 +1659,24 @@ body {
 }
 
 .toast.error {
-    background: #dc3545;
+    background: linear-gradient(180deg, #a82039 0%, #8b1a2f 100%);
+    border-color: #6b1525;
 }
 
 .toast.success {
-    background: #28a745;
+    background: linear-gradient(180deg, #3d6b4f 0%, #2d5a3f 100%);
+    border-color: #1d4a2f;
 }
 
 .toast.info {
-    background: #17a2b8;
+    background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary-color) 100%);
+    border-color: var(--primary-dark);
 }
 
 .toast.warning {
-    background: #ffc107;
-    color: #333;
+    background: linear-gradient(180deg, var(--brass-light) 0%, var(--brass-color) 100%);
+    color: var(--wood-dark);
+    border-color: var(--brass-dark);
 }
 
 /* ============================================
