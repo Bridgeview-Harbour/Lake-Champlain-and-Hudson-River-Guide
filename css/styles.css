@@ -128,6 +128,21 @@ body {
     );
 }
 
+.header-logo {
+    height: 55px;
+    width: auto;
+    margin-right: 15px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    flex-shrink: 0;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
 .header-content h1 {
     font-family: 'Cinzel', 'Times New Roman', serif;
     font-size: 1.4rem;
@@ -202,28 +217,60 @@ body {
     flex-direction: column;
     transition: var(--transition);
     order: -1;
-    border-right: 4px solid var(--rope-color);
+    border-right: none;
     position: relative;
 }
 
-/* Rope texture border effect */
+/* Realistic twisted rope border effect */
 .side-panel::before {
     content: '';
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
-    width: 4px;
+    width: 12px;
     background:
+        /* Main rope strand - twisted effect */
         repeating-linear-gradient(
-            180deg,
-            var(--rope-color) 0px,
-            #8a6a4a 2px,
-            var(--rope-color) 4px,
-            #6a5040 6px,
-            var(--rope-color) 8px
+            165deg,
+            #8b7355 0px,
+            #a08060 3px,
+            #c4a574 6px,
+            #a08060 9px,
+            #8b7355 12px,
+            #6b5344 15px,
+            #8b7355 18px
+        ),
+        /* Secondary highlight strand */
+        repeating-linear-gradient(
+            195deg,
+            transparent 0px,
+            rgba(255,255,255,0.15) 2px,
+            transparent 4px
         );
+    background-color: #8b7355;
     z-index: 10;
+    box-shadow:
+        inset 2px 0 3px rgba(0,0,0,0.3),
+        inset -1px 0 2px rgba(255,255,255,0.1),
+        -2px 0 4px rgba(0,0,0,0.2);
+    border-left: 1px solid #5c4434;
+    border-right: 1px solid #5c4434;
+}
+
+/* Rope end caps at top and bottom */
+.side-panel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 12px;
+    height: 100%;
+    background:
+        radial-gradient(ellipse 6px 8px at 6px 0px, #6b5344 0%, transparent 70%),
+        radial-gradient(ellipse 6px 8px at 6px 100%, #6b5344 0%, transparent 70%);
+    z-index: 11;
+    pointer-events: none;
 }
 
 .panel-section {
@@ -1484,8 +1531,14 @@ body {
         padding: 0 15px;
     }
 
+    .header-logo {
+        height: 40px;
+        margin-right: 10px;
+    }
+
     .header-content h1 {
-        font-size: 1rem;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
     }
 
     .header-content .tagline {
