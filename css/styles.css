@@ -1800,3 +1800,358 @@ body {
         height: 100vh;
     }
 }
+
+/* ============================================
+   WEATHER SECTION STYLES
+   ============================================ */
+.weather-section {
+    margin-top: 2rem;
+}
+
+.weather-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.weather-loading {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: #666;
+}
+
+.weather-current {
+    background: var(--panel-bg);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--secondary-color);
+    margin: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.weather-temp {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.weather-wind {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 0.25rem;
+}
+
+.weather-condition {
+    font-size: 0.95rem;
+    color: #666;
+    font-style: italic;
+}
+
+.weather-forecast {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin: 1rem 0;
+}
+
+.forecast-day {
+    background: var(--panel-bg);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--secondary-color);
+    text-align: center;
+}
+
+.forecast-name {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.forecast-temp {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin: 0.25rem 0;
+}
+
+.forecast-wind {
+    font-size: 0.85rem;
+    color: #555;
+    margin: 0.25rem 0;
+}
+
+.forecast-desc {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+.weather-alerts {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    margin: 1rem 0;
+}
+
+.weather-alert {
+    margin-bottom: 0.75rem;
+}
+
+.weather-alert:last-child {
+    margin-bottom: 0;
+}
+
+.alert-event {
+    font-weight: bold;
+    color: #856404;
+    margin-bottom: 0.25rem;
+}
+
+.alert-headline {
+    color: #856404;
+    font-size: 0.9rem;
+}
+
+.alert-extreme {
+    background: #f8d7da;
+    border-color: #dc3545;
+}
+
+.alert-severe {
+    background: #fff3cd;
+    border-color: #ffc107;
+}
+
+.weather-updated {
+    font-size: 0.85rem;
+    color: #666;
+    margin: 1rem 0 0.5rem;
+    text-align: center;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.wind-arrow-icon {
+    pointer-events: none;
+}
+
+/* Submit POI Button in Header */
+.submit-poi-btn {
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+@media (max-width: 900px) {
+    .weather-forecast {
+        grid-template-columns: 1fr;
+    }
+
+    .submit-poi-btn {
+        display: none; /* Hide on mobile, use menu instead */
+    }
+}
+
+/* ============================================
+   POI SUBMISSION MODAL STYLES
+   ============================================ */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 58, 92, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 1rem;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: var(--panel-bg-texture);
+    border: 3px solid var(--secondary-color);
+    border-radius: var(--radius-lg);
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 2px solid var(--secondary-color);
+    background: var(--panel-bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s ease;
+}
+
+.modal-close:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    padding: 1.5rem;
+    border-top: 2px solid var(--secondary-color);
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    background: var(--panel-bg);
+    position: sticky;
+    bottom: 0;
+}
+
+.form-section {
+    margin-bottom: 2rem;
+}
+
+.form-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    border-bottom: 1px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
+}
+
+.form-help {
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.warning {
+    background: #fff3cd;
+    color: #856404;
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+    margin-top: 0.5rem;
+    border: 1px solid #ffc107;
+    display: flex;
+    align-items: center;
+}
+
+.warning.hidden {
+    display: none;
+}
+
+#submitSuccess {
+    text-align: center;
+    padding: 3rem 1.5rem;
+}
+
+.success-icon {
+    font-size: 4rem;
+    color: #28a745;
+    margin-bottom: 1rem;
+    animation: scaleIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+#submitSuccess h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+#submitSuccess p {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+#submitSuccess a {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+#submitSuccess a:hover {
+    text-decoration: none;
+}
+
+/* Coordinate picking mode */
+.modal.picking-mode .modal-content {
+    opacity: 0.95;
+}
+
+/* Mobile responsiveness for modal */
+@media (max-width: 900px) {
+    .modal {
+        padding: 0;
+    }
+
+    .modal-content {
+        max-width: 100%;
+        max-height: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+    }
+
+    .modal-footer button {
+        width: 100%;
+    }
+
+    .form-section {
+        margin-bottom: 1.5rem;
+    }
+}

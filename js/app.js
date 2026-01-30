@@ -29,7 +29,14 @@ const isNode = typeof module !== 'undefined' && module.exports;
         vesselSpeed: 15,
         currentFilter: 'all',
         searchQuery: '',
-        isMobile: window.innerWidth <= 900
+        isMobile: window.innerWidth <= 900,
+        // Weather state
+        weatherZone: 'ANZ072',
+        showWindOverlay: false,
+        weatherData: null,
+        // POI submission state
+        isPickingCoordinates: false,
+        tempMarker: null
     };
 
     // Drag-and-drop state
@@ -1191,9 +1198,49 @@ const isNode = typeof module !== 'undefined' && module.exports;
             elements.legendToggle.setAttribute('aria-expanded', isExpanded.toString());
         });
 
-        // Close quick info on map click
+        // Close quick info on map click (also handles coordinate picking)
         state.map.on('click', (e) => {
-            // Only hide if clicking on map, not on a marker
+            // Handle coordinate picking for POI submission
+            if (state.isPickingCoordinates) {
+                const { lat, lng } = e.latlng;
+
+                // Set form values
+                const latInput = document.getElementById('poiLatitude');
+                const lngInput = document.getElementById('poiLongitude');
+                if (latInput) latInput.value = lat.toFixed(6);
+                if (lngInput) lngInput.value = lng.toFixed(6);
+
+                // Place temp marker
+                if (state.tempMarker) {
+                    state.map.removeLayer(state.tempMarker);
+                }
+
+                // Create simple circle marker for temp location
+                state.tempMarker = L.circleMarker([lat, lng], {
+                    radius: 8,
+                    fillColor: '#ff0000',
+                    color: '#ffffff',
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 0.8
+                }).addTo(state.map);
+
+                // Check if in water (use navigation.js isInWater function)
+                const warning = document.getElementById('coordWarning');
+                if (typeof isInWater === 'function' && !isInWater(lat, lng)) {
+                    warning?.classList.remove('hidden');
+                } else {
+                    warning?.classList.add('hidden');
+                }
+
+                state.isPickingCoordinates = false;
+                const modal = document.getElementById('submitPoiModal');
+                modal?.classList.remove('picking-mode');
+                showToast('Coordinates set!', 'success');
+                return;
+            }
+
+            // Only hide quick info if clicking on map, not on a marker
             if (!e.originalEvent.target.closest('.custom-marker-wrapper')) {
                 hideQuickInfo();
             }
@@ -1254,6 +1301,36 @@ const isNode = typeof module !== 'undefined' && module.exports;
                 trapFocusInQuickInfo(e);
             }
         });
+
+        // Weather event handlers
+        const weatherZoneSelect = document.getElementById('weatherZone');
+        if (weatherZoneSelect) {
+            weatherZoneSelect.addEventListener('change', (e) => {
+                state.weatherZone = e.target.value;
+                if (typeof WeatherModule !== 'undefined') {
+                    WeatherModule.setZone(e.target.value);
+                }
+            });
+        }
+
+        const windOverlayToggle = document.getElementById('windOverlayToggle');
+        if (windOverlayToggle) {
+            windOverlayToggle.addEventListener('change', (e) => {
+                state.showWindOverlay = e.target.checked;
+                if (typeof WeatherModule !== 'undefined') {
+                    WeatherModule.toggleWindOverlay(e.target.checked);
+                }
+            });
+        }
+
+        const refreshWeatherBtn = document.getElementById('refreshWeather');
+        if (refreshWeatherBtn) {
+            refreshWeatherBtn.addEventListener('click', () => {
+                if (typeof WeatherModule !== 'undefined') {
+                    WeatherModule.refresh();
+                }
+            });
+        }
     }
 
     // ============================================
@@ -1322,6 +1399,170 @@ const isNode = typeof module !== 'undefined' && module.exports;
     }
 
     // ============================================
+    // POI Submission Module
+    // ============================================
+    function initPoiSubmission() {
+        const modal = document.getElementById('submitPoiModal');
+        const openBtn = document.getElementById('submitPoiBtn');
+        const closeBtn = modal?.querySelector('.modal-close');
+        const cancelBtn = document.getElementById('cancelSubmit');
+        const form = document.getElementById('poiSubmitForm');
+        const pickBtn = document.getElementById('pickFromMap');
+
+        if (!modal || !openBtn) {
+            console.warn('POI submission elements not found');
+            return;
+        }
+
+        // Open modal
+        openBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            document.getElementById('poiName')?.focus();
+        });
+
+        // Close modal
+        const closeModal = () => {
+            modal.classList.add('hidden');
+            resetPoiForm();
+            if (state.tempMarker && state.map) {
+                state.map.removeLayer(state.tempMarker);
+                state.tempMarker = null;
+            }
+            state.isPickingCoordinates = false;
+            modal.classList.remove('picking-mode');
+        };
+
+        closeBtn?.addEventListener('click', closeModal);
+        cancelBtn?.addEventListener('click', closeModal);
+
+        // Pick from map
+        pickBtn?.addEventListener('click', () => {
+            state.isPickingCoordinates = true;
+            modal.classList.add('picking-mode');
+            showToast('Click on the map to select coordinates', 'info', 5000);
+        });
+
+        // Form submission
+        form?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('poiName').value.trim(),
+                category: document.getElementById('poiCategory').value,
+                description: document.getElementById('poiDescription').value.trim(),
+                latitude: parseFloat(document.getElementById('poiLatitude').value),
+                longitude: parseFloat(document.getElementById('poiLongitude').value),
+                town: document.getElementById('poiTown').value.trim(),
+                state: document.getElementById('poiState').value.trim(),
+                website: document.getElementById('poiWebsite').value.trim(),
+                phone: document.getElementById('poiPhone').value.trim(),
+                vhf: document.getElementById('poiVHF').value.trim(),
+                submitterName: document.getElementById('submitterName').value.trim(),
+                submitterEmail: document.getElementById('submitterEmail').value.trim()
+            };
+
+            // Validate coordinates in range
+            if (formData.latitude < 43 || formData.latitude > 45.2 ||
+                formData.longitude < -73.5 || formData.longitude > -73.0) {
+                showToast('Coordinates must be within Lake Champlain region', 'error');
+                return;
+            }
+
+            // Submit to GitHub
+            const issueUrl = await submitPoiToGitHub(formData);
+
+            if (issueUrl) {
+                // Show success screen
+                form.classList.add('hidden');
+                const successDiv = document.getElementById('submitSuccess');
+                successDiv.classList.remove('hidden');
+                document.getElementById('issueLink').href = issueUrl;
+
+                // Submit another button
+                document.getElementById('submitAnother').addEventListener('click', () => {
+                    successDiv.classList.add('hidden');
+                    form.classList.remove('hidden');
+                    resetPoiForm();
+                });
+            }
+        });
+    }
+
+    async function submitPoiToGitHub(poiData) {
+        const owner = 'Bridgeview-Harbour';
+        const repo = 'Lake-Champlain-and-Hudson-River-Guide';
+
+        // Format as structured markdown for easy parsing
+        const issueBody = `
+## POI Submission
+
+**Name:** ${poiData.name}
+**Category:** ${poiData.category}
+**Latitude:** ${poiData.latitude}
+**Longitude:** ${poiData.longitude}
+**Town:** ${poiData.town || 'N/A'}
+**State:** ${poiData.state || 'N/A'}
+
+**Description:**
+${poiData.description}
+
+**Contact Information:**
+- Website: ${poiData.website || 'N/A'}
+- Phone: ${poiData.phone || 'N/A'}
+- VHF: ${poiData.vhf || 'N/A'}
+
+---
+**Submitted by:** ${poiData.submitterName || 'Anonymous'}
+${poiData.submitterEmail ? `**Email:** ${poiData.submitterEmail}` : ''}
+
+<!-- POI_DATA
+${JSON.stringify(poiData, null, 2)}
+-->
+`;
+
+        try {
+            const response = await fetch(
+                `https://api.github.com/repos/${owner}/${repo}/issues`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github.v3+json'
+                    },
+                    body: JSON.stringify({
+                        title: `New POI Submission: ${poiData.name}`,
+                        body: issueBody,
+                        labels: ['poi-submission', 'needs-review']
+                    })
+                }
+            );
+
+            if (!response.ok) {
+                if (response.status === 403) {
+                    showToast('Rate limit exceeded. Please try again in an hour.', 'error', 5000);
+                } else {
+                    showToast('Failed to submit POI. Please try again.', 'error');
+                }
+                return null;
+            }
+
+            const issue = await response.json();
+            showToast('POI submitted successfully!', 'success');
+            return issue.html_url;
+
+        } catch (error) {
+            console.error('Error submitting POI:', error);
+            showToast('Network error. Please check your connection.', 'error');
+            return null;
+        }
+    }
+
+    function resetPoiForm() {
+        document.getElementById('poiSubmitForm')?.reset();
+        document.getElementById('coordWarning')?.classList.add('hidden');
+    }
+
+    // ============================================
     // Initialize Application
     // ============================================
     async function init() {
@@ -1355,6 +1596,16 @@ const isNode = typeof module !== 'undefined' && module.exports;
 
             // Set up preference saving
             initPreferenceSaving();
+
+            // Initialize POI submission
+            console.log('Initializing POI submission...');
+            initPoiSubmission();
+
+            // Initialize weather module
+            console.log('Initializing weather module...');
+            if (typeof WeatherModule !== 'undefined') {
+                WeatherModule.init(state.map, state.weatherZone);
+            }
 
             // Set initial speed unit display
             elements.speedUnit.textContent = UNIT_CONVERSIONS[state.currentUnit].speedUnit;

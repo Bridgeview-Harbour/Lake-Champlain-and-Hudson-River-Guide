@@ -1,0 +1,135 @@
+name: Process POI Submission
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  process-poi:
+    if: contains(github.event.issue.labels.*.name, 'poi-submission')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract POI data from issue
+        id: extract
+        run: |
+          # Extract JSON from issue body (between <!-- POI_DATA and -->)
+          POI_JSON=$(echo "${{ github.event.issue.body }}" | \
+            sed -n '/<!-- POI_DATA/,/-->/p' | \
+            sed '1d;$d')
+
+          # Save to file
+          echo "$POI_JSON" > /tmp/poi_data.json
+
+          # Validate JSON
+          if ! jq empty /tmp/poi_data.json 2>/dev/null; then
+            echo "Invalid JSON data in issue"
+            exit 1
+          fi
+
+          # Extract fields
+          NAME=$(jq -r '.name' /tmp/poi_data.json)
+          CATEGORY=$(jq -r '.category' /tmp/poi_data.json)
+          LAT=$(jq -r '.latitude' /tmp/poi_data.json)
+          LON=$(jq -r '.longitude' /tmp/poi_data.json)
+
+          # Validate required fields
+          if [ -z "$NAME" ] || [ -z "$CATEGORY" ] || [ -z "$LAT" ] || [ -z "$LON" ]; then
+            echo "Missing required fields"
+            exit 1
+          fi
+
+          echo "name=$NAME" >> $GITHUB_OUTPUT
+          echo "category=$CATEGORY" >> $GITHUB_OUTPUT
+
+      - name: Generate POI JSON entry
+        run: |
+          # Read POI data
+          POI_DATA=$(cat /tmp/poi_data.json)
+
+          # Generate ID (category-name-lowercase-with-hyphens)
+          ID=$(echo "${{ steps.extract.outputs.category }}-${{ steps.extract.outputs.name }}" | \
+            tr '[:upper:]' '[:lower:]' | \
+            tr -s ' ' '-' | \
+            sed 's/[^a-z0-9-]//g')
+
+          # Create POI entry matching schema
+          POI_ENTRY=$(jq -n \
+            --arg id "$ID" \
+            --argjson data "$POI_DATA" \
+            '{
+              id: $id,
+              name: $data.name,
+              category: $data.category,
+              location: {
+                coordinates: {
+                  latitude: ($data.latitude | tonumber),
+                  longitude: ($data.longitude | tonumber)
+                },
+                town: $data.town,
+                state: $data.state,
+                waterBodyRegion: "Lake Champlain"
+              },
+              contact: {
+                website: $data.website,
+                phone: $data.phone,
+                vhfChannel: $data.vhf
+              },
+              details: {
+                description: $data.description
+              },
+              tags: ["community-submitted"]
+            }')
+
+          # Append to JSON file
+          jq --argjson new "$POI_ENTRY" '.pois += [$new]' \
+            pois/lake_champlain_pois.json > /tmp/updated_pois.json
+
+          # Replace original
+          mv /tmp/updated_pois.json pois/lake_champlain_pois.json
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: |
+            Add community-submitted POI: ${{ steps.extract.outputs.name }}
+
+            Category: ${{ steps.extract.outputs.category }}
+            Submitted via issue #${{ github.event.issue.number }}
+          branch: poi-submission-${{ github.event.issue.number }}
+          title: "New POI: ${{ steps.extract.outputs.name }}"
+          body: |
+            ## Community POI Submission
+
+            This PR was automatically generated from issue #${{ github.event.issue.number }}
+
+            **POI Details:**
+            - Name: ${{ steps.extract.outputs.name }}
+            - Category: ${{ steps.extract.outputs.category }}
+
+            **Review Checklist:**
+            - [ ] Coordinates are accurate and in water
+            - [ ] Description is appropriate
+            - [ ] No duplicate POI exists
+            - [ ] Contact information is valid (if provided)
+
+            Closes #${{ github.event.issue.number }}
+          labels: |
+            poi-submission
+            automated-pr
+
+      - name: Comment on issue
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '✅ POI data validated! A pull request has been created and will be reviewed shortly. Thank you for your contribution!'
+            });
