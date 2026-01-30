@@ -1306,9 +1306,15 @@ const isNode = typeof module !== 'undefined' && module.exports;
                 }
 
                 state.isPickingCoordinates = false;
+
+                // Restore the modal after picking coordinates
                 const modal = document.getElementById('submitPoiModal');
-                modal?.classList.remove('picking-mode');
-                showToast('Coordinates set!', 'success');
+                if (modal) {
+                    modal.classList.remove('hidden');
+                    modal.classList.remove('picking-mode');
+                }
+
+                showToast(`Coordinates set: ${lat.toFixed(4)}, ${lng.toFixed(4)}`, 'success', 3000);
                 return;
             }
 
@@ -1510,8 +1516,10 @@ const isNode = typeof module !== 'undefined' && module.exports;
         // Pick from map
         pickBtn?.addEventListener('click', () => {
             state.isPickingCoordinates = true;
+            // Hide modal so user can see and click the map
+            modal.classList.add('hidden');
             modal.classList.add('picking-mode');
-            showToast('Click on the map to select coordinates', 'info', 5000);
+            showToast('Click on the map to select location', 'info', 0); // Toast stays until coordinates selected
         });
 
         // Form submission
