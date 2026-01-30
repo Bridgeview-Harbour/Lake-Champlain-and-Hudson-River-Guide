@@ -535,22 +535,29 @@ const WeatherModule = (function() {
     function convertToFahrenheit(temp) {
         if (!temp || temp.value === null) return null;
 
+        // Log for debugging
+        console.log('Temperature conversion:', { value: temp.value, unitCode: temp.unitCode });
+
         // Check for Celsius unit codes (NOAA uses different formats)
         if (temp.unitCode === 'wmoUnit:degC' ||
             temp.unitCode === 'unit:degC' ||
             temp.unitCode === 'degC') {
-            return (temp.value * 9/5) + 32;
+            const converted = (temp.value * 9/5) + 32;
+            console.log('Converting from Celsius:', temp.value, '°C →', converted, '°F');
+            return converted;
         }
 
-        // Already in Fahrenheit or other unit
+        // Already in Fahrenheit
         if (temp.unitCode === 'wmoUnit:degF' ||
             temp.unitCode === 'unit:degF' ||
             temp.unitCode === 'degF') {
+            console.log('Already in Fahrenheit:', temp.value, '°F');
             return temp.value;
         }
 
-        // Default: assume Celsius and convert (NOAA default is Celsius)
-        return (temp.value * 9/5) + 32;
+        // Unknown unit code - log warning and return as-is
+        console.warn('Unknown temperature unit code:', temp.unitCode, '- returning value as-is:', temp.value);
+        return temp.value;
     }
 
     /**
