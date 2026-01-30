@@ -23,15 +23,15 @@ const WeatherModule = (function() {
         USER_AGENT: 'Lake-Champlain-Guide/1.0'
     };
 
-    // Lake Champlain marine zones and weather stations
+    // Lake Champlain weather zones and stations
     const ZONES = {
-        ANZ072: {
+        northern: {
             name: 'Northern Lake Champlain',
             description: 'Rouses Point to Burlington',
             stations: ['KBTV'], // Burlington VT Airport
             center: { lat: 44.8, lng: -73.25 }
         },
-        ANZ073: {
+        southern: {
             name: 'Southern Lake Champlain',
             description: 'Burlington to Whitehall',
             stations: ['KSLK'], // Saranac Lake (nearby)
@@ -40,7 +40,7 @@ const WeatherModule = (function() {
     };
 
     // State
-    let currentZone = 'ANZ072';
+    let currentZone = 'northern';
     let weatherData = {
         current: null,
         forecast: null,
@@ -56,7 +56,7 @@ const WeatherModule = (function() {
     /**
      * Initialize weather module
      */
-    function init(leafletMap, zone = 'ANZ072') {
+    function init(leafletMap, zone = 'northern') {
         map = leafletMap;
         currentZone = zone;
 
@@ -350,11 +350,12 @@ const WeatherModule = (function() {
 
         // Weather Source Attribution
         const zoneName = ZONES[currentZone]?.name || 'Lake Champlain';
-        const forecastUrl = `https://forecast.weather.gov/MapClick.php?zoneid=${currentZone}`;
+        const zoneCenter = ZONES[currentZone]?.center || { lat: 44.3, lng: -73.3 };
+        const forecastUrl = `https://forecast.weather.gov/MapClick.php?lat=${zoneCenter.lat}&lon=${zoneCenter.lng}`;
         html += `
             <div class="weather-attribution">
                 <p class="weather-source">
-                    <strong>Forecast Zone:</strong> ${zoneName} (${currentZone})
+                    <strong>Forecast Area:</strong> ${zoneName}
                 </p>
                 <p class="weather-source">
                     Weather data provided by

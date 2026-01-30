@@ -31,7 +31,7 @@ const isNode = typeof module !== 'undefined' && module.exports;
         searchQuery: '',
         isMobile: window.innerWidth <= 900,
         // Weather state
-        weatherZone: 'ANZ072',
+        weatherZone: 'northern',
         showWindOverlay: false,
         weatherData: null,
         // POI submission state
