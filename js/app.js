@@ -1197,15 +1197,17 @@ const isNode = typeof module !== 'undefined' && module.exports;
                         btn.classList.add('active');
                         btn.setAttribute('aria-pressed', 'true');
 
-                        // Remove "All" if present
+                        // Remove "All" from state if present
                         const allIndex = state.currentFilters.indexOf('all');
                         if (allIndex > -1) {
                             state.currentFilters.splice(allIndex, 1);
-                            const allBtn = elements.filterButtons.find(b => b.dataset.filter === 'all');
-                            if (allBtn) {
-                                allBtn.classList.remove('active');
-                                allBtn.setAttribute('aria-pressed', 'false');
-                            }
+                        }
+
+                        // Always deactivate "All" button when selecting any specific filter
+                        const allBtn = Array.from(elements.filterButtons).find(b => b.dataset.filter === 'all');
+                        if (allBtn && allBtn.classList.contains('active')) {
+                            allBtn.classList.remove('active');
+                            allBtn.setAttribute('aria-pressed', 'false');
                         }
 
                         // Add this filter
