@@ -27,7 +27,7 @@ const isNode = typeof module !== 'undefined' && module.exports;
         stops: [null, null],  // Array of POI IDs: [startId, stop1Id, stop2Id, ..., endId]
         currentUnit: 'nm',
         vesselSpeed: 15,
-        currentFilter: 'all',
+        currentFilters: ['all'],  // Array of active filters (supports multiple selections)
         searchQuery: '',
         isMobile: window.innerWidth <= 900,
         // Weather state
@@ -741,6 +741,15 @@ const isNode = typeof module !== 'undefined' && module.exports;
         return false;
     }
 
+    // Check if POI matches any of the active filters (multi-select support)
+    function poiMatchesFilters(poi, filters) {
+        // If 'all' is in the filters array, show everything
+        if (filters.includes('all')) return true;
+
+        // POI matches if it matches ANY of the selected filters
+        return filters.some(filter => poiMatchesFilter(poi, filter));
+    }
+
     // ============================================
     // Populate Location List
     // ============================================
@@ -755,12 +764,12 @@ const isNode = typeof module !== 'undefined' && module.exports;
             return;
         }
 
-        // Filter POIs based on current filter and search
+        // Filter POIs based on current filters and search
         let filteredPOIs = [...POINTS_OF_INTEREST];
 
-        // Apply type/tag filter
-        if (state.currentFilter !== 'all') {
-            filteredPOIs = filteredPOIs.filter(poi => poiMatchesFilter(poi, state.currentFilter));
+        // Apply type/tag filters (multi-select support)
+        if (!state.currentFilters.includes('all')) {
+            filteredPOIs = filteredPOIs.filter(poi => poiMatchesFilters(poi, state.currentFilters));
         }
 
         // Apply search filter
@@ -1076,9 +1085,9 @@ const isNode = typeof module !== 'undefined' && module.exports;
     // ============================================
     // Filter Markers on Map
     // ============================================
-    function filterMarkers(filter) {
+    function filterMarkers() {
         Object.values(state.markers).forEach(({ marker, poi }) => {
-            if (poiMatchesFilter(poi, filter)) {
+            if (poiMatchesFilters(poi, state.currentFilters)) {
                 marker.addTo(state.map);
             } else {
                 state.map.removeLayer(marker);
@@ -1145,20 +1154,69 @@ const isNode = typeof module !== 'undefined' && module.exports;
         // Clear button
         elements.clearBtn.addEventListener('click', clearSelection);
 
-        // Filter buttons
+        // Filter buttons (multi-select support)
         elements.filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Update active state and ARIA pressed
-                elements.filterButtons.forEach(b => {
-                    b.classList.remove('active');
-                    b.setAttribute('aria-pressed', 'false');
-                });
-                btn.classList.add('active');
-                btn.setAttribute('aria-pressed', 'true');
+                const filterType = btn.dataset.filter;
 
-                // Apply filter
-                state.currentFilter = btn.dataset.filter;
-                filterMarkers(state.currentFilter);
+                // Handle "All" button - exclusive selection
+                if (filterType === 'all') {
+                    // Deactivate all other filters
+                    elements.filterButtons.forEach(b => {
+                        b.classList.remove('active');
+                        b.setAttribute('aria-pressed', 'false');
+                    });
+                    btn.classList.add('active');
+                    btn.setAttribute('aria-pressed', 'true');
+                    state.currentFilters = ['all'];
+                } else {
+                    // Toggle this filter
+                    const isActive = btn.classList.contains('active');
+
+                    if (isActive) {
+                        // Deactivate this filter
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-pressed', 'false');
+                        const index = state.currentFilters.indexOf(filterType);
+                        if (index > -1) {
+                            state.currentFilters.splice(index, 1);
+                        }
+
+                        // If no filters active, activate "All"
+                        if (state.currentFilters.length === 0 ||
+                            (state.currentFilters.length === 1 && state.currentFilters[0] === 'all')) {
+                            const allBtn = elements.filterButtons.find(b => b.dataset.filter === 'all');
+                            if (allBtn) {
+                                allBtn.classList.add('active');
+                                allBtn.setAttribute('aria-pressed', 'true');
+                            }
+                            state.currentFilters = ['all'];
+                        }
+                    } else {
+                        // Activate this filter
+                        btn.classList.add('active');
+                        btn.setAttribute('aria-pressed', 'true');
+
+                        // Remove "All" if present
+                        const allIndex = state.currentFilters.indexOf('all');
+                        if (allIndex > -1) {
+                            state.currentFilters.splice(allIndex, 1);
+                            const allBtn = elements.filterButtons.find(b => b.dataset.filter === 'all');
+                            if (allBtn) {
+                                allBtn.classList.remove('active');
+                                allBtn.setAttribute('aria-pressed', 'false');
+                            }
+                        }
+
+                        // Add this filter
+                        if (!state.currentFilters.includes(filterType)) {
+                            state.currentFilters.push(filterType);
+                        }
+                    }
+                }
+
+                // Apply filters
+                filterMarkers();
                 populateLocationList();
             });
         });
@@ -1197,6 +1255,18 @@ const isNode = typeof module !== 'undefined' && module.exports;
             const isExpanded = !elements.legendContent.classList.contains('hidden');
             elements.legendToggle.setAttribute('aria-expanded', isExpanded.toString());
         });
+
+        // Weather toggle
+        const weatherToggle = document.getElementById('weatherToggle');
+        const weatherContent = document.getElementById('weatherContent');
+        if (weatherToggle && weatherContent) {
+            weatherToggle.addEventListener('click', () => {
+                weatherContent.classList.toggle('hidden');
+                // Update ARIA expanded state
+                const isExpanded = !weatherContent.classList.contains('hidden');
+                weatherToggle.setAttribute('aria-expanded', isExpanded.toString());
+            });
+        }
 
         // Close quick info on map click (also handles coordinate picking)
         state.map.on('click', (e) => {

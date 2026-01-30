@@ -132,32 +132,36 @@
 
             <!-- Weather Section -->
             <section class="panel-section weather-section">
-                <h2>Weather & Conditions</h2>
+                <button id="weatherToggle" class="section-toggle" aria-expanded="false" aria-controls="weatherContent">
+                    <span class="toggle-icon">▶</span> Weather & Conditions
+                </button>
 
-                <!-- Zone Selector -->
-                <div class="form-group">
-                    <label for="weatherZone">Forecast Zone</label>
-                    <select id="weatherZone" class="touch-input">
-                        <option value="ANZ072">Northern Lake Champlain</option>
-                        <option value="ANZ073">Southern Lake Champlain</option>
-                    </select>
+                <div id="weatherContent" class="weather-content hidden" role="region" aria-label="Weather and conditions">
+                    <!-- Zone Selector -->
+                    <div class="form-group">
+                        <label for="weatherZone">Forecast Zone</label>
+                        <select id="weatherZone" class="touch-input">
+                            <option value="ANZ072">Northern Lake Champlain</option>
+                            <option value="ANZ073">Southern Lake Champlain</option>
+                        </select>
+                    </div>
+
+                    <!-- Weather Widget Container (populated by weather.js) -->
+                    <div id="weatherWidget">
+                        <div class="weather-loading">Loading weather...</div>
+                    </div>
+
+                    <!-- Wind Overlay Toggle -->
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="windOverlayToggle">
+                            <span>Show wind overlay on map</span>
+                        </label>
+                    </div>
+
+                    <!-- Refresh Button -->
+                    <button id="refreshWeather" class="btn btn-secondary">Refresh Weather</button>
                 </div>
-
-                <!-- Weather Widget Container (populated by weather.js) -->
-                <div id="weatherWidget">
-                    <div class="weather-loading">Loading weather...</div>
-                </div>
-
-                <!-- Wind Overlay Toggle -->
-                <div class="form-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="windOverlayToggle">
-                        <span>Show wind overlay on map</span>
-                    </label>
-                </div>
-
-                <!-- Refresh Button -->
-                <button id="refreshWeather" class="btn btn-secondary">Refresh Weather</button>
             </section>
 
             <!-- Filter Section -->
