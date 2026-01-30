@@ -89,8 +89,8 @@ const WeatherModule = (function() {
             // Fetch all data in parallel
             const [current, forecast, alerts, winds] = await Promise.all([
                 fetchCurrentConditions(zone.stations[0]),
-                fetchMarineForecast(currentZone),
-                fetchAlerts(currentZone),
+                fetchPointForecast(zone.center.lat, zone.center.lng),
+                fetchAlerts(zone.center.lat, zone.center.lng),
                 fetchWindData(zone.center.lat, zone.center.lng)
             ]);
 
@@ -158,24 +158,36 @@ const WeatherModule = (function() {
     }
 
     /**
-     * Fetch marine forecast for Lake Champlain zone
+     * Fetch point forecast for specific coordinates
      */
-    async function fetchMarineForecast(zoneId) {
-        const url = `https://api.weather.gov/zones/forecast/${zoneId}/forecast`;
-
+    async function fetchPointForecast(lat, lon) {
         try {
-            const response = await fetch(url, {
+            // First, get the forecast grid endpoint for this location
+            const pointUrl = `https://api.weather.gov/points/${lat.toFixed(4)},${lon.toFixed(4)}`;
+            const pointResponse = await fetch(pointUrl, {
                 headers: { 'User-Agent': CONFIG.USER_AGENT }
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
+            if (!pointResponse.ok) {
+                throw new Error(`HTTP ${pointResponse.status}`);
             }
 
-            const data = await response.json();
+            const pointData = await pointResponse.json();
+            const forecastUrl = pointData.properties.forecast;
+
+            // Now get the actual forecast
+            const forecastResponse = await fetch(forecastUrl, {
+                headers: { 'User-Agent': CONFIG.USER_AGENT }
+            });
+
+            if (!forecastResponse.ok) {
+                throw new Error(`HTTP ${forecastResponse.status}`);
+            }
+
+            const data = await forecastResponse.json();
             const periods = data.properties.periods || [];
 
-            // Return first 3 periods (typically 3 days)
+            // Return first 6 periods (typically 3 days with day/night)
             return periods.slice(0, 6).map(period => ({
                 name: period.name,
                 temperature: period.temperature,
@@ -188,16 +200,16 @@ const WeatherModule = (function() {
                 isDaytime: period.isDaytime
             }));
         } catch (error) {
-            console.error('Error fetching forecast:', error);
+            console.error('Error fetching point forecast:', error);
             return [];
         }
     }
 
     /**
-     * Fetch active weather alerts for zone
+     * Fetch active weather alerts for location
      */
-    async function fetchAlerts(zoneId) {
-        const url = `https://api.weather.gov/alerts/active?zone=${zoneId}`;
+    async function fetchAlerts(lat, lon) {
+        const url = `https://api.weather.gov/alerts/active?point=${lat},${lon}`;
 
         try {
             const response = await fetch(url, {
