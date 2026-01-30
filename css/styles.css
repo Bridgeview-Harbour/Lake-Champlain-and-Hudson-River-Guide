@@ -252,11 +252,22 @@ body {
     position: fixed;
     top: 70px;
     left: 0;
-    transform: translateX(0);
+    transform: translateX(0); /* Desktop: visible by default */
 }
 
 .side-panel.hidden {
     transform: translateX(-100%);
+}
+
+/* Mobile: hide panel by default, show map */
+@media screen and (max-width: 900px) {
+    .side-panel {
+        transform: translateX(-100%); /* Mobile: hidden by default */
+    }
+
+    .side-panel:not(.hidden) {
+        transform: translateX(0); /* Show when toggled */
+    }
 }
 
 /* ============================================
@@ -1572,16 +1583,6 @@ body {
     .side-panel {
         width: 100%;
         max-width: 400px;
-    }
-
-    /* On mobile, start hidden to show map first */
-    .side-panel.mobile-hidden {
-        transform: translateX(-100%);
-    }
-
-    /* Toggle menu button shows panel */
-    .side-panel.mobile-hidden:not(.hidden) {
-        transform: translateX(0);
     }
 
     .quick-info {
