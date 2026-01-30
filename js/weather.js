@@ -532,10 +532,23 @@ const WeatherModule = (function() {
      */
     function convertToFahrenheit(temp) {
         if (!temp || temp.value === null) return null;
-        if (temp.unitCode === 'unit:degC') {
+
+        // Check for Celsius unit codes (NOAA uses different formats)
+        if (temp.unitCode === 'wmoUnit:degC' ||
+            temp.unitCode === 'unit:degC' ||
+            temp.unitCode === 'degC') {
             return (temp.value * 9/5) + 32;
         }
-        return temp.value;
+
+        // Already in Fahrenheit or other unit
+        if (temp.unitCode === 'wmoUnit:degF' ||
+            temp.unitCode === 'unit:degF' ||
+            temp.unitCode === 'degF') {
+            return temp.value;
+        }
+
+        // Default: assume Celsius and convert (NOAA default is Celsius)
+        return (temp.value * 9/5) + 32;
     }
 
     /**
