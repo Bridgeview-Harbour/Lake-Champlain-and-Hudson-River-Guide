@@ -292,8 +292,30 @@ const WeatherModule = (function() {
 
         let html = '';
 
-        // Current Conditions
-        if (weatherData.current) {
+        // Current Forecast (use first forecast period for current temperature)
+        if (weatherData.forecast && weatherData.forecast.length > 0) {
+            const currentPeriod = weatherData.forecast[0];
+            const curr = weatherData.current;
+
+            html += `
+                <div class="weather-current">
+                    <div class="weather-temp">${currentPeriod.temperature}°${currentPeriod.temperatureUnit}</div>
+                    ${curr ? `
+                        <div class="weather-wind">
+                            Wind: ${formatWindDirection(curr.windDirection)} ${curr.windSpeed !== null ? Math.round(curr.windSpeed) + ' kts' : 'N/A'}
+                            ${curr.windGust ? `, Gusts ${Math.round(curr.windGust)} kts` : ''}
+                        </div>
+                        <div class="weather-condition">${curr.description}</div>
+                    ` : `
+                        <div class="weather-wind">
+                            Wind: ${currentPeriod.windSpeed} ${currentPeriod.windDirection}
+                        </div>
+                        <div class="weather-condition">${currentPeriod.shortForecast}</div>
+                    `}
+                </div>
+            `;
+        } else if (weatherData.current) {
+            // Fallback to observation if no forecast available
             const curr = weatherData.current;
             html += `
                 <div class="weather-current">
