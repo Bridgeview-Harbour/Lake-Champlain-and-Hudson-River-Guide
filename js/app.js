@@ -1099,13 +1099,13 @@ const isNode = typeof module !== 'undefined' && module.exports;
     // Event Listeners
     // ============================================
     function initEventListeners() {
-        // Menu toggle (mobile)
+        // Menu toggle (show/hide side panel)
         elements.menuToggle.addEventListener('click', () => {
-            elements.sidePanel.classList.toggle('open');
+            elements.sidePanel.classList.toggle('hidden');
             elements.menuToggle.classList.toggle('active');
             // Update ARIA expanded state
-            const isOpen = elements.sidePanel.classList.contains('open');
-            elements.menuToggle.setAttribute('aria-expanded', isOpen.toString());
+            const isVisible = !elements.sidePanel.classList.contains('hidden');
+            elements.menuToggle.setAttribute('aria-expanded', isVisible.toString());
         });
 
         // Add stop button

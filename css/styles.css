@@ -252,11 +252,11 @@ body {
     position: fixed;
     top: 70px;
     left: 0;
-    transform: translateX(-100%);
+    transform: translateX(0);
 }
 
-.side-panel.open {
-    transform: translateX(0);
+.side-panel.hidden {
+    transform: translateX(-100%);
 }
 
 /* Realistic twisted rope border effect */
@@ -1538,6 +1538,16 @@ body {
         max-width: 400px;
     }
 
+    /* On mobile, start hidden to show map first */
+    .side-panel.mobile-hidden {
+        transform: translateX(-100%);
+    }
+
+    /* Toggle menu button shows panel */
+    .side-panel.mobile-hidden:not(.hidden) {
+        transform: translateX(0);
+    }
+
     .quick-info {
         width: calc(100% - 40px);
         left: 20px;
@@ -1989,9 +1999,39 @@ body {
 
 .weather-updated {
     font-size: 0.85rem;
-    color: #666;
+    color: var(--text-light);
     margin: 1rem 0 0.5rem;
     text-align: center;
+}
+
+.weather-attribution {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--border-color);
+    font-size: 0.85rem;
+}
+
+.weather-source {
+    color: var(--text-light);
+    margin: 0.5rem 0;
+    line-height: 1.5;
+}
+
+.weather-source strong {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.weather-source a {
+    color: var(--primary-color);
+    text-decoration: none;
+    border-bottom: 1px solid var(--primary-light);
+    transition: var(--transition);
+}
+
+.weather-source a:hover {
+    color: var(--primary-light);
+    border-bottom-color: var(--primary-color);
 }
 
 .checkbox-label {

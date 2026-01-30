@@ -348,6 +348,22 @@ const WeatherModule = (function() {
             html += `<div class="weather-updated">Last updated: ${time}</div>`;
         }
 
+        // Weather Source Attribution
+        const zoneName = ZONES[currentZone]?.name || 'Lake Champlain';
+        html += `
+            <div class="weather-attribution">
+                <p class="weather-source">
+                    <strong>Forecast Zone:</strong> ${zoneName} (${currentZone})
+                </p>
+                <p class="weather-source">
+                    Weather data provided by
+                    <a href="https://www.weather.gov" target="_blank" rel="noopener noreferrer">
+                        NOAA - National Oceanic and Atmospheric Administration
+                    </a>
+                </p>
+            </div>
+        `;
+
         container.innerHTML = html;
     }
 
