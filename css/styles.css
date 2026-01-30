@@ -70,7 +70,7 @@ html {
 }
 
 body {
-    font-family: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    font-family: 'Cabin', 'Helvetica Neue', Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -142,7 +142,7 @@ body {
 }
 
 .header-content h1 {
-    font-family: 'Cinzel', 'Times New Roman', serif;
+    font-family: 'Sail', cursive;
     font-size: 1.4rem;
     font-weight: 700;
     letter-spacing: 2px;
@@ -152,7 +152,7 @@ body {
 }
 
 .header-content .tagline {
-    font-family: 'Libre Baskerville', Georgia, serif;
+    font-family: 'Cabin', 'Helvetica Neue', Arial, sans-serif;
     font-size: 0.75rem;
     font-style: italic;
     opacity: 0.85;
@@ -291,7 +291,7 @@ body {
 }
 
 .panel-section h2 {
-    font-family: 'Cinzel', 'Times New Roman', serif;
+    font-family: 'Sail', cursive;
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 15px;
@@ -384,7 +384,7 @@ body {
     gap: 8px;
     min-height: var(--touch-target);
     padding: 12px 24px;
-    font-family: 'Cinzel', 'Times New Roman', serif;
+    font-family: 'Sail', cursive;
     font-size: 0.9rem;
     font-weight: 600;
     border: none;
@@ -731,13 +731,13 @@ body {
 }
 
 .result-label {
-    font-family: 'Libre Baskerville', Georgia, serif;
+    font-family: 'Cabin', 'Helvetica Neue', Arial, sans-serif;
     font-size: 0.9rem;
     color: var(--text-light);
 }
 
 .result-value {
-    font-family: 'Cinzel', 'Times New Roman', serif;
+    font-family: 'Sail', cursive;
     font-size: 1.4rem;
     font-weight: 700;
     color: var(--wood-dark);
@@ -758,7 +758,7 @@ body {
     gap: 6px;
     min-height: 44px;
     padding: 10px 14px;
-    font-family: 'Libre Baskerville', Georgia, serif;
+    font-family: 'Cabin', 'Helvetica Neue', Arial, sans-serif;
     font-size: 0.8rem;
     font-weight: 500;
     background: rgba(250, 246, 237, 0.9);
@@ -1080,7 +1080,7 @@ body {
 }
 
 .quick-info h3 {
-    font-family: 'Cinzel', 'Times New Roman', serif;
+    font-family: 'Sail', cursive;
     font-size: 1.2rem;
     margin-bottom: 5px;
     padding-right: 40px;
@@ -1088,7 +1088,7 @@ body {
 }
 
 .quick-info .poi-type {
-    font-family: 'Libre Baskerville', Georgia, serif;
+    font-family: 'Cabin', 'Helvetica Neue', Arial, sans-serif;
     font-size: 0.85rem;
     color: var(--brass-dark);
     font-weight: 500;
@@ -1121,7 +1121,7 @@ body {
 .legend-toggle {
     min-height: 44px;
     padding: 10px 16px;
-    font-family: 'Cinzel', 'Times New Roman', serif;
+    font-family: 'Sail', cursive;
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -1168,7 +1168,7 @@ body {
     align-items: center;
     gap: 10px;
     padding: 6px 0;
-    font-family: 'Libre Baskerville', Georgia, serif;
+    font-family: 'Cabin', 'Helvetica Neue', Arial, sans-serif;
     font-size: 0.8rem;
     color: var(--wood-dark);
 }
@@ -1285,7 +1285,7 @@ body {
 }
 
 .loading-overlay p {
-    font-family: 'Cinzel', 'Times New Roman', serif;
+    font-family: 'Sail', cursive;
     font-size: 1rem;
     color: var(--wood-dark);
     margin-top: 20px;
@@ -1696,7 +1696,7 @@ body {
     z-index: 10000;
     opacity: 0;
     transition: opacity 0.3s ease;
-    font-family: 'Libre Baskerville', Georgia, serif;
+    font-family: 'Cabin', 'Helvetica Neue', Arial, sans-serif;
     font-size: 0.95rem;
     font-weight: 500;
     box-shadow: 0 4px 16px rgba(0,0,0,0.3);
