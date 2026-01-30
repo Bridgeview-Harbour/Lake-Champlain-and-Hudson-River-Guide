@@ -2,14 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self';
+                   script-src 'self' https://unpkg.com;
+                   style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com;
+                   font-src 'self' https://fonts.gstatic.com;
+                   img-src 'self' data: https://*.openstreetmap.org https://server.arcgisonline.com https://tiles.openseamap.org;
+                   connect-src 'self' https://*.openstreetmap.org https://server.arcgisonline.com https://tiles.openseamap.org https://api.weather.gov https://api.github.com;">
+
     <title>Lake Champlain & Hudson River Boater's Guide | Bridgeview Harbour Marina</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/BridgeviewHarbourMarina_favicon_transparent.png">
     <link rel="apple-touch-icon" href="images/BridgeviewHarbourMarina_favicon_transparent.png">
+
+    <!-- Google Fonts - Nautical Theme -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -26,10 +41,14 @@
 <body>
     <!-- Header -->
     <header class="app-header">
+        <img src="images/Badge_logo_768.png" alt="Bridgeview Harbour Marina" class="header-logo">
         <div class="header-content">
             <h1>Lake Champlain & Hudson River Guide</h1>
             <p class="tagline">Presented by Bridgeview Harbour Marina</p>
         </div>
+        <button id="submitPoiBtn" class="btn-secondary submit-poi-btn" aria-label="Submit a Point of Interest">
+            Submit POI
+        </button>
         <button id="menuToggle" class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidePanel">
             <span></span>
             <span></span>
@@ -43,7 +62,7 @@
         <div id="map" class="map-container"></div>
 
         <!-- Side Panel -->
-        <aside id="sidePanel" class="side-panel" role="complementary" aria-label="Trip planning and filters">
+        <aside id="sidePanel" class="side-panel mobile-hidden" role="complementary" aria-label="Trip planning and filters">
             <!-- Trip Calculator -->
             <section class="panel-section trip-calculator">
                 <h2>Trip Calculator</h2>
@@ -109,6 +128,40 @@
                 <button id="clearBtn" class="btn btn-outline clear-btn">
                     Clear Selection
                 </button>
+            </section>
+
+            <!-- Weather Section -->
+            <section class="panel-section weather-section">
+                <button id="weatherToggle" class="section-toggle" aria-expanded="false" aria-controls="weatherContent">
+                    <span class="toggle-icon">▶</span> Weather & Conditions
+                </button>
+
+                <div id="weatherContent" class="weather-content hidden" role="region" aria-label="Weather and conditions">
+                    <!-- Zone Selector -->
+                    <div class="form-group">
+                        <label for="weatherZone">Forecast Area</label>
+                        <select id="weatherZone" class="touch-input">
+                            <option value="northern">Northern Lake Champlain</option>
+                            <option value="southern">Southern Lake Champlain</option>
+                        </select>
+                    </div>
+
+                    <!-- Weather Widget Container (populated by weather.js) -->
+                    <div id="weatherWidget">
+                        <div class="weather-loading">Loading weather...</div>
+                    </div>
+
+                    <!-- Wind Overlay Toggle -->
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="windOverlayToggle">
+                            <span>Show wind overlay on map</span>
+                        </label>
+                    </div>
+
+                    <!-- Refresh Button -->
+                    <button id="refreshWeather" class="btn btn-secondary">Refresh Weather</button>
+                </div>
             </section>
 
             <!-- Filter Section -->
@@ -198,6 +251,134 @@
                 <button id="setAsEnd" class="btn btn-small btn-secondary">Set as Destination</button>
             </div>
         </div>
+
+        <!-- POI Submission Modal -->
+        <div id="submitPoiModal" class="modal hidden" role="dialog" aria-labelledby="submitPoiTitle">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="submitPoiTitle">Submit a Point of Interest</h2>
+                    <button class="modal-close" aria-label="Close">&times;</button>
+                </div>
+
+                <form id="poiSubmitForm" class="modal-body">
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <h3>Basic Information</h3>
+
+                        <div class="form-group">
+                            <label for="poiName">Name *</label>
+                            <input type="text" id="poiName" class="touch-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="poiCategory">Category *</label>
+                            <select id="poiCategory" class="touch-input" required>
+                                <option value="">Select category...</option>
+                                <option value="marina">Marina</option>
+                                <option value="restaurant">Restaurant/Dining</option>
+                                <option value="campground">Campground</option>
+                                <option value="boat-launch">Boat Launch</option>
+                                <option value="anchorage">Anchorage</option>
+                                <option value="fuel">Fuel Station</option>
+                                <option value="poi">Point of Interest</option>
+                                <option value="beach">Beach</option>
+                                <option value="island">Island</option>
+                                <option value="bay">Bay</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="poiDescription">Description *</label>
+                            <textarea id="poiDescription" class="touch-input" rows="4" required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="form-section">
+                        <h3>Location</h3>
+
+                        <div class="form-group">
+                            <label for="poiLatitude">Latitude *</label>
+                            <input type="number" id="poiLatitude" class="touch-input"
+                                   step="0.000001" min="43.0" max="45.2" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="poiLongitude">Longitude *</label>
+                            <input type="number" id="poiLongitude" class="touch-input"
+                                   step="0.000001" min="-73.5" max="-73.0" required>
+                        </div>
+
+                        <button type="button" id="pickFromMap" class="btn btn-secondary">
+                            📍 Pick from Map
+                        </button>
+                        <div id="coordWarning" class="warning hidden">
+                            ⚠️ Coordinates appear to be on land, not in water
+                        </div>
+
+                        <div class="form-group">
+                            <label for="poiTown">Town/City</label>
+                            <input type="text" id="poiTown" class="touch-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="poiState">State/Province</label>
+                            <input type="text" id="poiState" class="touch-input">
+                        </div>
+                    </div>
+
+                    <!-- Contact Information (Optional) -->
+                    <div class="form-section">
+                        <h3>Contact Information (Optional)</h3>
+
+                        <div class="form-group">
+                            <label for="poiWebsite">Website</label>
+                            <input type="url" id="poiWebsite" class="touch-input" placeholder="https://...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="poiPhone">Phone</label>
+                            <input type="tel" id="poiPhone" class="touch-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="poiVHF">VHF Channel</label>
+                            <input type="text" id="poiVHF" class="touch-input" placeholder="e.g., 9, 16">
+                        </div>
+                    </div>
+
+                    <!-- Submitter Info -->
+                    <div class="form-section">
+                        <h3>Your Information (Optional)</h3>
+                        <p class="form-help">In case we need to follow up about this submission</p>
+
+                        <div class="form-group">
+                            <label for="submitterName">Your Name</label>
+                            <input type="text" id="submitterName" class="touch-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="submitterEmail">Your Email</label>
+                            <input type="email" id="submitterEmail" class="touch-input">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelSubmit">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit POI</button>
+                    </div>
+                </form>
+
+                <!-- Success Screen (hidden initially) -->
+                <div id="submitSuccess" class="hidden">
+                    <div class="success-icon">✓</div>
+                    <h3>POI Submitted Successfully!</h3>
+                    <p>Your point of interest has been submitted for review.</p>
+                    <p>Track the status: <a id="issueLink" target="_blank" rel="noopener noreferrer">View on GitHub</a></p>
+                    <button class="btn btn-primary" id="submitAnother">Submit Another</button>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Legend -->
@@ -236,6 +417,7 @@
     <!-- Application Scripts -->
     <script src="js/data.js"></script>
     <script src="js/navigation.js"></script>
+    <script src="js/weather.js?v=2"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

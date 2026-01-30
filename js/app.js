@@ -11,6 +11,9 @@
  * - Offline-capable calculations (no server needed)
  */
 
+// Check if we're in a Node.js environment (for testing)
+const isNode = typeof module !== 'undefined' && module.exports;
+
 (function() {
     'use strict';
 
@@ -24,9 +27,16 @@
         stops: [null, null],  // Array of POI IDs: [startId, stop1Id, stop2Id, ..., endId]
         currentUnit: 'nm',
         vesselSpeed: 15,
-        currentFilter: 'all',
+        currentFilters: ['all'],  // Array of active filters (supports multiple selections)
         searchQuery: '',
-        isMobile: window.innerWidth <= 900
+        isMobile: window.innerWidth <= 900,
+        // Weather state
+        weatherZone: 'northern',
+        showWindOverlay: false,
+        weatherData: null,
+        // POI submission state
+        isPickingCoordinates: false,
+        tempMarker: null
     };
 
     // Drag-and-drop state
@@ -79,6 +89,27 @@
     }
 
     // ============================================
+    // Debounce Utility
+    // ============================================
+    /**
+     * Debounce function to limit the rate at which a function can fire
+     * @param {Function} func - The function to debounce
+     * @param {number} wait - The delay in milliseconds
+     * @returns {Function} Debounced function
+     */
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // ============================================
     // DOM Elements
     // ============================================
     const elements = {
@@ -122,8 +153,27 @@
      * @param {number} lat2 - Latitude of point 2
      * @param {number} lng2 - Longitude of point 2
      * @returns {number} Distance in kilometers
+     * @throws {Error} If coordinates are invalid
      */
     function calculateDistance(lat1, lng1, lat2, lng2) {
+        // Validate inputs
+        if (!Number.isFinite(lat1) || !Number.isFinite(lng1) ||
+            !Number.isFinite(lat2) || !Number.isFinite(lng2)) {
+            console.error('Invalid coordinates:', {lat1, lng1, lat2, lng2});
+            throw new Error('Invalid coordinates provided to calculateDistance');
+        }
+
+        // Validate coordinate ranges
+        if (lat1 < -90 || lat1 > 90 || lat2 < -90 || lat2 > 90) {
+            console.error('Latitude out of range:', {lat1, lat2});
+            throw new Error('Latitude must be between -90 and 90 degrees');
+        }
+
+        if (lng1 < -180 || lng1 > 180 || lng2 < -180 || lng2 > 180) {
+            console.error('Longitude out of range:', {lng1, lng2});
+            throw new Error('Longitude must be between -180 and 180 degrees');
+        }
+
         const R = 6371; // Earth's radius in kilometers
         const dLat = toRadians(lat2 - lat1);
         const dLng = toRadians(lng2 - lng1);
@@ -137,6 +187,9 @@
     }
 
     function toRadians(degrees) {
+        if (!Number.isFinite(degrees)) {
+            throw new Error('toRadians requires a finite number');
+        }
         return degrees * (Math.PI / 180);
     }
 
@@ -148,8 +201,19 @@
      * @param {number} km - Distance in kilometers
      * @param {string} unit - Target unit (nm, mi, km)
      * @returns {number} Converted distance
+     * @throws {Error} If distance is invalid or unit is not supported
      */
     function convertDistance(km, unit) {
+        if (!Number.isFinite(km) || km < 0) {
+            console.error('Invalid distance:', km);
+            throw new Error('Distance must be a positive finite number');
+        }
+
+        if (!UNIT_CONVERSIONS[unit]) {
+            console.error('Unknown unit:', unit);
+            throw new Error(`Unsupported unit: ${unit}`);
+        }
+
         return km * UNIT_CONVERSIONS[unit].factor;
     }
 
@@ -238,13 +302,15 @@
             minZoom: 7
         });
 
-        const topoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)',
-            maxZoom: 17,
+        // Esri World Topo Map (more reliable than OpenTopoMap)
+        const topoMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+            attribution: '&copy; Esri, HERE, Garmin, USGS',
+            maxZoom: 19,
             minZoom: 7
         });
 
-        const nautical = L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
+        // OpenSeaMap overlay (navigation aids symbols)
+        const seaMarks = L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openseamap.org">OpenSeaMap</a>',
             maxZoom: 18,
             minZoom: 7
@@ -254,15 +320,16 @@
         streetMap.addTo(state.map);
 
         // Create base maps object for layer control
+        // Note: NOAA Charts temporarily removed - will be added back with self-hosted tiles
         const baseMaps = {
             "Street Map": streetMap,
             "Satellite": satellite,
             "Topographic": topoMap
         };
 
-        // Create overlay maps (nautical chart overlay)
+        // Create overlay maps (navigation aids overlay)
         const overlayMaps = {
-            "Nautical Charts": nautical
+            "Nav Aids (OpenSeaMap)": seaMarks
         };
 
         // Add layer control to map (top-right corner)
@@ -674,6 +741,15 @@
         return false;
     }
 
+    // Check if POI matches any of the active filters (multi-select support)
+    function poiMatchesFilters(poi, filters) {
+        // If 'all' is in the filters array, show everything
+        if (filters.includes('all')) return true;
+
+        // POI matches if it matches ANY of the selected filters
+        return filters.some(filter => poiMatchesFilter(poi, filter));
+    }
+
     // ============================================
     // Populate Location List
     // ============================================
@@ -688,12 +764,12 @@
             return;
         }
 
-        // Filter POIs based on current filter and search
+        // Filter POIs based on current filters and search
         let filteredPOIs = [...POINTS_OF_INTEREST];
 
-        // Apply type/tag filter
-        if (state.currentFilter !== 'all') {
-            filteredPOIs = filteredPOIs.filter(poi => poiMatchesFilter(poi, state.currentFilter));
+        // Apply type/tag filters (multi-select support)
+        if (!state.currentFilters.includes('all')) {
+            filteredPOIs = filteredPOIs.filter(poi => poiMatchesFilters(poi, state.currentFilters));
         }
 
         // Apply search filter
@@ -1009,9 +1085,9 @@
     // ============================================
     // Filter Markers on Map
     // ============================================
-    function filterMarkers(filter) {
+    function filterMarkers() {
         Object.values(state.markers).forEach(({ marker, poi }) => {
-            if (poiMatchesFilter(poi, filter)) {
+            if (poiMatchesFilters(poi, state.currentFilters)) {
                 marker.addTo(state.map);
             } else {
                 state.map.removeLayer(marker);
@@ -1023,13 +1099,13 @@
     // Event Listeners
     // ============================================
     function initEventListeners() {
-        // Menu toggle (mobile)
+        // Menu toggle (show/hide side panel)
         elements.menuToggle.addEventListener('click', () => {
-            elements.sidePanel.classList.toggle('open');
+            elements.sidePanel.classList.toggle('hidden');
             elements.menuToggle.classList.toggle('active');
             // Update ARIA expanded state
-            const isOpen = elements.sidePanel.classList.contains('open');
-            elements.menuToggle.setAttribute('aria-expanded', isOpen.toString());
+            const isVisible = !elements.sidePanel.classList.contains('hidden');
+            elements.menuToggle.setAttribute('aria-expanded', isVisible.toString());
         });
 
         // Add stop button
@@ -1078,28 +1154,83 @@
         // Clear button
         elements.clearBtn.addEventListener('click', clearSelection);
 
-        // Filter buttons
+        // Filter buttons (multi-select support)
         elements.filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Update active state and ARIA pressed
-                elements.filterButtons.forEach(b => {
-                    b.classList.remove('active');
-                    b.setAttribute('aria-pressed', 'false');
-                });
-                btn.classList.add('active');
-                btn.setAttribute('aria-pressed', 'true');
+                const filterType = btn.dataset.filter;
 
-                // Apply filter
-                state.currentFilter = btn.dataset.filter;
-                filterMarkers(state.currentFilter);
+                // Handle "All" button - exclusive selection
+                if (filterType === 'all') {
+                    // Deactivate all other filters
+                    elements.filterButtons.forEach(b => {
+                        b.classList.remove('active');
+                        b.setAttribute('aria-pressed', 'false');
+                    });
+                    btn.classList.add('active');
+                    btn.setAttribute('aria-pressed', 'true');
+                    state.currentFilters = ['all'];
+                } else {
+                    // Toggle this filter
+                    const isActive = btn.classList.contains('active');
+
+                    if (isActive) {
+                        // Deactivate this filter
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-pressed', 'false');
+                        const index = state.currentFilters.indexOf(filterType);
+                        if (index > -1) {
+                            state.currentFilters.splice(index, 1);
+                        }
+
+                        // If no filters active, activate "All"
+                        if (state.currentFilters.length === 0 ||
+                            (state.currentFilters.length === 1 && state.currentFilters[0] === 'all')) {
+                            const allBtn = elements.filterButtons.find(b => b.dataset.filter === 'all');
+                            if (allBtn) {
+                                allBtn.classList.add('active');
+                                allBtn.setAttribute('aria-pressed', 'true');
+                            }
+                            state.currentFilters = ['all'];
+                        }
+                    } else {
+                        // Activate this filter
+                        btn.classList.add('active');
+                        btn.setAttribute('aria-pressed', 'true');
+
+                        // Remove "All" from state if present
+                        const allIndex = state.currentFilters.indexOf('all');
+                        if (allIndex > -1) {
+                            state.currentFilters.splice(allIndex, 1);
+                        }
+
+                        // Always deactivate "All" button when selecting any specific filter
+                        const allBtn = Array.from(elements.filterButtons).find(b => b.dataset.filter === 'all');
+                        if (allBtn && allBtn.classList.contains('active')) {
+                            allBtn.classList.remove('active');
+                            allBtn.setAttribute('aria-pressed', 'false');
+                        }
+
+                        // Add this filter
+                        if (!state.currentFilters.includes(filterType)) {
+                            state.currentFilters.push(filterType);
+                        }
+                    }
+                }
+
+                // Apply filters
+                filterMarkers();
                 populateLocationList();
             });
         });
 
-        // Location search
-        elements.locationSearch.addEventListener('input', (e) => {
-            state.searchQuery = e.target.value;
+        // Location search with debouncing for better performance
+        const debouncedSearch = debounce((value) => {
+            state.searchQuery = value;
             populateLocationList();
+        }, 300);
+
+        elements.locationSearch.addEventListener('input', (e) => {
+            debouncedSearch(e.target.value);
         });
 
         // Quick info close
@@ -1127,9 +1258,61 @@
             elements.legendToggle.setAttribute('aria-expanded', isExpanded.toString());
         });
 
-        // Close quick info on map click
+        // Weather toggle
+        const weatherToggle = document.getElementById('weatherToggle');
+        const weatherContent = document.getElementById('weatherContent');
+        if (weatherToggle && weatherContent) {
+            weatherToggle.addEventListener('click', () => {
+                weatherContent.classList.toggle('hidden');
+                // Update ARIA expanded state
+                const isExpanded = !weatherContent.classList.contains('hidden');
+                weatherToggle.setAttribute('aria-expanded', isExpanded.toString());
+            });
+        }
+
+        // Close quick info on map click (also handles coordinate picking)
         state.map.on('click', (e) => {
-            // Only hide if clicking on map, not on a marker
+            // Handle coordinate picking for POI submission
+            if (state.isPickingCoordinates) {
+                const { lat, lng } = e.latlng;
+
+                // Set form values
+                const latInput = document.getElementById('poiLatitude');
+                const lngInput = document.getElementById('poiLongitude');
+                if (latInput) latInput.value = lat.toFixed(6);
+                if (lngInput) lngInput.value = lng.toFixed(6);
+
+                // Place temp marker
+                if (state.tempMarker) {
+                    state.map.removeLayer(state.tempMarker);
+                }
+
+                // Create simple circle marker for temp location
+                state.tempMarker = L.circleMarker([lat, lng], {
+                    radius: 8,
+                    fillColor: '#ff0000',
+                    color: '#ffffff',
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 0.8
+                }).addTo(state.map);
+
+                // Check if in water (use navigation.js isInWater function)
+                const warning = document.getElementById('coordWarning');
+                if (typeof isInWater === 'function' && !isInWater(lat, lng)) {
+                    warning?.classList.remove('hidden');
+                } else {
+                    warning?.classList.add('hidden');
+                }
+
+                state.isPickingCoordinates = false;
+                const modal = document.getElementById('submitPoiModal');
+                modal?.classList.remove('picking-mode');
+                showToast('Coordinates set!', 'success');
+                return;
+            }
+
+            // Only hide quick info if clicking on map, not on a marker
             if (!e.originalEvent.target.closest('.custom-marker-wrapper')) {
                 hideQuickInfo();
             }
@@ -1190,6 +1373,36 @@
                 trapFocusInQuickInfo(e);
             }
         });
+
+        // Weather event handlers
+        const weatherZoneSelect = document.getElementById('weatherZone');
+        if (weatherZoneSelect) {
+            weatherZoneSelect.addEventListener('change', (e) => {
+                state.weatherZone = e.target.value;
+                if (typeof WeatherModule !== 'undefined') {
+                    WeatherModule.setZone(e.target.value);
+                }
+            });
+        }
+
+        const windOverlayToggle = document.getElementById('windOverlayToggle');
+        if (windOverlayToggle) {
+            windOverlayToggle.addEventListener('change', (e) => {
+                state.showWindOverlay = e.target.checked;
+                if (typeof WeatherModule !== 'undefined') {
+                    WeatherModule.toggleWindOverlay(e.target.checked);
+                }
+            });
+        }
+
+        const refreshWeatherBtn = document.getElementById('refreshWeather');
+        if (refreshWeatherBtn) {
+            refreshWeatherBtn.addEventListener('click', () => {
+                if (typeof WeatherModule !== 'undefined') {
+                    WeatherModule.refresh();
+                }
+            });
+        }
     }
 
     // ============================================
@@ -1258,6 +1471,170 @@
     }
 
     // ============================================
+    // POI Submission Module
+    // ============================================
+    function initPoiSubmission() {
+        const modal = document.getElementById('submitPoiModal');
+        const openBtn = document.getElementById('submitPoiBtn');
+        const closeBtn = modal?.querySelector('.modal-close');
+        const cancelBtn = document.getElementById('cancelSubmit');
+        const form = document.getElementById('poiSubmitForm');
+        const pickBtn = document.getElementById('pickFromMap');
+
+        if (!modal || !openBtn) {
+            console.warn('POI submission elements not found');
+            return;
+        }
+
+        // Open modal
+        openBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            document.getElementById('poiName')?.focus();
+        });
+
+        // Close modal
+        const closeModal = () => {
+            modal.classList.add('hidden');
+            resetPoiForm();
+            if (state.tempMarker && state.map) {
+                state.map.removeLayer(state.tempMarker);
+                state.tempMarker = null;
+            }
+            state.isPickingCoordinates = false;
+            modal.classList.remove('picking-mode');
+        };
+
+        closeBtn?.addEventListener('click', closeModal);
+        cancelBtn?.addEventListener('click', closeModal);
+
+        // Pick from map
+        pickBtn?.addEventListener('click', () => {
+            state.isPickingCoordinates = true;
+            modal.classList.add('picking-mode');
+            showToast('Click on the map to select coordinates', 'info', 5000);
+        });
+
+        // Form submission
+        form?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('poiName').value.trim(),
+                category: document.getElementById('poiCategory').value,
+                description: document.getElementById('poiDescription').value.trim(),
+                latitude: parseFloat(document.getElementById('poiLatitude').value),
+                longitude: parseFloat(document.getElementById('poiLongitude').value),
+                town: document.getElementById('poiTown').value.trim(),
+                state: document.getElementById('poiState').value.trim(),
+                website: document.getElementById('poiWebsite').value.trim(),
+                phone: document.getElementById('poiPhone').value.trim(),
+                vhf: document.getElementById('poiVHF').value.trim(),
+                submitterName: document.getElementById('submitterName').value.trim(),
+                submitterEmail: document.getElementById('submitterEmail').value.trim()
+            };
+
+            // Validate coordinates in range
+            if (formData.latitude < 43 || formData.latitude > 45.2 ||
+                formData.longitude < -73.5 || formData.longitude > -73.0) {
+                showToast('Coordinates must be within Lake Champlain region', 'error');
+                return;
+            }
+
+            // Submit to GitHub
+            const issueUrl = await submitPoiToGitHub(formData);
+
+            if (issueUrl) {
+                // Show success screen
+                form.classList.add('hidden');
+                const successDiv = document.getElementById('submitSuccess');
+                successDiv.classList.remove('hidden');
+                document.getElementById('issueLink').href = issueUrl;
+
+                // Submit another button
+                document.getElementById('submitAnother').addEventListener('click', () => {
+                    successDiv.classList.add('hidden');
+                    form.classList.remove('hidden');
+                    resetPoiForm();
+                });
+            }
+        });
+    }
+
+    async function submitPoiToGitHub(poiData) {
+        const owner = 'Bridgeview-Harbour';
+        const repo = 'Lake-Champlain-and-Hudson-River-Guide';
+
+        // Format as structured markdown for easy parsing
+        const issueBody = `
+## POI Submission
+
+**Name:** ${poiData.name}
+**Category:** ${poiData.category}
+**Latitude:** ${poiData.latitude}
+**Longitude:** ${poiData.longitude}
+**Town:** ${poiData.town || 'N/A'}
+**State:** ${poiData.state || 'N/A'}
+
+**Description:**
+${poiData.description}
+
+**Contact Information:**
+- Website: ${poiData.website || 'N/A'}
+- Phone: ${poiData.phone || 'N/A'}
+- VHF: ${poiData.vhf || 'N/A'}
+
+---
+**Submitted by:** ${poiData.submitterName || 'Anonymous'}
+${poiData.submitterEmail ? `**Email:** ${poiData.submitterEmail}` : ''}
+
+<!-- POI_DATA
+${JSON.stringify(poiData, null, 2)}
+-->
+`;
+
+        try {
+            const response = await fetch(
+                `https://api.github.com/repos/${owner}/${repo}/issues`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github.v3+json'
+                    },
+                    body: JSON.stringify({
+                        title: `New POI Submission: ${poiData.name}`,
+                        body: issueBody,
+                        labels: ['poi-submission', 'needs-review']
+                    })
+                }
+            );
+
+            if (!response.ok) {
+                if (response.status === 403) {
+                    showToast('Rate limit exceeded. Please try again in an hour.', 'error', 5000);
+                } else {
+                    showToast('Failed to submit POI. Please try again.', 'error');
+                }
+                return null;
+            }
+
+            const issue = await response.json();
+            showToast('POI submitted successfully!', 'success');
+            return issue.html_url;
+
+        } catch (error) {
+            console.error('Error submitting POI:', error);
+            showToast('Network error. Please check your connection.', 'error');
+            return null;
+        }
+    }
+
+    function resetPoiForm() {
+        document.getElementById('poiSubmitForm')?.reset();
+        document.getElementById('coordWarning')?.classList.add('hidden');
+    }
+
+    // ============================================
     // Initialize Application
     // ============================================
     async function init() {
@@ -1292,6 +1669,16 @@
             // Set up preference saving
             initPreferenceSaving();
 
+            // Initialize POI submission
+            console.log('Initializing POI submission...');
+            initPoiSubmission();
+
+            // Initialize weather module
+            console.log('Initializing weather module...');
+            if (typeof WeatherModule !== 'undefined') {
+                WeatherModule.init(state.map, state.weatherZone);
+            }
+
             // Set initial speed unit display
             elements.speedUnit.textContent = UNIT_CONVERSIONS[state.currentUnit].speedUnit;
 
@@ -1306,11 +1693,27 @@
         }
     }
 
-    // Start the application when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => init());
-    } else {
-        init();
+    // Start the application when DOM is ready (browser only)
+    if (!isNode) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => init());
+        } else {
+            init();
+        }
+    }
+
+    // Export functions for testing (Node.js environment only)
+    if (isNode) {
+        module.exports = {
+            calculateDistance,
+            toRadians,
+            convertDistance,
+            formatDistance,
+            calculateTravelTime,
+            formatTime,
+            debounce,
+            showToast
+        };
     }
 
 })();

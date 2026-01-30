@@ -3,36 +3,65 @@
    Touch-Friendly Responsive Styles
    ============================================ */
 
-/* CSS Variables for Theming */
+/* CSS Variables for Theming - 1800s Maritime Theme */
 :root {
-    --primary-color: #1a5f7a;
-    --primary-dark: #134b61;
-    --primary-light: #2980b9;
-    --secondary-color: #27ae60;
-    --accent-color: #e67e22;
-    --danger-color: #e74c3c;
-    --text-color: #2c3e50;
-    --text-light: #7f8c8d;
-    --bg-color: #ecf0f1;
-    --panel-bg: #ffffff;
-    --border-color: #bdc3c7;
-    --shadow: 0 2px 10px rgba(0,0,0,0.15);
-    --shadow-lg: 0 4px 20px rgba(0,0,0,0.2);
-    --radius: 8px;
-    --radius-lg: 12px;
-    --touch-target: 48px;
-    --transition: all 0.3s ease;
+    /* Primary nautical colors - deeper 1800s palette */
+    --primary-color: #0d2840;      /* Deep indigo-navy */
+    --primary-dark: #061420;       /* Near-black maritime blue */
+    --primary-light: #1a4d7a;      /* Faded naval blue */
+    --secondary-color: #a67c3a;    /* Aged brass/bronze */
+    --accent-color: #6b2632;       /* Faded ship paint red */
+    --danger-color: #8b1e2f;       /* Deep maritime red */
 
-    /* Marker Colors */
-    --marina-color: #2980b9;
-    --restaurant-color: #e74c3c;
-    --historic-color: #8e44ad;
-    --bay-color: #16a085;
-    --fuel-color: #f39c12;
-    --anchorage-color: #27ae60;
-    --lock-color: #9b59b6;
-    --bridge-color: #7f8c8d;
-    --bridge-movable-color: #e67e22;
+    /* Text colors - aged ink */
+    --text-color: #1a1410;         /* Dark brown-black (old ink) */
+    --text-light: #4a3d2f;         /* Faded sepia */
+
+    /* Background colors - aged parchment/canvas */
+    --bg-color: #e8dcc5;           /* Weathered parchment */
+    --panel-bg: #f2e9d8;           /* Aged canvas */
+    --panel-bg-texture: linear-gradient(135deg,
+        #f5ede0 0%,
+        #ebe0ca 25%,
+        #e3d4b8 50%,
+        #d9c9a8 75%,
+        #d0bf98 100%);              /* Multi-toned aged paper */
+
+    /* Brass/Bronze accents - oxidized metal */
+    --brass-color: #9d7434;        /* Oxidized brass */
+    --brass-light: #b88d46;        /* Polished brass highlight */
+    --brass-dark: #7a5a28;         /* Tarnished brass shadow */
+
+    /* Wood tones - ship timber */
+    --wood-dark: #2d1810;          /* Dark mahogany */
+    --wood-medium: #4a2f1a;        /* Oak/teak */
+    --wood-light: #6b4423;         /* Weathered pine */
+
+    /* Borders and shadows */
+    --border-color: #a89060;       /* Aged rope/hemp */
+    --rope-color: #8b7550;         /* Manila rope */
+    --shadow: 0 3px 12px rgba(13, 40, 64, 0.25);
+    --shadow-lg: 0 6px 24px rgba(13, 40, 64, 0.35);
+    --shadow-inset: inset 0 2px 8px rgba(77, 61, 47, 0.15);
+
+    /* Dimensions */
+    --radius: 2px;                 /* Minimal rounding (period-appropriate) */
+    --radius-lg: 4px;
+    --radius-md: 3px;
+    --radius-sm: 1px;
+    --touch-target: 48px;
+    --transition: all 0.4s ease;   /* Slower, more deliberate */
+
+    /* Marker Colors - 1800s maritime palette */
+    --marina-color: #0d2840;       /* Deep naval blue */
+    --restaurant-color: #6b2632;   /* Faded burgundy */
+    --historic-color: #5a4230;     /* Aged brown */
+    --bay-color: #2d5555;          /* Dark teal */
+    --fuel-color: #9d7434;         /* Brass */
+    --anchorage-color: #3a5a40;    /* Deep sea green */
+    --lock-color: #4a3a5a;         /* Iron purple */
+    --bridge-color: #4a4a4a;       /* Iron grey */
+    --bridge-movable-color: #7a5230; /* Rust brown */
 }
 
 /* Reset & Base */
@@ -49,48 +78,122 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Crimson Text', 'Georgia', 'Times New Roman', serif;
     background-color: var(--bg-color);
+    background-image:
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(139, 117, 80, 0.03) 2px,
+            rgba(139, 117, 80, 0.03) 4px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(139, 117, 80, 0.03) 2px,
+            rgba(139, 117, 80, 0.03) 4px
+        );
     color: var(--text-color);
-    line-height: 1.5;
+    line-height: 1.7;
     overflow: hidden;
     height: 100vh;
     width: 100vw;
+    font-size: 16px;
 }
 
 /* ============================================
-   Header Styles
+   Utility Classes
+   ============================================ */
+.hidden {
+    display: none !important;
+}
+
+/* ============================================
+   Header Styles - Wood Plank with Brass
    ============================================ */
 .app-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 60px;
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    color: white;
+    height: 70px;
+    background:
+        linear-gradient(180deg,
+            rgba(45, 28, 16, 0.98) 0%,
+            rgba(35, 20, 12, 1) 50%,
+            rgba(29, 17, 10, 1) 100%
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 100px,
+            rgba(0,0,0,0.15) 100px,
+            rgba(0,0,0,0.15) 102px
+        );
+    background-color: var(--wood-dark);
+    color: #f2e9d8;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
     z-index: 1000;
-    box-shadow: var(--shadow);
+    border-bottom: 3px solid var(--brass-dark);
+    box-shadow:
+        0 4px 8px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    border-bottom: 3px solid var(--brass-color);
+}
+
+.app-header::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+        var(--brass-dark) 0%,
+        var(--brass-light) 50%,
+        var(--brass-dark) 100%
+    );
+}
+
+.header-logo {
+    height: 55px;
+    width: auto;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .header-content h1 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-family: 'IM Fell English SC', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    color: var(--brass-light);
 }
 
 .header-content .tagline {
+    font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
     font-size: 0.75rem;
-    opacity: 0.9;
+    font-style: italic;
+    opacity: 0.85;
     margin-top: 2px;
+    letter-spacing: 1px;
 }
 
 .menu-toggle {
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
     width: var(--touch-target);
@@ -99,12 +202,13 @@ body {
     border: none;
     cursor: pointer;
     padding: 10px;
+    margin-right: 1rem;
 }
 
 .menu-toggle span {
     width: 28px;
     height: 3px;
-    background: white;
+    background: var(--brass-light);
     border-radius: 2px;
     transition: var(--transition);
 }
@@ -116,7 +220,7 @@ body {
     position: relative;
     height: 100vh;
     width: 100vw;
-    padding-top: 60px;
+    padding-top: 70px;
     display: flex;
 }
 
@@ -127,35 +231,152 @@ body {
 }
 
 /* ============================================
-   Side Panel Styles
+   Side Panel Styles - Parchment with Rope Border
    ============================================ */
 .side-panel {
     width: 380px;
-    height: calc(100vh - 60px);
-    background: var(--panel-bg);
-    box-shadow: var(--shadow-lg);
+    height: calc(100vh - 70px);
+    background: var(--panel-bg-texture);
+    background-color: var(--panel-bg);
+    box-shadow:
+        var(--shadow-lg),
+        inset 0 0 50px rgba(139, 90, 43, 0.1);
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 500;
     display: flex;
     flex-direction: column;
     transition: var(--transition);
-    order: -1;  /* Move to left side */
+    order: -1;
+    border-right: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    transform: translateX(0);
 }
+
+.side-panel.hidden {
+    transform: translateX(-100%);
+}
+
+/* ============================================
+   Nautical Scrollbar - Rope & Brass Theme
+   ============================================ */
+/* WebKit browsers (Chrome, Safari, Edge) */
+.side-panel::-webkit-scrollbar {
+    width: 14px;
+}
+
+.side-panel::-webkit-scrollbar-track {
+    background: linear-gradient(
+        90deg,
+        #2d1810 0%,
+        #3a2416 50%,
+        #2d1810 100%
+    );
+    border-left: 2px solid var(--brass-dark);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.side-panel::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        180deg,
+        var(--brass-light) 0%,
+        var(--brass-color) 20%,
+        var(--brass-dark) 40%,
+        var(--brass-color) 60%,
+        var(--brass-dark) 80%,
+        var(--brass-light) 100%
+    );
+    border: 2px solid var(--wood-dark);
+    border-radius: 2px;
+    box-shadow:
+        inset 0 0 6px rgba(255, 255, 255, 0.2),
+        inset 0 2px 0 rgba(255, 255, 255, 0.3),
+        0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.side-panel::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+        180deg,
+        var(--brass-light) 0%,
+        #c9a035 50%,
+        var(--brass-dark) 100%
+    );
+    box-shadow:
+        inset 0 0 8px rgba(255, 255, 255, 0.3),
+        inset 0 2px 0 rgba(255, 255, 255, 0.4),
+        0 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.side-panel::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(
+        180deg,
+        var(--brass-dark) 0%,
+        var(--brass-color) 50%,
+        var(--brass-dark) 100%
+    );
+}
+
+/* Firefox */
+.side-panel {
+    scrollbar-width: thin;
+    scrollbar-color: var(--brass-color) var(--wood-dark);
+}
+
+/* Simple brass border trim */
+.side-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(
+        180deg,
+        var(--brass-dark) 0%,
+        var(--brass-color) 25%,
+        var(--brass-light) 50%,
+        var(--brass-color) 75%,
+        var(--brass-dark) 100%
+    );
+    z-index: 10;
+    box-shadow:
+        -1px 0 3px rgba(0,0,0,0.3),
+        1px 0 2px rgba(0,0,0,0.2);
+}
+
 
 .panel-section {
     padding: 20px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 2px solid rgba(160, 128, 96, 0.3);
+    position: relative;
+}
+
+/* Decorative corner flourish */
+.panel-section::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+    border-left: 2px solid var(--brass-color);
+    border-top: 2px solid var(--brass-color);
+    opacity: 0.5;
 }
 
 .panel-section h2 {
+    font-family: 'IM Fell English SC', serif;
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 15px;
-    color: var(--primary-color);
+    color: var(--wood-dark);
     display: flex;
     align-items: center;
     gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* ============================================
@@ -230,7 +451,7 @@ body {
 }
 
 /* ============================================
-   Buttons (Touch Optimized)
+   Buttons (Nautical Brass Theme)
    ============================================ */
 .btn {
     display: inline-flex;
@@ -239,48 +460,72 @@ body {
     gap: 8px;
     min-height: var(--touch-target);
     padding: 12px 24px;
-    font-size: 1rem;
+    font-family: 'IM Fell English SC', serif;
+    font-size: 0.9rem;
     font-weight: 600;
     border: none;
     border-radius: var(--radius);
     cursor: pointer;
     transition: var(--transition);
-    text-transform: none;
-    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-    color: white;
+    background: linear-gradient(180deg,
+        var(--brass-light) 0%,
+        var(--brass-color) 50%,
+        var(--brass-dark) 100%
+    );
+    color: var(--wood-dark);
+    border: 2px solid var(--brass-dark);
+    box-shadow:
+        0 2px 4px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.3);
 }
 
 .btn-primary:hover,
 .btn-primary:active {
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    background: linear-gradient(180deg,
+        var(--brass-color) 0%,
+        var(--brass-dark) 50%,
+        #8a6a1a 100%
+    );
     transform: translateY(-1px);
     box-shadow: var(--shadow);
 }
 
 .btn-secondary {
-    background: var(--secondary-color);
-    color: white;
+    background: linear-gradient(180deg,
+        var(--primary-light) 0%,
+        var(--primary-color) 50%,
+        var(--primary-dark) 100%
+    );
+    color: #f4e8d1;
+    border: 2px solid var(--primary-dark);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .btn-secondary:hover,
 .btn-secondary:active {
-    background: #219a52;
+    background: linear-gradient(180deg,
+        var(--primary-color) 0%,
+        var(--primary-dark) 50%,
+        #0a1c2e 100%
+    );
 }
 
 .btn-outline {
-    background: transparent;
-    border: 2px solid var(--border-color);
-    color: var(--text-color);
+    background: rgba(250, 246, 237, 0.8);
+    border: 2px solid var(--rope-color);
+    color: var(--wood-dark);
 }
 
 .btn-outline:hover,
 .btn-outline:active {
-    background: var(--bg-color);
-    border-color: var(--text-light);
+    background: rgba(244, 232, 209, 1);
+    border-color: var(--wood-medium);
 }
 
 .btn-small {
@@ -531,14 +776,19 @@ body {
 }
 
 /* ============================================
-   Trip Results
+   Trip Results - Nautical Card
    ============================================ */
 .trip-results {
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    background:
+        linear-gradient(135deg, rgba(250, 246, 237, 0.95), rgba(244, 232, 209, 0.95)),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L35 25 L30 20 L25 25 Z' fill='%23c9a227' opacity='0.1'/%3E%3C/svg%3E");
     border-radius: var(--radius-lg);
     padding: 20px;
     margin-top: 15px;
-    border: 2px solid var(--primary-color);
+    border: 3px solid var(--brass-color);
+    box-shadow:
+        inset 0 0 20px rgba(139, 90, 43, 0.1),
+        0 4px 8px rgba(0,0,0,0.15);
 }
 
 .trip-results.hidden {
@@ -553,22 +803,24 @@ body {
 }
 
 .result-item:first-child {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 2px solid rgba(201, 162, 39, 0.3);
 }
 
 .result-label {
+    font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
     font-size: 0.9rem;
     color: var(--text-light);
 }
 
 .result-value {
+    font-family: 'IM Fell English SC', serif;
     font-size: 1.4rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--wood-dark);
 }
 
 /* ============================================
-   Filter Buttons
+   Filter Buttons - Nautical Toggle Pills
    ============================================ */
 .filter-buttons {
     display: flex;
@@ -582,23 +834,31 @@ body {
     gap: 6px;
     min-height: 44px;
     padding: 10px 14px;
-    font-size: 0.85rem;
+    font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
+    font-size: 0.8rem;
     font-weight: 500;
-    background: var(--bg-color);
-    border: 2px solid transparent;
-    border-radius: 25px;
+    background: rgba(250, 246, 237, 0.9);
+    border: 2px solid var(--rope-color);
+    border-radius: 20px;
     cursor: pointer;
     transition: var(--transition);
     white-space: nowrap;
+    color: var(--wood-dark);
 }
 
 .filter-btn:hover {
-    background: var(--border-color);
+    background: rgba(201, 162, 39, 0.2);
+    border-color: var(--brass-color);
 }
 
 .filter-btn.active {
-    background: var(--primary-color);
-    color: white;
+    background: linear-gradient(180deg,
+        var(--primary-light) 0%,
+        var(--primary-color) 100%
+    );
+    color: #f4e8d1;
+    border-color: var(--primary-dark);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .filter-btn .filter-icon {
@@ -832,7 +1092,7 @@ body {
 .poi-marker.public-dock { background: #34495e; color: white; }
 
 /* ============================================
-   Quick Info Panel
+   Quick Info Panel - Nautical Card
    ============================================ */
 .quick-info {
     position: fixed;
@@ -840,12 +1100,31 @@ body {
     left: 400px;
     right: 20px;
     max-width: 500px;
-    background: white;
+    background: var(--panel-bg-texture);
+    background-color: var(--panel-bg);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
+    box-shadow:
+        0 4px 20px rgba(0,0,0,0.25),
+        inset 0 0 30px rgba(139, 90, 43, 0.08);
     padding: 20px;
     z-index: 600;
     transition: var(--transition);
+    border: 3px solid var(--brass-color);
+}
+
+.quick-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+        var(--brass-dark) 0%,
+        var(--brass-light) 50%,
+        var(--brass-dark) 100%
+    );
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .quick-info.hidden {
@@ -858,40 +1137,46 @@ body {
     right: 10px;
     width: 44px;
     height: 44px;
-    border: none;
-    background: var(--bg-color);
+    border: 2px solid var(--rope-color);
+    background: rgba(250, 246, 237, 0.9);
     border-radius: 50%;
     font-size: 1.5rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-light);
+    color: var(--wood-dark);
     transition: var(--transition);
 }
 
 .quick-info .close-btn:hover {
-    background: var(--border-color);
-    color: var(--text-color);
+    background: var(--brass-light);
+    border-color: var(--brass-dark);
+    color: var(--wood-dark);
 }
 
 .quick-info h3 {
+    font-family: 'IM Fell English SC', serif;
     font-size: 1.2rem;
     margin-bottom: 5px;
     padding-right: 40px;
+    color: var(--wood-dark);
 }
 
 .quick-info .poi-type {
+    font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
     font-size: 0.85rem;
-    color: var(--primary-color);
+    color: var(--brass-dark);
     font-weight: 500;
     margin-bottom: 8px;
+    font-style: italic;
 }
 
 .quick-info .poi-desc {
     font-size: 0.9rem;
     color: var(--text-light);
     margin-bottom: 15px;
+    line-height: 1.6;
 }
 
 .quick-info-actions {
@@ -900,7 +1185,7 @@ body {
 }
 
 /* ============================================
-   Map Legend
+   Map Legend - Nautical Compass Style
    ============================================ */
 .map-legend {
     position: fixed;
@@ -912,29 +1197,42 @@ body {
 .legend-toggle {
     min-height: 44px;
     padding: 10px 16px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    background: white;
-    border: none;
+    font-family: 'IM Fell English SC', serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(180deg,
+        var(--brass-light) 0%,
+        var(--brass-color) 50%,
+        var(--brass-dark) 100%
+    );
+    color: var(--wood-dark);
+    border: 2px solid var(--brass-dark);
     border-radius: var(--radius);
-    box-shadow: var(--shadow);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     cursor: pointer;
     transition: var(--transition);
 }
 
 .legend-toggle:hover {
-    background: var(--bg-color);
+    background: linear-gradient(180deg,
+        var(--brass-color) 0%,
+        var(--brass-dark) 100%
+    );
 }
 
 .legend-content {
     position: absolute;
     bottom: 50px;
     right: 0;
-    background: white;
+    background: var(--panel-bg-texture);
+    background-color: var(--panel-bg);
     border-radius: var(--radius);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
     padding: 15px;
-    min-width: 160px;
+    min-width: 180px;
+    border: 2px solid var(--brass-color);
 }
 
 .legend-content.hidden {
@@ -946,7 +1244,9 @@ body {
     align-items: center;
     gap: 10px;
     padding: 6px 0;
-    font-size: 0.85rem;
+    font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
+    font-size: 0.8rem;
+    color: var(--wood-dark);
 }
 
 .legend-marker {
@@ -989,7 +1289,7 @@ body {
 .legend-marker.public-dock { background: #34495e; }
 
 /* ============================================
-   Loading Overlay
+   Loading Overlay - Nautical Compass Theme
    ============================================ */
 .loading-overlay {
     position: fixed;
@@ -997,7 +1297,9 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.95);
+    background:
+        radial-gradient(ellipse at center, rgba(250, 246, 237, 0.98) 0%, rgba(244, 232, 209, 0.98) 100%),
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L55 45 L50 40 L45 45 Z' fill='%23c9a227' opacity='0.05'/%3E%3C/svg%3E");
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1011,14 +1313,47 @@ body {
     pointer-events: none;
 }
 
+/* Ship Wheel / Compass Spinner */
 .loading-spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid var(--bg-color);
-    border-top-color: var(--primary-color);
+    width: 70px;
+    height: 70px;
+    position: relative;
+    animation: spin 2s linear infinite;
+}
+
+.loading-spinner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 4px solid var(--brass-color);
     border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 15px;
+    box-shadow:
+        inset 0 0 0 8px transparent,
+        inset 0 0 0 10px var(--brass-dark);
+}
+
+.loading-spinner::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    background: var(--brass-color);
+    border-radius: 50%;
+    box-shadow:
+        0 -25px 0 -6px var(--wood-dark),
+        0 25px 0 -6px var(--wood-dark),
+        25px 0 0 -6px var(--wood-dark),
+        -25px 0 0 -6px var(--wood-dark),
+        18px -18px 0 -6px var(--wood-dark),
+        -18px 18px 0 -6px var(--wood-dark),
+        18px 18px 0 -6px var(--wood-dark),
+        -18px -18px 0 -6px var(--wood-dark);
 }
 
 @keyframes spin {
@@ -1026,8 +1361,12 @@ body {
 }
 
 .loading-overlay p {
+    font-family: 'IM Fell English SC', serif;
     font-size: 1rem;
-    color: var(--text-light);
+    color: var(--wood-dark);
+    margin-top: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 /* ============================================
@@ -1230,21 +1569,18 @@ body {
    Responsive Styles
    ============================================ */
 @media screen and (max-width: 900px) {
-    .menu-toggle {
-        display: flex;
-    }
-
     .side-panel {
-        position: fixed;
-        top: 60px;
-        left: 0;
         width: 100%;
         max-width: 400px;
-        transform: translateX(-100%);
-        box-shadow: var(--shadow-lg);
     }
 
-    .side-panel.open {
+    /* On mobile, start hidden to show map first */
+    .side-panel.mobile-hidden {
+        transform: translateX(-100%);
+    }
+
+    /* Toggle menu button shows panel */
+    .side-panel.mobile-hidden:not(.hidden) {
         transform: translateX(0);
     }
 
@@ -1266,8 +1602,14 @@ body {
         padding: 0 15px;
     }
 
+    .header-logo {
+        height: 40px;
+        margin-right: 10px;
+    }
+
     .header-content h1 {
-        font-size: 1rem;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
     }
 
     .header-content .tagline {
@@ -1325,20 +1667,20 @@ body {
     }
 
     .app-header {
-        height: 70px;
+        height: 80px;
     }
 
     .app-container {
-        padding-top: 70px;
+        padding-top: 80px;
     }
 
     .side-panel {
         width: 450px;
-        height: calc(100vh - 70px);
+        height: calc(100vh - 80px);
     }
 
     .header-content h1 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 
     .panel-section h2 {
@@ -1352,7 +1694,7 @@ body {
     }
 
     .btn {
-        font-size: 1.1rem;
+        font-size: 1rem;
         padding: 14px 28px;
     }
 
@@ -1400,7 +1742,7 @@ body {
 .remove-stop-btn:focus-visible,
 .add-stop-btn:focus-visible,
 .location-item:focus-visible {
-    outline: 3px solid #4A90D9;
+    outline: 3px solid var(--brass-color);
     outline-offset: 2px;
 }
 
@@ -1414,24 +1756,26 @@ body {
 }
 
 /* ============================================
-   Toast Notification System
+   Toast Notification System - Nautical Style
    ============================================ */
 .toast {
     position: fixed;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 12px 24px;
-    border-radius: 8px;
-    color: white;
+    padding: 14px 28px;
+    border-radius: var(--radius);
+    color: #f4e8d1;
     z-index: 10000;
     opacity: 0;
     transition: opacity 0.3s ease;
+    font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
     font-size: 0.95rem;
     font-weight: 500;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
     max-width: 90%;
     text-align: center;
+    border: 2px solid rgba(255,255,255,0.2);
 }
 
 .toast.visible {
@@ -1439,20 +1783,24 @@ body {
 }
 
 .toast.error {
-    background: #dc3545;
+    background: linear-gradient(180deg, #a82039 0%, #8b1a2f 100%);
+    border-color: #6b1525;
 }
 
 .toast.success {
-    background: #28a745;
+    background: linear-gradient(180deg, #3d6b4f 0%, #2d5a3f 100%);
+    border-color: #1d4a2f;
 }
 
 .toast.info {
-    background: #17a2b8;
+    background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary-color) 100%);
+    border-color: var(--primary-dark);
 }
 
 .toast.warning {
-    background: #ffc107;
-    color: #333;
+    background: linear-gradient(180deg, var(--brass-light) 0%, var(--brass-color) 100%);
+    color: var(--wood-dark);
+    border-color: var(--brass-dark);
 }
 
 /* ============================================
@@ -1523,5 +1871,433 @@ body {
     .map-container {
         width: 100%;
         height: 100vh;
+    }
+}
+
+/* ============================================
+   WEATHER SECTION STYLES
+   ============================================ */
+.weather-section {
+    margin-top: 2rem;
+}
+
+.section-toggle {
+    width: 100%;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    margin-bottom: 0.5rem;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-toggle:hover {
+    background: var(--accent-color);
+}
+
+.toggle-icon {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    font-size: 0.8rem;
+}
+
+.section-toggle[aria-expanded="true"] .toggle-icon {
+    transform: rotate(90deg);
+}
+
+.weather-content {
+    padding-top: 1rem;
+}
+
+.weather-content.hidden {
+    display: none;
+}
+
+.weather-loading {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: #666;
+}
+
+.weather-current {
+    background: var(--panel-bg);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--secondary-color);
+    margin: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.weather-temp {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+}
+
+.weather-period {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.weather-wind {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 0.25rem;
+}
+
+.weather-condition {
+    font-size: 0.95rem;
+    color: #666;
+    font-style: italic;
+}
+
+.weather-forecast {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin: 1rem 0;
+}
+
+.forecast-day {
+    background: var(--panel-bg);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--secondary-color);
+    text-align: center;
+}
+
+.forecast-name {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.forecast-temp {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin: 0.25rem 0;
+}
+
+.forecast-wind {
+    font-size: 0.85rem;
+    color: #555;
+    margin: 0.25rem 0;
+}
+
+.forecast-desc {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+.weather-alerts {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    margin: 1rem 0;
+}
+
+.weather-alert {
+    margin-bottom: 0.75rem;
+}
+
+.weather-alert:last-child {
+    margin-bottom: 0;
+}
+
+.alert-event {
+    font-weight: bold;
+    color: #856404;
+    margin-bottom: 0.25rem;
+}
+
+.alert-headline {
+    color: #856404;
+    font-size: 0.9rem;
+}
+
+.alert-extreme {
+    background: #f8d7da;
+    border-color: #dc3545;
+}
+
+.alert-severe {
+    background: #fff3cd;
+    border-color: #ffc107;
+}
+
+.weather-updated {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin: 1rem 0 0.5rem;
+    text-align: center;
+}
+
+.weather-attribution {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--border-color);
+    font-size: 0.85rem;
+}
+
+.weather-source {
+    color: var(--text-light);
+    margin: 0.5rem 0;
+    line-height: 1.5;
+}
+
+.weather-source strong {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.weather-source a {
+    color: var(--primary-color);
+    text-decoration: none;
+    border-bottom: 1px solid var(--primary-light);
+    transition: var(--transition);
+}
+
+.weather-source a:hover {
+    color: var(--primary-light);
+    border-bottom-color: var(--primary-color);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.wind-arrow-icon {
+    pointer-events: none;
+}
+
+/* Submit POI Button in Header */
+.submit-poi-btn {
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+@media (max-width: 900px) {
+    .weather-forecast {
+        grid-template-columns: 1fr;
+    }
+
+    .submit-poi-btn {
+        display: none; /* Hide on mobile, use menu instead */
+    }
+}
+
+/* ============================================
+   POI SUBMISSION MODAL STYLES
+   ============================================ */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 58, 92, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 1rem;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: var(--panel-bg-texture);
+    border: 3px solid var(--secondary-color);
+    border-radius: var(--radius-lg);
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 2px solid var(--secondary-color);
+    background: var(--panel-bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s ease;
+}
+
+.modal-close:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    padding: 1.5rem;
+    border-top: 2px solid var(--secondary-color);
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    background: var(--panel-bg);
+    position: sticky;
+    bottom: 0;
+}
+
+.form-section {
+    margin-bottom: 2rem;
+}
+
+.form-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    border-bottom: 1px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
+}
+
+.form-help {
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.warning {
+    background: #fff3cd;
+    color: #856404;
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+    margin-top: 0.5rem;
+    border: 1px solid #ffc107;
+    display: flex;
+    align-items: center;
+}
+
+.warning.hidden {
+    display: none;
+}
+
+#submitSuccess {
+    text-align: center;
+    padding: 3rem 1.5rem;
+}
+
+.success-icon {
+    font-size: 4rem;
+    color: #28a745;
+    margin-bottom: 1rem;
+    animation: scaleIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+#submitSuccess h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+#submitSuccess p {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+#submitSuccess a {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+#submitSuccess a:hover {
+    text-decoration: none;
+}
+
+/* Coordinate picking mode */
+.modal.picking-mode .modal-content {
+    opacity: 0.95;
+}
+
+/* Mobile responsiveness for modal */
+@media (max-width: 900px) {
+    .modal {
+        padding: 0;
+    }
+
+    .modal-content {
+        max-width: 100%;
+        max-height: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+    }
+
+    .modal-footer button {
+        width: 100%;
+    }
+
+    .form-section {
+        margin-bottom: 1.5rem;
     }
 }

@@ -6,6 +6,9 @@
  * to ensure routes stay on navigable water and never cross land.
  */
 
+// Check if we're in a Node.js environment (for testing)
+const isNodeNav = typeof module !== 'undefined' && module.exports;
+
 // ============================================
 // Lake Champlain Water Polygon - FROM KMZ DATA
 // ============================================
@@ -1642,16 +1645,45 @@ const LAKE_CHAMPLAIN_POLYGON = [
 // ============================================
 // Grid Configuration - Updated for KMZ bounds
 // ============================================
+
+/**
+ * Earth's radius in kilometers
+ * Used for Haversine distance calculations
+ */
+const EARTH_RADIUS_KM = 6371;
+
+/**
+ * Grid configuration for water-based pathfinding
+ *
+ * latStep: ~0.5 km resolution in latitude (degrees)
+ *   0.00450° ≈ 500 meters per grid cell
+ *   Chosen to balance accuracy vs performance
+ *
+ * lngStep: ~0.5 km resolution in longitude (degrees)
+ *   0.00600° ≈ 500 meters per grid cell at 44°N
+ *   Adjusted for longitude compression at this latitude
+ *
+ * bounds: Geographic boundary of the navigation region
+ *   Covers Lake Champlain from Whitehall, NY to Canadian border
+ *   and extends to include the Champlain Canal connection
+ */
 const GRID_CONFIG = {
-    latStep: 0.00450,
-    lngStep: 0.00600,
+    latStep: 0.00450,      // Grid resolution: ~500m per cell (latitude)
+    lngStep: 0.00600,      // Grid resolution: ~500m per cell (longitude)
     bounds: {
-        south: 43.5300,
-        north: 45.0900,
-        west: -73.5200,
-        east: -73.0700
+        south: 43.5300,    // Southern extent (near Whitehall, NY)
+        north: 45.0900,    // Northern extent (Canadian border)
+        west: -73.5200,    // Western shore
+        east: -73.0700     // Eastern shore
     }
 };
+
+/**
+ * Maximum distance (km) to search for nearest grid point
+ * If a POI is farther than this from any water grid point,
+ * pathfinding will fail (prevents infinite searches)
+ */
+const MAX_GRID_SEARCH_DISTANCE_KM = 5;
 
 // ============================================
 // Point in Polygon Check (Ray Casting)
@@ -1680,8 +1712,15 @@ function isInWater(lat, lng) {
 // ============================================
 // Haversine Distance (km)
 // ============================================
+/**
+ * Calculate great-circle distance between two points using Haversine formula
+ * @param {number} lat1 - Latitude of point 1 (degrees)
+ * @param {number} lng1 - Longitude of point 1 (degrees)
+ * @param {number} lat2 - Latitude of point 2 (degrees)
+ * @param {number} lng2 - Longitude of point 2 (degrees)
+ * @returns {number} Distance in kilometers
+ */
 function haversineDistance(lat1, lng1, lat2, lng2) {
-    const R = 6371;
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLng = (lng2 - lng1) * Math.PI / 180;
 
@@ -1690,7 +1729,7 @@ function haversineDistance(lat1, lng1, lat2, lng2) {
               Math.sin(dLng / 2) * Math.sin(dLng / 2);
 
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c;
+    return EARTH_RADIUS_KM * c;
 }
 
 // ============================================
@@ -1766,14 +1805,59 @@ function getNeighbors(point) {
 // ============================================
 // A* Pathfinding Algorithm
 // ============================================
+/**
+ * Find a water-only path between two points using A* algorithm
+ * @param {number} startLat - Starting latitude
+ * @param {number} startLng - Starting longitude
+ * @param {number} endLat - Ending latitude
+ * @param {number} endLng - Ending longitude
+ * @returns {Object|null} Object with path array and distance, or null if no path found
+ */
 function findPath(startLat, startLng, endLat, endLng) {
+    // Validate inputs
+    if (!Number.isFinite(startLat) || !Number.isFinite(startLng) ||
+        !Number.isFinite(endLat) || !Number.isFinite(endLng)) {
+        console.error('Invalid coordinates provided to findPath:', {
+            startLat, startLng, endLat, endLng
+        });
+        return null;
+    }
+
+    // Check if coordinates are within reasonable bounds
+    if (startLat < -90 || startLat > 90 || endLat < -90 || endLat > 90 ||
+        startLng < -180 || startLng > 180 || endLng < -180 || endLng > 180) {
+        console.error('Coordinates out of valid range:', {
+            startLat, startLng, endLat, endLng
+        });
+        return null;
+    }
+
     generateWaterGrid();
+
+    if (!waterGrid || waterGrid.length === 0) {
+        console.error('Water grid generation failed');
+        return null;
+    }
 
     const startPoint = findNearestGridPoint(startLat, startLng);
     const endPoint = findNearestGridPoint(endLat, endLng);
 
     if (!startPoint || !endPoint) {
         console.warn('Could not find grid points for route');
+        return null;
+    }
+
+    // Check if points are too far from water
+    const startDist = haversineDistance(startLat, startLng, startPoint.lat, startPoint.lng);
+    const endDist = haversineDistance(endLat, endLng, endPoint.lat, endPoint.lng);
+
+    if (startDist > MAX_GRID_SEARCH_DISTANCE_KM) {
+        console.warn(`Start point is ${startDist.toFixed(2)}km from nearest water (max: ${MAX_GRID_SEARCH_DISTANCE_KM}km)`);
+        return null;
+    }
+
+    if (endDist > MAX_GRID_SEARCH_DISTANCE_KM) {
+        console.warn(`End point is ${endDist.toFixed(2)}km from nearest water (max: ${MAX_GRID_SEARCH_DISTANCE_KM}km)`);
         return null;
     }
 
@@ -1853,7 +1937,14 @@ function findPath(startLat, startLng, endLat, endLng) {
         }
     }
 
-    console.warn('No water path found');
+    // No path found - all possible routes have been exhausted
+    console.warn('No water path found between points:', {
+        start: { lat: startLat, lng: startLng },
+        end: { lat: endLat, lng: endLng },
+        startPoint: { lat: startPoint.lat, lng: startPoint.lng },
+        endPoint: { lat: endPoint.lat, lng: endPoint.lng },
+        nodesExplored: closedSet.size
+    });
     return null;
 }
 
@@ -1961,4 +2052,25 @@ if (typeof window !== 'undefined') {
     window.findNearestGridPoint = findNearestGridPoint;
     window.generateWaterGrid = generateWaterGrid;
     window.LAKE_CHAMPLAIN_POLYGON = LAKE_CHAMPLAIN_POLYGON;
+}
+
+// Export for testing (Node.js environment)
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        pointInPolygon,
+        isInWater,
+        haversineDistance,
+        generateWaterGrid,
+        getNeighbors,
+        findNearestGridPoint,
+        findPath,
+        calculateWaterRoute,
+        LAKE_CHAMPLAIN_POLYGON,
+        GRID_CONFIG,
+        EARTH_RADIUS_KM,
+        MAX_GRID_SEARCH_DISTANCE_KM,
+        // Expose internal variables for testing
+        get waterGrid() { return waterGrid; },
+        get gridIndex() { return gridIndex; }
+    };
 }

@@ -610,3 +610,17 @@ if (typeof window !== 'undefined') {
     window.loadPoisFromJson = loadPoisFromJson;
     window.initializeData = initializeData;
 }
+
+// Export for testing (Node.js environment)
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        DEFAULT_START_LOCATION,
+        MAP_CENTER,
+        MAP_BOUNDS,
+        POINTS_OF_INTEREST,
+        TYPE_CONFIG,
+        UNIT_CONVERSIONS,
+        loadPoisFromJson,
+        initializeData
+    };
+}
