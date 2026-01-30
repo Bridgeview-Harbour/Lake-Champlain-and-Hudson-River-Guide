@@ -324,57 +324,28 @@ body {
     scrollbar-color: var(--brass-color) var(--wood-dark);
 }
 
-/* Realistic twisted rope border effect */
+/* Simple brass border trim */
 .side-panel::before {
     content: '';
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
-    width: 12px;
-    background:
-        /* Main rope strand - twisted effect */
-        repeating-linear-gradient(
-            165deg,
-            #8b7355 0px,
-            #a08060 3px,
-            #c4a574 6px,
-            #a08060 9px,
-            #8b7355 12px,
-            #6b5344 15px,
-            #8b7355 18px
-        ),
-        /* Secondary highlight strand */
-        repeating-linear-gradient(
-            195deg,
-            transparent 0px,
-            rgba(255,255,255,0.15) 2px,
-            transparent 4px
-        );
-    background-color: #8b7355;
+    width: 4px;
+    background: linear-gradient(
+        180deg,
+        var(--brass-dark) 0%,
+        var(--brass-color) 25%,
+        var(--brass-light) 50%,
+        var(--brass-color) 75%,
+        var(--brass-dark) 100%
+    );
     z-index: 10;
     box-shadow:
-        inset 2px 0 3px rgba(0,0,0,0.3),
-        inset -1px 0 2px rgba(255,255,255,0.1),
-        -2px 0 4px rgba(0,0,0,0.2);
-    border-left: 1px solid #5c4434;
-    border-right: 1px solid #5c4434;
+        -1px 0 3px rgba(0,0,0,0.3),
+        1px 0 2px rgba(0,0,0,0.2);
 }
 
-/* Rope end caps at top and bottom */
-.side-panel::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 12px;
-    height: 100%;
-    background:
-        radial-gradient(ellipse 6px 8px at 6px 0px, #6b5344 0%, transparent 70%),
-        radial-gradient(ellipse 6px 8px at 6px 100%, #6b5344 0%, transparent 70%);
-    z-index: 11;
-    pointer-events: none;
-}
 
 .panel-section {
     padding: 20px;
