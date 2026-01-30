@@ -80,6 +80,13 @@ body {
 }
 
 /* ============================================
+   Utility Classes
+   ============================================ */
+.hidden {
+    display: none !important;
+}
+
+/* ============================================
    Header Styles - Wood Plank with Brass
    ============================================ */
 .app-header {
@@ -161,7 +168,7 @@ body {
 }
 
 .menu-toggle {
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
     width: var(--touch-target);
@@ -170,6 +177,7 @@ body {
     border: none;
     cursor: pointer;
     padding: 10px;
+    margin-right: 1rem;
 }
 
 .menu-toggle span {
@@ -216,7 +224,14 @@ body {
     transition: var(--transition);
     order: -1;
     border-right: none;
-    position: relative;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    transform: translateX(-100%);
+}
+
+.side-panel.open {
+    transform: translateX(0);
 }
 
 /* Realistic twisted rope border effect */
@@ -1493,22 +1508,9 @@ body {
    Responsive Styles
    ============================================ */
 @media screen and (max-width: 900px) {
-    .menu-toggle {
-        display: flex;
-    }
-
     .side-panel {
-        position: fixed;
-        top: 70px;
-        left: 0;
         width: 100%;
         max-width: 400px;
-        transform: translateX(-100%);
-        box-shadow: var(--shadow-lg);
-    }
-
-    .side-panel.open {
-        transform: translateX(0);
     }
 
     .quick-info {
