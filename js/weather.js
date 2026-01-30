@@ -350,6 +350,7 @@ const WeatherModule = (function() {
 
         // Weather Source Attribution
         const zoneName = ZONES[currentZone]?.name || 'Lake Champlain';
+        const forecastUrl = `https://forecast.weather.gov/MapClick.php?zoneid=${currentZone}`;
         html += `
             <div class="weather-attribution">
                 <p class="weather-source">
@@ -357,8 +358,8 @@ const WeatherModule = (function() {
                 </p>
                 <p class="weather-source">
                     Weather data provided by
-                    <a href="https://www.weather.gov" target="_blank" rel="noopener noreferrer">
-                        NOAA - National Oceanic and Atmospheric Administration
+                    <a href="${forecastUrl}" target="_blank" rel="noopener noreferrer">
+                        NOAA
                     </a>
                 </p>
             </div>
