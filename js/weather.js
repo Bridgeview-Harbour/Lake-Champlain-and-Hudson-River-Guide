@@ -304,16 +304,32 @@ const WeatherModule = (function() {
 
         let html = '';
 
-        // Current Forecast (use first forecast period for current temperature)
+        // Current Forecast (find the current or most relevant period)
         if (weatherData.forecast && weatherData.forecast.length > 0) {
-            const currentPeriod = weatherData.forecast[0];
+            // Try to find the current period (not a future period)
+            // Prefer daytime periods, or use the first period if none match
+            let currentPeriod = weatherData.forecast[0];
+
+            // If first period is "Tonight" or "Overnight", and there's a daytime period available, use that
+            if ((currentPeriod.name.includes('Tonight') || currentPeriod.name.includes('Overnight')) &&
+                weatherData.forecast.length > 1 && weatherData.forecast[1].isDaytime) {
+                // Skip to next daytime period
+                currentPeriod = weatherData.forecast.find(p => p.isDaytime) || weatherData.forecast[0];
+            }
+
             const curr = weatherData.current;
 
             // Debug logging
+            console.log('Available forecast periods:', weatherData.forecast.map(p => ({
+                name: p.name,
+                temp: p.temperature,
+                isDaytime: p.isDaytime
+            })));
             console.log('Displaying forecast temperature:', {
                 temp: currentPeriod.temperature,
                 unit: currentPeriod.temperatureUnit,
-                period: currentPeriod.name
+                period: currentPeriod.name,
+                isDaytime: currentPeriod.isDaytime
             });
 
             html += `
