@@ -297,9 +297,17 @@ const WeatherModule = (function() {
             const currentPeriod = weatherData.forecast[0];
             const curr = weatherData.current;
 
+            // Debug logging
+            console.log('Displaying forecast temperature:', {
+                temp: currentPeriod.temperature,
+                unit: currentPeriod.temperatureUnit,
+                period: currentPeriod.name
+            });
+
             html += `
                 <div class="weather-current">
                     <div class="weather-temp">${currentPeriod.temperature}°${currentPeriod.temperatureUnit}</div>
+                    <div class="weather-period">${currentPeriod.name}</div>
                     ${curr ? `
                         <div class="weather-wind">
                             Wind: ${formatWindDirection(curr.windDirection)} ${curr.windSpeed !== null ? Math.round(curr.windSpeed) + ' kts' : 'N/A'}
