@@ -60,10 +60,22 @@ const WeatherModule = (function() {
         map = leafletMap;
         currentZone = zone;
 
-        // Try loading cached data first
-        loadCachedData();
+        console.log('=== Weather Module v2 Initialized ===');
+        console.log('Zone:', currentZone);
 
-        // Fetch fresh weather data
+        // Clear old cached data to force fresh fetch
+        try {
+            Object.keys(localStorage).forEach(key => {
+                if (key.startsWith(CONFIG.CACHE_KEY_PREFIX)) {
+                    localStorage.removeItem(key);
+                    console.log('Cleared old cache:', key);
+                }
+            });
+        } catch (e) {
+            console.error('Error clearing cache:', e);
+        }
+
+        // Fetch fresh weather data (skip cache on init)
         refresh();
 
         // Set up auto-refresh
