@@ -89,19 +89,19 @@ const EARTH_RADIUS_KM = 6371;
 /**
  * Grid configuration for water-based pathfinding
  *
- * UPDATED FOR DENSE WAYPOINT ROUTING:
- * Finer grid resolution (350m) provides many waypoints for:
- * - Visual smoothness through waypoint density (not curve smoothing)
- * - Tight turns are acceptable at map scale
- * - More precise navigation around obstacles
- * - Better visual appearance without aggressive smoothing
- * - Expected ~15K water grid points
+ * HIGH-RESOLUTION ROUTING:
+ * Fine grid resolution (200m) for maximum precision:
+ * - Very detailed routes with many waypoints
+ * - Precise navigation around shorelines and obstacles
+ * - Visual smoothness from high waypoint density
+ * - Better adherence to water boundaries
+ * - Expected ~30-35K water grid points
  *
- * latStep: ~350m resolution in latitude (degrees)
- *   0.00315° ≈ 350 meters per grid cell
+ * latStep: ~200m resolution in latitude (degrees)
+ *   0.00180° ≈ 200 meters per grid cell
  *
- * lngStep: ~350m resolution in longitude (degrees)
- *   0.00420° ≈ 350 meters per grid cell at 44°N
+ * lngStep: ~200m resolution in longitude (degrees)
+ *   0.00240° ≈ 200 meters per grid cell at 44°N
  *   Adjusted for longitude compression at this latitude
  *
  * bounds: Geographic boundary of the navigation region
@@ -109,8 +109,8 @@ const EARTH_RADIUS_KM = 6371;
  *   and extends to include the Champlain Canal connection
  */
 const GRID_CONFIG = {
-    latStep: 0.00315,      // Grid resolution: ~350m per cell (latitude)
-    lngStep: 0.00420,      // Grid resolution: ~350m per cell (longitude)
+    latStep: 0.00180,      // Grid resolution: ~200m per cell (latitude)
+    lngStep: 0.00240,      // Grid resolution: ~200m per cell (longitude)
     bounds: {
         south: 43.5300,    // Southern extent (near Whitehall, NY)
         north: 45.0900,    // Northern extent (Canadian border)
