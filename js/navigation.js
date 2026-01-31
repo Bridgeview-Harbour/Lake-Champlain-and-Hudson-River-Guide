@@ -47,14 +47,14 @@ async function loadDepthData() {
             console.log(`  Depth range: ${data.depth_statistics.min}m - ${data.depth_statistics.max}m`);
             console.log(`  Average depth: ${data.depth_statistics.mean}m`);
 
-            // Store depth data in Map for fast lookup
+            // Store depth data in Map using coordinate key for lookup
             for (const [id, point] of Object.entries(data.depth_grid)) {
-                DEPTH_GRID.set(id, {
-                    lat: point.lat,
-                    lng: point.lng,
-                    depth: point.depth
-                });
+                // Create coordinate key rounded to grid precision
+                const coordKey = `${point.lat.toFixed(6)},${point.lng.toFixed(6)}`;
+                DEPTH_GRID.set(coordKey, point.depth);
             }
+
+            console.log(`  Depth data indexed by coordinates for fast lookup`);
 
         } catch (error) {
             console.warn(`Failed to load ${file}:`, error);
@@ -564,35 +564,44 @@ function generateWaterGrid() {
 
     let id = 0;
     let depthFiltered = 0;
+    let noDepthData = 0;
 
     for (let lat = south; lat <= north; lat += latStep) {
         for (let lng = west; lng <= east; lng += lngStep) {
             if (isInWater(lat, lng)) {
-                const gridId = `g${id}`;
+                const roundedLat = Math.round(lat * 1000000) / 1000000;
+                const roundedLng = Math.round(lng * 1000000) / 1000000;
 
                 // Check depth constraints if depth data available
                 let depthOk = true;
                 let depth = null;
 
-                if (DEPTH_GRID && DEPTH_GRID.has(gridId)) {
-                    const depthPoint = DEPTH_GRID.get(gridId);
-                    depth = depthPoint.depth;
+                if (DEPTH_GRID && DEPTH_GRID.size > 0) {
+                    // Look up depth by coordinates
+                    const coordKey = `${roundedLat.toFixed(6)},${roundedLng.toFixed(6)}`;
 
-                    const minSafeDepth = VESSEL_DRAFT + SAFETY_MARGIN;
+                    if (DEPTH_GRID.has(coordKey)) {
+                        depth = DEPTH_GRID.get(coordKey);
 
-                    if (depth < minSafeDepth) {
-                        depthOk = false;
-                        depthFiltered++;
+                        const minSafeDepth = VESSEL_DRAFT + SAFETY_MARGIN;
+
+                        if (depth < minSafeDepth) {
+                            depthOk = false;
+                            depthFiltered++;
+                        }
+                    } else {
+                        // No depth data for this point - include it anyway for now
+                        noDepthData++;
                     }
                 }
 
-                // Only add point if both in water AND has safe depth (if depth data available)
+                // Only add point if both in water AND has safe depth (or no depth data)
                 if (depthOk) {
                     const point = {
-                        id: gridId,
-                        lat: Math.round(lat * 1000000) / 1000000,
-                        lng: Math.round(lng * 1000000) / 1000000,
-                        depth: depth,  // Include depth if available
+                        id: `g${id}`,
+                        lat: roundedLat,
+                        lng: roundedLng,
+                        depth: depth,  // Include depth if available, null otherwise
                         row: Math.round((lat - south) / latStep),
                         col: Math.round((lng - west) / lngStep),
                         // RBush requires bounding box format
@@ -613,7 +622,10 @@ function generateWaterGrid() {
     }
 
     if (depthFiltered > 0) {
-        console.log(`Filtered out ${depthFiltered} shallow water points (< ${VESSEL_DRAFT + SAFETY_MARGIN}m depth)`);
+        console.log(`Filtered out ${depthFiltered} shallow water points (< ${(VESSEL_DRAFT + SAFETY_MARGIN).toFixed(1)}m depth)`);
+    }
+    if (noDepthData > 0) {
+        console.log(`${noDepthData} water points have no depth data (included in grid)`);
     }
 
     // Build RBush spatial index for fast nearest-neighbor queries
