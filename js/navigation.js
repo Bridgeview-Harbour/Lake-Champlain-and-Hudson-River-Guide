@@ -89,19 +89,19 @@ const EARTH_RADIUS_KM = 6371;
 /**
  * Grid configuration for water-based pathfinding
  *
- * UPDATED FOR SMOOTHER ROUTING:
- * Moderately finer grid resolution (400m vs previous 500m) for:
- * - Smoother, more boat-friendly paths (with path smoothing doing most of the work)
- * - Better turn gradients
- * - More precise island avoidance
- * - Foundation for channel marker routing
- * - Good performance balance (~10K grid points)
+ * UPDATED FOR DENSE WAYPOINT ROUTING:
+ * Finer grid resolution (350m) provides many waypoints for:
+ * - Visual smoothness through waypoint density (not curve smoothing)
+ * - Tight turns are acceptable at map scale
+ * - More precise navigation around obstacles
+ * - Better visual appearance without aggressive smoothing
+ * - Expected ~15K water grid points
  *
- * latStep: ~400m resolution in latitude (degrees)
- *   0.00360° ≈ 400 meters per grid cell
+ * latStep: ~350m resolution in latitude (degrees)
+ *   0.00315° ≈ 350 meters per grid cell
  *
- * lngStep: ~400m resolution in longitude (degrees)
- *   0.00480° ≈ 400 meters per grid cell at 44°N
+ * lngStep: ~350m resolution in longitude (degrees)
+ *   0.00420° ≈ 350 meters per grid cell at 44°N
  *   Adjusted for longitude compression at this latitude
  *
  * bounds: Geographic boundary of the navigation region
@@ -109,8 +109,8 @@ const EARTH_RADIUS_KM = 6371;
  *   and extends to include the Champlain Canal connection
  */
 const GRID_CONFIG = {
-    latStep: 0.00360,      // Grid resolution: ~400m per cell (latitude)
-    lngStep: 0.00480,      // Grid resolution: ~400m per cell (longitude)
+    latStep: 0.00315,      // Grid resolution: ~350m per cell (latitude)
+    lngStep: 0.00420,      // Grid resolution: ~350m per cell (longitude)
     bounds: {
         south: 43.5300,    // Southern extent (near Whitehall, NY)
         north: 45.0900,    // Northern extent (Canadian border)
@@ -134,11 +134,11 @@ const ROUTING_CONFIG = {
 
     // Path smoothing
     smoothing: {
-        enabled: true,
+        enabled: false,         // Disabled - rely on dense waypoints for visual smoothness
         method: 'catmull-rom',  // 'catmull-rom', 'bezier', 'none'
-        tension: 0.7,           // 0 = loose curves, 1 = tight curves (0.7 = tighter, safer)
-        simplifyFirst: true,    // Douglas-Peucker before smoothing
-        simplifyTolerance: 0.00005  // degrees (reduced for more waypoints = safer)
+        tension: 0.9,           // 0 = loose curves, 1 = tight curves (very tight if enabled)
+        simplifyFirst: false,   // Keep ALL waypoints - density creates visual smoothness
+        simplifyTolerance: 0.00001  // degrees (very fine - keeps maximum waypoints)
     },
 
     // Safety margins (meters)
