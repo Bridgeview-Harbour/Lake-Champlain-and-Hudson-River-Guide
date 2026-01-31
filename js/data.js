@@ -582,11 +582,24 @@ async function loadPoisFromJson() {
 }
 
 /**
- * Initialize data - call this before using POIs
+ * Initialize data - call this before using POIs and navigation
  * Returns a promise that resolves when data is ready
  */
 async function initializeData() {
-    await loadPoisFromJson();
+    // Load POI data and water boundaries in parallel
+    await Promise.all([
+        loadPoisFromJson(),
+        typeof loadWaterBoundaries === 'function' ? loadWaterBoundaries() : Promise.resolve()
+    ]);
+
+    // Generate water grid after boundaries are loaded
+    if (typeof generateWaterGrid === 'function') {
+        // Small delay to ensure all data is ready
+        setTimeout(() => {
+            generateWaterGrid();
+        }, 100);
+    }
+
     return {
         pois: POINTS_OF_INTEREST,
         config: {

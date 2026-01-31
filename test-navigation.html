@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation System Test</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .test-section h3 {
+            margin-top: 0;
+        }
+        .pass { color: green; }
+        .fail { color: red; }
+        .info { color: blue; }
+        .test-section div {
+            font-family: 'Courier New', monospace;
+            margin: 5px 0;
+            padding: 3px 0;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        .coord-tester {
+            margin: 20px 0;
+        }
+        .coord-tester input {
+            font-family: 'Courier New', monospace;
+            padding: 8px;
+            font-size: 14px;
+            width: 250px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+        }
+        .coord-tester button {
+            font-family: monospace;
+            padding: 8px 16px;
+            font-size: 14px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .coord-tester button:hover {
+            background: #45a049;
+        }
+        .coord-result {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        .coord-result.water {
+            background: #e3f2fd;
+            border: 2px solid #2196F3;
+            color: #1565C0;
+        }
+        .coord-result.land {
+            background: #fff3e0;
+            border: 2px solid #FF9800;
+            color: #E65100;
+        }
+        .coord-result.error {
+            background: #ffebee;
+            border: 2px solid #f44336;
+            color: #c62828;
+        }
+        .helper-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Water Boundary Navigation System Test</h1>
+    
+    <div class="test-section">
+        <h3>Test Results</h3>
+        <div id="results"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>🧪 Interactive Coordinate Tester</h3>
+        <div class="coord-tester">
+            <label for="coord-input">Enter coordinates (lat,lng):</label><br>
+            <input
+                type="text"
+                id="coord-input"
+                placeholder="44.4759,-73.2121"
+                value="44.4759,-73.2121">
+            <button onclick="testCoordinate()">Test Coordinate</button>
+            <div class="helper-text">
+                Format: latitude,longitude (e.g., 44.75,-73.30 for Grand Isle)
+            </div>
+            <div id="coord-result"></div>
+        </div>
+        <div class="coord-tester">
+            <strong>Quick Test Examples:</strong><br>
+            <button onclick="testQuick(44.4759, -73.2121)">Burlington Harbor (water)</button>
+            <button onclick="testQuick(44.75, -73.30)">Grand Isle (island)</button>
+            <button onclick="testQuick(44.82, -73.28)">North Hero (island)</button>
+            <button onclick="testQuick(44.56, -73.42)">Valcour Island</button>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>Console Output</h3>
+        <pre id="console-output"></pre>
+    </div>
+
+    <!-- Load dependencies -->
+    <script src="https://unpkg.com/rbush@3.0.1/rbush.min.js"></script>
+    <script src="js/navigation.js"></script>
+
+    <script>
+        const resultsDiv = document.getElementById('results');
+        const consoleDiv = document.getElementById('console-output');
+        let consoleLog = [];
+
+        // Capture console output
+        const originalLog = console.log;
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            consoleLog.push(args.join(' '));
+            consoleDiv.textContent = consoleLog.join('\n');
+        };
+
+        const originalError = console.error;
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            consoleLog.push('ERROR: ' + args.join(' '));
+            consoleDiv.textContent = consoleLog.join('\n');
+        };
+
+        const originalWarn = console.warn;
+        console.warn = function(...args) {
+            originalWarn.apply(console, args);
+            consoleLog.push('WARN: ' + args.join(' '));
+            consoleDiv.textContent = consoleLog.join('\n');
+        };
+
+        function addResult(testName, passed, message, coords = null) {
+            const div = document.createElement('div');
+            div.className = passed ? 'pass' : 'fail';
+            let text = `${passed ? '✓' : '✗'} ${testName}: ${message}`;
+            if (coords) {
+                text += ` [${coords}]`;
+            }
+            div.textContent = text;
+            resultsDiv.appendChild(div);
+        }
+
+        function addInfo(message, coords = null) {
+            const div = document.createElement('div');
+            div.className = 'info';
+            let text = `ℹ ${message}`;
+            if (coords) {
+                text += ` [${coords}]`;
+            }
+            div.textContent = text;
+            resultsDiv.appendChild(div);
+        }
+
+        async function runTests() {
+            try {
+                // Test 1: Load water boundaries
+                addInfo('Loading water boundaries...');
+                await loadWaterBoundaries();
+                
+                const boundariesLoaded = WATER_BOUNDARIES && WATER_BOUNDARIES.length > 0;
+                addResult('Test 1: Load GeoJSON', boundariesLoaded, 
+                    boundariesLoaded ? `Loaded ${WATER_BOUNDARIES.length} water bodies` : 'Failed to load');
+
+                if (!boundariesLoaded) {
+                    addInfo('Cannot continue tests - boundaries not loaded');
+                    return;
+                }
+
+                // Test 2: Check island support
+                const lakeChamplain = WATER_BOUNDARIES[0];
+                const hasIslands = lakeChamplain.holes && lakeChamplain.holes.length > 0;
+                addResult('Test 2: Island Support', hasIslands,
+                    hasIslands ? `Found ${lakeChamplain.holes.length} islands` : 'No islands found');
+
+                // Test 3: Point in water check
+                const burlingtonPoint = { lat: 44.4759, lng: -73.2121 }; // Burlington Harbor
+                const inWater = isInWater(burlingtonPoint.lat, burlingtonPoint.lng);
+                addResult('Test 3: isInWater (Burlington)', inWater,
+                    inWater ? 'Point correctly identified as water' : 'FAILED - should be water',
+                    `${burlingtonPoint.lat}, ${burlingtonPoint.lng}`);
+
+                // Test 4: Point on island check (Grand Isle)
+                const grandIsle = { lat: 44.75, lng: -73.30 }; // Approximate center of Grand Isle
+                const onIsland = !isInWater(grandIsle.lat, grandIsle.lng);
+                addResult('Test 4: Island Exclusion (Grand Isle)', onIsland,
+                    onIsland ? 'Island correctly excluded from water' : 'FAILED - should not be water',
+                    `${grandIsle.lat}, ${grandIsle.lng}`);
+
+                // Test 5: Generate water grid
+                addInfo('Generating water grid...');
+                const startTime = performance.now();
+                const grid = generateWaterGrid();
+                const endTime = performance.now();
+                const gridTime = endTime - startTime;
+                
+                const gridGenerated = grid && grid.length > 0;
+                addResult('Test 5: Generate Grid', gridGenerated,
+                    gridGenerated ? `Generated ${grid.length} points in ${gridTime.toFixed(0)}ms` : 'Failed to generate grid');
+
+                // Test 6: Spatial index
+                const hasIndex = spatialIndex && typeof spatialIndex.all === 'function';
+                addResult('Test 6: RBush Spatial Index', hasIndex,
+                    hasIndex ? `Index contains ${spatialIndex.all().length} points` : 'Spatial index not created');
+
+                // Test 7: Find nearest grid point
+                if (grid && grid.length > 0) {
+                    const nearestStart = performance.now();
+                    const nearest = findNearestGridPoint(burlingtonPoint.lat, burlingtonPoint.lng);
+                    const nearestTime = performance.now() - nearestStart;
+
+                    const nearestFound = nearest !== null;
+                    addResult('Test 7: Find Nearest Point', nearestFound,
+                        nearestFound ? `Found in ${nearestTime.toFixed(2)}ms (${nearest.id} at ${nearest.lat.toFixed(4)}, ${nearest.lng.toFixed(4)})` : 'Failed to find nearest point',
+                        `query: ${burlingtonPoint.lat}, ${burlingtonPoint.lng}`);
+                }
+
+                // Test 7b: Additional island tests
+                addInfo('Testing multiple island locations...');
+                const testPoints = [
+                    { name: 'North Hero Island', lat: 44.82, lng: -73.28, shouldBeWater: false },
+                    { name: 'South Hero Island', lat: 44.64, lng: -73.31, shouldBeWater: false },
+                    { name: 'Valcour Island', lat: 44.56, lng: -73.42, shouldBeWater: false },
+                    { name: 'Water near Grand Isle', lat: 44.76, lng: -73.30, shouldBeWater: true },
+                    { name: 'Burlington Bay', lat: 44.48, lng: -73.22, shouldBeWater: true },
+                    { name: 'Plattsburgh Harbor', lat: 44.69, lng: -73.46, shouldBeWater: true }
+                ];
+
+                let islandTestsPassed = 0;
+                for (const point of testPoints) {
+                    const result = isInWater(point.lat, point.lng);
+                    const expected = point.shouldBeWater;
+                    const passed = result === expected;
+                    if (passed) islandTestsPassed++;
+
+                    addResult(`  ${point.name}`, passed,
+                        passed ? (expected ? 'Correctly in water' : 'Correctly excluded') :
+                                (expected ? 'FAILED - should be water' : 'FAILED - should be land'),
+                        `${point.lat}, ${point.lng}`);
+                }
+
+                addInfo(`Island/Water Tests: ${islandTestsPassed}/${testPoints.length} passed`);
+
+                // Test 8: Performance comparison
+                if (grid && grid.length > 100) {
+                    addInfo('Running performance benchmark (10 iterations each)...',
+                        `test point: ${burlingtonPoint.lat}, ${burlingtonPoint.lng}`);
+
+                    // Linear search
+                    let linearTotal = 0;
+                    for (let i = 0; i < 10; i++) {
+                        const start = performance.now();
+                        let nearest = null;
+                        let nearestDist = Infinity;
+                        for (const point of grid) {
+                            const dist = Math.sqrt(
+                                Math.pow(burlingtonPoint.lat - point.lat, 2) +
+                                Math.pow(burlingtonPoint.lng - point.lng, 2)
+                            );
+                            if (dist < nearestDist) {
+                                nearestDist = dist;
+                                nearest = point;
+                            }
+                        }
+                        linearTotal += performance.now() - start;
+                    }
+                    const linearAvg = linearTotal / 10;
+
+                    // RBush search
+                    let rbushTotal = 0;
+                    for (let i = 0; i < 10; i++) {
+                        const start = performance.now();
+                        findNearestGridPoint(burlingtonPoint.lat, burlingtonPoint.lng);
+                        rbushTotal += performance.now() - start;
+                    }
+                    const rbushAvg = rbushTotal / 10;
+
+                    const speedup = linearAvg / rbushAvg;
+                    addResult('Test 8: Performance Benchmark', speedup > 5,
+                        `Linear=${linearAvg.toFixed(2)}ms, RBush=${rbushAvg.toFixed(2)}ms, Speedup=${speedup.toFixed(1)}x`,
+                        `${grid.length} grid points searched`);
+                }
+
+                addInfo('All tests complete!');
+
+                // Summary of coordinates tested
+                addInfo('─────────────────────────────────────────');
+                addInfo('📍 Summary of Test Coordinates:');
+                addInfo(`  Burlington Harbor (water): ${burlingtonPoint.lat}, ${burlingtonPoint.lng}`);
+                addInfo(`  Grand Isle center (island): ${grandIsle.lat}, ${grandIsle.lng}`);
+                for (const point of testPoints) {
+                    addInfo(`  ${point.name} (${point.shouldBeWater ? 'water' : 'island'}): ${point.lat}, ${point.lng}`);
+                }
+                addInfo('─────────────────────────────────────────');
+
+            } catch (error) {
+                addResult('Test Suite', false, `Error: ${error.message}`);
+                console.error('Test error:', error);
+            }
+        }
+
+        // Interactive coordinate tester functions
+        function testCoordinate() {
+            const input = document.getElementById('coord-input').value.trim();
+            const resultDiv = document.getElementById('coord-result');
+
+            try {
+                // Parse input
+                const parts = input.split(',').map(s => s.trim());
+                if (parts.length !== 2) {
+                    throw new Error('Please enter coordinates in format: lat,lng');
+                }
+
+                const lat = parseFloat(parts[0]);
+                const lng = parseFloat(parts[1]);
+
+                if (isNaN(lat) || isNaN(lng)) {
+                    throw new Error('Invalid numbers. Please enter valid coordinates.');
+                }
+
+                if (lat < -90 || lat > 90) {
+                    throw new Error('Latitude must be between -90 and 90');
+                }
+
+                if (lng < -180 || lng > 180) {
+                    throw new Error('Longitude must be between -180 and 180');
+                }
+
+                // Test if in water
+                const inWater = isInWater(lat, lng);
+                const waterBodyName = getWaterBodyName(lat, lng);
+
+                // Display result
+                resultDiv.className = 'coord-result ' + (inWater ? 'water' : 'land');
+
+                let resultText = `<strong>Coordinates:</strong> ${lat}, ${lng}<br>`;
+                resultText += `<strong>Result:</strong> ${inWater ? '💧 IN WATER' : '🏝️ ON LAND (Island or Outside Boundary)'}<br>`;
+
+                if (inWater && waterBodyName) {
+                    resultText += `<strong>Water Body:</strong> ${waterBodyName}<br>`;
+                }
+
+                // Find nearest water point
+                if (typeof findNearestGridPoint === 'function' && waterGrid && waterGrid.length > 0) {
+                    const nearest = findNearestGridPoint(lat, lng);
+                    if (nearest) {
+                        const dist = haversineDistance(lat, lng, nearest.lat, nearest.lng);
+                        resultText += `<strong>Nearest Water Grid Point:</strong> ${dist.toFixed(3)} km away<br>`;
+                        resultText += `<strong>Grid Point:</strong> ${nearest.lat.toFixed(4)}, ${nearest.lng.toFixed(4)} (${nearest.id})`;
+                    }
+                }
+
+                resultDiv.innerHTML = resultText;
+
+            } catch (error) {
+                resultDiv.className = 'coord-result error';
+                resultDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
+            }
+        }
+
+        function testQuick(lat, lng) {
+            document.getElementById('coord-input').value = `${lat},${lng}`;
+            testCoordinate();
+        }
+
+        // Allow Enter key to submit
+        document.addEventListener('DOMContentLoaded', () => {
+            const input = document.getElementById('coord-input');
+            if (input) {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        testCoordinate();
+                    }
+                });
+            }
+        });
+
+        // Run tests when page loads
+        runTests();
+    </script>
+</body>
+</html>

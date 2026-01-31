@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Water Boundary Tester</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin="anonymous"/>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        #header h1 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        #header p {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        #container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        #map {
+            flex: 1;
+            position: relative;
+        }
+
+        #info-panel {
+            width: 350px;
+            background: #f8f9fa;
+            border-left: 2px solid #ddd;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .info-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .info-section h3 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+
+        .info-row {
+            margin: 8px 0;
+            font-size: 12px;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .info-value {
+            color: #000;
+        }
+
+        .status-water {
+            background: #e3f2fd;
+            color: #1565C0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #2196F3;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .status-land {
+            background: #fff3e0;
+            color: #E65100;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #FF9800;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .status-loading {
+            background: #f5f5f5;
+            color: #666;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #ccc;
+            text-align: center;
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        .click-history {
+            max-height: 200px;
+            overflow-y: auto;
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 3px;
+            font-size: 11px;
+        }
+
+        .click-item {
+            padding: 5px;
+            margin: 3px 0;
+            border-radius: 3px;
+        }
+
+        .click-item.water {
+            background: #e3f2fd;
+        }
+
+        .click-item.land {
+            background: #fff3e0;
+        }
+
+        .controls {
+            margin-top: 10px;
+        }
+
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 2px;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .leaflet-click-marker {
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .coordinate-display {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>🗺️ Interactive Water Boundary Tester</h1>
+        <p>Click anywhere on the map to test if a location is water or land</p>
+    </div>
+
+    <div id="container">
+        <div id="map"></div>
+
+        <div id="info-panel">
+            <div class="info-section">
+                <h3>📍 Last Clicked Location</h3>
+                <div id="current-status" class="status-loading">
+                    Click on the map to test a location
+                </div>
+                <div id="current-info" style="margin-top: 10px;">
+                    <!-- Details will appear here -->
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>🔧 Debug Information</h3>
+                <div id="debug-info">
+                    <div class="info-row">
+                        <span class="info-label">Boundaries Loaded:</span>
+                        <span class="info-value" id="boundaries-loaded">Loading...</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Water Bodies:</span>
+                        <span class="info-value" id="water-bodies-count">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Islands:</span>
+                        <span class="info-value" id="islands-count">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Total Vertices:</span>
+                        <span class="info-value" id="vertices-count">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>📝 Click History</h3>
+                <div class="controls">
+                    <button class="btn btn-secondary" onclick="clearHistory()">Clear History</button>
+                    <button class="btn" onclick="toggleBoundaries()">Toggle Boundaries</button>
+                </div>
+                <div class="click-history" id="click-history">
+                    <div style="text-align: center; color: #999;">No clicks yet</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin="anonymous"></script>
+
+    <!-- RBush for spatial indexing -->
+    <script src="https://unpkg.com/rbush@3.0.1/rbush.min.js"></script>
+
+    <!-- Navigation system -->
+    <script src="js/navigation.js"></script>
+
+    <script>
+        let map;
+        let clickMarker = null;
+        let clickHistory = [];
+        let boundaryLayers = [];
+        let boundariesVisible = false;
+
+        // Initialize map
+        async function initMap() {
+            // Create map centered on Lake Champlain
+            map = L.map('map').setView([44.2, -73.35], 9);
+
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 19
+            }).addTo(map);
+
+            // Add click handler
+            map.on('click', handleMapClick);
+
+            // Load water boundaries
+            try {
+                document.getElementById('boundaries-loaded').textContent = 'Loading...';
+                await loadWaterBoundaries();
+
+                if (WATER_BOUNDARIES && WATER_BOUNDARIES.length > 0) {
+                    document.getElementById('boundaries-loaded').textContent = '✓ Yes';
+                    document.getElementById('water-bodies-count').textContent = WATER_BOUNDARIES.length;
+
+                    let totalIslands = 0;
+                    let totalVertices = 0;
+                    WATER_BOUNDARIES.forEach(wb => {
+                        totalIslands += wb.holes.length;
+                        totalVertices += wb.outer.length + wb.holes.reduce((sum, h) => sum + h.length, 0);
+                    });
+
+                    document.getElementById('islands-count').textContent = totalIslands;
+                    document.getElementById('vertices-count').textContent = totalVertices.toLocaleString();
+
+                    console.log('Water boundaries loaded successfully');
+                } else {
+                    document.getElementById('boundaries-loaded').textContent = '✗ No';
+                    console.error('No water boundaries loaded');
+                }
+            } catch (error) {
+                document.getElementById('boundaries-loaded').textContent = '✗ Error';
+                console.error('Failed to load water boundaries:', error);
+            }
+        }
+
+        function handleMapClick(e) {
+            const lat = e.latlng.lat;
+            const lng = e.latlng.lng;
+
+            // Remove previous marker
+            if (clickMarker) {
+                map.removeLayer(clickMarker);
+            }
+
+            // Test if in water
+            const inWater = isInWater(lat, lng);
+            const waterBodyName = getWaterBodyName(lat, lng);
+
+            // Create marker with appropriate color
+            const markerColor = inWater ? '#2196F3' : '#FF9800';
+            clickMarker = L.circleMarker([lat, lng], {
+                radius: 8,
+                fillColor: markerColor,
+                color: '#fff',
+                weight: 3,
+                opacity: 1,
+                fillOpacity: 0.8,
+                className: 'leaflet-click-marker'
+            }).addTo(map);
+
+            // Update status display
+            const statusDiv = document.getElementById('current-status');
+            if (inWater) {
+                statusDiv.className = 'status-water';
+                statusDiv.innerHTML = '💧 IN WATER';
+            } else {
+                statusDiv.className = 'status-land';
+                statusDiv.innerHTML = '🏝️ ON LAND';
+            }
+
+            // Update info display
+            let infoHtml = `
+                <div class="coordinate-display">${lat.toFixed(6)}, ${lng.toFixed(6)}</div>
+                <div class="info-row" style="margin-top: 10px;">
+                    <span class="info-label">Result:</span>
+                    <span class="info-value">${inWater ? 'Water' : 'Land/Island'}</span>
+                </div>
+            `;
+
+            if (inWater && waterBodyName) {
+                infoHtml += `
+                    <div class="info-row">
+                        <span class="info-label">Water Body:</span>
+                        <span class="info-value">${waterBodyName}</span>
+                    </div>
+                `;
+            }
+
+            // Check which polygon (for debugging)
+            if (WATER_BOUNDARIES && WATER_BOUNDARIES.length > 0) {
+                const wb = WATER_BOUNDARIES[0];
+                const outer = geoJsonToLatLng(wb.outer);
+                const inOuter = pointInPolygon(lat, lng, outer);
+
+                infoHtml += `
+                    <div class="info-row">
+                        <span class="info-label">In Outer Boundary:</span>
+                        <span class="info-value">${inOuter ? 'Yes' : 'No'}</span>
+                    </div>
+                `;
+
+                if (inOuter) {
+                    // Check which island (if any)
+                    let inIsland = false;
+                    let islandIndex = -1;
+                    for (let i = 0; i < wb.holes.length; i++) {
+                        const hole = geoJsonToLatLng(wb.holes[i]);
+                        if (pointInPolygon(lat, lng, hole)) {
+                            inIsland = true;
+                            islandIndex = i;
+                            break;
+                        }
+                    }
+
+                    if (inIsland) {
+                        infoHtml += `
+                            <div class="info-row">
+                                <span class="info-label">Inside Island:</span>
+                                <span class="info-value">Yes (Island #${islandIndex})</span>
+                            </div>
+                        `;
+                    }
+                }
+            }
+
+            document.getElementById('current-info').innerHTML = infoHtml;
+
+            // Add to history
+            addToHistory(lat, lng, inWater, waterBodyName);
+        }
+
+        function addToHistory(lat, lng, inWater, waterBodyName) {
+            const timestamp = new Date().toLocaleTimeString();
+            const item = {
+                lat,
+                lng,
+                inWater,
+                waterBodyName,
+                timestamp
+            };
+
+            clickHistory.unshift(item);
+            if (clickHistory.length > 20) {
+                clickHistory.pop();
+            }
+
+            updateHistoryDisplay();
+        }
+
+        function updateHistoryDisplay() {
+            const historyDiv = document.getElementById('click-history');
+
+            if (clickHistory.length === 0) {
+                historyDiv.innerHTML = '<div style="text-align: center; color: #999;">No clicks yet</div>';
+                return;
+            }
+
+            let html = '';
+            clickHistory.forEach((item, index) => {
+                const className = item.inWater ? 'water' : 'land';
+                const icon = item.inWater ? '💧' : '🏝️';
+                html += `
+                    <div class="click-item ${className}">
+                        ${icon} ${item.lat.toFixed(4)}, ${item.lng.toFixed(4)} -
+                        ${item.inWater ? 'Water' : 'Land'}
+                        <span style="color: #999; font-size: 10px;">(${item.timestamp})</span>
+                    </div>
+                `;
+            });
+
+            historyDiv.innerHTML = html;
+        }
+
+        function clearHistory() {
+            clickHistory = [];
+            updateHistoryDisplay();
+        }
+
+        function toggleBoundaries() {
+            if (boundariesVisible) {
+                // Remove boundary layers
+                boundaryLayers.forEach(layer => map.removeLayer(layer));
+                boundaryLayers = [];
+                boundariesVisible = false;
+            } else {
+                // Draw boundary layers
+                if (WATER_BOUNDARIES && WATER_BOUNDARIES.length > 0) {
+                    WATER_BOUNDARIES.forEach(wb => {
+                        // Draw outer boundary
+                        const outerCoords = wb.outer.map(([lng, lat]) => [lat, lng]);
+                        const outerPoly = L.polygon(outerCoords, {
+                            color: '#2196F3',
+                            weight: 2,
+                            fillOpacity: 0.1
+                        }).addTo(map);
+                        boundaryLayers.push(outerPoly);
+
+                        // Draw islands (holes)
+                        wb.holes.forEach((hole, index) => {
+                            const holeCoords = hole.map(([lng, lat]) => [lat, lng]);
+                            const holePoly = L.polygon(holeCoords, {
+                                color: '#FF9800',
+                                weight: 2,
+                                fillColor: '#FF9800',
+                                fillOpacity: 0.3
+                            }).addTo(map);
+                            boundaryLayers.push(holePoly);
+                        });
+                    });
+                    boundariesVisible = true;
+                }
+            }
+        }
+
+        // Initialize on page load
+        initMap();
+    </script>
+</body>
+</html>

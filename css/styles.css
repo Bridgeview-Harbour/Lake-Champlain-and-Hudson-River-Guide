@@ -1324,47 +1324,30 @@ body {
     pointer-events: none;
 }
 
-/* Ship Wheel / Compass Spinner */
+/* Marina Name on Loading Screen */
+.marina-name {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--wood-dark);
+    text-align: center;
+    line-height: 1.2;
+    margin: 0 0 30px 0;
+    letter-spacing: 4px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.marina-name div {
+    margin: 0;
+    padding: 2px 0;
+}
+
+/* Ship's Wheel Spinner */
 .loading-spinner {
-    width: 70px;
-    height: 70px;
-    position: relative;
-    animation: spin 2s linear infinite;
-}
-
-.loading-spinner::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 4px solid var(--brass-color);
-    border-radius: 50%;
-    box-shadow:
-        inset 0 0 0 8px transparent,
-        inset 0 0 0 10px var(--brass-dark);
-}
-
-.loading-spinner::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 16px;
-    height: 16px;
-    background: var(--brass-color);
-    border-radius: 50%;
-    box-shadow:
-        0 -25px 0 -6px var(--wood-dark),
-        0 25px 0 -6px var(--wood-dark),
-        25px 0 0 -6px var(--wood-dark),
-        -25px 0 0 -6px var(--wood-dark),
-        18px -18px 0 -6px var(--wood-dark),
-        -18px 18px 0 -6px var(--wood-dark),
-        18px 18px 0 -6px var(--wood-dark),
-        -18px -18px 0 -6px var(--wood-dark);
+    width: 100px;
+    height: 100px;
+    animation: spin 3s linear infinite;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 @keyframes spin {
@@ -1375,7 +1358,7 @@ body {
     font-family: 'IM Fell English SC', serif;
     font-size: 1rem;
     color: var(--wood-dark);
-    margin-top: 20px;
+    margin-top: 30px;
     letter-spacing: 2px;
     text-transform: uppercase;
 }

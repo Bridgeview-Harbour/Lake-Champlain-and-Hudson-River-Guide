@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Screen Preview</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Show the loading overlay for testing */
+        #loadingOverlay {
+            opacity: 1 !important;
+            pointer-events: all !important;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .test-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 3000;
+            font-family: sans-serif;
+        }
+
+        .test-controls button {
+            display: block;
+            width: 100%;
+            padding: 8px 12px;
+            margin: 5px 0;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: #f0f0f0;
+        }
+
+        .test-controls button:hover {
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Test Controls -->
+    <div class="test-controls">
+        <h3 style="margin: 0 0 10px 0; font-size: 14px;">Loading Screen Test</h3>
+        <button onclick="toggleLoading()">Toggle Loading Screen</button>
+        <button onclick="location.reload()">Reload Page</button>
+    </div>
+
+    <!-- Loading Overlay (from main app) -->
+    <div id="loadingOverlay" class="loading-overlay" role="status" aria-live="polite" aria-label="Bridgeview Harbour Marina - Loading application">
+        <h1 class="marina-name">
+            <div>BRIDGEVIEW</div>
+            <div>HARBOUR</div>
+            <div>MARINA</div>
+        </h1>
+
+        <!-- Ship's Wheel Spinner -->
+        <svg class="loading-spinner" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Outer rim -->
+            <circle cx="50" cy="50" r="45" fill="none" stroke="#8B6F47" stroke-width="3"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#A0826D" stroke-width="2"/>
+
+            <!-- Center hub -->
+            <circle cx="50" cy="50" r="12" fill="#8B6F47" stroke="#6B5437" stroke-width="2"/>
+            <circle cx="50" cy="50" r="8" fill="#A0826D"/>
+
+            <!-- 8 spokes -->
+            <g stroke="#8B6F47" stroke-width="3" stroke-linecap="round">
+                <line x1="50" y1="12" x2="50" y2="38" />
+                <line x1="50" y1="62" x2="50" y2="88" />
+                <line x1="12" y1="50" x2="38" y2="50" />
+                <line x1="62" y1="50" x2="88" y2="50" />
+                <line x1="21" y1="21" x2="40" y2="40" />
+                <line x1="60" y1="60" x2="79" y2="79" />
+                <line x1="79" y1="21" x2="60" y2="40" />
+                <line x1="40" y1="60" x2="21" y2="79" />
+            </g>
+
+            <!-- Handles on spokes -->
+            <g fill="#A0826D" stroke="#6B5437" stroke-width="1">
+                <rect x="46" y="5" width="8" height="12" rx="2"/>
+                <rect x="46" y="83" width="8" height="12" rx="2"/>
+                <rect x="5" y="46" width="12" height="8" rx="2"/>
+                <rect x="83" y="46" width="12" height="8" rx="2"/>
+                <rect x="15" y="15" width="10" height="10" rx="2" transform="rotate(45 20 20)"/>
+                <rect x="75" y="75" width="10" height="10" rx="2" transform="rotate(45 80 80)"/>
+                <rect x="75" y="15" width="10" height="10" rx="2" transform="rotate(-45 80 20)"/>
+                <rect x="15" y="75" width="10" height="10" rx="2" transform="rotate(-45 20 80)"/>
+            </g>
+        </svg>
+
+        <p>Loading map...</p>
+    </div>
+
+    <script>
+        function toggleLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            overlay.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>

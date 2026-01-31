@@ -404,8 +404,48 @@
     </div>
 
     <!-- Loading Overlay -->
-    <div id="loadingOverlay" class="loading-overlay" role="status" aria-live="polite" aria-label="Loading application">
-        <div class="loading-spinner" aria-hidden="true"></div>
+    <div id="loadingOverlay" class="loading-overlay" role="status" aria-live="polite" aria-label="Bridgeview Harbour Marina - Loading application">
+        <h1 class="marina-name">
+            <div>BRIDGEVIEW</div>
+            <div>HARBOUR</div>
+            <div>MARINA</div>
+        </h1>
+
+        <!-- Ship's Wheel Spinner -->
+        <svg class="loading-spinner" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Outer rim -->
+            <circle cx="50" cy="50" r="45" fill="none" stroke="#8B6F47" stroke-width="3"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#A0826D" stroke-width="2"/>
+
+            <!-- Center hub -->
+            <circle cx="50" cy="50" r="12" fill="#8B6F47" stroke="#6B5437" stroke-width="2"/>
+            <circle cx="50" cy="50" r="8" fill="#A0826D"/>
+
+            <!-- 8 spokes -->
+            <g stroke="#8B6F47" stroke-width="3" stroke-linecap="round">
+                <line x1="50" y1="12" x2="50" y2="38" />
+                <line x1="50" y1="62" x2="50" y2="88" />
+                <line x1="12" y1="50" x2="38" y2="50" />
+                <line x1="62" y1="50" x2="88" y2="50" />
+                <line x1="21" y1="21" x2="40" y2="40" />
+                <line x1="60" y1="60" x2="79" y2="79" />
+                <line x1="79" y1="21" x2="60" y2="40" />
+                <line x1="40" y1="60" x2="21" y2="79" />
+            </g>
+
+            <!-- Handles on spokes -->
+            <g fill="#A0826D" stroke="#6B5437" stroke-width="1">
+                <rect x="46" y="5" width="8" height="12" rx="2"/>
+                <rect x="46" y="83" width="8" height="12" rx="2"/>
+                <rect x="5" y="46" width="12" height="8" rx="2"/>
+                <rect x="83" y="46" width="12" height="8" rx="2"/>
+                <rect x="15" y="15" width="10" height="10" rx="2" transform="rotate(45 20 20)"/>
+                <rect x="75" y="75" width="10" height="10" rx="2" transform="rotate(45 80 80)"/>
+                <rect x="75" y="15" width="10" height="10" rx="2" transform="rotate(-45 80 20)"/>
+                <rect x="15" y="75" width="10" height="10" rx="2" transform="rotate(-45 20 80)"/>
+            </g>
+        </svg>
+
         <p>Loading map...</p>
     </div>
 
@@ -416,6 +456,8 @@
 
     <!-- Application Scripts -->
     <script src="js/data.js"></script>
+    <!-- RBush spatial indexing library for fast nearest-neighbor queries -->
+    <script src="https://unpkg.com/rbush@3.0.1/rbush.min.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/weather.js?v=2"></script>
     <script src="js/app.js"></script>
