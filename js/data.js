@@ -586,10 +586,11 @@ async function loadPoisFromJson() {
  * Returns a promise that resolves when data is ready
  */
 async function initializeData() {
-    // Load POI data and water boundaries in parallel
+    // Load POI data, water boundaries, and depth data in parallel
     await Promise.all([
         loadPoisFromJson(),
-        typeof loadWaterBoundaries === 'function' ? loadWaterBoundaries() : Promise.resolve()
+        typeof loadWaterBoundaries === 'function' ? loadWaterBoundaries() : Promise.resolve(),
+        typeof loadDepthData === 'function' ? loadDepthData() : Promise.resolve()
     ]);
 
     // Generate water grid after boundaries are loaded

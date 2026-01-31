@@ -16,6 +16,55 @@ const isNodeNav = typeof module !== 'undefined' && module.exports;
 // with support for islands (polygon holes) and multiple water bodies
 
 let WATER_BOUNDARIES = null;
+let DEPTH_GRID = null;  // Bathymetric depth data
+
+// User vessel settings for depth-based routing
+let VESSEL_DRAFT = 1.5;   // meters (default ~5 feet)
+let SAFETY_MARGIN = 1.0;  // meters (default ~3 feet)
+
+/**
+ * Load bathymetric depth data
+ * @returns {Promise<void>}
+ */
+async function loadDepthData() {
+    const depthFiles = [
+        'data/depth/lake-champlain-depth-grid.json'
+    ];
+
+    DEPTH_GRID = new Map();
+
+    for (const file of depthFiles) {
+        try {
+            const response = await fetch(file);
+            if (!response.ok) {
+                console.warn(`Could not load ${file}: ${response.status}`);
+                continue;
+            }
+
+            const data = await response.json();
+
+            console.log(`Loaded bathymetric data: ${data.metadata.grid_points} points`);
+            console.log(`  Depth range: ${data.depth_statistics.min}m - ${data.depth_statistics.max}m`);
+            console.log(`  Average depth: ${data.depth_statistics.mean}m`);
+
+            // Store depth data in Map for fast lookup
+            for (const [id, point] of Object.entries(data.depth_grid)) {
+                DEPTH_GRID.set(id, {
+                    lat: point.lat,
+                    lng: point.lng,
+                    depth: point.depth
+                });
+            }
+
+        } catch (error) {
+            console.warn(`Failed to load ${file}:`, error);
+        }
+    }
+
+    if (DEPTH_GRID.size === 0) {
+        console.warn('No depth data loaded - routing will use water/land only');
+    }
+}
 
 /**
  * Load water boundary data from GeoJSON file(s)
@@ -514,30 +563,57 @@ function generateWaterGrid() {
     const { latStep, lngStep } = GRID_CONFIG;
 
     let id = 0;
+    let depthFiltered = 0;
 
     for (let lat = south; lat <= north; lat += latStep) {
         for (let lng = west; lng <= east; lng += lngStep) {
             if (isInWater(lat, lng)) {
-                const point = {
-                    id: `g${id}`,
-                    lat: Math.round(lat * 1000000) / 1000000,
-                    lng: Math.round(lng * 1000000) / 1000000,
-                    row: Math.round((lat - south) / latStep),
-                    col: Math.round((lng - west) / lngStep),
-                    // RBush requires bounding box format
-                    minX: lng,
-                    minY: lat,
-                    maxX: lng,
-                    maxY: lat
-                };
-                waterGrid.push(point);
+                const gridId = `g${id}`;
 
-                const key = `${point.row},${point.col}`;
-                gridIndex[key] = point;
+                // Check depth constraints if depth data available
+                let depthOk = true;
+                let depth = null;
 
-                id++;
+                if (DEPTH_GRID && DEPTH_GRID.has(gridId)) {
+                    const depthPoint = DEPTH_GRID.get(gridId);
+                    depth = depthPoint.depth;
+
+                    const minSafeDepth = VESSEL_DRAFT + SAFETY_MARGIN;
+
+                    if (depth < minSafeDepth) {
+                        depthOk = false;
+                        depthFiltered++;
+                    }
+                }
+
+                // Only add point if both in water AND has safe depth (if depth data available)
+                if (depthOk) {
+                    const point = {
+                        id: gridId,
+                        lat: Math.round(lat * 1000000) / 1000000,
+                        lng: Math.round(lng * 1000000) / 1000000,
+                        depth: depth,  // Include depth if available
+                        row: Math.round((lat - south) / latStep),
+                        col: Math.round((lng - west) / lngStep),
+                        // RBush requires bounding box format
+                        minX: lng,
+                        minY: lat,
+                        maxX: lng,
+                        maxY: lat
+                    };
+                    waterGrid.push(point);
+
+                    const key = `${point.row},${point.col}`;
+                    gridIndex[key] = point;
+
+                    id++;
+                }
             }
         }
+    }
+
+    if (depthFiltered > 0) {
+        console.log(`Filtered out ${depthFiltered} shallow water points (< ${VESSEL_DRAFT + SAFETY_MARGIN}m depth)`);
     }
 
     // Build RBush spatial index for fast nearest-neighbor queries
