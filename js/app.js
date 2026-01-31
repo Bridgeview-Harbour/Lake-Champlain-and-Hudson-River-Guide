@@ -1270,6 +1270,61 @@ const isNode = typeof module !== 'undefined' && module.exports;
             });
         }
 
+        // Vessel settings toggle
+        const vesselToggle = document.getElementById('vesselToggle');
+        const vesselContent = document.getElementById('vesselContent');
+        if (vesselToggle && vesselContent) {
+            vesselToggle.addEventListener('click', () => {
+                vesselContent.classList.toggle('hidden');
+                const isExpanded = !vesselContent.classList.contains('hidden');
+                vesselToggle.setAttribute('aria-expanded', isExpanded.toString());
+                // Update toggle icon
+                const icon = vesselToggle.querySelector('.toggle-icon');
+                if (icon) {
+                    icon.textContent = isExpanded ? '▼' : '▶';
+                }
+            });
+        }
+
+        // Vessel draft and safety margin sliders
+        const draftSlider = document.getElementById('vesselDraft');
+        const marginSlider = document.getElementById('safetyMargin');
+        const draftDisplay = document.getElementById('draftDisplay');
+        const marginDisplay = document.getElementById('marginDisplay');
+        const minDepthDisplay = document.getElementById('minDepthDisplay');
+
+        function updateDepthDisplays() {
+            const draft = parseFloat(draftSlider.value);
+            const margin = parseFloat(marginSlider.value);
+            const minDepth = draft + margin;
+
+            draftDisplay.textContent = `${draft.toFixed(1)}m (${(draft * 3.28084).toFixed(1)}ft)`;
+            marginDisplay.textContent = `${margin.toFixed(1)}m (${(margin * 3.28084).toFixed(1)}ft)`;
+            minDepthDisplay.textContent = `${minDepth.toFixed(1)}m (${(minDepth * 3.28084).toFixed(1)}ft)`;
+        }
+
+        if (draftSlider && marginSlider) {
+            draftSlider.addEventListener('input', updateDepthDisplays);
+            marginSlider.addEventListener('input', updateDepthDisplays);
+            updateDepthDisplays(); // Initialize displays
+        }
+
+        // Apply vessel settings button
+        const applyVesselBtn = document.getElementById('applyVesselSettings');
+        if (applyVesselBtn) {
+            applyVesselBtn.addEventListener('click', () => {
+                const draft = parseFloat(draftSlider.value);
+                const margin = parseFloat(marginSlider.value);
+
+                if (typeof updateVesselSettings === 'function') {
+                    const result = updateVesselSettings(draft, margin);
+                    showToast(`Vessel settings updated: ${result.minimumDepth.toFixed(1)}m minimum depth`, 'success');
+                } else {
+                    console.error('updateVesselSettings function not available');
+                }
+            });
+        }
+
         // Close quick info on map click (also handles coordinate picking)
         state.map.on('click', (e) => {
             // Handle coordinate picking for POI submission

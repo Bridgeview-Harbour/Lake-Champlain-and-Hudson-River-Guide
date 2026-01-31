@@ -54,11 +54,14 @@ def process_point_cloud(bathymetry_file, water_boundary_file, output_file):
             # Convert negative feet to positive meters
             depth_m = abs(float(depth_ft)) * 0.3048  # feet to meters
 
-            bathy_points.append({
-                'lat': coords[1],
-                'lng': coords[0],
-                'depth_m': depth_m
-            })
+            # FILTER OUT SHORELINE/LAND POINTS (depth < 3 feet / 1 meter)
+            # These are elevation points, not navigable water
+            if depth_m >= 0.9:  # 3 feet minimum
+                bathy_points.append({
+                    'lat': coords[1],
+                    'lng': coords[0],
+                    'depth_m': depth_m
+                })
 
     print(f"Extracted {len(bathy_points):,} valid depth points")
 

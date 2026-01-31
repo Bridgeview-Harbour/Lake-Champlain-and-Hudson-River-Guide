@@ -19,8 +19,35 @@ let WATER_BOUNDARIES = null;
 let DEPTH_GRID = null;  // Bathymetric depth data
 
 // User vessel settings for depth-based routing
-let VESSEL_DRAFT = 1.5;   // meters (default ~5 feet)
-let SAFETY_MARGIN = 1.0;  // meters (default ~3 feet)
+// Defaults optimized for Lake Champlain recreational boats
+let VESSEL_DRAFT = 0.6;   // meters (default ~2 feet)
+let SAFETY_MARGIN = 0.3;  // meters (default ~1 foot)
+
+/**
+ * Update vessel draft settings and regenerate grid
+ * @param {number} draftMeters - Vessel draft in meters
+ * @param {number} marginMeters - Safety margin in meters
+ */
+function updateVesselSettings(draftMeters, marginMeters) {
+    VESSEL_DRAFT = draftMeters;
+    SAFETY_MARGIN = marginMeters;
+
+    console.log(`Updated vessel settings: draft=${VESSEL_DRAFT}m, safety=${SAFETY_MARGIN}m, minimum depth=${(VESSEL_DRAFT + SAFETY_MARGIN).toFixed(1)}m`);
+
+    // Clear grid to force regeneration
+    waterGrid = null;
+    gridIndex = null;
+    spatialIndex = null;
+
+    // Regenerate grid with new settings
+    generateWaterGrid();
+
+    return {
+        draft: VESSEL_DRAFT,
+        safety: SAFETY_MARGIN,
+        minimumDepth: VESSEL_DRAFT + SAFETY_MARGIN
+    };
+}
 
 /**
  * Load bathymetric depth data

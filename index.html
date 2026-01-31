@@ -130,6 +130,44 @@
                 </button>
             </section>
 
+            <!-- Vessel Settings Section -->
+            <section class="panel-section vessel-settings-section">
+                <button id="vesselToggle" class="section-toggle" aria-expanded="false" aria-controls="vesselContent">
+                    <span class="toggle-icon">▶</span> Vessel Settings
+                </button>
+
+                <div id="vesselContent" class="vessel-content hidden" role="region" aria-label="Vessel depth settings">
+                    <p class="section-description">Configure your vessel's draft and safety margin for depth-based routing.</p>
+
+                    <div class="form-group">
+                        <label for="vesselDraft">
+                            Vessel Draft
+                            <span class="value-display" id="draftDisplay">0.6m (2.0ft)</span>
+                        </label>
+                        <input type="range" id="vesselDraft" min="0.3" max="3.0" step="0.1" value="0.6" class="slider">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="safetyMargin">
+                            Safety Margin
+                            <span class="value-display" id="marginDisplay">0.3m (1.0ft)</span>
+                        </label>
+                        <input type="range" id="safetyMargin" min="0.1" max="2.0" step="0.1" value="0.3" class="slider">
+                    </div>
+
+                    <div class="depth-summary">
+                        <strong>Minimum Routing Depth:</strong>
+                        <span id="minDepthDisplay">0.9m (3.0ft)</span>
+                    </div>
+
+                    <button id="applyVesselSettings" class="btn btn-primary">Apply Settings</button>
+
+                    <div class="settings-info">
+                        <small>Routes will only use water deeper than the minimum depth. Adjust these settings based on your vessel type.</small>
+                    </div>
+                </div>
+            </section>
+
             <!-- Weather Section -->
             <section class="panel-section weather-section">
                 <button id="weatherToggle" class="section-toggle" aria-expanded="false" aria-controls="weatherContent">
