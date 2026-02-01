@@ -1325,6 +1325,26 @@ const isNode = typeof module !== 'undefined' && module.exports;
             });
         }
 
+        // Bathymetry layer toggle
+        const bathymetryToggle = document.getElementById('bathymetryToggle');
+        if (bathymetryToggle) {
+            bathymetryToggle.addEventListener('change', (e) => {
+                const show = e.target.checked;
+
+                if (typeof toggleBathymetryLayer === 'function') {
+                    toggleBathymetryLayer(state.map, show);
+
+                    if (show) {
+                        showToast('Bathymetric depth layer enabled', 'success');
+                    } else {
+                        showToast('Bathymetric depth layer disabled', 'info');
+                    }
+                } else {
+                    console.error('toggleBathymetryLayer function not available');
+                }
+            });
+        }
+
         // Close quick info on map click (also handles coordinate picking)
         state.map.on('click', (e) => {
             // Handle coordinate picking for POI submission
